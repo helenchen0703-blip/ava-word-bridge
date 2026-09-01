@@ -1,0 +1,4183 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+<meta charset="UTF-8">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Ava Math Word Bridge | 7-Day Journey</title>
+
+<style>
+
+:root {
+
+  --ink: #26384d;
+
+  --teal: #4f7772;
+
+  --teal-dark: #3e6867;
+
+  --blue: #355477;
+
+  --purple: #6d5a87;
+
+  --cream: #f7f4ee;
+
+  --white: #ffffff;
+
+  --soft-green: #edf5f3;
+
+  --soft-blue: #eef4fb;
+
+  --soft-purple: #f1eef6;
+
+  --soft-yellow: #fff7e5;
+
+  --line: #e3e6e8;
+
+  --success: #dff0e4;
+
+  --warning: #f7e5c8;
+
+}
+
+
+/* =====================================================
+   RESET
+===================================================== */
+
+* {
+
+  box-sizing: border-box;
+
+}
+
+
+body {
+
+  margin: 0;
+
+  font-family:
+    -apple-system,
+    BlinkMacSystemFont,
+    "Segoe UI",
+    Arial,
+    Helvetica,
+    sans-serif;
+
+  background:
+
+    linear-gradient(
+      180deg,
+      #f8f5ef,
+      #eff5f3
+    );
+
+  color: var(--ink);
+
+}
+
+
+button {
+
+  font: inherit;
+
+}
+
+
+/* =====================================================
+   PAGE
+===================================================== */
+
+.page {
+
+  max-width: 920px;
+
+  margin: 0 auto;
+
+  padding: 18px 14px 60px;
+
+}
+
+
+/* =====================================================
+   TOP
+===================================================== */
+
+.topbar {
+
+  display: flex;
+
+  justify-content: space-between;
+
+  align-items: center;
+
+  gap: 10px;
+
+}
+
+
+.home {
+
+  text-decoration: none;
+
+  background: white;
+
+  color: var(--teal-dark);
+
+  padding: 10px 15px;
+
+  border-radius: 13px;
+
+  font-weight: 800;
+
+  box-shadow:
+    0 3px 12px
+    rgba(0,0,0,0.06);
+
+}
+
+
+.badge {
+
+  background: #dfeee9;
+
+  color: var(--teal-dark);
+
+  padding: 10px 15px;
+
+  border-radius: 13px;
+
+  font-weight: 850;
+
+}
+
+
+/* =====================================================
+   HERO
+===================================================== */
+
+.hero {
+
+  margin-top: 16px;
+
+  background: white;
+
+  border-radius: 28px;
+
+  padding: 28px 20px;
+
+  text-align: center;
+
+  box-shadow:
+    0 8px 28px
+    rgba(0,0,0,0.07);
+
+}
+
+
+.hero-icon {
+
+  font-size: 52px;
+
+}
+
+
+.hero h1 {
+
+  margin: 7px 0;
+
+  font-size: 36px;
+
+  color: var(--teal-dark);
+
+}
+
+
+.tagline {
+
+  font-size: 19px;
+
+  color: var(--blue);
+
+  font-weight: 850;
+
+}
+
+
+.goal {
+
+  max-width: 630px;
+
+  margin: 18px auto 0;
+
+  padding: 15px 17px;
+
+  border-radius: 17px;
+
+  background: var(--soft-green);
+
+  line-height: 1.6;
+
+}
+
+
+/* =====================================================
+   DAY NAV
+===================================================== */
+
+.days {
+
+  margin-top: 18px;
+
+  background: white;
+
+  border-radius: 22px;
+
+  padding: 14px;
+
+  display: grid;
+
+  grid-template-columns:
+    repeat(7, 1fr);
+
+  gap: 8px;
+
+  box-shadow:
+    0 5px 18px
+    rgba(0,0,0,0.05);
+
+}
+
+
+.daybtn {
+
+  border: none;
+
+  border-radius: 14px;
+
+  background: #f4f5f5;
+
+  color: #626a70;
+
+  padding: 11px 5px;
+
+  cursor: pointer;
+
+  font-weight: 800;
+
+}
+
+
+.daybtn small {
+
+  display: block;
+
+  margin-top: 4px;
+
+  font-size: 11px;
+
+  font-weight: 650;
+
+}
+
+
+.daybtn.active {
+
+  background: #e7f1ef;
+
+  color: var(--teal-dark);
+
+  outline:
+    2px solid #6c958f;
+
+}
+
+
+.daybtn.done::after {
+
+  content: " ✓";
+
+}
+
+
+/* =====================================================
+   PANEL
+===================================================== */
+
+.panel {
+
+  margin-top: 20px;
+
+  background: white;
+
+  border-radius: 28px;
+
+  padding: 24px;
+
+  box-shadow:
+    0 8px 28px
+    rgba(0,0,0,0.07);
+
+}
+
+
+.panel h2 {
+
+  margin: 0;
+
+  color: var(--teal-dark);
+
+  font-size: 27px;
+
+}
+
+
+.panel-sub {
+
+  color: #6e767e;
+
+  line-height: 1.55;
+
+  margin-top: 7px;
+
+}
+
+
+/* =====================================================
+   PROGRESS
+===================================================== */
+
+.progress {
+
+  margin-top: 17px;
+
+}
+
+
+.progress-row {
+
+  display: flex;
+
+  justify-content: space-between;
+
+  font-weight: 800;
+
+}
+
+
+.track {
+
+  margin-top: 8px;
+
+  height: 13px;
+
+  border-radius: 999px;
+
+  background: #e7e9eb;
+
+  overflow: hidden;
+
+}
+
+
+.fill {
+
+  height: 100%;
+
+  background:
+
+    linear-gradient(
+      90deg,
+      #56827a,
+      #789ca7
+    );
+
+  width: 0;
+
+  transition: width .25s;
+
+}
+
+
+/* =====================================================
+   WORD
+===================================================== */
+
+.word-chip {
+
+  display: inline-block;
+
+  background: var(--soft-green);
+
+  color: var(--teal-dark);
+
+  border-radius: 999px;
+
+  padding: 7px 12px;
+
+  font-size: 14px;
+
+  font-weight: 850;
+
+  margin-top: 20px;
+
+}
+
+
+.word {
+
+  text-align: center;
+
+  color: var(--teal-dark);
+
+  font-size: 42px;
+
+  font-weight: 900;
+
+  margin: 18px 0 6px;
+
+}
+
+
+.instruction {
+
+  text-align: center;
+
+  color: #747b83;
+
+  font-size: 14px;
+
+  line-height: 1.45;
+
+}
+
+
+/* =====================================================
+   VISUAL
+===================================================== */
+
+.visual {
+
+  margin-top: 19px;
+
+  min-height: 280px;
+
+  border-radius: 23px;
+
+  background:
+
+    linear-gradient(
+      135deg,
+      #eef5f3,
+      #f5f2ea
+    );
+
+  display: flex;
+
+  justify-content: center;
+
+  align-items: center;
+
+  padding: 22px;
+
+}
+
+
+/* =====================================================
+   FACTOR VISUAL
+===================================================== */
+
+.factor-grid {
+
+  display: grid;
+
+  grid-template-columns:
+    repeat(4, 48px);
+
+  gap: 8px;
+
+}
+
+
+.dot {
+
+  width: 48px;
+
+  height: 48px;
+
+  border-radius: 12px;
+
+  background: #71938c;
+
+  display: flex;
+
+  align-items: center;
+
+  justify-content: center;
+
+  color: white;
+
+  font-weight: 900;
+
+}
+
+
+.visual-label {
+
+  text-align: center;
+
+  margin-top: 15px;
+
+  font-size: 20px;
+
+  font-weight: 850;
+
+  color: #4f6766;
+
+}
+
+
+/* =====================================================
+   FRACTION VISUAL
+===================================================== */
+
+.fraction-circle {
+
+  width: 220px;
+
+  height: 220px;
+
+  border-radius: 50%;
+
+  background:
+
+    conic-gradient(
+      #668f8a 0deg 90deg,
+      #e0ebe8 90deg 360deg
+    );
+
+  border: 6px solid #ffffff;
+
+  box-shadow:
+    0 3px 12px
+    rgba(0,0,0,.08);
+
+  position: relative;
+
+}
+
+
+.fraction-circle::before {
+
+  content: "";
+
+  position: absolute;
+
+  left: 50%;
+
+  top: 0;
+
+  width: 3px;
+
+  height: 100%;
+
+  background: white;
+
+}
+
+
+.fraction-circle::after {
+
+  content: "";
+
+  position: absolute;
+
+  top: 50%;
+
+  left: 0;
+
+  height: 3px;
+
+  width: 100%;
+
+  background: white;
+
+}
+
+
+/* =====================================================
+   BOX
+===================================================== */
+
+.box {
+
+  border-radius: 18px;
+
+  padding: 18px;
+
+  margin-top: 17px;
+
+}
+
+
+.meaning-box {
+
+  background: var(--soft-yellow);
+
+}
+
+
+.math-box {
+
+  background: var(--soft-green);
+
+}
+
+
+.language-box {
+
+  background: var(--soft-blue);
+
+}
+
+
+.label {
+
+  font-size: 12px;
+
+  text-transform: uppercase;
+
+  letter-spacing: .8px;
+
+  font-weight: 900;
+
+  margin-bottom: 8px;
+
+  color: #64706e;
+
+}
+
+
+.bigtext {
+
+  font-size: 20px;
+
+  line-height: 1.6;
+
+  font-weight: 700;
+
+}
+
+
+/* =====================================================
+   CHINESE
+===================================================== */
+
+.secondary {
+
+  display: block;
+
+  margin: 15px auto 0;
+
+  border:
+    2px solid var(--teal);
+
+  background: white;
+
+  color: var(--teal-dark);
+
+  border-radius: 14px;
+
+  padding: 11px 16px;
+
+  cursor: pointer;
+
+  font-weight: 850;
+
+}
+
+
+.chinese {
+
+  display: none;
+
+  text-align: center;
+
+  font-size: 18px;
+
+  color: #496866;
+
+  font-weight: 750;
+
+}
+
+
+/* =====================================================
+   QUIZ
+===================================================== */
+
+.qcard {
+
+  margin-top: 19px;
+
+  padding: 18px;
+
+  border-radius: 18px;
+
+  background: #f5f7f7;
+
+}
+
+
+.qtitle {
+
+  text-align: center;
+
+  font-size: 19px;
+
+  font-weight: 900;
+
+  line-height: 1.5;
+
+}
+
+
+.options {
+
+  display: grid;
+
+  gap: 9px;
+
+  margin-top: 14px;
+
+}
+
+
+.option {
+
+  background: white;
+
+  border:
+    2px solid #dfe3e3;
+
+  border-radius: 14px;
+
+  padding: 13px 14px;
+
+  cursor: pointer;
+
+  font-weight: 700;
+
+  text-align: left;
+
+  line-height: 1.45;
+
+  color: #344b52;
+
+}
+
+
+.option.correct {
+
+  background: #dff0e4;
+
+  border-color: #80a98d;
+
+}
+
+
+.option.wrong {
+
+  background: #fae7df;
+
+  border-color: #c79182;
+
+}
+
+
+.feedback {
+
+  display: none;
+
+  margin-top: 12px;
+
+  border-radius: 13px;
+
+  padding: 12px;
+
+  text-align: center;
+
+  font-weight: 800;
+
+}
+
+
+/* =====================================================
+   BUTTONS
+===================================================== */
+
+.primary {
+
+  display: block;
+
+  width: 100%;
+
+  border: none;
+
+  border-radius: 15px;
+
+  background: var(--teal);
+
+  color: white;
+
+  padding: 15px;
+
+  margin-top: 16px;
+
+  font-size: 17px;
+
+  font-weight: 850;
+
+  cursor: pointer;
+
+}
+
+
+.next {
+
+  display: none;
+
+}
+
+
+/* =====================================================
+   DIAGNOSTIC
+===================================================== */
+
+.diagnosis {
+
+  margin-top: 20px;
+
+  border:
+    2px dashed #9ab4b0;
+
+  border-radius: 19px;
+
+  padding: 18px;
+
+  background: #f8fbfa;
+
+}
+
+
+.diagnosis h3 {
+
+  margin: 0;
+
+  text-align: center;
+
+  color: #426d68;
+
+}
+
+
+.diagnosis p {
+
+  text-align: center;
+
+  color: #6c7775;
+
+  line-height: 1.5;
+
+}
+
+
+.diagnostic-buttons {
+
+  display: grid;
+
+  grid-template-columns:
+    1fr 1fr;
+
+  gap: 11px;
+
+  margin-top: 14px;
+
+}
+
+
+.diagnostic {
+
+  border: none;
+
+  border-radius: 15px;
+
+  padding: 15px;
+
+  cursor: pointer;
+
+  font-weight: 800;
+
+  line-height: 1.4;
+
+}
+
+
+.language-btn {
+
+  background: #e8eef8;
+
+  color: #456080;
+
+}
+
+
+.math-btn {
+
+  background: #f5e9ce;
+
+  color: #755c28;
+
+}
+
+
+.diagnosis-result {
+
+  display: none;
+
+  margin-top: 13px;
+
+  border-radius: 14px;
+
+  padding: 13px;
+
+  font-weight: 800;
+
+  text-align: center;
+
+}
+
+
+/* =====================================================
+   FRACTION BAR
+===================================================== */
+
+.fraction-bar {
+
+  width: 100%;
+
+  max-width: 500px;
+
+  display: grid;
+
+  grid-template-columns:
+    repeat(4, 1fr);
+
+  border:
+    4px solid white;
+
+  border-radius: 14px;
+
+  overflow: hidden;
+
+}
+
+
+.fr-part {
+
+  height: 90px;
+
+  background: #dbe9e5;
+
+  border-right:
+    3px solid white;
+
+}
+
+
+.fr-part:last-child {
+
+  border-right: 0;
+
+}
+
+
+.fr-part.selected {
+
+  background: #648d86;
+
+}
+
+
+/* =====================================================
+   NUMBER LINE
+===================================================== */
+
+.numberline {
+
+  width: 90%;
+
+  position: relative;
+
+  height: 110px;
+
+}
+
+
+.line {
+
+  position: absolute;
+
+  top: 50px;
+
+  left: 0;
+
+  right: 0;
+
+  height: 5px;
+
+  background: #506d6b;
+
+}
+
+
+.tick {
+
+  position: absolute;
+
+  top: 35px;
+
+  width: 4px;
+
+  height: 35px;
+
+  background: #506d6b;
+
+}
+
+
+.tick-label {
+
+  position: absolute;
+
+  top: 74px;
+
+  transform:
+    translateX(-50%);
+
+  font-weight: 850;
+
+  color: #4d6665;
+
+}
+
+
+/* =====================================================
+   SUMMARY
+===================================================== */
+
+.summary {
+
+  display: none;
+
+  text-align: center;
+
+}
+
+
+.summary-star {
+
+  font-size: 62px;
+
+}
+
+
+.summary h3 {
+
+  color: var(--teal-dark);
+
+  font-size: 29px;
+
+}
+
+
+.result {
+
+  margin-top: 17px;
+
+  background: var(--soft-green);
+
+  border-radius: 18px;
+
+  padding: 19px;
+
+  line-height: 1.85;
+
+}
+
+
+/* =====================================================
+   FOOTER
+===================================================== */
+
+.footer {
+
+  margin-top: 24px;
+
+  text-align: center;
+
+  color: #737a7d;
+
+  font-size: 14px;
+
+  line-height: 1.65;
+
+}
+
+
+/* =====================================================
+   MOBILE
+===================================================== */
+
+@media(max-width:760px) {
+
+  .days {
+
+    grid-template-columns:
+      repeat(2, 1fr);
+
+  }
+
+
+  .daybtn:last-child {
+
+    grid-column:
+      span 2;
+
+  }
+
+
+  .panel {
+
+    padding:
+      20px 15px;
+
+  }
+
+
+  .word {
+
+    font-size:
+      34px;
+
+  }
+
+
+  .diagnostic-buttons {
+
+    grid-template-columns:
+      1fr;
+
+  }
+
+
+  .visual {
+
+    min-height:
+      230px;
+
+  }
+
+
+  .factor-grid {
+
+    grid-template-columns:
+      repeat(4, 40px);
+
+  }
+
+
+  .dot {
+
+    width:
+      40px;
+
+    height:
+      40px;
+
+  }
+
+}
+
+</style>
+
+</head>
+
+
+<body>
+
+
+<div class="page">
+
+
+<!-- =====================================================
+     TOP
+===================================================== -->
+
+<div class="topbar">
+
+
+  <a
+    href="index.html"
+    class="home">
+
+    ← Home
+
+  </a>
+
+
+  <div class="badge">
+
+    7-Day Math Journey
+
+  </div>
+
+
+</div>
+
+
+
+<!-- =====================================================
+     HERO
+===================================================== -->
+
+<section class="hero">
+
+
+  <div class="hero-icon">
+
+    🔢 🌉
+
+  </div>
+
+
+  <h1>
+
+    Math Word Bridge
+
+  </h1>
+
+
+  <div class="tagline">
+
+    Read the words.
+    Understand the math.
+
+  </div>
+
+
+  <div class="goal">
+
+    <strong>
+      My Learning Goal
+    </strong>
+
+    <br>
+
+    I can use English math words
+    to understand the concept
+    and solve the school task.
+
+  </div>
+
+
+</section>
+
+
+
+<!-- =====================================================
+     NAV
+===================================================== -->
+
+<nav
+  class="days"
+  id="dayNav">
+</nav>
+
+
+
+<!-- =====================================================
+     ACTIVITY
+===================================================== -->
+
+<section class="panel">
+
+
+  <div
+    id="activityView">
+  </div>
+
+
+  <div
+    id="summaryView"
+    class="summary">
+  </div>
+
+
+</section>
+
+
+
+<div class="footer">
+
+
+  <strong>
+
+    WORD → VISUAL → CONCEPT
+    → MATH SENTENCE → TASK
+
+  </strong>
+
+
+  <br>
+
+
+  The goal is not only
+  to know the math word.
+
+  <br>
+
+  The goal is to use the word
+  to understand the math.
+
+
+</div>
+
+
+</div>
+
+
+
+<script>
+
+
+/* =====================================================
+   VOCAB DATA
+===================================================== */
+
+const vocab = [
+
+
+{
+
+  word:
+    "factor",
+
+  zh:
+    "因数",
+
+  meaning:
+    "a whole number that divides another whole number exactly",
+
+  sentence:
+    "3 is a factor of 12 because 3 × 4 = 12.",
+
+  type:
+    "factor"
+
+},
+
+
+{
+
+  word:
+    "factor pair",
+
+  zh:
+    "因数对",
+
+  meaning:
+    "two factors that multiply together to make a number",
+
+  sentence:
+    "3 and 4 are a factor pair of 12 because 3 × 4 = 12.",
+
+  type:
+    "factorpair"
+
+},
+
+
+{
+
+  word:
+    "prime number",
+
+  zh:
+    "质数",
+
+  meaning:
+    "a whole number greater than 1 that has exactly two factors: 1 and itself",
+
+  sentence:
+    "7 is a prime number because its only factors are 1 and 7.",
+
+  type:
+    "prime"
+
+},
+
+
+{
+
+  word:
+    "composite number",
+
+  zh:
+    "合数",
+
+  meaning:
+    "a whole number greater than 1 that has more than two factors",
+
+  sentence:
+    "12 is a composite number because it has more than two factors.",
+
+  type:
+    "composite"
+
+},
+
+
+{
+
+  word:
+    "fraction",
+
+  zh:
+    "分数",
+
+  meaning:
+    "a number that shows equal parts of a whole",
+
+  sentence:
+    "One fourth is a fraction that represents one of four equal parts.",
+
+  type:
+    "fraction"
+
+},
+
+
+{
+
+  word:
+    "parts of a whole",
+
+  zh:
+    "整体的一部分",
+
+  meaning:
+    "equal pieces that together make one complete whole",
+
+  sentence:
+    "Four fourths are four equal parts of one whole.",
+
+  type:
+    "wholeparts"
+
+}
+
+];
+
+
+
+/* =====================================================
+   DAYS
+===================================================== */
+
+const dayMeta = [
+
+
+{
+  n:1,
+  icon:"🔍",
+  name:"Discover"
+},
+
+
+{
+  n:2,
+  icon:"🧠",
+  name:"Remember"
+},
+
+
+{
+  n:3,
+  icon:"👀",
+  name:"Visuals"
+},
+
+
+{
+  n:4,
+  icon:"💬",
+  name:"Math Sentences"
+},
+
+
+{
+  n:5,
+  icon:"🧭",
+  name:"School Tasks"
+},
+
+
+{
+  n:6,
+  icon:"🌍",
+  name:"New Problems"
+},
+
+
+{
+  n:7,
+  icon:"⭐",
+  name:"I Can!"
+}
+
+
+];
+
+
+
+/* =====================================================
+   STATE
+===================================================== */
+
+let state = {
+
+  day:1,
+
+  index:0,
+
+  score:0,
+
+  hints:0,
+
+  languageBarrier:0,
+
+  mathBarrier:0
+
+};
+
+
+
+const activity =
+  document.getElementById(
+    "activityView"
+  );
+
+
+const summary =
+  document.getElementById(
+    "summaryView"
+  );
+
+
+
+/* =====================================================
+   STORAGE
+===================================================== */
+
+function getSaved(){
+
+  try{
+
+    return (
+
+      JSON.parse(
+
+        localStorage.getItem(
+          "avaMath7Day"
+        )
+
+      )
+
+      ||
+
+      {}
+
+    );
+
+  }
+
+  catch(error){
+
+    return {};
+
+  }
+
+}
+
+
+
+function saveDay(data){
+
+  const all =
+    getSaved();
+
+
+  all[
+    "day" +
+    state.day
+  ] =
+    data;
+
+
+  localStorage.setItem(
+
+    "avaMath7Day",
+
+    JSON.stringify(
+      all
+    )
+
+  );
+
+
+  renderNav();
+
+}
+
+
+
+/* =====================================================
+   NAV
+===================================================== */
+
+function renderNav(){
+
+  const saved =
+    getSaved();
+
+
+  document.getElementById(
+    "dayNav"
+  ).innerHTML =
+
+    dayMeta
+
+    .map(
+
+      day => `
+
+      <button
+
+        class="
+          daybtn
+          ${
+            state.day === day.n
+              ? "active"
+              : ""
+          }
+
+          ${
+            saved[
+              "day" + day.n
+            ]?.complete
+              ? "done"
+              : ""
+          }
+        "
+
+        onclick="
+          startDay(
+            ${day.n}
+          )
+        ">
+
+        ${day.icon}
+        Day ${day.n}
+
+        <small>
+
+          ${day.name}
+
+        </small>
+
+      </button>
+
+      `
+
+    )
+
+    .join("");
+
+}
+
+
+
+/* =====================================================
+   START DAY
+===================================================== */
+
+function startDay(day){
+
+  state = {
+
+    day:day,
+
+    index:0,
+
+    score:0,
+
+    hints:0,
+
+    languageBarrier:0,
+
+    mathBarrier:0
+
+  };
+
+
+  activity.style.display =
+    "block";
+
+
+  summary.style.display =
+    "none";
+
+
+  renderNav();
+
+  renderDay();
+
+}
+
+
+
+/* =====================================================
+   HEADER
+===================================================== */
+
+function header(
+  title,
+  subtitle,
+  total
+){
+
+  return `
+
+  <h2>
+
+    ${title}
+
+  </h2>
+
+
+  <div class="panel-sub">
+
+    ${subtitle}
+
+  </div>
+
+
+  <div class="progress">
+
+
+    <div class="progress-row">
+
+      <span>
+
+        Progress
+
+      </span>
+
+      <span>
+
+        ${
+          Math.min(
+            state.index + 1,
+            total
+          )
+        }
+
+        /
+
+        ${total}
+
+      </span>
+
+    </div>
+
+
+    <div class="track">
+
+      <div
+
+        class="fill"
+
+        style="
+          width:
+          ${
+            (
+              state.index /
+              total
+            ) * 100
+          }%
+        ">
+
+      </div>
+
+    </div>
+
+
+  </div>
+
+  `;
+
+}
+
+
+
+/* =====================================================
+   VISUAL HELPERS
+===================================================== */
+
+function factorDots(){
+
+  let dots = "";
+
+
+  for(
+    let i=0;
+    i<12;
+    i++
+  ){
+
+    dots +=
+      `<div class="dot">●</div>`;
+
+  }
+
+
+  return `
+
+  <div>
+
+    <div class="factor-grid">
+
+      ${dots}
+
+    </div>
+
+
+    <div class="visual-label">
+
+      3 rows × 4 = 12
+
+    </div>
+
+  </div>
+
+  `;
+
+}
+
+
+
+function primeVisual(){
+
+  return `
+
+  <div style="text-align:center">
+
+
+    <div
+      style="
+        font-size:82px;
+        font-weight:900;
+        color:#4f7772;
+      ">
+
+      7
+
+    </div>
+
+
+    <div class="visual-label">
+
+      Factor pairs:
+
+      <br>
+
+      1 × 7
+
+      <br><br>
+
+      Only 2 factors:
+      1 and 7
+
+    </div>
+
+
+  </div>
+
+  `;
+
+}
+
+
+
+function compositeVisual(){
+
+  return `
+
+  <div style="text-align:center">
+
+
+    <div
+      style="
+        font-size:82px;
+        font-weight:900;
+        color:#4f7772;
+      ">
+
+      12
+
+    </div>
+
+
+    <div class="visual-label">
+
+      1 × 12
+
+      <br>
+
+      2 × 6
+
+      <br>
+
+      3 × 4
+
+      <br><br>
+
+      More than 2 factors
+
+    </div>
+
+
+  </div>
+
+  `;
+
+}
+
+
+
+function fractionVisual(){
+
+  return `
+
+  <div style="text-align:center">
+
+
+    <div
+      class="fraction-circle">
+    </div>
+
+
+    <div class="visual-label">
+
+      1 out of 4 equal parts
+
+      <br>
+
+      1/4
+
+    </div>
+
+
+  </div>
+
+  `;
+
+}
+
+
+
+function wholePartsVisual(){
+
+  return `
+
+  <div style="width:100%">
+
+
+    <div class="fraction-bar">
+
+      <div class="fr-part selected">
+      </div>
+
+      <div class="fr-part">
+      </div>
+
+      <div class="fr-part">
+      </div>
+
+      <div class="fr-part">
+      </div>
+
+    </div>
+
+
+    <div class="visual-label">
+
+      One whole
+
+      <br>
+
+      divided into
+
+      <strong>
+
+        4 equal parts
+
+      </strong>
+
+    </div>
+
+
+  </div>
+
+  `;
+
+}
+
+
+
+function visualFor(item){
+
+  if(
+    item.type ===
+    "factor"
+  ){
+
+    return factorDots();
+
+  }
+
+
+  if(
+    item.type ===
+    "factorpair"
+  ){
+
+    return `
+
+    <div style="text-align:center">
+
+
+      <div
+        style="
+          font-size:54px;
+          font-weight:900;
+          color:#4f7772;
+        ">
+
+        3 × 4 = 12
+
+      </div>
+
+
+      <div class="visual-label">
+
+        3 and 4 work together
+
+        <br>
+
+        → factor pair
+
+      </div>
+
+
+    </div>
+
+    `;
+
+  }
+
+
+  if(
+    item.type ===
+    "prime"
+  ){
+
+    return primeVisual();
+
+  }
+
+
+  if(
+    item.type ===
+    "composite"
+  ){
+
+    return compositeVisual();
+
+  }
+
+
+  if(
+    item.type ===
+    "fraction"
+  ){
+
+    return fractionVisual();
+
+  }
+
+
+  return wholePartsVisual();
+
+}
+
+
+
+/* =====================================================
+   CHINESE
+===================================================== */
+
+function showChinese(){
+
+  const box =
+    document.getElementById(
+      "zh"
+    );
+
+
+  if(box){
+
+    box.style.display =
+      "block";
+
+
+    state.hints++;
+
+  }
+
+}
+
+
+
+/* =====================================================
+   OPTIONS
+===================================================== */
+
+function shuffle(array){
+
+  return [...array]
+    .sort(
+      () =>
+        Math.random() - .5
+    );
+
+}
+
+
+
+function optionsHTML(
+  options,
+  answer
+){
+
+  return `
+
+  <div class="options">
+
+    ${
+      options
+
+      .map(
+
+        (
+          option,
+          index
+        ) => `
+
+        <button
+
+          class="option"
+
+          onclick="
+            answerMC(
+              this,
+              ${index},
+              ${answer}
+            )
+          ">
+
+          ${option}
+
+        </button>
+
+        `
+
+      )
+
+      .join("")
+    }
+
+  </div>
+
+
+  <div
+    id="feedback"
+    class="feedback">
+  </div>
+
+  `;
+
+}
+
+
+
+/* =====================================================
+   ANSWER
+===================================================== */
+
+function answerMC(
+  button,
+  index,
+  answer
+){
+
+  const buttons =
+    document.querySelectorAll(
+      ".option"
+    );
+
+
+  const feedback =
+    document.getElementById(
+      "feedback"
+    );
+
+
+  if(
+    index === answer
+  ){
+
+    button.classList.add(
+      "correct"
+    );
+
+
+    feedback.style.background =
+      "#dff0e4";
+
+
+    feedback.style.color =
+      "#355c42";
+
+
+    feedback.textContent =
+      "✅ Correct!";
+
+
+    feedback.style.display =
+      "block";
+
+
+    state.score++;
+
+
+    buttons.forEach(
+
+      btn =>
+        btn.disabled = true
+
+    );
+
+
+    document.getElementById(
+      "nextBtn"
+    ).style.display =
+      "block";
+
+  }
+
+
+  else{
+
+    button.classList.add(
+      "wrong"
+    );
+
+
+    feedback.style.background =
+      "#fae7df";
+
+
+    feedback.style.color =
+      "#7c5145";
+
+
+    feedback.textContent =
+
+      "🌱 Try again. Look for the math meaning, not just one familiar word.";
+
+
+    feedback.style.display =
+      "block";
+
+  }
+
+}
+
+
+
+/* =====================================================
+   NEXT
+===================================================== */
+
+function next(total){
+
+  state.index++;
+
+
+  if(
+    state.index >=
+    total
+  ){
+
+    finishDay();
+
+  }
+
+
+  else{
+
+    renderDay();
+
+  }
+
+
+  window.scrollTo({
+
+    top:0,
+
+    behavior:"smooth"
+
+  });
+
+}
+
+
+
+/* =====================================================
+   RENDER DAY
+===================================================== */
+
+function renderDay(){
+
+  if(state.day === 1){
+    day1();
+  }
+
+  if(state.day === 2){
+    day2();
+  }
+
+  if(state.day === 3){
+    day3();
+  }
+
+  if(state.day === 4){
+    day4();
+  }
+
+  if(state.day === 5){
+    day5();
+  }
+
+  if(state.day === 6){
+    day6();
+  }
+
+  if(state.day === 7){
+    day7();
+  }
+
+}
+
+
+
+/* =====================================================
+   DAY 1
+===================================================== */
+
+function day1(){
+
+  const item =
+    vocab[state.index];
+
+
+  const total =
+    vocab.length;
+
+
+  activity.innerHTML =
+
+    header(
+
+      "Day 1 · Discover",
+
+      "See the math idea first, then connect it with the English word.",
+
+      total
+
+    )
+
+    +
+
+    `
+
+
+    <span class="word-chip">
+
+      🔢 Grade 4 Math Word
+
+    </span>
+
+
+    <div class="word">
+
+      ${item.word}
+
+    </div>
+
+
+    <div class="instruction">
+
+      Look at the visual.
+
+      What math idea do you notice?
+
+    </div>
+
+
+    <div class="visual">
+
+      ${
+        visualFor(item)
+      }
+
+    </div>
+
+
+    <div class="box meaning-box">
+
+      <div class="label">
+
+        🧠 Meaning
+
+      </div>
+
+
+      <div class="bigtext">
+
+        ${item.meaning}
+
+      </div>
+
+    </div>
+
+
+    <button
+
+      class="secondary"
+
+      onclick="
+        showChinese()
+      ">
+
+      🇨🇳 I need Chinese help
+
+    </button>
+
+
+    <div
+
+      id="zh"
+
+      class="
+        box
+        language-box
+        chinese
+      ">
+
+      ${item.zh}
+
+    </div>
+
+
+    <div class="box math-box">
+
+      <div class="label">
+
+        ✏️ Math Sentence
+
+      </div>
+
+
+      <div class="bigtext">
+
+        ${item.sentence}
+
+      </div>
+
+    </div>
+
+
+    <button
+
+      id="nextBtn"
+
+      class="primary"
+
+      onclick="
+        next(${total})
+      ">
+
+      Next →
+
+    </button>
+
+    `;
+
+}
+
+
+
+/* =====================================================
+   DAY 2
+===================================================== */
+
+function day2(){
+
+  const item =
+    vocab[state.index];
+
+
+  const total =
+    vocab.length;
+
+
+  const distractors =
+
+    vocab
+
+    .filter(
+      v =>
+        v.word !==
+        item.word
+    )
+
+    .map(
+      v =>
+        v.meaning
+    );
+
+
+  const choices =
+    shuffle(
+
+      [
+        item.meaning,
+        ...shuffle(
+          distractors
+        ).slice(0,2)
+      ]
+
+    );
+
+
+  const answer =
+    choices.indexOf(
+      item.meaning
+    );
+
+
+  activity.innerHTML =
+
+    header(
+
+      "Day 2 · Remember",
+
+      "The visual is gone first. Retrieve the meaning from the English math word.",
+
+      total
+
+    )
+
+    +
+
+    `
+
+
+    <div class="word">
+
+      ${item.word}
+
+    </div>
+
+
+    <div class="qcard">
+
+      <div class="qtitle">
+
+        What does
+
+        <strong>
+
+          ${item.word}
+
+        </strong>
+
+        mean?
+
+      </div>
+
+
+      ${
+        optionsHTML(
+          choices,
+          answer
+        )
+      }
+
+    </div>
+
+
+    <button
+
+      class="secondary"
+
+      onclick="
+        showMathHint(
+          '${item.type}'
+        )
+      ">
+
+      💡 I need a visual hint
+
+    </button>
+
+
+    <div
+
+      id="mathHint"
+
+      class="visual"
+
+      style="
+        display:none;
+        margin-top:14px;
+      ">
+
+    </div>
+
+
+    <button
+
+      id="nextBtn"
+
+      class="
+        primary
+        next
+      "
+
+      onclick="
+        next(${total})
+      ">
+
+      Next →
+
+    </button>
+
+    `;
+
+}
+
+
+
+function showMathHint(type){
+
+  const item =
+    vocab.find(
+      v =>
+        v.type === type
+    );
+
+
+  const box =
+    document.getElementById(
+      "mathHint"
+    );
+
+
+  box.innerHTML =
+    visualFor(item);
+
+
+  box.style.display =
+    "flex";
+
+
+  state.hints++;
+
+}
+
+
+
+/* =====================================================
+   DAY 3 — VISUALS
+===================================================== */
+
+const visualQuestions = [
+
+
+{
+
+  question:
+    "Which word matches this model?",
+
+  visual:
+    factorDots(),
+
+  options:[
+    "factor pair",
+    "fraction",
+    "prime number"
+  ],
+
+  answer:0
+
+},
+
+
+{
+
+  question:
+    "7 has only the factors 1 and 7. What kind of number is 7?",
+
+  visual:
+    primeVisual(),
+
+  options:[
+    "prime number",
+    "composite number",
+    "fraction"
+  ],
+
+  answer:0
+
+},
+
+
+{
+
+  question:
+    "12 has several factor pairs. What kind of number is 12?",
+
+  visual:
+    compositeVisual(),
+
+  options:[
+    "composite number",
+    "prime number",
+    "fraction"
+  ],
+
+  answer:0
+
+},
+
+
+{
+
+  question:
+    "Which word describes the number shown by one equal part out of four?",
+
+  visual:
+    fractionVisual(),
+
+  options:[
+    "fraction",
+    "factor",
+    "prime number"
+  ],
+
+  answer:0
+
+},
+
+
+{
+
+  question:
+    "The whole is divided into four equal pieces. What are the pieces?",
+
+  visual:
+    wholePartsVisual(),
+
+  options:[
+    "parts of a whole",
+    "factor pairs",
+    "prime numbers"
+  ],
+
+  answer:0
+
+}
+
+
+];
+
+
+
+function day3(){
+
+  const q =
+    visualQuestions[
+      state.index
+    ];
+
+
+  const total =
+    visualQuestions.length;
+
+
+  activity.innerHTML =
+
+    header(
+
+      "Day 3 · Visuals",
+
+      "Move between the visual math model and the English word.",
+
+      total
+
+    )
+
+    +
+
+    `
+
+
+    <div class="visual">
+
+      ${q.visual}
+
+    </div>
+
+
+    <div class="qcard">
+
+      <div class="qtitle">
+
+        ${q.question}
+
+      </div>
+
+
+      ${
+        optionsHTML(
+          q.options,
+          q.answer
+        )
+      }
+
+    </div>
+
+
+    <button
+
+      id="nextBtn"
+
+      class="
+        primary
+        next
+      "
+
+      onclick="
+        next(${total})
+      ">
+
+      Next →
+
+    </button>
+
+    `;
+
+}
+
+
+
+/* =====================================================
+   DAY 4 — MATH SENTENCES
+===================================================== */
+
+const sentenceQuestions = [
+
+
+{
+
+  sentence:
+    "2 is a factor of 10 because 2 × 5 = 10.",
+
+  q:
+    "What does factor mean here?",
+
+  options:[
+
+    "a number that divides another number exactly",
+
+    "a part of a fraction",
+
+    "a number with only two factors"
+
+  ],
+
+  answer:0
+
+},
+
+
+{
+
+  sentence:
+    "2 and 6 are a factor pair of 12.",
+
+  q:
+    "Why are 2 and 6 a factor pair?",
+
+  options:[
+
+    "because 2 × 6 = 12",
+
+    "because 2 + 6 = 12",
+
+    "because both are prime numbers"
+
+  ],
+
+  answer:0
+
+},
+
+
+{
+
+  sentence:
+    "11 is a prime number.",
+
+  q:
+    "What must be true about 11?",
+
+  options:[
+
+    "Its only factors are 1 and 11.",
+
+    "It has many factor pairs.",
+
+    "It is part of a fraction."
+
+  ],
+
+  answer:0
+
+},
+
+
+{
+
+  sentence:
+    "8 is a composite number.",
+
+  q:
+    "What must be true about 8?",
+
+  options:[
+
+    "It has more than two factors.",
+
+    "Its only factors are 1 and 8.",
+
+    "It is one equal part of a whole."
+
+  ],
+
+  answer:0
+
+},
+
+
+{
+
+  sentence:
+    "Three fourths is a fraction.",
+
+  q:
+    "What idea does fraction communicate?",
+
+  options:[
+
+    "equal parts of a whole",
+
+    "a pair of factors",
+
+    "a prime number"
+
+  ],
+
+  answer:0
+
+}
+
+
+];
+
+
+
+function day4(){
+
+  const q =
+    sentenceQuestions[
+      state.index
+    ];
+
+
+  const total =
+    sentenceQuestions.length;
+
+
+  activity.innerHTML =
+
+    header(
+
+      "Day 4 · Math Sentences",
+
+      "Use the math vocabulary to understand what the whole sentence is saying.",
+
+      total
+
+    )
+
+    +
+
+    `
+
+
+    <div class="box math-box">
+
+      <div class="label">
+
+        ✏️ Read the Math Sentence
+
+      </div>
+
+
+      <div class="bigtext">
+
+        ${q.sentence}
+
+      </div>
+
+    </div>
+
+
+    <div class="qcard">
+
+      <div class="qtitle">
+
+        ${q.q}
+
+      </div>
+
+
+      ${
+        optionsHTML(
+          q.options,
+          q.answer
+        )
+      }
+
+    </div>
+
+
+    <button
+
+      id="nextBtn"
+
+      class="
+        primary
+        next
+      "
+
+      onclick="
+        next(${total})
+      ">
+
+      Next →
+
+    </button>
+
+    `;
+
+}
+
+
+
+/* =====================================================
+   DAY 5 — SCHOOL TASKS + DIAGNOSIS
+===================================================== */
+
+const schoolTasks = [
+
+
+{
+
+  task:
+    "Find all factor pairs of 24.",
+
+  meaning:
+    "Find two numbers that multiply to make 24.",
+
+  options:[
+
+    "1 × 24, 2 × 12, 3 × 8, 4 × 6",
+
+    "1 + 24, 2 + 12, 3 + 8",
+
+    "24 ÷ 24 only"
+
+  ],
+
+  answer:0
+
+},
+
+
+{
+
+  task:
+    "Is 13 prime or composite?",
+
+  meaning:
+    "Decide whether 13 has exactly two factors or more than two factors.",
+
+  options:[
+
+    "Prime",
+
+    "Composite",
+
+    "Fraction"
+
+  ],
+
+  answer:0
+
+},
+
+
+{
+
+  task:
+    "Which fraction shows one of four equal parts?",
+
+  meaning:
+    "Choose the fraction that represents 1 part when the whole has 4 equal parts.",
+
+  options:[
+
+    "1/4",
+
+    "4/1",
+
+    "1/2"
+
+  ],
+
+  answer:0
+
+},
+
+
+{
+
+  task:
+    "A whole is divided into 8 equal parts. What fraction is one part?",
+
+  meaning:
+    "There are 8 equal parts in the whole. One part is one out of eight.",
+
+  options:[
+
+    "1/8",
+
+    "8/1",
+
+    "1/4"
+
+  ],
+
+  answer:0
+
+}
+
+
+];
+
+
+
+function day5(){
+
+  const q =
+    schoolTasks[
+      state.index
+    ];
+
+
+  const total =
+    schoolTasks.length;
+
+
+  activity.innerHTML =
+
+    header(
+
+      "Day 5 · School Tasks",
+
+      "Before solving, notice where the difficulty is: English language or the math concept.",
+
+      total
+
+    )
+
+    +
+
+    `
+
+
+    <div class="box language-box">
+
+      <div class="label">
+
+        📖 Read the Task
+
+      </div>
+
+
+      <div class="bigtext">
+
+        ${q.task}
+
+      </div>
+
+    </div>
+
+
+    <div class="diagnosis">
+
+
+      <h3>
+
+        🧭 What is hard right now?
+
+      </h3>
+
+
+      <p>
+
+        Choose before asking for help.
+
+      </p>
+
+
+      <div class="diagnostic-buttons">
+
+
+        <button
+
+          class="
+            diagnostic
+            language-btn
+          "
+
+          onclick="
+            diagnose(
+              'language',
+              '${escapeText(q.meaning)}'
+            )
+          ">
+
+          📖 I know the math,
+
+          <br>
+
+          but I don't understand
+          the English.
+
+        </button>
+
+
+        <button
+
+          class="
+            diagnostic
+            math-btn
+          "
+
+          onclick="
+            diagnose(
+              'math',
+              '${escapeText(q.meaning)}'
+            )
+          ">
+
+          🔢 I don't understand
+          the math yet.
+
+        </button>
+
+
+      </div>
+
+
+      <div
+
+        id="diagnosisResult"
+
+        class="diagnosis-result">
+
+      </div>
+
+
+    </div>
+
+
+    <div class="qcard">
+
+      <div class="qtitle">
+
+        Solve the task.
+
+      </div>
+
+
+      ${
+        optionsHTML(
+          q.options,
+          q.answer
+        )
+      }
+
+    </div>
+
+
+    <button
+
+      id="nextBtn"
+
+      class="
+        primary
+        next
+      "
+
+      onclick="
+        next(${total})
+      ">
+
+      Next →
+
+    </button>
+
+    `;
+
+}
+
+
+
+function escapeText(text){
+
+  return text
+
+    .replaceAll(
+      "'",
+      "\\'"
+    );
+
+}
+
+
+
+function diagnose(
+  type,
+  meaning
+){
+
+  const box =
+    document.getElementById(
+      "diagnosisResult"
+    );
+
+
+  if(
+    type ===
+    "language"
+  ){
+
+    state.languageBarrier++;
+
+
+    box.style.background =
+      "#e8eef8";
+
+
+    box.style.color =
+      "#465f7e";
+
+
+    box.innerHTML =
+
+      "📖 <strong>Language Bridge:</strong><br>" +
+
+      meaning;
+
+  }
+
+
+  else{
+
+    state.mathBarrier++;
+
+
+    box.style.background =
+      "#f5e9ce";
+
+
+    box.style.color =
+      "#725825";
+
+
+    box.innerHTML =
+
+      "🔢 <strong>Math Bridge:</strong><br>" +
+
+      meaning +
+
+      "<br><br>" +
+
+      "Use a visual or equation to show the idea.";
+
+  }
+
+
+  box.style.display =
+    "block";
+
+}
+
+
+
+/* =====================================================
+   DAY 6 — NEW PROBLEMS
+===================================================== */
+
+const newProblems = [
+
+
+{
+
+  q:
+    "Which number is a factor of 18?",
+
+  options:[
+    "3",
+    "5",
+    "7"
+  ],
+
+  answer:0
+
+},
+
+
+{
+
+  q:
+    "Which pair is a factor pair of 20?",
+
+  options:[
+    "4 and 5",
+    "3 and 5",
+    "2 and 7"
+  ],
+
+  answer:0
+
+},
+
+
+{
+
+  q:
+    "Which number is prime?",
+
+  options:[
+    "17",
+    "15",
+    "12"
+  ],
+
+  answer:0
+
+},
+
+
+{
+
+  q:
+    "Which number is composite?",
+
+  options:[
+    "16",
+    "13",
+    "11"
+  ],
+
+  answer:0
+
+},
+
+
+{
+
+  q:
+    "A whole is divided into 4 equal parts. Two parts are shaded. Which fraction is shaded?",
+
+  options:[
+    "2/4",
+    "1/4",
+    "4/2"
+  ],
+
+  answer:0
+
+},
+
+
+{
+
+  q:
+    "Which fraction is greater than one whole?",
+
+  options:[
+    "3/2",
+    "1/2",
+    "1/4"
+  ],
+
+  answer:0
+
+}
+
+
+];
+
+
+
+function day6(){
+
+  const q =
+    newProblems[
+      state.index
+    ];
+
+
+  const total =
+    newProblems.length;
+
+
+  activity.innerHTML =
+
+    header(
+
+      "Day 6 · New Problems",
+
+      "Use the same vocabulary in new problems. The examples are different, but the math meaning stays the same.",
+
+      total
+
+    )
+
+    +
+
+    `
+
+
+    <div class="qcard">
+
+
+      <div class="qtitle">
+
+        ${q.q}
+
+      </div>
+
+
+      ${
+        optionsHTML(
+          q.options,
+          q.answer
+        )
+      }
+
+
+    </div>
+
+
+    <button
+
+      id="nextBtn"
+
+      class="
+        primary
+        next
+      "
+
+      onclick="
+        next(${total})
+      ">
+
+      Next →
+
+    </button>
+
+    `;
+
+}
+
+
+
+/* =====================================================
+   DAY 7 — INDEPENDENCE
+===================================================== */
+
+const mastery = [
+
+
+{
+
+  q:
+    "What is a factor?",
+
+  options:[
+
+    "A number that divides another whole number exactly",
+
+    "One part of a fraction",
+
+    "A number that always has two digits"
+
+  ],
+
+  answer:0
+
+},
+
+
+{
+
+  q:
+    "Which is a factor pair of 12?",
+
+  options:[
+    "3 and 4",
+    "3 and 5",
+    "2 and 7"
+  ],
+
+  answer:0
+
+},
+
+
+{
+
+  q:
+    "Which number is prime?",
+
+  options:[
+    "7",
+    "8",
+    "9"
+  ],
+
+  answer:0
+
+},
+
+
+{
+
+  q:
+    "Which number is composite?",
+
+  options:[
+    "12",
+    "11",
+    "13"
+  ],
+
+  answer:0
+
+},
+
+
+{
+
+  q:
+    "Which fraction represents one of eight equal parts?",
+
+  options:[
+    "1/8",
+    "8/1",
+    "1/4"
+  ],
+
+  answer:0
+
+},
+
+
+{
+
+  q:
+    "If four equal parts make one whole, what is each part?",
+
+  options:[
+    "1/4",
+    "4/1",
+    "2/4"
+  ],
+
+  answer:0
+
+},
+
+
+{
+
+  q:
+    "A student knows how to find factors but does not understand the words “factor pair.” What is the main barrier?",
+
+  options:[
+
+    "English academic language",
+
+    "The math concept",
+
+    "Counting"
+
+  ],
+
+  answer:0
+
+}
+
+
+];
+
+
+
+function day7(){
+
+  const q =
+    mastery[
+      state.index
+    ];
+
+
+  const total =
+    mastery.length;
+
+
+  activity.innerHTML =
+
+    header(
+
+      "Day 7 · I Can!",
+
+      "Minimal support. Show what you can understand and solve independently.",
+
+      total
+
+    )
+
+    +
+
+    `
+
+
+    <div class="qcard">
+
+
+      <div class="qtitle">
+
+        ${q.q}
+
+      </div>
+
+
+      ${
+        optionsHTML(
+          q.options,
+          q.answer
+        )
+      }
+
+
+    </div>
+
+
+    <button
+
+      id="nextBtn"
+
+      class="
+        primary
+        next
+      "
+
+      onclick="
+        next(${total})
+      ">
+
+      Next →
+
+    </button>
+
+    `;
+
+}
+
+
+
+/* =====================================================
+   TOTAL
+===================================================== */
+
+function getTotal(){
+
+  if(
+    state.day === 1 ||
+    state.day === 2
+  ){
+
+    return vocab.length;
+
+  }
+
+
+  if(
+    state.day === 3
+  ){
+
+    return visualQuestions.length;
+
+  }
+
+
+  if(
+    state.day === 4
+  ){
+
+    return sentenceQuestions.length;
+
+  }
+
+
+  if(
+    state.day === 5
+  ){
+
+    return schoolTasks.length;
+
+  }
+
+
+  if(
+    state.day === 6
+  ){
+
+    return newProblems.length;
+
+  }
+
+
+  return mastery.length;
+
+}
+
+
+
+/* =====================================================
+   FINISH
+===================================================== */
+
+function finishDay(){
+
+  const total =
+    getTotal();
+
+
+  const percent =
+
+    Math.round(
+
+      (
+        state.score /
+        total
+      ) * 100
+
+    );
+
+
+  saveDay({
+
+    complete:true,
+
+    score:
+      state.score,
+
+    total:
+      total,
+
+    hints:
+      state.hints,
+
+    languageBarrier:
+      state.languageBarrier,
+
+    mathBarrier:
+      state.mathBarrier,
+
+    date:
+      new Date()
+      .toISOString()
+
+  });
+
+
+  activity.style.display =
+    "none";
+
+
+  summary.style.display =
+    "block";
+
+
+  let diagnosticText =
+    "";
+
+
+  if(
+    state.day === 5
+  ){
+
+    diagnosticText = `
+
+      <br><br>
+
+      <strong>
+
+        🧭 Learning Diagnosis
+
+      </strong>
+
+      <br>
+
+      📖 English-language barrier selected:
+
+      ${state.languageBarrier}
+
+      time(s)
+
+      <br>
+
+      🔢 Math-concept barrier selected:
+
+      ${state.mathBarrier}
+
+      time(s)
+
+    `;
+
+  }
+
+
+  summary.innerHTML = `
+
+
+    <div class="summary-star">
+
+      🌟
+
+    </div>
+
+
+    <h3>
+
+      Day ${state.day}
+      Complete!
+
+    </h3>
+
+
+    <div class="result">
+
+
+      <strong>
+
+        Correct:
+
+      </strong>
+
+      ${state.score}
+
+      /
+
+      ${total}
+
+
+      <br>
+
+
+      <strong>
+
+        Score:
+
+      </strong>
+
+      ${percent}%
+
+
+      <br>
+
+
+      <strong>
+
+        Hints used:
+
+      </strong>
+
+      ${state.hints}
+
+
+      ${diagnosticText}
+
+
+      <br><br>
+
+
+      ${
+        state.day < 7
+
+        ?
+
+        "Next time, the support becomes a little smaller."
+
+        :
+
+        "You completed the independence check. Compare what you can do now with Day 1."
+      }
+
+
+    </div>
+
+
+    <button
+
+      class="primary"
+
+      onclick="
+        startDay(
+          ${
+            state.day < 7
+
+            ?
+
+            state.day + 1
+
+            :
+
+            1
+          }
+        )
+      ">
+
+      ${
+        state.day < 7
+
+        ?
+
+        "Go to Day " +
+        (
+          state.day + 1
+        ) +
+        " →"
+
+        :
+
+        "Practice Again →"
+      }
+
+    </button>
+
+  `;
+
+
+  window.scrollTo({
+
+    top:0,
+
+    behavior:"smooth"
+
+  });
+
+}
+
+
+
+/* =====================================================
+   START
+===================================================== */
+
+renderNav();
+
+startDay(1);
+
+
+</script>
+
+
+</body>
+
+</html>
