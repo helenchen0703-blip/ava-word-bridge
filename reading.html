@@ -1,12 +1,25 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Ava Word Bridge | Day 1</title>
+<title>Ava Word Bridge | 7-Day Reading Journey</title>
 
 <style>
+
+:root {
+  --ink: #26384d;
+  --blue: #304d79;
+  --purple: #705d8b;
+  --green: #56827a;
+  --cream: #f7f4ee;
+  --card: #ffffff;
+  --line: #e5e7eb;
+  --soft: #f3f1f7;
+  --gold: #f2dda8;
+}
 
 * {
   box-sizing: border-box;
@@ -14,1548 +27,3773 @@
 
 body {
   margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Arial, sans-serif;
-  background: #f7f4ee;
-  color: #26384d;
+
+  font-family:
+    -apple-system,
+    BlinkMacSystemFont,
+    "Segoe UI",
+    Arial,
+    sans-serif;
+
+  background:
+    linear-gradient(
+      180deg,
+      #f8f5ef,
+      #f1f5f3
+    );
+
+  color: var(--ink);
 }
+
+button,
+a {
+  font: inherit;
+}
+
+
+/* =========================================
+   PAGE
+========================================= */
 
 .page {
-  max-width: 820px;
-  margin: 0 auto;
-  padding: 18px 15px 60px;
+  max-width: 920px;
+  margin: auto;
+  padding: 18px 14px 60px;
 }
 
-/* TOP */
+
+/* =========================================
+   TOP
+========================================= */
 
 .topbar {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  margin-bottom: 18px;
+  gap: 10px;
 }
 
 .home {
+  background: #ffffff;
+  color: #66547f;
   text-decoration: none;
-  background: white;
-  color: #67547f;
-  padding: 11px 16px;
-  border-radius: 14px;
-  font-weight: 700;
-  box-shadow: 0 3px 12px rgba(0,0,0,.06);
-}
 
-.day {
-  background: #f0dca8;
-  color: #604e20;
-  padding: 11px 16px;
-  border-radius: 14px;
+  padding: 10px 15px;
+
+  border-radius: 13px;
+
   font-weight: 800;
+
+  box-shadow:
+    0 3px 12px rgba(0,0,0,0.06);
 }
 
-/* HERO */
+.badge {
+  background: var(--gold);
+  color: #5f4d20;
+
+  padding: 10px 15px;
+
+  border-radius: 13px;
+
+  font-weight: 850;
+}
+
+
+/* =========================================
+   HERO
+========================================= */
 
 .hero {
-  background: white;
-  border-radius: 26px;
-  padding: 27px 20px;
+  margin-top: 16px;
+
+  background: #ffffff;
+
+  border-radius: 28px;
+
+  padding: 28px 20px;
+
   text-align: center;
-  box-shadow: 0 7px 24px rgba(0,0,0,.07);
+
+  box-shadow:
+    0 8px 28px rgba(0,0,0,0.07);
 }
 
-.hero .icon {
-  font-size: 50px;
+.hero .emoji {
+  font-size: 52px;
 }
 
 .hero h1 {
   margin: 7px 0;
-  color: #304d79;
-  font-size: 34px;
+
+  color: var(--blue);
+
+  font-size: 36px;
 }
 
-.hero p {
-  color: #705e88;
-  font-size: 18px;
-  font-weight: 700;
+.tag {
+  color: var(--purple);
+
+  font-weight: 850;
+
+  font-size: 19px;
 }
 
 .goal {
+  max-width: 610px;
+
   margin: 18px auto 0;
-  max-width: 580px;
-  padding: 14px;
-  border-radius: 16px;
+
   background: #eef4ff;
-  line-height: 1.5;
+
+  padding: 14px 17px;
+
+  border-radius: 17px;
+
+  line-height: 1.55;
 }
 
-/* PROGRESS */
+
+/* =========================================
+   DAY NAVIGATION
+========================================= */
+
+.days {
+  margin-top: 18px;
+
+  background: #ffffff;
+
+  border-radius: 22px;
+
+  padding: 14px;
+
+  display: grid;
+
+  grid-template-columns:
+    repeat(7, 1fr);
+
+  gap: 8px;
+
+  box-shadow:
+    0 5px 18px rgba(0,0,0,0.05);
+}
+
+.daybtn {
+  border: 0;
+
+  border-radius: 14px;
+
+  background: #f4f4f5;
+
+  color: #5f6670;
+
+  padding: 11px 5px;
+
+  cursor: pointer;
+
+  font-weight: 800;
+
+  line-height: 1.2;
+}
+
+.daybtn small {
+  display: block;
+
+  font-weight: 650;
+
+  margin-top: 4px;
+}
+
+.daybtn.active {
+  background: #eeeaf5;
+
+  color: #5e4c75;
+
+  outline:
+    2px solid #826f9b;
+}
+
+.daybtn.done::after {
+  content: " ✓";
+}
+
+
+/* =========================================
+   MAIN PANEL
+========================================= */
+
+.panel {
+  margin-top: 20px;
+
+  background: #ffffff;
+
+  border-radius: 28px;
+
+  padding: 24px;
+
+  box-shadow:
+    0 8px 28px rgba(0,0,0,0.07);
+}
+
+.panel h2 {
+  margin: 0;
+
+  color: var(--blue);
+
+  font-size: 27px;
+}
+
+.panel-sub {
+  color: #6d7580;
+
+  line-height: 1.55;
+
+  margin-top: 7px;
+}
+
+
+/* =========================================
+   PROGRESS
+========================================= */
 
 .progress {
-  background: white;
-  border-radius: 18px;
-  padding: 17px;
-  margin-top: 18px;
-  box-shadow: 0 4px 14px rgba(0,0,0,.05);
+  margin-top: 16px;
 }
 
 .progress-row {
   display: flex;
+
   justify-content: space-between;
+
   font-weight: 800;
-  margin-bottom: 9px;
 }
 
 .track {
-  height: 14px;
-  background: #e5e7ea;
-  border-radius: 20px;
+  height: 13px;
+
+  background: #e7e8eb;
+
+  border-radius: 999px;
+
   overflow: hidden;
+
+  margin-top: 8px;
 }
 
 .fill {
   height: 100%;
-  width: 0%;
-  background: #71608f;
-  transition: width .3s;
+
+  background:
+    linear-gradient(
+      90deg,
+      var(--purple),
+      #8da1bc
+    );
+
+  width: 0;
+
+  transition: 0.25s;
 }
 
-/* CARD */
 
-.card {
-  background: white;
-  border-radius: 28px;
-  margin-top: 20px;
-  padding: 24px;
-  box-shadow: 0 9px 28px rgba(0,0,0,.08);
+/* =========================================
+   WORD
+========================================= */
+
+.activity {
+  margin-top: 18px;
 }
 
-.category {
+.word-chip {
   display: inline-block;
+
   background: #f0edf6;
-  color: #66547f;
-  border-radius: 20px;
-  padding: 7px 13px;
+
+  color: #625078;
+
+  border-radius: 999px;
+
+  padding: 7px 12px;
+
   font-weight: 800;
+
   font-size: 14px;
 }
 
 .word {
+  font-size: 40px;
+
   text-align: center;
-  font-size: 42px;
-  font-weight: 850;
-  color: #304d79;
-  margin: 19px 0 8px;
+
+  color: var(--blue);
+
+  font-weight: 900;
+
+  margin: 17px 0 7px;
 }
 
-.look-first {
+.instruction {
   text-align: center;
-  color: #777;
+
+  color: #747b84;
+
   font-size: 14px;
 }
 
-/* IMAGE */
 
-.image-box {
-  margin: 20px auto 0;
-  max-width: 640px;
-  height: 300px;
-  border-radius: 24px;
-  background: linear-gradient(145deg,#edf2f6,#f6f0e8);
+/* =========================================
+   IMAGE
+========================================= */
+
+.imagebox {
+  height: 285px;
+
+  border-radius: 22px;
+
+  background:
+    linear-gradient(
+      135deg,
+      #edf2f6,
+      #f7efe6
+    );
+
+  margin-top: 18px;
+
   overflow: hidden;
-  position: relative;
+
+  display: flex;
+
+  align-items: center;
+
+  justify-content: center;
 }
 
-.image-box img {
+.imagebox img {
   width: 100%;
+
   height: 100%;
+
   object-fit: cover;
 }
 
 .fallback {
   display: none;
-  height: 100%;
-  align-items: center;
-  justify-content: center;
+
   flex-direction: column;
-  padding: 25px;
+
+  align-items: center;
+
   text-align: center;
+
+  padding: 20px;
 }
 
-.fallback-emoji {
-  font-size: 78px;
+.fallback .em {
+  font-size: 76px;
 }
 
-.fallback-text {
-  margin-top: 15px;
-  font-size: 20px;
-  font-weight: 800;
-  color: #51647b;
+.fallback b {
+  margin-top: 12px;
+
+  font-size: 19px;
+
+  color: #52667c;
 }
 
-/* AUDIO */
 
-.audio-box {
-  margin-top: 20px;
-  padding: 18px;
-  background: #edf3fb;
-  border-radius: 19px;
-}
+/* =========================================
+   AUDIO
+========================================= */
 
-.audio-title {
-  text-align: center;
-  font-weight: 850;
-  color: #4b6585;
-  margin-bottom: 13px;
-}
-
-.audio-buttons {
+.audio-row {
   display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 11px;
+
+  grid-template-columns:
+    1fr 1fr;
+
+  gap: 10px;
+
+  margin-top: 16px;
 }
 
-.audio-button {
+.audio-btn,
+.primary,
+.secondary,
+.option,
+.selfbtn {
   border: 0;
-  background: white;
-  color: #304d79;
-  padding: 15px;
-  border-radius: 15px;
-  font-weight: 800;
-  font-size: 16px;
+
+  border-radius: 14px;
+
+  padding: 13px 14px;
+
   cursor: pointer;
+
+  font-weight: 800;
 }
 
-.audio-button:active {
-  transform: scale(.98);
+.audio-btn {
+  background: #edf3fb;
+
+  color: var(--blue);
 }
 
-.audio-message {
-  min-height: 20px;
+.audio-status {
   text-align: center;
-  color: #67788d;
+
+  color: #68788b;
+
   font-size: 13px;
-  margin-top: 10px;
+
+  min-height: 20px;
+
+  margin-top: 8px;
 }
 
-/* MEANING */
 
-.meaning-box {
+/* =========================================
+   BOXES
+========================================= */
+
+.box {
+  border-radius: 18px;
+
+  padding: 18px;
+
+  margin-top: 17px;
+}
+
+.meaningbox {
   background: #fff7e5;
-  border-radius: 19px;
-  padding: 19px;
-  margin-top: 21px;
+}
+
+.sentencebox {
+  background: #edf6f1;
+}
+
+.hintbox {
+  background: #f2eef7;
 }
 
 .label {
-  font-size: 13px;
-  font-weight: 850;
+  font-size: 12px;
+
   text-transform: uppercase;
-  letter-spacing: .8px;
-  color: #89743f;
+
+  letter-spacing: 0.8px;
+
+  font-weight: 900;
+
   margin-bottom: 8px;
+
+  color: #7d6b3d;
 }
 
-.meaning {
-  font-size: 21px;
-  line-height: 1.55;
-  font-weight: 750;
+.bigtext {
+  font-size: 20px;
+
+  line-height: 1.6;
+
+  font-weight: 700;
 }
 
-/* CHINESE */
 
-.chinese-button {
-  display: block;
-  margin: 17px auto 0;
-  border: 2px solid #725e8d;
-  background: white;
-  color: #68537f;
-  padding: 11px 17px;
-  border-radius: 14px;
-  font-weight: 800;
-  font-size: 15px;
-  cursor: pointer;
-}
+/* =========================================
+   CHINESE
+========================================= */
 
 .chinese {
   display: none;
-  background: #f2eef7;
-  color: #57466c;
-  margin-top: 11px;
-  border-radius: 15px;
-  padding: 14px;
+
+  text-align: center;
+
+  color: #59486e;
+
   font-size: 18px;
+
   font-weight: 750;
-  text-align: center;
 }
 
-/* SENTENCE */
+.secondary {
+  background: #ffffff;
 
-.sentence-box {
-  background: #edf6f1;
-  border-radius: 19px;
-  padding: 19px;
-  margin-top: 21px;
+  border:
+    2px solid var(--purple);
+
+  color: var(--purple);
+
+  display: block;
+
+  margin: 14px auto 0;
 }
 
-.sentence-label {
-  color: #52705d;
-}
 
-.sentence {
-  font-size: 20px;
-  line-height: 1.65;
-  font-weight: 650;
-}
+/* =========================================
+   QUESTIONS
+========================================= */
 
-/* QUIZ */
+.qcard {
+  margin-top: 18px;
 
-.quiz-box {
   background: #f5f6f9;
-  border-radius: 19px;
+
+  border-radius: 18px;
+
   padding: 18px;
-  margin-top: 22px;
 }
 
-.quiz-title {
-  font-size: 19px;
-  font-weight: 850;
+.qtitle {
   text-align: center;
-  margin-bottom: 14px;
+
+  font-size: 19px;
+
+  font-weight: 900;
+
+  line-height: 1.45;
 }
 
 .options {
   display: grid;
-  gap: 10px;
+
+  gap: 9px;
+
+  margin-top: 13px;
 }
 
 .option {
-  border: 2px solid #dde1e7;
-  background: white;
-  padding: 13px;
-  border-radius: 14px;
+  background: #ffffff;
+
+  border:
+    2px solid #dfe2e7;
+
   text-align: left;
-  font-size: 16px;
-  line-height: 1.4;
-  cursor: pointer;
+
+  color: #34465b;
 }
 
 .option.correct {
-  background: #def0e4;
-  border-color: #7ea78a;
+  background: #dff0e4;
+
+  border-color: #7baa88;
 }
 
 .option.wrong {
-  background: #fae6df;
-  border-color: #c78e7e;
+  background: #fae7df;
+
+  border-color: #c79182;
 }
 
-.quiz-feedback {
+.feedback {
   display: none;
-  margin-top: 12px;
-  padding: 12px;
+
+  margin-top: 11px;
+
   border-radius: 13px;
+
+  padding: 12px;
+
   text-align: center;
+
   font-weight: 800;
 }
 
-/* REFLECTION */
 
-.reflection {
-  margin-top: 24px;
-  padding-top: 22px;
-  border-top: 2px solid #eee;
+/* =========================================
+   SELF CHECK
+========================================= */
+
+.self {
+  border-top:
+    2px solid #eeeeee;
+
+  margin-top: 20px;
+
+  padding-top: 18px;
 }
 
-.reflection-title {
+.self-title {
   text-align: center;
-  font-size: 19px;
-  font-weight: 850;
-  margin-bottom: 14px;
+
+  font-weight: 900;
+
+  font-size: 18px;
 }
 
-.reflect-buttons {
+.self-grid {
   display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 11px;
+
+  grid-template-columns:
+    1fr 1fr;
+
+  gap: 10px;
+
+  margin-top: 12px;
 }
 
-.reflect {
-  border: 0;
-  padding: 15px;
-  border-radius: 15px;
-  font-weight: 850;
-  font-size: 16px;
-  cursor: pointer;
-}
-
-.know {
+.selfbtn.know {
   background: #dcefe2;
-  color: #355d43;
+
+  color: #345d42;
 }
 
-.help {
-  background: #f7e5c7;
+.selfbtn.help {
+  background: #f7e5c8;
+
   color: #725522;
 }
 
-.reflect-feedback {
-  display: none;
-  text-align: center;
-  padding: 13px;
-  border-radius: 14px;
-  margin-top: 13px;
-  font-weight: 800;
+.primary {
+  display: block;
+
+  width: 100%;
+
+  margin-top: 15px;
+
+  background: var(--purple);
+
+  color: #ffffff;
+
+  font-size: 17px;
 }
 
 .next {
   display: none;
-  width: 100%;
-  border: 0;
-  margin-top: 16px;
-  background: #705c8a;
-  color: white;
-  border-radius: 15px;
-  padding: 16px;
-  font-size: 18px;
-  font-weight: 850;
-  cursor: pointer;
 }
 
-/* FINISH */
 
-.finish {
-  display: none;
-  background: white;
-  border-radius: 28px;
-  padding: 30px 22px;
-  text-align: center;
-  margin-top: 21px;
-  box-shadow: 0 9px 28px rgba(0,0,0,.08);
-}
+/* =========================================
+   SCHOOL TEXT
+========================================= */
 
-.finish-icon {
-  font-size: 66px;
-}
+.textpassage {
+  background: #f8f7fb;
 
-.finish h2 {
-  color: #304d79;
-  font-size: 30px;
-}
+  border-left:
+    5px solid #80709a;
 
-.results {
-  background: #f3f1f7;
-  border-radius: 18px;
+  border-radius: 16px;
+
   padding: 19px;
+
+  font-size: 20px;
+
+  line-height: 1.75;
+
+  margin-top: 18px;
+}
+
+.mini-note {
+  font-size: 13px;
+
+  color: #777777;
+
+  margin-top: 8px;
+}
+
+
+/* =========================================
+   SUMMARY
+========================================= */
+
+.summary {
+  display: none;
+
+  text-align: center;
+}
+
+.summary .star {
+  font-size: 60px;
+}
+
+.summary h3 {
+  font-size: 28px;
+
+  color: var(--blue);
+}
+
+.result {
+  background: #f3f1f7;
+
+  border-radius: 18px;
+
+  padding: 18px;
+
   line-height: 1.8;
-  font-size: 17px;
-  margin-top: 17px;
+
+  margin-top: 15px;
 }
 
-.restart {
-  border: 0;
-  background: #628c71;
-  color: white;
-  padding: 13px 20px;
-  border-radius: 14px;
-  font-weight: 850;
-  font-size: 16px;
-  cursor: pointer;
-  margin-top: 17px;
+
+/* =========================================
+   FOOTER
+========================================= */
+
+.footer {
+  text-align: center;
+
+  color: #737980;
+
+  margin-top: 24px;
+
+  line-height: 1.6;
+
+  font-size: 14px;
 }
 
-/* MOBILE */
 
-@media (max-width:600px) {
+/* =========================================
+   MOBILE
+========================================= */
 
-  .hero h1 {
-    font-size: 28px;
+@media (max-width: 760px) {
+
+  .days {
+    grid-template-columns:
+      repeat(2, 1fr);
   }
 
-  .card {
-    padding: 19px 15px;
+  .daybtn:last-child {
+    grid-column:
+      span 2;
+  }
+
+  .panel {
+    padding:
+      20px 15px;
   }
 
   .word {
     font-size: 34px;
   }
 
-  .image-box {
-    height: 235px;
+  .audio-row,
+  .self-grid {
+    grid-template-columns:
+      1fr;
   }
 
-  .audio-buttons,
-  .reflect-buttons {
-    grid-template-columns: 1fr;
+  .imagebox {
+    height: 230px;
+  }
+
+  .hero h1 {
+    font-size: 30px;
   }
 
 }
 
 </style>
+
 </head>
+
 
 <body>
 
+
 <div class="page">
+
 
 <div class="topbar">
 
-<a href="index.html" class="home">
-← Home
-</a>
+  <a
+    class="home"
+    href="index.html">
 
-<div class="day">
-Day 1 · Discover
+    ← Home
+
+  </a>
+
+
+  <div class="badge">
+
+    7-Day Reading Journey
+
+  </div>
+
 </div>
 
-</div>
 
 
 <section class="hero">
 
-<div class="icon">
-🔍 🦉
-</div>
+  <div class="emoji">
 
-<h1>
-Ava's Word Detective
-</h1>
+    🌉 🦉
 
-<p>
-See it. Hear it. Know it. Understand it.
-</p>
-
-<div class="goal">
-
-<strong>Today's Goal</strong><br>
-
-I can connect a school word with its meaning.
-
-</div>
-
-</section>
+  </div>
 
 
-<section class="progress">
+  <h1>
 
-<div class="progress-row">
+    Ava Word Bridge
 
-<span>My Word Mission</span>
+  </h1>
 
-<span id="progressText">
-1 / 12
-</span>
 
-</div>
+  <div class="tag">
 
-<div class="track">
+    Read it. Know it. Understand it.
 
-<div
-id="progressFill"
-class="fill">
-</div>
+  </div>
 
-</div>
+
+  <div class="goal">
+
+    <strong>
+      Learning Goal
+    </strong>
+
+    <br>
+
+    I can use important school words
+    and phrases to understand sentences
+    and find the gist.
+
+  </div>
 
 </section>
 
 
-<section
-id="wordCard"
-class="card">
 
-<div
-id="category"
-class="category">
-</div>
+<nav
+  class="days"
+  id="dayNav">
+</nav>
 
 
-<div
-id="word"
-class="word">
-</div>
 
-<div class="look-first">
+<section class="panel">
 
-Look at the picture first.
-What do you think this word means?
+  <div id="activityView">
+  </div>
 
-</div>
-
-
-<div class="image-box">
-
-<img
-id="wordImage"
-src=""
-alt="Vocabulary picture">
-
-<div
-id="imageFallback"
-class="fallback">
-
-<div
-id="fallbackEmoji"
-class="fallback-emoji">
-</div>
-
-<div
-id="fallbackText"
-class="fallback-text">
-</div>
-
-</div>
-
-</div>
-
-
-<div class="audio-box">
-
-<div class="audio-title">
-
-👂 Listen carefully
-
-</div>
-
-<div class="audio-buttons">
-
-<button
-class="audio-button"
-onclick="playWord()">
-
-🔊 Hear the Word
-
-</button>
-
-<button
-class="audio-button"
-onclick="playSentence()">
-
-🎧 Hear the Sentence
-
-</button>
-
-</div>
-
-<div
-id="audioMessage"
-class="audio-message">
-
-Listen once. Then say it yourself.
-
-</div>
-
-</div>
-
-
-<div class="meaning-box">
-
-<div class="label">
-
-🧠 What does it mean?
-
-</div>
-
-<div
-id="meaning"
-class="meaning">
-</div>
-
-</div>
-
-
-<button
-class="chinese-button"
-onclick="toggleChinese()">
-
-🇨🇳 I need Chinese help
-
-</button>
-
-<div
-id="chinese"
-class="chinese">
-</div>
-
-
-<div class="sentence-box">
-
-<div class="label sentence-label">
-
-🎒 School Reading
-
-</div>
-
-<div
-id="sentence"
-class="sentence">
-</div>
-
-</div>
-
-
-<div class="quiz-box">
-
-<div
-id="quizTitle"
-class="quiz-title">
-</div>
-
-<div
-id="options"
-class="options">
-</div>
-
-<div
-id="quizFeedback"
-class="quiz-feedback">
-</div>
-
-</div>
-
-
-<div class="reflection">
-
-<div class="reflection-title">
-
-How much help did you need?
-
-</div>
-
-<div class="reflect-buttons">
-
-<button
-class="reflect know"
-onclick="recordResult('know')">
-
-🟢 I know it
-
-</button>
-
-<button
-class="reflect help"
-onclick="recordResult('help')">
-
-🟡 I need help
-
-</button>
-
-</div>
-
-<div
-id="reflectFeedback"
-class="reflect-feedback">
-</div>
-
-<button
-id="nextButton"
-class="next"
-onclick="nextWord()">
-
-Next Word →
-
-</button>
-
-</div>
+  <div
+    id="summaryView"
+    class="summary">
+  </div>
 
 </section>
 
 
-<section
-id="finish"
-class="finish">
 
-<div class="finish-icon">
-🌟
-</div>
+<div class="footer">
 
-<h2>
-Day 1 Complete!
-</h2>
+  <strong>
+    More support → less support → independence
+  </strong>
 
-<p>
-Great work, Ava.
-</p>
+  <br>
 
-<div
-id="results"
-class="results">
-</div>
-
-<button
-class="restart"
-onclick="restart()">
-
-🔁 Practice Again
-
-</button>
-
-<br><br>
-
-<a
-href="index.html"
-class="home">
-
-← Back Home
-
-</a>
-
-</section>
+  Pictures and Chinese are bridges,
+  not the final destination.
 
 </div>
+
+
+</div>
+
 
 
 <audio
-id="wordAudio"
-preload="none">
+  id="wordAudio"
+  preload="none">
 </audio>
 
 <audio
-id="sentenceAudio"
-preload="none">
+  id="sentenceAudio"
+  preload="none">
 </audio>
+
 
 
 <script>
 
-const words = [
+
+/* =====================================================
+   VOCABULARY
+===================================================== */
+
+const vocab = [
+
 
 {
-word:"government",
-slug:"government",
-category:"🏛️ Social Studies",
-meaning:"the people or system that make decisions and run a country or place",
-chinese:"政府；管理国家或地区并作出重要决定的机构",
-sentence:"The government of Sparta included two kings, a council of elders, and an Assembly.",
-emoji:"🏛️",
-fallback:"People who make decisions and run a place",
-quiz:"Which idea best matches government?",
-options:[
-"People who make decisions and run a place",
-"A group of soldiers",
-"A person you fight against"
-],
-answer:0
+  word: "government",
+
+  slug: "government",
+
+  cat: "🏛️ Social Studies",
+
+  meaning:
+    "the people or system that make decisions and run a country or place",
+
+  zh:
+    "政府；管理国家或地区并作出重要决定的机构",
+
+  sentence:
+    "The government of Sparta included two kings, a council of elders, and an Assembly.",
+
+  emoji:
+    "🏛️",
+
+  fallback:
+    "People making decisions for a place",
+
+  wrong: [
+    "a group of soldiers",
+    "a person you fight against"
+  ],
+
+  newSentence:
+    "A government makes important decisions for the people it serves."
 },
 
-{
-word:"citizen",
-slug:"citizen",
-category:"🏛️ Social Studies",
-meaning:"a person who belongs to a country or city and has rights and responsibilities there",
-chinese:"公民；属于一个国家或城市，并拥有相应权利和责任的人",
-sentence:"Citizens could take part in important decisions.",
-emoji:"🧑‍🤝‍🧑",
-fallback:"A person who belongs to a country or city",
-quiz:"Who is a citizen?",
-options:[
-"A person who belongs to a country or city",
-"A building",
-"A type of army"
-],
-answer:0
-},
 
 {
-word:"assembly",
-slug:"assembly",
-category:"🏛️ Social Studies",
-meaning:"a group of people who meet together to discuss or make decisions",
-chinese:"公民大会；人们聚在一起讨论或作出决定",
-sentence:"The Assembly voted yes or no on important decisions.",
-emoji:"👥",
-fallback:"People meeting together",
-quiz:"What happens in an assembly?",
-options:[
-"People meet together",
-"A soldier trains alone",
-"Someone sleeps"
-],
-answer:0
+  word: "citizen",
+
+  slug: "citizen",
+
+  cat: "🏛️ Social Studies",
+
+  meaning:
+    "a person who belongs to a country or city and has rights and responsibilities there",
+
+  zh:
+    "公民；属于一个国家或城市，并拥有相应权利和责任的人",
+
+  sentence:
+    "A citizen belongs to a country or city.",
+
+  emoji:
+    "🧑‍🤝‍🧑",
+
+  fallback:
+    "A person who belongs to a country or city",
+
+  wrong: [
+    "a building used for meetings",
+    "a group of soldiers"
+  ],
+
+  newSentence:
+    "A citizen may have rights and responsibilities in a community."
 },
 
-{
-word:"rights",
-slug:"rights",
-category:"🏛️ Social Studies",
-meaning:"things that people are allowed to do or have",
-chinese:"权利；一个人被允许拥有或做的事情",
-sentence:"Citizens had certain rights.",
-emoji:"⚖️",
-fallback:"Things people are allowed to do or have",
-quiz:"Rights are things people are...",
-options:[
-"allowed to do or have",
-"forced to forget",
-"unable to see"
-],
-answer:0
-},
 
 {
-word:"slave",
-slug:"slave",
-category:"🏛️ Social Studies",
-meaning:"a person who was forced to work for another person and was not free",
-chinese:"奴隶；被迫为别人劳动并没有自由的人",
-sentence:"Slaves did not have the same rights as citizens.",
-emoji:"⛓️",
-fallback:"A person who was not free",
-quiz:"A slave was...",
-options:[
-"not free",
-"a king",
-"a teacher"
-],
-answer:0
+  word: "assembly",
+
+  slug: "assembly",
+
+  cat: "🏛️ Social Studies",
+
+  meaning:
+    "a group of people who meet together to discuss or make decisions",
+
+  zh:
+    "公民大会；人们聚在一起讨论或作出决定",
+
+  sentence:
+    "The government of Sparta included two kings, a council of elders, and an Assembly.",
+
+  emoji:
+    "👥",
+
+  fallback:
+    "People meeting together",
+
+  wrong: [
+    "one soldier training alone",
+    "a place where people sleep"
+  ],
+
+  newSentence:
+    "The assembly met to vote on an important question."
 },
 
-{
-word:"debate",
-slug:"debate",
-category:"🏛️ Social Studies",
-meaning:"a discussion in which people share different ideas or opinions",
-chinese:"辩论；人们表达并讨论不同观点",
-sentence:"Citizens could debate important questions.",
-emoji:"💬",
-fallback:"People sharing different ideas",
-quiz:"During a debate people...",
-options:[
-"share different ideas",
-"sleep quietly",
-"march in an army"
-],
-answer:0
-},
 
 {
-word:"enemy",
-slug:"enemy",
-category:"📖 Reading Word",
-meaning:"a person, group, or country that you fight against",
-chinese:"敌人；与你对立或作战的人、团体或国家",
-sentence:"Sparta and Athens were, at times, enemies.",
-emoji:"⚔️",
-fallback:"Two sides that fight against each other",
-quiz:"Which word means someone you fight against?",
-options:[
-"enemy",
-"citizen",
-"teacher"
-],
-answer:0
+  word: "rights",
+
+  slug: "rights",
+
+  cat: "🏛️ Social Studies",
+
+  meaning:
+    "things that people are allowed to do or have",
+
+  zh:
+    "权利；一个人被允许拥有或做的事情",
+
+  sentence:
+    "Rights are things that people are allowed to do or have.",
+
+  emoji:
+    "⚖️",
+
+  fallback:
+    "Things people are allowed to do or have",
+
+  wrong: [
+    "things people must forget",
+    "things no one may use"
+  ],
+
+  newSentence:
+    "Different groups in ancient societies did not always have the same rights."
 },
 
-{
-word:"army",
-slug:"army",
-category:"📖 Reading Word",
-meaning:"a large group of soldiers trained to fight",
-chinese:"军队；由许多士兵组成的队伍",
-sentence:"The kings were in charge of the army.",
-emoji:"🛡️",
-fallback:"A group of soldiers",
-quiz:"An army is made up mainly of...",
-options:[
-"soldiers",
-"teachers",
-"musicians"
-],
-answer:0
-},
 
 {
-word:"soldier",
-slug:"soldier",
-category:"📖 Reading Word",
-meaning:"a person who serves and fights in an army",
-chinese:"士兵；在军队中服役和作战的人",
-sentence:"Spartan boys trained hard to become strong soldiers.",
-emoji:"🪖",
-fallback:"A person who serves in an army",
-quiz:"Where does a soldier serve?",
-options:[
-"in an army",
-"in a bakery",
-"in a library"
-],
-answer:0
+  word: "slave",
+
+  slug: "slave",
+
+  cat: "🏛️ Social Studies",
+
+  meaning:
+    "a person who was forced to work for another person and was not free",
+
+  zh:
+    "奴隶；被迫为别人劳动并且没有自由的人",
+
+  sentence:
+    "A slave in an ancient society was not free.",
+
+  emoji:
+    "⛓️",
+
+  fallback:
+    "A person who was not free",
+
+  wrong: [
+    "a king who made laws",
+    "a teacher in a school"
+  ],
+
+  newSentence:
+    "A slave had far less freedom than a citizen."
 },
 
-{
-word:"in charge of",
-slug:"in-charge-of",
-category:"⚡ Power Phrase",
-meaning:"responsible for leading or taking care of something",
-chinese:"负责；掌管",
-sentence:"The kings were in charge of the army.",
-emoji:"👑",
-fallback:"Responsible for leading something",
-quiz:"If you are in charge of something, you are...",
-options:[
-"responsible for it",
-"afraid of it",
-"far away from it"
-],
-answer:0
-},
 
 {
-word:"be allowed to",
-slug:"be-allowed-to",
-category:"⚡ Power Phrase",
-meaning:"to have permission to do something",
-chinese:"被允许做某事",
-sentence:"To be allowed to do something means you have permission.",
-emoji:"✅",
-fallback:"You have permission",
-quiz:"If you are allowed to do something, you...",
-options:[
-"have permission",
-"must hide",
-"cannot understand"
-],
-answer:0
+  word: "debate",
+
+  slug: "debate",
+
+  cat: "🏛️ Social Studies",
+
+  meaning:
+    "a discussion in which people share different ideas or opinions",
+
+  zh:
+    "辩论；人们表达并讨论不同观点",
+
+  sentence:
+    "During a debate, people share different ideas or opinions.",
+
+  emoji:
+    "💬",
+
+  fallback:
+    "People sharing different ideas",
+
+  wrong: [
+    "a silent reading time",
+    "a military march"
+  ],
+
+  newSentence:
+    "The class held a debate before voting on the question."
 },
 
+
 {
-word:"be loyal to",
-slug:"be-loyal-to",
-category:"⚡ Power Phrase",
-meaning:"to keep supporting and standing by a person or group",
-chinese:"忠于；忠诚于；一直支持某人或群体",
-sentence:"A loyal person continues to support the group.",
-emoji:"🤝",
-fallback:"Stay with and support your group",
-quiz:"Being loyal means you...",
-options:[
-"keep supporting someone or your group",
-"forget your group",
-"leave every time"
-],
-answer:0
+  word: "enemy",
+
+  slug: "enemy",
+
+  cat: "📖 Reading Word",
+
+  meaning:
+    "a person, group, or country that you fight against",
+
+  zh:
+    "敌人；与你对立或作战的人、团体或国家",
+
+  sentence:
+    "Sparta and Athens were, at times, enemies.",
+
+  emoji:
+    "⚔️",
+
+  fallback:
+    "Two sides that fight against each other",
+
+  wrong: [
+    "a member of your own team",
+    "a person who belongs to a city"
+  ],
+
+  newSentence:
+    "Two city-states can become enemies when they fight against each other."
+},
+
+
+{
+  word: "army",
+
+  slug: "army",
+
+  cat: "📖 Reading Word",
+
+  meaning:
+    "a large group of soldiers trained to fight",
+
+  zh:
+    "军队；由许多接受作战训练的士兵组成的队伍",
+
+  sentence:
+    "The kings were in charge of the army.",
+
+  emoji:
+    "🛡️",
+
+  fallback:
+    "A group of soldiers",
+
+  wrong: [
+    "a group of teachers",
+    "a group of musicians"
+  ],
+
+  newSentence:
+    "The army trained together to protect the city-state."
+},
+
+
+{
+  word: "soldier",
+
+  slug: "soldier",
+
+  cat: "📖 Reading Word",
+
+  meaning:
+    "a person who serves and fights in an army",
+
+  zh:
+    "士兵；在军队中服役和作战的人",
+
+  sentence:
+    "Spartan boys trained hard to become strong soldiers.",
+
+  emoji:
+    "🪖",
+
+  fallback:
+    "A person who serves in an army",
+
+  wrong: [
+    "a person who bakes bread",
+    "a person who works in a library"
+  ],
+
+  newSentence:
+    "The soldier trained with other members of the army."
+},
+
+
+{
+  word: "in charge of",
+
+  slug: "in-charge-of",
+
+  cat: "⚡ Power Phrase",
+
+  meaning:
+    "responsible for leading, controlling, or taking care of something",
+
+  zh:
+    "负责；掌管",
+
+  sentence:
+    "The kings were in charge of the army.",
+
+  emoji:
+    "👑",
+
+  fallback:
+    "Responsible for leading something",
+
+  wrong: [
+    "afraid of something",
+    "far away from something"
+  ],
+
+  newSentence:
+    "The team captain is in charge of leading the group."
+},
+
+
+{
+  word: "be allowed to",
+
+  slug: "be-allowed-to",
+
+  cat: "⚡ Power Phrase",
+
+  meaning:
+    "to have permission to do something",
+
+  zh:
+    "被允许做某事",
+
+  sentence:
+    "To be allowed to do something means you have permission.",
+
+  emoji:
+    "✅",
+
+  fallback:
+    "You have permission",
+
+  wrong: [
+    "to be unable to do something",
+    "to be afraid to do something"
+  ],
+
+  newSentence:
+    "Citizens may be allowed to vote in some systems of government."
+},
+
+
+{
+  word: "be loyal to",
+
+  slug: "be-loyal-to",
+
+  cat: "⚡ Power Phrase",
+
+  meaning:
+    "to keep supporting and standing by a person or group",
+
+  zh:
+    "忠于；忠诚于；一直支持某人或群体",
+
+  sentence:
+    "To be loyal to a group means to keep supporting it.",
+
+  emoji:
+    "🤝",
+
+  fallback:
+    "Stay with and support your group",
+
+  wrong: [
+    "to forget your group",
+    "to leave your group every time"
+  ],
+
+  newSentence:
+    "A loyal teammate keeps supporting the group."
 }
 
 ];
 
 
-let current = 0;
-let results = [];
-let chineseUsed = false;
-let quizCorrect = false;
+
+/* =====================================================
+   DAY INFORMATION
+===================================================== */
+
+const dayMeta = [
+
+  {
+    n: 1,
+    name: "Discover",
+    icon: "🔍"
+  },
+
+  {
+    n: 2,
+    name: "Remember",
+    icon: "🧠"
+  },
+
+  {
+    n: 3,
+    name: "Phrases",
+    icon: "🧩"
+  },
+
+  {
+    n: 4,
+    name: "Sentences",
+    icon: "💬"
+  },
+
+  {
+    n: 5,
+    name: "New Context",
+    icon: "🌍"
+  },
+
+  {
+    n: 6,
+    name: "School Text",
+    icon: "📚"
+  },
+
+  {
+    n: 7,
+    name: "I Can!",
+    icon: "⭐"
+  }
+
+];
+
+
+
+/* =====================================================
+   STATE
+===================================================== */
+
+let state = {
+
+  day: 1,
+
+  index: 0,
+
+  score: 0,
+
+  hints: 0,
+
+  responses: []
+
+};
+
+
+
+const activity =
+  document.getElementById(
+    "activityView"
+  );
+
+
+const summary =
+  document.getElementById(
+    "summaryView"
+  );
+
 
 const wordAudio =
-document.getElementById("wordAudio");
+  document.getElementById(
+    "wordAudio"
+  );
+
 
 const sentenceAudio =
-document.getElementById("sentenceAudio");
+  document.getElementById(
+    "sentenceAudio"
+  );
 
 
-function showWord(){
 
-const item = words[current];
+/* =====================================================
+   LOCAL STORAGE
+===================================================== */
 
-chineseUsed = false;
-quizCorrect = false;
+function saved() {
 
-document.getElementById("category").textContent =
-item.category;
+  try {
 
-document.getElementById("word").textContent =
-item.word;
+    return (
+      JSON.parse(
+        localStorage.getItem(
+          "avaReading7Day"
+        )
+      ) || {}
+    );
 
-document.getElementById("meaning").textContent =
-item.meaning;
+  }
 
-document.getElementById("chinese").textContent =
-item.chinese;
+  catch(error) {
 
-document.getElementById("chinese").style.display =
-"none";
+    return {};
 
-document.getElementById("sentence").textContent =
-item.sentence;
-
-document.getElementById("reflectFeedback").style.display =
-"none";
-
-document.getElementById("nextButton").style.display =
-"none";
-
-loadImage(item);
-loadAudio(item);
-buildQuiz(item);
-updateProgress();
+  }
 
 }
 
 
-function loadImage(item){
 
-const image =
-document.getElementById("wordImage");
+function saveDay(data) {
 
-const fallback =
-document.getElementById("imageFallback");
+  const allData =
+    saved();
 
-document.getElementById("fallbackEmoji").textContent =
-item.emoji;
 
-document.getElementById("fallbackText").textContent =
-item.fallback;
+  allData[
+    "day" + state.day
+  ] = data;
 
-image.style.display = "block";
-fallback.style.display = "none";
 
-image.onerror = function(){
+  localStorage.setItem(
 
-image.style.display = "none";
-fallback.style.display = "flex";
+    "avaReading7Day",
 
-};
+    JSON.stringify(
+      allData
+    )
 
-image.onload = function(){
+  );
 
-image.style.display = "block";
-fallback.style.display = "none";
 
-};
-
-image.src =
-"assets/images/reading/day1/" +
-item.slug +
-".jpg";
+  renderNav();
 
 }
 
 
-function loadAudio(item){
 
-stopAudio();
+/* =====================================================
+   NAVIGATION
+===================================================== */
 
-wordAudio.src =
-"assets/audio/reading/day1/" +
-item.slug +
-"-word.mp3";
+function renderNav() {
 
-sentenceAudio.src =
-"assets/audio/reading/day1/" +
-item.slug +
-"-sentence.mp3";
-
-wordAudio.load();
-sentenceAudio.load();
-
-document.getElementById("audioMessage").textContent =
-"Listen once. Then say it yourself.";
-
-}
+  const data =
+    saved();
 
 
-function stopAudio(){
+  document.getElementById(
+    "dayNav"
+  ).innerHTML =
 
-wordAudio.pause();
-sentenceAudio.pause();
+    dayMeta
+      .map(
 
-wordAudio.currentTime = 0;
-sentenceAudio.currentTime = 0;
+        day => `
 
-}
+        <button
 
+          class="
+          daybtn
 
-function playWord(){
+          ${
+            state.day === day.n
+              ? "active"
+              : ""
+          }
 
-stopAudio();
+          ${
+            data["day" + day.n]
+              ?.complete
+              ? "done"
+              : ""
+          }
+          "
 
-document.getElementById("audioMessage").textContent =
-"🔊 Listening to the word...";
+          onclick="
+            startDay(${day.n})
+          ">
 
-wordAudio.play()
-.then(function(){
+          <div>
 
-})
-.catch(function(){
+            ${day.icon}
+            Day ${day.n}
 
-document.getElementById("audioMessage").textContent =
-"⚠️ Word MP3 has not been uploaded yet.";
+          </div>
 
-});
+          <small>
 
-}
+            ${day.name}
 
+          </small>
 
-function playSentence(){
+        </button>
 
-stopAudio();
+        `
 
-document.getElementById("audioMessage").textContent =
-"🎧 Listening to the sentence...";
-
-sentenceAudio.play()
-.then(function(){
-
-})
-.catch(function(){
-
-document.getElementById("audioMessage").textContent =
-"⚠️ Sentence MP3 has not been uploaded yet.";
-
-});
+      )
+      .join("");
 
 }
 
 
-wordAudio.addEventListener("ended",function(){
 
-document.getElementById("audioMessage").textContent =
-"👄 Now say the word yourself.";
+/* =====================================================
+   START DAY
+===================================================== */
 
-});
+function startDay(number) {
 
-
-sentenceAudio.addEventListener("ended",function(){
-
-document.getElementById("audioMessage").textContent =
-"🧠 What did the sentence mean?";
-
-});
+  stopAudio();
 
 
-wordAudio.addEventListener("error",function(){
+  state = {
 
-document.getElementById("audioMessage").textContent =
-"⚠️ Word MP3 not found.";
+    day: number,
 
-});
+    index: 0,
+
+    score: 0,
+
+    hints: 0,
+
+    responses: []
+
+  };
 
 
-sentenceAudio.addEventListener("error",function(){
-
-document.getElementById("audioMessage").textContent =
-"⚠️ Sentence MP3 not found.";
-
-});
+  summary.style.display =
+    "none";
 
 
-function toggleChinese(){
+  activity.style.display =
+    "block";
 
-const box =
-document.getElementById("chinese");
 
-if(box.style.display === "block"){
+  renderNav();
 
-box.style.display = "none";
 
-}else{
-
-box.style.display = "block";
-chineseUsed = true;
-
-}
+  renderDay();
 
 }
 
 
-function buildQuiz(item){
 
-document.getElementById("quizTitle").textContent =
-"🎯 " + item.quiz;
+/* =====================================================
+   HEADER
+===================================================== */
 
-const container =
-document.getElementById("options");
+function header(
+  title,
+  subtitle,
+  total
+) {
 
-container.innerHTML = "";
+  return `
 
-document.getElementById("quizFeedback").style.display =
-"none";
+  <h2>
 
-item.options.forEach(function(option,index){
+    ${title}
 
-const button =
-document.createElement("button");
-
-button.className =
-"option";
-
-button.textContent =
-option;
-
-button.onclick =
-function(){
-
-checkQuiz(index,button);
-
-};
-
-container.appendChild(button);
-
-});
-
-}
+  </h2>
 
 
-function checkQuiz(index,button){
+  <div class="panel-sub">
 
-const item =
-words[current];
+    ${subtitle}
 
-const feedback =
-document.getElementById("quizFeedback");
-
-document
-.querySelectorAll(".option")
-.forEach(function(btn){
-
-btn.classList.remove("correct","wrong");
-
-});
+  </div>
 
 
-if(index === item.answer){
+  <div class="progress">
 
-quizCorrect = true;
+    <div class="progress-row">
 
-button.classList.add("correct");
+      <span>
 
-feedback.style.background =
-"#def0e4";
+        Progress
 
-feedback.style.color =
-"#355d43";
+      </span>
 
-feedback.textContent =
-"✅ Yes! You connected the word with its meaning.";
+      <span>
 
-}else{
+        ${
+          Math.min(
+            state.index + 1,
+            total
+          )
+        }
 
-quizCorrect = false;
+        /
 
-button.classList.add("wrong");
+        ${total}
 
-feedback.style.background =
-"#fae6df";
+      </span>
 
-feedback.style.color =
-"#7b5146";
+    </div>
 
-feedback.textContent =
-"🌱 Try again. Look at the picture and meaning one more time.";
 
-}
+    <div class="track">
 
-feedback.style.display =
-"block";
+      <div
+
+        class="fill"
+
+        style="
+          width:
+          ${
+            (
+              state.index /
+              total
+            ) * 100
+          }%
+        ">
+
+      </div>
+
+    </div>
+
+  </div>
+
+  `;
 
 }
 
 
-function recordResult(level){
 
-const item =
-words[current];
+/* =====================================================
+   HELPERS
+===================================================== */
 
-results[current] = {
+function shuffled(array) {
 
-word:item.word,
-result:level,
-chineseUsed:chineseUsed,
-quizCorrect:quizCorrect,
-date:new Date().toISOString()
-
-};
-
-localStorage.setItem(
-"avaWordBridgeDay1",
-JSON.stringify(results)
-);
-
-const feedback =
-document.getElementById("reflectFeedback");
-
-if(level === "know"){
-
-feedback.style.background =
-"#def0e4";
-
-feedback.style.color =
-"#355d43";
-
-feedback.innerHTML =
-"🌟 Great!<br><strong>word → meaning → sentence</strong>";
-
-}else{
-
-feedback.style.background =
-"#f7e5c7";
-
-feedback.style.color =
-"#725522";
-
-feedback.textContent =
-"🌱 Good noticing. This word needs another meeting.";
-
-}
-
-feedback.style.display =
-"block";
-
-document.getElementById("nextButton").style.display =
-"block";
+  return [...array]
+    .sort(
+      () =>
+        Math.random() - 0.5
+    );
 
 }
 
 
-function nextWord(){
 
-stopAudio();
+function imageBlock(item) {
 
-if(current < words.length - 1){
+  return `
 
-current++;
+  <div class="imagebox">
 
-showWord();
+    <img
 
-window.scrollTo({
-top:0,
-behavior:"smooth"
-});
+      src="
+        assets/images/reading/day1/
+        ${item.slug}.jpg
+      "
 
-}else{
+      alt="
+        ${item.word} visual
+      "
 
-finishDay();
-
-}
-
-}
-
-
-function updateProgress(){
-
-document.getElementById("progressText").textContent =
-(current + 1) +
-" / " +
-words.length;
-
-const percent =
-(current / words.length) * 100;
-
-document.getElementById("progressFill").style.width =
-percent + "%";
-
-}
+      onerror="
+        this.style.display='none';
+        this.nextElementSibling.style.display='flex';
+      ">
 
 
-function finishDay(){
+    <div class="fallback">
 
-stopAudio();
+      <div class="em">
 
-document.getElementById("wordCard").style.display =
-"none";
+        ${item.emoji}
 
-document.getElementById("finish").style.display =
-"block";
+      </div>
 
-document.getElementById("progressFill").style.width =
-"100%";
+      <b>
 
-document.getElementById("progressText").textContent =
-words.length +
-" / " +
-words.length;
+        ${item.fallback}
 
-const known =
-results.filter(
-x => x && x.result === "know"
-).length;
+      </b>
 
-const help =
-results.filter(
-x => x && x.result === "help"
-).length;
+    </div>
 
-const chinese =
-results.filter(
-x => x && x.chineseUsed
-).length;
+  </div>
 
-const quiz =
-results.filter(
-x => x && x.quizCorrect
-).length;
-
-document.getElementById("results").innerHTML =
-
-"🟢 <strong>I knew:</strong> " +
-known +
-" / 12" +
-
-"<br>" +
-
-"🟡 <strong>I needed help:</strong> " +
-help +
-
-"<br>" +
-
-"🎯 <strong>Meaning checks:</strong> " +
-quiz +
-" / 12" +
-
-"<br>" +
-
-"🇨🇳 <strong>Chinese help used:</strong> " +
-chinese +
-
-"<br><br>" +
-
-"<strong>Next:</strong><br>" +
-
-"Try these words again with fewer clues.";
-
-localStorage.setItem(
-"avaWordBridgeDay1Complete",
-"true"
-);
-
-window.scrollTo({
-top:0,
-behavior:"smooth"
-});
+  `;
 
 }
 
 
-function restart(){
 
-current = 0;
-results = [];
-chineseUsed = false;
-quizCorrect = false;
+/* =====================================================
+   AUDIO
+===================================================== */
 
-localStorage.removeItem(
-"avaWordBridgeDay1"
-);
+function audioBlock(item) {
 
-localStorage.removeItem(
-"avaWordBridgeDay1Complete"
-);
+  return `
 
-document.getElementById("finish").style.display =
-"none";
+  <div class="audio-row">
 
-document.getElementById("wordCard").style.display =
-"block";
+    <button
 
-showWord();
+      class="audio-btn"
 
-window.scrollTo({
-top:0,
-behavior:"smooth"
-});
+      onclick="
+        playAudio(
+          '${item.slug}',
+          'word'
+        )
+      ">
+
+      🔊 Hear the Word
+
+    </button>
+
+
+    <button
+
+      class="audio-btn"
+
+      onclick="
+        playAudio(
+          '${item.slug}',
+          'sentence'
+        )
+      ">
+
+      🎧 Hear the Sentence
+
+    </button>
+
+  </div>
+
+
+  <div
+
+    id="audioStatus"
+
+    class="audio-status">
+
+    Fixed MP3 audio plays here
+    after the files are uploaded.
+
+  </div>
+
+  `;
 
 }
 
 
-showWord();
+
+function playAudio(
+  slug,
+  type
+) {
+
+  stopAudio();
+
+
+  const player =
+
+    type === "word"
+
+      ? wordAudio
+
+      : sentenceAudio;
+
+
+  player.src =
+
+    "assets/audio/reading/day1/" +
+
+    slug +
+
+    "-" +
+
+    type +
+
+    ".mp3";
+
+
+  player
+    .play()
+
+    .then(
+      () => {
+
+        setAudio(
+
+          "🔊 Playing " +
+          type +
+          "..."
+
+        );
+
+      }
+    )
+
+    .catch(
+      () => {
+
+        setAudio(
+
+          "⚠️ MP3 not uploaded yet."
+
+        );
+
+      }
+    );
+
+}
+
+
+
+function setAudio(text) {
+
+  const element =
+    document.getElementById(
+      "audioStatus"
+    );
+
+
+  if(element) {
+
+    element.textContent =
+      text;
+
+  }
+
+}
+
+
+
+function stopAudio() {
+
+  [
+    wordAudio,
+    sentenceAudio
+  ]
+
+  .forEach(
+
+    audio => {
+
+      audio.pause();
+
+      audio.currentTime = 0;
+
+    }
+
+  );
+
+}
+
+
+
+wordAudio.onended =
+  () => {
+
+    setAudio(
+      "👄 Now say the word yourself."
+    );
+
+  };
+
+
+sentenceAudio.onended =
+  () => {
+
+    setAudio(
+      "🧠 What did the sentence mean?"
+    );
+
+  };
+
+
+
+/* =====================================================
+   MULTIPLE CHOICE
+===================================================== */
+
+function optionsHTML(
+  options,
+  answer
+) {
+
+  return `
+
+  <div class="options">
+
+    ${
+      options
+        .map(
+
+          (
+            option,
+            index
+          ) => `
+
+          <button
+
+            class="option"
+
+            onclick="
+              answerMC(
+                this,
+                ${index},
+                ${answer}
+              )
+            ">
+
+            ${option}
+
+          </button>
+
+          `
+
+        )
+        .join("")
+    }
+
+  </div>
+
+
+  <div
+    id="feedback"
+    class="feedback">
+  </div>
+
+  `;
+
+}
+
+
+
+function answerMC(
+  button,
+  index,
+  answer
+) {
+
+  document
+    .querySelectorAll(
+      ".option"
+    )
+
+    .forEach(
+
+      item => {
+
+        item.classList.remove(
+          "correct",
+          "wrong"
+        );
+
+      }
+
+    );
+
+
+  const feedback =
+    document.getElementById(
+      "feedback"
+    );
+
+
+  if(
+    index === answer
+  ) {
+
+    button
+      .classList
+      .add(
+        "correct"
+      );
+
+
+    feedback.style.background =
+      "#dff0e4";
+
+
+    feedback.style.color =
+      "#355c42";
+
+
+    feedback.textContent =
+      "✅ Correct.";
+
+
+    state.score++;
+
+
+    state.responses.push(
+      1
+    );
+
+
+    feedback.style.display =
+      "block";
+
+
+    document.getElementById(
+      "nextBtn"
+    ).style.display =
+      "block";
+
+
+    disableOptions();
+
+  }
+
+  else {
+
+    button
+      .classList
+      .add(
+        "wrong"
+      );
+
+
+    feedback.style.background =
+      "#fae7df";
+
+
+    feedback.style.color =
+      "#7c5145";
+
+
+    feedback.textContent =
+
+      "🌱 Try again. " +
+
+      "Use the clues you still have.";
+
+
+    state.responses.push(
+      0
+    );
+
+
+    feedback.style.display =
+      "block";
+
+  }
+
+}
+
+
+
+function disableOptions() {
+
+  document
+    .querySelectorAll(
+      ".option"
+    )
+
+    .forEach(
+
+      button => {
+
+        button.disabled =
+          true;
+
+      }
+
+    );
+
+}
+
+
+
+/* =====================================================
+   NEXT
+===================================================== */
+
+function next(total) {
+
+  state.index++;
+
+
+  if(
+    state.index >= total
+  ) {
+
+    finishDay();
+
+  }
+
+  else {
+
+    renderDay();
+
+  }
+
+
+  window.scrollTo({
+
+    top: 0,
+
+    behavior: "smooth"
+
+  });
+
+}
+
+
+
+/* =====================================================
+   CHINESE HELP
+===================================================== */
+
+function toggleChinese() {
+
+  const box =
+    document.getElementById(
+      "zh"
+    );
+
+
+  if(box) {
+
+    box.style.display =
+
+      box.style.display ===
+      "block"
+
+      ? "none"
+
+      : "block";
+
+
+    state.hints++;
+
+  }
+
+}
+
+
+
+/* =====================================================
+   SELF REPORT
+===================================================== */
+
+function selfReport(
+  level
+) {
+
+  state.responses.push(
+
+    level === "know"
+      ? 1
+      : 0
+
+  );
+
+
+  if(
+    level === "know"
+  ) {
+
+    state.score++;
+
+  }
+
+
+  const feedback =
+    document.getElementById(
+      "selfFeedback"
+    );
+
+
+  feedback.style.display =
+    "block";
+
+
+  feedback.style.background =
+
+    level === "know"
+
+      ? "#dff0e4"
+
+      : "#f7e5c8";
+
+
+  feedback.style.color =
+
+    level === "know"
+
+      ? "#355c42"
+
+      : "#725522";
+
+
+  feedback.textContent =
+
+    level === "know"
+
+      ? "🌟 I connected the word with its meaning."
+
+      : "🌱 This word needs another meeting.";
+
+
+  document.getElementById(
+    "nextBtn"
+  ).style.display =
+    "block";
+
+}
+
+
+
+/* =====================================================
+   RENDER CORRECT DAY
+===================================================== */
+
+function renderDay() {
+
+  if(
+    state.day === 1
+  ) {
+
+    day1();
+
+  }
+
+  if(
+    state.day === 2
+  ) {
+
+    day2();
+
+  }
+
+  if(
+    state.day === 3
+  ) {
+
+    day3();
+
+  }
+
+  if(
+    state.day === 4
+  ) {
+
+    day4();
+
+  }
+
+  if(
+    state.day === 5
+  ) {
+
+    day5();
+
+  }
+
+  if(
+    state.day === 6
+  ) {
+
+    day6();
+
+  }
+
+  if(
+    state.day === 7
+  ) {
+
+    day7();
+
+  }
+
+}
+
+
+
+/* =====================================================
+   DAY 1
+===================================================== */
+
+function day1() {
+
+  const item =
+    vocab[state.index];
+
+
+  const total =
+    vocab.length;
+
+
+  activity.innerHTML =
+
+    header(
+
+      "Day 1 · Discover",
+
+      "Use a picture, clear meaning, optional Chinese, and a school-aligned sentence. The goal is meaning—not memorizing a translation.",
+
+      total
+
+    )
+
+    +
+
+    `
+
+    <div class="activity">
+
+
+      <span class="word-chip">
+
+        ${item.cat}
+
+      </span>
+
+
+      <div class="word">
+
+        ${item.word}
+
+      </div>
+
+
+      <div class="instruction">
+
+        Look first.
+
+        What idea does this
+        word or phrase carry?
+
+      </div>
+
+
+      ${imageBlock(item)}
+
+
+      ${audioBlock(item)}
+
+
+      <div class="box meaningbox">
+
+        <div class="label">
+
+          🧠 Meaning
+
+        </div>
+
+
+        <div class="bigtext">
+
+          ${item.meaning}
+
+        </div>
+
+      </div>
+
+
+      <button
+
+        class="secondary"
+
+        onclick="
+          toggleChinese()
+        ">
+
+        🇨🇳 I need Chinese help
+
+      </button>
+
+
+      <div
+
+        id="zh"
+
+        class="
+          box
+          hintbox
+          chinese
+        ">
+
+        ${item.zh}
+
+      </div>
+
+
+      <div class="box sentencebox">
+
+        <div class="label">
+
+          🎒 School /
+          school-aligned sentence
+
+        </div>
+
+
+        <div class="bigtext">
+
+          ${item.sentence}
+
+        </div>
+
+      </div>
+
+
+      <div class="self">
+
+        <div class="self-title">
+
+          How much help
+          did you need?
+
+        </div>
+
+
+        <div class="self-grid">
+
+          <button
+
+            class="
+              selfbtn
+              know
+            "
+
+            onclick="
+              selfReport(
+                'know'
+              )
+            ">
+
+            🟢 I know it
+
+          </button>
+
+
+          <button
+
+            class="
+              selfbtn
+              help
+            "
+
+            onclick="
+              selfReport(
+                'help'
+              )
+            ">
+
+            🟡 I need help
+
+          </button>
+
+        </div>
+
+
+        <div
+
+          id="selfFeedback"
+
+          class="feedback">
+        </div>
+
+
+        <button
+
+          id="nextBtn"
+
+          class="
+            primary
+            next
+          "
+
+          onclick="
+            next(${total})
+          ">
+
+          Next →
+
+        </button>
+
+      </div>
+
+
+    </div>
+
+    `;
+
+}
+
+
+
+/* =====================================================
+   DAY 2
+===================================================== */
+
+function day2() {
+
+  const item =
+    vocab[state.index];
+
+
+  const total =
+    vocab.length;
+
+
+  const choices =
+    shuffled(
+
+      [
+        item.meaning,
+        ...item.wrong
+      ]
+
+    );
+
+
+  const answer =
+    choices.indexOf(
+      item.meaning
+    );
+
+
+  activity.innerHTML =
+
+    header(
+
+      "Day 2 · Remember",
+
+      "Retrieve the meaning from the word. Pictures and Chinese are no longer shown first.",
+
+      total
+
+    )
+
+    +
+
+    `
+
+    <div class="activity">
+
+
+      <span class="word-chip">
+
+        ${item.cat}
+
+      </span>
+
+
+      <div class="word">
+
+        ${item.word}
+
+      </div>
+
+
+      <div class="qcard">
+
+        <div class="qtitle">
+
+          What does
+
+          <strong>
+
+            ${item.word}
+
+          </strong>
+
+          mean?
+
+        </div>
+
+
+        ${
+          optionsHTML(
+            choices,
+            answer
+          )
+        }
+
+      </div>
+
+
+      <button
+
+        class="secondary"
+
+        onclick="
+          showRememberHint()
+        ">
+
+        💡 I need a hint
+
+      </button>
+
+
+      <div
+
+        id="rememberHint"
+
+        class="
+          box
+          hintbox
+        "
+
+        style="
+          display:none
+        ">
+
+        ${item.emoji}
+
+        ${item.fallback}
+
+        <br>
+
+
+        <span class="mini-note">
+
+          Hint:
+
+          ${item.meaning}
+
+        </span>
+
+      </div>
+
+
+      <button
+
+        id="nextBtn"
+
+        class="
+          primary
+          next
+        "
+
+        onclick="
+          next(${total})
+        ">
+
+        Next →
+
+      </button>
+
+
+    </div>
+
+    `;
+
+}
+
+
+
+function showRememberHint() {
+
+  document.getElementById(
+    "rememberHint"
+  ).style.display =
+    "block";
+
+
+  state.hints++;
+
+}
+
+
+
+/* =====================================================
+   DAY 3 — PHRASES
+===================================================== */
+
+const phraseQuestions = [
+
+
+{
+  stem:
+    "The kings were ______ the army.",
+
+  answer:
+    "in charge of",
+
+  opts: [
+    "in charge of",
+    "be allowed to",
+    "be loyal to"
+  ]
+},
+
+
+{
+  stem:
+    "If you have permission, you ______ do something.",
+
+  answer:
+    "be allowed to",
+
+  opts: [
+    "be loyal to",
+    "be allowed to",
+    "in charge of"
+  ]
+},
+
+
+{
+  stem:
+    "If you keep supporting your group, you ______ the group.",
+
+  answer:
+    "be loyal to",
+
+  opts: [
+    "be loyal to",
+    "in charge of",
+    "be allowed to"
+  ]
+},
+
+
+{
+  stem:
+    "The class captain is ______ leading the group.",
+
+  answer:
+    "in charge of",
+
+  opts: [
+    "be allowed to",
+    "be loyal to",
+    "in charge of"
+  ]
+},
+
+
+{
+  stem:
+    "Students may ______ use the library during this time.",
+
+  answer:
+    "be allowed to",
+
+  opts: [
+    "be allowed to",
+    "in charge of",
+    "be loyal to"
+  ]
+},
+
+
+{
+  stem:
+    "A teammate can ______ the team by continuing to support it.",
+
+  answer:
+    "be loyal to",
+
+  opts: [
+    "in charge of",
+    "be loyal to",
+    "be allowed to"
+  ]
+}
+
+];
+
+
+
+function day3() {
+
+  const question =
+    phraseQuestions[
+      state.index
+    ];
+
+
+  const total =
+    phraseQuestions.length;
+
+
+  const answer =
+    question.opts.indexOf(
+      question.answer
+    );
+
+
+  activity.innerHTML =
+
+    header(
+
+      "Day 3 · Phrases",
+
+      "Treat important multiword chunks as one meaning unit. Say the whole phrase, not one word at a time.",
+
+      total
+
+    )
+
+    +
+
+    `
+
+    <div class="activity">
+
+
+      <div class="word">
+
+        🧩 Power Phrase
+
+      </div>
+
+
+      <div class="qcard">
+
+        <div class="qtitle">
+
+          Complete the sentence:
+
+          <br><br>
+
+          ${question.stem}
+
+        </div>
+
+
+        ${
+          optionsHTML(
+            question.opts,
+            answer
+          )
+        }
+
+      </div>
+
+
+      <div class="box hintbox">
+
+        <div class="label">
+
+          Phrase Bank
+
+        </div>
+
+
+        <div class="bigtext">
+
+          in charge of
+          = responsible for
+
+          <br>
+
+          be allowed to
+          = have permission
+
+          <br>
+
+          be loyal to
+          = keep supporting
+
+        </div>
+
+      </div>
+
+
+      <button
+
+        id="nextBtn"
+
+        class="
+          primary
+          next
+        "
+
+        onclick="
+          next(${total})
+        ">
+
+        Next →
+
+      </button>
+
+
+    </div>
+
+    `;
+
+}
+
+
+
+/* =====================================================
+   DAY 4 — SENTENCES
+===================================================== */
+
+const sentenceQuestions =
+
+  vocab.map(
+
+    item => ({
+
+      sentence:
+        item.sentence,
+
+      answer:
+        item.meaning,
+
+      wrong:
+        item.wrong,
+
+      word:
+        item.word
+
+    })
+
+  );
+
+
+
+function day4() {
+
+  const question =
+    sentenceQuestions[
+      state.index
+    ];
+
+
+  const total =
+    sentenceQuestions.length;
+
+
+  const choices =
+    shuffled(
+
+      [
+        question.answer,
+        ...question.wrong
+      ]
+
+    );
+
+
+  const answer =
+    choices.indexOf(
+      question.answer
+    );
+
+
+  activity.innerHTML =
+
+    header(
+
+      "Day 4 · Sentences",
+
+      "Use the target word or phrase to unlock the meaning of the whole sentence.",
+
+      total
+
+    )
+
+    +
+
+    `
+
+    <div class="activity">
+
+
+      <span class="word-chip">
+
+        Target:
+        ${question.word}
+
+      </span>
+
+
+      <div class="textpassage">
+
+        ${question.sentence}
+
+      </div>
+
+
+      <div class="qcard">
+
+        <div class="qtitle">
+
+          What does the target word
+          or phrase mean
+          in this sentence?
+
+        </div>
+
+
+        ${
+          optionsHTML(
+            choices,
+            answer
+          )
+        }
+
+      </div>
+
+
+      <button
+
+        id="nextBtn"
+
+        class="
+          primary
+          next
+        "
+
+        onclick="
+          next(${total})
+        ">
+
+        Next →
+
+      </button>
+
+
+    </div>
+
+    `;
+
+}
+
+
+
+/* =====================================================
+   DAY 5 — NEW CONTEXT
+===================================================== */
+
+function day5() {
+
+  const item =
+    vocab[state.index];
+
+
+  const total =
+    vocab.length;
+
+
+  const otherWords =
+    shuffled(
+
+      vocab.filter(
+
+        other =>
+          other.word !==
+          item.word
+
+      )
+
+    )
+
+    .slice(
+      0,
+      2
+    )
+
+    .map(
+
+      other =>
+        other.word
+
+    );
+
+
+  const choices =
+    shuffled(
+
+      [
+        item.word,
+        ...otherWords
+      ]
+
+    );
+
+
+  const answer =
+    choices.indexOf(
+      item.word
+    );
+
+
+  activity.innerHTML =
+
+    header(
+
+      "Day 5 · New Context",
+
+      "Now the word appears in a new sentence. This checks flexible meaning—not memory for one example sentence.",
+
+      total
+
+    )
+
+    +
+
+    `
+
+    <div class="activity">
+
+
+      <div class="textpassage">
+
+        ${item.newSentence}
+
+      </div>
+
+
+      <div class="qcard">
+
+        <div class="qtitle">
+
+          Which word or phrase
+          best fits the meaning
+          of this sentence?
+
+        </div>
+
+
+        ${
+          optionsHTML(
+            choices,
+            answer
+          )
+        }
+
+      </div>
+
+
+      <button
+
+        id="nextBtn"
+
+        class="
+          primary
+          next
+        "
+
+        onclick="
+          next(${total})
+        ">
+
+        Next →
+
+      </button>
+
+
+    </div>
+
+    `;
+
+}
+
+
+
+/* =====================================================
+   DAY 6 — SCHOOL TEXT
+===================================================== */
+
+const schoolPassage =
+
+  "Sparta and Athens were, at times, enemies. " +
+
+  "The government of Sparta included two kings, " +
+
+  "a council of elders, and an Assembly. " +
+
+  "The kings were in charge of the army.";
+
+
+
+const schoolQuestions = [
+
+
+{
+  q:
+    "Which sentence best states the gist?",
+
+  opts: [
+
+    "Sparta had a government system, and its kings were responsible for the army.",
+
+    "Athens and Sparta were always friends.",
+
+    "The passage is mainly about shoes and clothing."
+
+  ],
+
+  a: 0
+},
+
+
+{
+  q:
+    "What does “in charge of the army” tell us about the kings?",
+
+  opts: [
+
+    "They were responsible for the army.",
+
+    "They were enemies of the army.",
+
+    "They were not allowed to see the army."
+
+  ],
+
+  a: 0
+},
+
+
+{
+  q:
+    "Which two city-states were sometimes enemies?",
+
+  opts: [
+
+    "Sparta and Athens",
+
+    "Sparta and Rome",
+
+    "Athens and Egypt"
+
+  ],
+
+  a: 0
+},
+
+
+{
+  q:
+    "What was included in the government of Sparta?",
+
+  opts: [
+
+    "Two kings, a council of elders, and an Assembly",
+
+    "Only one soldier",
+
+    "Only the army"
+
+  ],
+
+  a: 0
+}
+
+];
+
+
+
+function day6() {
+
+  const question =
+    schoolQuestions[
+      state.index
+    ];
+
+
+  const total =
+    schoolQuestions.length;
+
+
+  activity.innerHTML =
+
+    header(
+
+      "Day 6 · School Text",
+
+      "Return to the school passage. Visual support is removed. Use the words you have learned to understand the paragraph and find the gist.",
+
+      total
+
+    )
+
+    +
+
+    `
+
+    <div class="activity">
+
+
+      <div class="textpassage">
+
+        ${schoolPassage}
+
+      </div>
+
+
+      <div class="mini-note">
+
+        This passage uses school-text
+        wording already practiced
+        in the Word Bridge.
+
+      </div>
+
+
+      <div class="qcard">
+
+        <div class="qtitle">
+
+          ${question.q}
+
+        </div>
+
+
+        ${
+          optionsHTML(
+            question.opts,
+            question.a
+          )
+        }
+
+      </div>
+
+
+      <button
+
+        id="nextBtn"
+
+        class="
+          primary
+          next
+        "
+
+        onclick="
+          next(${total})
+        ">
+
+        Next →
+
+      </button>
+
+
+    </div>
+
+    `;
+
+}
+
+
+
+/* =====================================================
+   DAY 7 — INDEPENDENCE
+===================================================== */
+
+const masteryQuestions = [
+
+
+{
+  q:
+    "government",
+
+  opts: [
+
+    "people or a system that run a place",
+
+    "a group of soldiers",
+
+    "an enemy"
+
+  ],
+
+  a: 0
+},
+
+
+{
+  q:
+    "assembly",
+
+  opts: [
+
+    "a group that meets to discuss or decide",
+
+    "a person who fights",
+
+    "permission to do something"
+
+  ],
+
+  a: 0
+},
+
+
+{
+  q:
+    "enemy",
+
+  opts: [
+
+    "someone or a group you fight against",
+
+    "a citizen",
+
+    "a right"
+
+  ],
+
+  a: 0
+},
+
+
+{
+  q:
+    "army",
+
+  opts: [
+
+    "a large group of soldiers",
+
+    "a government meeting",
+
+    "a debate"
+
+  ],
+
+  a: 0
+},
+
+
+{
+  q:
+    "in charge of",
+
+  opts: [
+
+    "responsible for",
+
+    "not allowed to",
+
+    "fighting against"
+
+  ],
+
+  a: 0
+},
+
+
+{
+  q:
+    "be allowed to",
+
+  opts: [
+
+    "have permission to",
+
+    "be responsible for",
+
+    "be an enemy of"
+
+  ],
+
+  a: 0
+},
+
+
+{
+  q:
+    "be loyal to",
+
+  opts: [
+
+    "keep supporting",
+
+    "make a law",
+
+    "become a soldier"
+
+  ],
+
+  a: 0
+},
+
+
+{
+  q:
+    "Gist of the Sparta passage",
+
+  opts: [
+
+    "Sparta had a government system, and its kings were responsible for the army.",
+
+    "The passage is mainly about one soldier.",
+
+    "The passage explains how to debate."
+
+  ],
+
+  a: 0
+}
+
+];
+
+
+
+function day7() {
+
+  const question =
+    masteryQuestions[
+      state.index
+    ];
+
+
+  const total =
+    masteryQuestions.length;
+
+
+  activity.innerHTML =
+
+    header(
+
+      "Day 7 · I Can!",
+
+      "Minimal support. No picture, Chinese, or audio. Show what you can understand independently.",
+
+      total
+
+    )
+
+    +
+
+    `
+
+    <div class="activity">
+
+
+      <div class="word">
+
+        ${question.q}
+
+      </div>
+
+
+      <div class="qcard">
+
+        <div class="qtitle">
+
+          Choose the best meaning.
+
+        </div>
+
+
+        ${
+          optionsHTML(
+            question.opts,
+            question.a
+          )
+        }
+
+      </div>
+
+
+      <button
+
+        id="nextBtn"
+
+        class="
+          primary
+          next
+        "
+
+        onclick="
+          next(${total})
+        ">
+
+        Next →
+
+      </button>
+
+
+    </div>
+
+    `;
+
+}
+
+
+
+/* =====================================================
+   FINISH DAY
+===================================================== */
+
+function finishDay() {
+
+  let total;
+
+
+  if(
+    state.day === 3
+  ) {
+
+    total =
+      phraseQuestions.length;
+
+  }
+
+  else if(
+    state.day === 6
+  ) {
+
+    total =
+      schoolQuestions.length;
+
+  }
+
+  else if(
+    state.day === 7
+  ) {
+
+    total =
+      masteryQuestions.length;
+
+  }
+
+  else {
+
+    total =
+      vocab.length;
+
+  }
+
+
+  const percent =
+
+    Math.round(
+
+      (
+        state.score /
+        total
+      ) * 100
+
+    );
+
+
+  saveDay({
+
+    complete:
+      true,
+
+    score:
+      state.score,
+
+    total:
+      total,
+
+    hints:
+      state.hints,
+
+    date:
+      new Date()
+      .toISOString()
+
+  });
+
+
+  activity.style.display =
+    "none";
+
+
+  summary.style.display =
+    "block";
+
+
+  summary.innerHTML = `
+
+    <div class="star">
+
+      🌟
+
+    </div>
+
+
+    <h3>
+
+      Day ${state.day}
+      Complete!
+
+    </h3>
+
+
+    <div class="result">
+
+      <strong>
+
+        Score:
+
+      </strong>
+
+      ${state.score}
+
+      /
+
+      ${total}
+
+      (${percent}%)
+
+      <br>
+
+
+      <strong>
+
+        Hints used:
+
+      </strong>
+
+      ${state.hints}
+
+      <br><br>
+
+
+      ${
+        state.day < 7
+
+        ?
+
+        "Tomorrow the support gets a little smaller."
+
+        :
+
+        "You reached the independence check. Compare Day 7 with Day 1 to see how much support changed."
+      }
+
+    </div>
+
+
+    <button
+
+      class="primary"
+
+      onclick="
+        startDay(
+          ${
+            state.day < 7
+              ? state.day + 1
+              : 1
+          }
+        )
+      ">
+
+      ${
+        state.day < 7
+
+        ?
+
+        "Go to Day " +
+        (
+          state.day + 1
+        ) +
+        " →"
+
+        :
+
+        "Practice Again →"
+      }
+
+    </button>
+
+  `;
+
+}
+
+
+
+/* =====================================================
+   START
+===================================================== */
+
+renderNav();
+
+startDay(1);
+
 
 </script>
 
+
 </body>
+
 </html>
