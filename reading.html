@@ -1,0 +1,1127 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>Ava Word Bridge - Day 1</title>
+
+  <style>
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      font-family: Arial, Helvetica, sans-serif;
+      background: #f7f5ef;
+      color: #243447;
+    }
+
+    .container {
+      max-width: 820px;
+      margin: 0 auto;
+      padding: 20px 16px 50px;
+    }
+
+    /* ---------- TOP ---------- */
+
+    .topbar {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 20px;
+      gap: 12px;
+    }
+
+    .home-link {
+      text-decoration: none;
+      color: #5d5276;
+      font-weight: bold;
+      background: white;
+      padding: 11px 16px;
+      border-radius: 12px;
+      box-shadow: 0 3px 10px rgba(0,0,0,0.06);
+    }
+
+    .day-label {
+      background: #f1dca7;
+      padding: 11px 16px;
+      border-radius: 12px;
+      font-weight: bold;
+      color: #57461d;
+    }
+
+    /* ---------- HEADER ---------- */
+
+    .header {
+      background: white;
+      border-radius: 24px;
+      padding: 28px 22px;
+      text-align: center;
+      box-shadow: 0 7px 20px rgba(0,0,0,0.07);
+    }
+
+    .header-icon {
+      font-size: 52px;
+    }
+
+    h1 {
+      color: #304b78;
+      margin: 8px 0;
+      font-size: 34px;
+    }
+
+    .subtitle {
+      color: #6c5b8c;
+      font-size: 19px;
+      font-weight: bold;
+    }
+
+    .goal {
+      margin: 18px auto 0;
+      background: #eef4ff;
+      padding: 15px;
+      border-radius: 15px;
+      max-width: 600px;
+      line-height: 1.5;
+    }
+
+    /* ---------- PROGRESS ---------- */
+
+    .progress-area {
+      background: white;
+      margin-top: 20px;
+      border-radius: 18px;
+      padding: 18px;
+      box-shadow: 0 4px 14px rgba(0,0,0,0.05);
+    }
+
+    .progress-row {
+      display: flex;
+      justify-content: space-between;
+      font-weight: bold;
+      margin-bottom: 10px;
+    }
+
+    .progress-bar {
+      width: 100%;
+      height: 15px;
+      background: #e6e6e6;
+      border-radius: 20px;
+      overflow: hidden;
+    }
+
+    .progress-fill {
+      width: 0%;
+      height: 100%;
+      background: #6c5b8c;
+      transition: width 0.4s ease;
+    }
+
+    /* ---------- CARD ---------- */
+
+    .word-card {
+      background: white;
+      margin-top: 22px;
+      border-radius: 26px;
+      padding: 30px 28px;
+      box-shadow: 0 8px 24px rgba(0,0,0,0.08);
+    }
+
+    .category {
+      display: inline-block;
+      background: #f0edf6;
+      color: #65557e;
+      padding: 8px 13px;
+      border-radius: 20px;
+      font-size: 14px;
+      font-weight: bold;
+    }
+
+    .word-row {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: 12px;
+      margin-top: 18px;
+    }
+
+    .word {
+      text-align: center;
+      font-size: 42px;
+      font-weight: bold;
+      color: #304b78;
+      margin: 0;
+    }
+
+    .sound-button {
+      border: none;
+      background: #edf3ff;
+      border-radius: 50%;
+      width: 48px;
+      height: 48px;
+      cursor: pointer;
+      font-size: 22px;
+    }
+
+    .sound-button:hover {
+      transform: scale(1.05);
+    }
+
+    .meaning-box {
+      margin-top: 22px;
+      background: #fff8e8;
+      border-radius: 18px;
+      padding: 20px;
+    }
+
+    .small-title {
+      font-size: 14px;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      color: #8a7544;
+      font-weight: bold;
+      margin-bottom: 8px;
+    }
+
+    .meaning {
+      font-size: 21px;
+      line-height: 1.5;
+      font-weight: bold;
+    }
+
+    /* ---------- CHINESE ---------- */
+
+    .chinese-button {
+      display: block;
+      margin: 18px auto 0;
+      border: 2px solid #6c5b8c;
+      color: #6c5b8c;
+      background: white;
+      padding: 11px 18px;
+      border-radius: 13px;
+      font-size: 16px;
+      font-weight: bold;
+      cursor: pointer;
+    }
+
+    .chinese-help {
+      display: none;
+      margin-top: 13px;
+      background: #f2eff7;
+      border-radius: 14px;
+      padding: 14px;
+      text-align: center;
+      font-size: 20px;
+      font-weight: bold;
+      color: #594a72;
+    }
+
+    /* ---------- SCHOOL SENTENCE ---------- */
+
+    .sentence-box {
+      margin-top: 22px;
+      background: #edf6f1;
+      border-radius: 18px;
+      padding: 20px;
+    }
+
+    .sentence-title {
+      font-size: 14px;
+      color: #52705e;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      font-weight: bold;
+      margin-bottom: 9px;
+    }
+
+    .sentence {
+      font-size: 20px;
+      line-height: 1.6;
+    }
+
+    /* ---------- CHECK ---------- */
+
+    .check-box {
+      margin-top: 24px;
+      border-top: 2px solid #eeeeee;
+      padding-top: 22px;
+    }
+
+    .check-question {
+      text-align: center;
+      font-size: 21px;
+      font-weight: bold;
+      margin-bottom: 18px;
+    }
+
+    .choice-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 12px;
+    }
+
+    .choice-button {
+      border: none;
+      padding: 15px;
+      border-radius: 15px;
+      font-size: 17px;
+      font-weight: bold;
+      cursor: pointer;
+    }
+
+    .know {
+      background: #dcefe2;
+      color: #345c42;
+    }
+
+    .help {
+      background: #f8e5c8;
+      color: #745726;
+    }
+
+    .choice-button:hover {
+      transform: translateY(-2px);
+    }
+
+    .feedback {
+      display: none;
+      margin-top: 18px;
+      padding: 16px;
+      border-radius: 15px;
+      text-align: center;
+      line-height: 1.5;
+      font-weight: bold;
+    }
+
+    .next-button {
+      display: none;
+      width: 100%;
+      margin-top: 18px;
+      border: none;
+      background: #6c5b8c;
+      color: white;
+      padding: 16px;
+      border-radius: 15px;
+      font-size: 18px;
+      font-weight: bold;
+      cursor: pointer;
+    }
+
+    /* ---------- FINISH ---------- */
+
+    .finish-card {
+      display: none;
+      background: white;
+      margin-top: 22px;
+      border-radius: 26px;
+      padding: 32px 25px;
+      text-align: center;
+      box-shadow: 0 8px 24px rgba(0,0,0,0.08);
+    }
+
+    .finish-icon {
+      font-size: 65px;
+    }
+
+    .finish-card h2 {
+      color: #304b78;
+      font-size: 30px;
+    }
+
+    .result-box {
+      margin-top: 20px;
+      background: #f5f3fa;
+      border-radius: 18px;
+      padding: 20px;
+      line-height: 1.8;
+      font-size: 18px;
+    }
+
+    .restart-button {
+      border: none;
+      margin-top: 20px;
+      background: #5e8870;
+      color: white;
+      padding: 14px 22px;
+      border-radius: 14px;
+      font-size: 17px;
+      font-weight: bold;
+      cursor: pointer;
+    }
+
+    .bottom-message {
+      margin-top: 22px;
+      text-align: center;
+      color: #777;
+      line-height: 1.6;
+      font-size: 14px;
+    }
+
+    @media (max-width: 600px) {
+
+      .word {
+        font-size: 34px;
+      }
+
+      .word-card {
+        padding: 24px 18px;
+      }
+
+      .choice-grid {
+        grid-template-columns: 1fr;
+      }
+
+      h1 {
+        font-size: 28px;
+      }
+    }
+  </style>
+</head>
+
+
+<body>
+
+<div class="container">
+
+  <!-- TOP -->
+
+  <div class="topbar">
+
+    <a href="index.html" class="home-link">
+      ← Home
+    </a>
+
+    <div class="day-label">
+      Day 1 · Discover
+    </div>
+
+  </div>
+
+
+  <!-- HEADER -->
+
+  <section class="header">
+
+    <div class="header-icon">
+      🏛️ 🔍
+    </div>
+
+    <h1>
+      Word Detective
+    </h1>
+
+    <div class="subtitle">
+      Discover the words that unlock your school reading.
+    </div>
+
+    <div class="goal">
+      <strong>Today's Goal</strong><br>
+      I can connect a word with its meaning.
+    </div>
+
+  </section>
+
+
+  <!-- PROGRESS -->
+
+  <section class="progress-area">
+
+    <div class="progress-row">
+
+      <span>
+        My Word Mission
+      </span>
+
+      <span id="progressText">
+        1 / 12
+      </span>
+
+    </div>
+
+    <div class="progress-bar">
+      <div
+        class="progress-fill"
+        id="progressFill">
+      </div>
+    </div>
+
+  </section>
+
+
+  <!-- WORD CARD -->
+
+  <section
+    class="word-card"
+    id="wordCard">
+
+    <div
+      class="category"
+      id="category">
+    </div>
+
+
+    <div class="word-row">
+
+      <div
+        class="word"
+        id="word">
+      </div>
+
+      <button
+        class="sound-button"
+        onclick="speakWord()"
+        aria-label="Hear the word">
+
+        🔊
+
+      </button>
+
+    </div>
+
+
+    <!-- MEANING -->
+
+    <div class="meaning-box">
+
+      <div class="small-title">
+        🧠 What does it mean?
+      </div>
+
+      <div
+        class="meaning"
+        id="meaning">
+      </div>
+
+    </div>
+
+
+    <!-- CHINESE HELP -->
+
+    <button
+      class="chinese-button"
+      onclick="toggleChinese()">
+
+      🇨🇳 I need Chinese help
+
+    </button>
+
+    <div
+      class="chinese-help"
+      id="chineseHelp">
+    </div>
+
+
+    <!-- SCHOOL SENTENCE -->
+
+    <div class="sentence-box">
+
+      <div class="sentence-title">
+        🎒 See it in a school sentence
+      </div>
+
+      <div
+        class="sentence"
+        id="sentence">
+      </div>
+
+    </div>
+
+
+    <!-- SELF CHECK -->
+
+    <div class="check-box">
+
+      <div class="check-question">
+        Before we move on, how much help did you need?
+      </div>
+
+      <div class="choice-grid">
+
+        <button
+          class="choice-button know"
+          onclick="recordAnswer('know')">
+
+          🟢 I know it
+
+        </button>
+
+        <button
+          class="choice-button help"
+          onclick="recordAnswer('help')">
+
+          🟡 I need help
+
+        </button>
+
+      </div>
+
+
+      <div
+        class="feedback"
+        id="feedback">
+      </div>
+
+
+      <button
+        class="next-button"
+        id="nextButton"
+        onclick="nextWord()">
+
+        Next Word →
+
+      </button>
+
+    </div>
+
+  </section>
+
+
+  <!-- FINISH -->
+
+  <section
+    class="finish-card"
+    id="finishCard">
+
+    <div class="finish-icon">
+      🌟
+    </div>
+
+    <h2>
+      Day 1 Complete!
+    </h2>
+
+    <p>
+      Great work, Ava.
+      Today you discovered the meanings of important school words.
+    </p>
+
+    <div
+      class="result-box"
+      id="resultBox">
+    </div>
+
+    <button
+      class="restart-button"
+      onclick="restartMission()">
+
+      🔁 Practice Again
+
+    </button>
+
+    <br><br>
+
+    <a
+      href="index.html"
+      class="home-link">
+
+      ← Back to Home
+
+    </a>
+
+  </section>
+
+
+  <div class="bottom-message">
+
+    🌱 Reading a word is the first step.<br>
+
+    Understanding the word helps us understand the sentence.
+
+  </div>
+
+</div>
+
+
+
+<script>
+
+  /*
+  ------------------------------------------------
+  WEEK 1 WORD DATA
+  ------------------------------------------------
+  */
+
+  const words = [
+
+    {
+      word: "government",
+      category: "🏫 School Word",
+      meaning: "the people or system that make decisions and run a country or place",
+      chinese: "政府；管理国家或地区的机构",
+      sentence: "The government of Sparta included two kings, a council of elders, and an Assembly."
+    },
+
+    {
+      word: "citizen",
+      category: "🏫 School Word",
+      meaning: "a person who belongs to a country or city and has rights and responsibilities there",
+      chinese: "公民；属于一个国家或城市并拥有相应权利和责任的人",
+      sentence: "Citizens could take part in important decisions in some ancient Greek city-states."
+    },
+
+    {
+      word: "assembly",
+      category: "🏫 School Word",
+      meaning: "a group of people who meet together to discuss or make decisions",
+      chinese: "集会；议事大会",
+      sentence: "The Assembly voted yes or no on important decisions."
+    },
+
+    {
+      word: "rights",
+      category: "🏫 School Word",
+      meaning: "things that people are allowed to do or have",
+      chinese: "权利；人们被允许拥有或做的事情",
+      sentence: "Citizens had certain rights in their city-state."
+    },
+
+    {
+      word: "slave",
+      category: "🏫 School Word",
+      meaning: "a person who was forced to work for another person and was not free",
+      chinese: "奴隶；被迫为别人劳动并且没有自由的人",
+      sentence: "Slaves in ancient societies did not have the same rights as citizens."
+    },
+
+    {
+      word: "debate",
+      category: "🏫 School Word",
+      meaning: "a discussion in which people give different ideas or opinions",
+      chinese: "辩论；人们表达不同观点并进行讨论",
+      sentence: "Citizens could debate important questions before making decisions."
+    },
+
+    {
+      word: "enemy",
+      category: "📖 Reading Word",
+      meaning: "a person, group, or country that you fight against",
+      chinese: "敌人；敌对的一方",
+      sentence: "Sparta and Athens were, at times, enemies."
+    },
+
+    {
+      word: "army",
+      category: "📖 Reading Word",
+      meaning: "a large group of soldiers trained to fight on land",
+      chinese: "军队；由士兵组成、接受作战训练的队伍",
+      sentence: "The kings were in charge of the army."
+    },
+
+    {
+      word: "soldier",
+      category: "📖 Reading Word",
+      meaning: "a person who serves and fights in an army",
+      chinese: "士兵；在军队中服役和作战的人",
+      sentence: "Spartan boys trained hard to become strong soldiers."
+    },
+
+    {
+      word: "in charge of",
+      category: "⚡ Power Phrase",
+      meaning: "responsible for leading, controlling, or taking care of something",
+      chinese: "负责；掌管",
+      sentence: "The kings were in charge of the army."
+    },
+
+    {
+      word: "be allowed to",
+      category: "⚡ Power Phrase",
+      meaning: "to have permission to do something",
+      chinese: "被允许做某事",
+      sentence: "Spartan boys were allowed to begin military training when they were young."
+    },
+
+    {
+      word: "be loyal to",
+      category: "⚡ Power Phrase",
+      meaning: "to continue supporting a person, group, or place",
+      chinese: "忠于；忠诚于",
+      sentence: "Spartan soldiers were expected to be loyal to one another."
+    }
+
+  ];
+
+
+  /*
+  ------------------------------------------------
+  APP STATE
+  ------------------------------------------------
+  */
+
+  let currentIndex = 0;
+
+  let answers = [];
+
+  let chineseUsed = false;
+
+
+  /*
+  ------------------------------------------------
+  SHOW WORD
+  ------------------------------------------------
+  */
+
+  function showWord() {
+
+    const item = words[currentIndex];
+
+    document.getElementById("category").textContent =
+      item.category;
+
+    document.getElementById("word").textContent =
+      item.word;
+
+    document.getElementById("meaning").textContent =
+      item.meaning;
+
+    document.getElementById("chineseHelp").textContent =
+      item.chinese;
+
+    document.getElementById("sentence").textContent =
+      item.sentence;
+
+
+    document.getElementById("chineseHelp").style.display =
+      "none";
+
+    chineseUsed = false;
+
+
+    document.getElementById("feedback").style.display =
+      "none";
+
+    document.getElementById("nextButton").style.display =
+      "none";
+
+
+    updateProgress();
+
+  }
+
+
+  /*
+  ------------------------------------------------
+  PROGRESS
+  ------------------------------------------------
+  */
+
+  function updateProgress() {
+
+    const number =
+      currentIndex + 1;
+
+    document.getElementById("progressText").textContent =
+      number + " / " + words.length;
+
+    const percent =
+      (currentIndex / words.length) * 100;
+
+    document.getElementById("progressFill").style.width =
+      percent + "%";
+
+  }
+
+
+  /*
+  ------------------------------------------------
+  AUDIO
+  ------------------------------------------------
+  */
+
+  function speakWord() {
+
+    const item =
+      words[currentIndex];
+
+    if ("speechSynthesis" in window) {
+
+      window.speechSynthesis.cancel();
+
+      const speech =
+        new SpeechSynthesisUtterance(item.word);
+
+      speech.lang =
+        "en-US";
+
+      speech.rate =
+        0.82;
+
+      window.speechSynthesis.speak(speech);
+
+    } else {
+
+      alert(
+        "Audio is not supported on this browser."
+      );
+
+    }
+
+  }
+
+
+  /*
+  ------------------------------------------------
+  CHINESE HELP
+  ------------------------------------------------
+  */
+
+  function toggleChinese() {
+
+    const box =
+      document.getElementById("chineseHelp");
+
+    if (box.style.display === "block") {
+
+      box.style.display =
+        "none";
+
+    } else {
+
+      box.style.display =
+        "block";
+
+      chineseUsed =
+        true;
+
+    }
+
+  }
+
+
+  /*
+  ------------------------------------------------
+  RECORD ANSWER
+  ------------------------------------------------
+  */
+
+  function recordAnswer(level) {
+
+    const item =
+      words[currentIndex];
+
+    const record = {
+
+      word: item.word,
+
+      result: level,
+
+      chineseHelpUsed: chineseUsed,
+
+      date: new Date().toISOString()
+
+    };
+
+
+    answers[currentIndex] =
+      record;
+
+
+    saveProgress();
+
+
+    const feedback =
+      document.getElementById("feedback");
+
+
+    if (level === "know") {
+
+      feedback.style.background =
+        "#dcefe2";
+
+      feedback.style.color =
+        "#345c42";
+
+      feedback.innerHTML =
+        "🌟 Great! You connected the word with its meaning.";
+
+    } else {
+
+      feedback.style.background =
+        "#f8e5c8";
+
+      feedback.style.color =
+        "#745726";
+
+      feedback.innerHTML =
+        "🌱 That's okay. This word needs another meeting.<br>We will see it again.";
+
+    }
+
+
+    feedback.style.display =
+      "block";
+
+
+    document.getElementById("nextButton").style.display =
+      "block";
+
+  }
+
+
+  /*
+  ------------------------------------------------
+  NEXT WORD
+  ------------------------------------------------
+  */
+
+  function nextWord() {
+
+    if (currentIndex < words.length - 1) {
+
+      currentIndex++;
+
+      showWord();
+
+      window.scrollTo({
+        top: 0,
+        behavior: "smooth"
+      });
+
+    } else {
+
+      finishMission();
+
+    }
+
+  }
+
+
+  /*
+  ------------------------------------------------
+  FINISH
+  ------------------------------------------------
+  */
+
+  function finishMission() {
+
+    document.getElementById("wordCard").style.display =
+      "none";
+
+    document.getElementById("finishCard").style.display =
+      "block";
+
+    document.getElementById("progressFill").style.width =
+      "100%";
+
+    document.getElementById("progressText").textContent =
+      "12 / 12";
+
+
+    const known =
+      answers.filter(
+        item => item && item.result === "know"
+      ).length;
+
+
+    const help =
+      answers.filter(
+        item => item && item.result === "help"
+      ).length;
+
+
+    const chinese =
+      answers.filter(
+        item => item && item.chineseHelpUsed
+      ).length;
+
+
+    document.getElementById("resultBox").innerHTML =
+
+      "🟢 <strong>I knew:</strong> " +
+      known +
+      " words / phrases" +
+
+      "<br>" +
+
+      "🟡 <strong>I needed help with:</strong> " +
+      help +
+
+      "<br>" +
+
+      "🇨🇳 <strong>I used Chinese help for:</strong> " +
+      chinese +
+
+      "<br><br>" +
+
+      "<strong>Tomorrow:</strong> We will try to remember these words without seeing the meanings first.";
+
+
+    localStorage.setItem(
+      "avaWordBridgeDay1Complete",
+      "true"
+    );
+
+  }
+
+
+  /*
+  ------------------------------------------------
+  SAVE
+  ------------------------------------------------
+  */
+
+  function saveProgress() {
+
+    localStorage.setItem(
+      "avaWordBridgeDay1",
+      JSON.stringify(answers)
+    );
+
+  }
+
+
+  /*
+  ------------------------------------------------
+  RESTART
+  ------------------------------------------------
+  */
+
+  function restartMission() {
+
+    currentIndex =
+      0;
+
+    answers =
+      [];
+
+    chineseUsed =
+      false;
+
+
+    localStorage.removeItem(
+      "avaWordBridgeDay1"
+    );
+
+
+    document.getElementById("finishCard").style.display =
+      "none";
+
+    document.getElementById("wordCard").style.display =
+      "block";
+
+
+    showWord();
+
+
+    window.scrollTo({
+      top: 0,
+      behavior: "smooth"
+    });
+
+  }
+
+
+  /*
+  ------------------------------------------------
+  START APP
+  ------------------------------------------------
+  */
+
+  showWord();
+
+</script>
+
+</body>
+</html>
