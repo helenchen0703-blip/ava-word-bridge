@@ -1,0 +1,559 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>Ava Word Bridge</title>
+
+  <style>
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      font-family: Arial, Helvetica, sans-serif;
+      background: #f7f5ef;
+      color: #243447;
+    }
+
+    .container {
+      max-width: 900px;
+      margin: 0 auto;
+      padding: 24px 18px 50px;
+    }
+
+    /* ---------- Header ---------- */
+
+    .hero {
+      background: white;
+      border-radius: 24px;
+      padding: 32px 24px;
+      text-align: center;
+      box-shadow: 0 8px 24px rgba(0,0,0,0.08);
+      margin-bottom: 24px;
+    }
+
+    .owl {
+      font-size: 64px;
+      margin-bottom: 8px;
+    }
+
+    h1 {
+      margin: 5px 0;
+      font-size: 38px;
+      color: #304b78;
+    }
+
+    .subtitle {
+      font-size: 20px;
+      color: #6a5c86;
+      font-weight: bold;
+      margin-top: 8px;
+    }
+
+    .mission {
+      margin: 20px auto 0;
+      max-width: 600px;
+      background: #eef4ff;
+      border-radius: 16px;
+      padding: 16px;
+      font-size: 18px;
+      line-height: 1.5;
+    }
+
+    /* ---------- Progress ---------- */
+
+    .progress-card {
+      background: white;
+      border-radius: 20px;
+      padding: 22px;
+      margin-bottom: 24px;
+      box-shadow: 0 5px 18px rgba(0,0,0,0.06);
+    }
+
+    .progress-title {
+      font-size: 20px;
+      font-weight: bold;
+      margin-bottom: 12px;
+    }
+
+    .progress-bar {
+      width: 100%;
+      height: 18px;
+      background: #e7e7e7;
+      border-radius: 20px;
+      overflow: hidden;
+    }
+
+    .progress-fill {
+      height: 100%;
+      width: 14%;
+      background: #6a8f72;
+      border-radius: 20px;
+    }
+
+    .progress-text {
+      margin-top: 10px;
+      color: #666;
+    }
+
+    /* ---------- Learning areas ---------- */
+
+    .section-title {
+      text-align: center;
+      font-size: 25px;
+      margin: 28px 0 18px;
+    }
+
+    .learning-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 18px;
+    }
+
+    .learning-card {
+      background: white;
+      border-radius: 22px;
+      padding: 26px 22px;
+      box-shadow: 0 5px 18px rgba(0,0,0,0.07);
+      text-align: center;
+    }
+
+    .learning-card .icon {
+      font-size: 54px;
+    }
+
+    .learning-card h2 {
+      margin: 10px 0;
+      color: #304b78;
+    }
+
+    .learning-card p {
+      line-height: 1.5;
+      color: #555;
+    }
+
+    .word-preview {
+      margin: 18px 0;
+      padding: 13px;
+      border-radius: 14px;
+      background: #f5f3fa;
+      line-height: 1.7;
+      font-size: 15px;
+    }
+
+    button {
+      border: none;
+      border-radius: 14px;
+      padding: 14px 24px;
+      font-size: 17px;
+      font-weight: bold;
+      cursor: pointer;
+      transition: 0.2s;
+    }
+
+    button:hover {
+      transform: translateY(-2px);
+    }
+
+    .reading-button {
+      background: #6c5b8c;
+      color: white;
+    }
+
+    .math-button {
+      background: #5e8870;
+      color: white;
+    }
+
+    /* ---------- 7 days ---------- */
+
+    .days {
+      background: white;
+      margin-top: 26px;
+      border-radius: 22px;
+      padding: 24px;
+      box-shadow: 0 5px 18px rgba(0,0,0,0.06);
+    }
+
+    .day-grid {
+      display: grid;
+      grid-template-columns: repeat(7, 1fr);
+      gap: 8px;
+      margin-top: 18px;
+    }
+
+    .day {
+      padding: 13px 5px;
+      border-radius: 12px;
+      background: #eeeeee;
+      text-align: center;
+      font-weight: bold;
+    }
+
+    .day.active {
+      background: #f1dca7;
+      color: #57461d;
+    }
+
+    .day-number {
+      font-size: 20px;
+    }
+
+    .day-label {
+      font-size: 11px;
+      margin-top: 4px;
+    }
+
+    /* ---------- Reading pathway ---------- */
+
+    .pathway {
+      margin-top: 26px;
+      background: #fff9e9;
+      border-radius: 22px;
+      padding: 25px;
+      text-align: center;
+    }
+
+    .pathway h2 {
+      color: #735f32;
+    }
+
+    .path {
+      font-size: 17px;
+      line-height: 2;
+      font-weight: bold;
+    }
+
+    .arrow {
+      color: #a38c58;
+      padding: 0 5px;
+    }
+
+    /* ---------- Message ---------- */
+
+    #message {
+      display: none;
+      margin-top: 22px;
+      background: #eaf5ed;
+      border-radius: 16px;
+      padding: 18px;
+      text-align: center;
+      font-size: 18px;
+      font-weight: bold;
+    }
+
+    footer {
+      text-align: center;
+      margin-top: 35px;
+      color: #888;
+      font-size: 14px;
+    }
+
+    /* ---------- Mobile ---------- */
+
+    @media (max-width: 650px) {
+
+      h1 {
+        font-size: 30px;
+      }
+
+      .learning-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .day-grid {
+        grid-template-columns: repeat(4, 1fr);
+      }
+
+      .path {
+        font-size: 15px;
+      }
+    }
+  </style>
+</head>
+
+
+<body>
+
+<div class="container">
+
+  <!-- HERO -->
+
+  <section class="hero">
+
+    <div class="owl">🦉</div>
+
+    <h1>Ava Word Bridge</h1>
+
+    <div class="subtitle">
+      Read it. Know it. Understand it.
+    </div>
+
+    <div class="mission">
+      🌱 <strong>My Learning Goal</strong><br>
+      I can use words I know to understand what I read.
+    </div>
+
+  </section>
+
+
+  <!-- WEEK PROGRESS -->
+
+  <section class="progress-card">
+
+    <div class="progress-title">
+      🌟 My 7-Day Learning Journey
+    </div>
+
+    <div class="progress-bar">
+      <div class="progress-fill"></div>
+    </div>
+
+    <div class="progress-text">
+      Day 1 of 7 · Let's build your word power!
+    </div>
+
+  </section>
+
+
+  <!-- LEARNING AREAS -->
+
+  <h2 class="section-title">
+    What would you like to learn today?
+  </h2>
+
+
+  <div class="learning-grid">
+
+
+    <!-- READING -->
+
+    <section class="learning-card">
+
+      <div class="icon">🏛️📖</div>
+
+      <h2>Reading & Social Studies</h2>
+
+      <p>
+        Learn the words that help you understand
+        <strong>Life in Ancient Sparta</strong>.
+      </p>
+
+      <div class="word-preview">
+
+        <strong>School Words</strong><br>
+
+        government · citizen · assembly<br>
+        rights · slave · debate
+
+        <br><br>
+
+        <strong>Reading Words</strong><br>
+
+        enemy · army · soldier
+
+        <br><br>
+
+        <strong>Power Phrases</strong><br>
+
+        in charge of · be allowed to · be loyal to
+
+      </div>
+
+      <button
+        class="reading-button"
+        onclick="startReading()">
+
+        Start Word Mission →
+
+      </button>
+
+    </section>
+
+
+
+    <!-- MATH -->
+
+    <section class="learning-card">
+
+      <div class="icon">🍕🔢</div>
+
+      <h2>Math Word Bridge</h2>
+
+      <p>
+        Understand the English words that help you
+        learn mathematics.
+      </p>
+
+      <div class="word-preview">
+
+        <strong>New Unit</strong><br>
+
+        fraction · parts of a whole
+
+        <br><br>
+
+        <strong>Review Words</strong><br>
+
+        factor · factor pair<br>
+        prime number · composite number
+
+      </div>
+
+      <button
+        class="math-button"
+        onclick="startMath()">
+
+        Start Math Mission →
+
+      </button>
+
+    </section>
+
+  </div>
+
+
+  <!-- SEVEN DAYS -->
+
+  <section class="days">
+
+    <h2>🗓️ Our 7-Day Word Journey</h2>
+
+    <div class="day-grid">
+
+      <div class="day active">
+        <div class="day-number">1</div>
+        <div class="day-label">Discover</div>
+      </div>
+
+      <div class="day">
+        <div class="day-number">2</div>
+        <div class="day-label">Remember</div>
+      </div>
+
+      <div class="day">
+        <div class="day-number">3</div>
+        <div class="day-label">Phrases</div>
+      </div>
+
+      <div class="day">
+        <div class="day-number">4</div>
+        <div class="day-label">Sentences</div>
+      </div>
+
+      <div class="day">
+        <div class="day-number">5</div>
+        <div class="day-label">New Context</div>
+      </div>
+
+      <div class="day">
+        <div class="day-number">6</div>
+        <div class="day-label">School Text</div>
+      </div>
+
+      <div class="day">
+        <div class="day-number">7</div>
+        <div class="day-label">I Can!</div>
+      </div>
+
+    </div>
+
+  </section>
+
+
+
+  <!-- READING PATH -->
+
+  <section class="pathway">
+
+    <h2>🌉 How Words Help Me Read</h2>
+
+    <div class="path">
+
+      WORD
+
+      <span class="arrow">→</span>
+
+      PHRASE
+
+      <span class="arrow">→</span>
+
+      SENTENCE
+
+      <span class="arrow">→</span>
+
+      MEANING
+
+      <span class="arrow">→</span>
+
+      GIST
+
+      <span class="arrow">→</span>
+
+      💪 INDEPENDENT
+
+    </div>
+
+  </section>
+
+
+  <div id="message"></div>
+
+
+  <footer>
+
+    Ava Word Bridge · Week 1<br>
+
+    Learning words to understand school.
+
+  </footer>
+
+</div>
+
+
+
+<script>
+
+  function startReading() {
+
+    const message = document.getElementById("message");
+
+    message.style.display = "block";
+
+    message.innerHTML =
+      "🏛️ Great choice, Ava!<br><br>" +
+      "Your Reading Word Mission is coming next.<br>" +
+      "Today we will DISCOVER what important school words mean.";
+
+    message.scrollIntoView({
+      behavior: "smooth"
+    });
+
+  }
+
+
+  function startMath() {
+
+    const message = document.getElementById("message");
+
+    message.style.display = "block";
+
+    message.innerHTML =
+      "🍕 Great choice, Ava!<br><br>" +
+      "Your Math Word Mission is coming next.<br>" +
+      "Today we will learn how words help us understand fractions.";
+
+    message.scrollIntoView({
+      behavior: "smooth"
+    });
+
+  }
+
+</script>
+
+
+</body>
+</html>
