@@ -1,383 +1,531 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-  <title>Ava Word Bridge - Day 1</title>
+<meta charset="UTF-8">
 
-  <style>
-    * {
-      box-sizing: border-box;
-    }
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    body {
-      margin: 0;
-      font-family: Arial, Helvetica, sans-serif;
-      background: #f7f5ef;
-      color: #243447;
-    }
+<title>Ava Word Bridge - Day 1 Discover</title>
 
-    .container {
-      max-width: 820px;
-      margin: 0 auto;
-      padding: 20px 16px 50px;
-    }
 
-    /* ---------- TOP ---------- */
+<style>
 
-    .topbar {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      margin-bottom: 20px;
-      gap: 12px;
-    }
+/* ==================================================
+   BASIC PAGE
+================================================== */
 
-    .home-link {
-      text-decoration: none;
-      color: #5d5276;
-      font-weight: bold;
-      background: white;
-      padding: 11px 16px;
-      border-radius: 12px;
-      box-shadow: 0 3px 10px rgba(0,0,0,0.06);
-    }
+* {
+  box-sizing: border-box;
+}
 
-    .day-label {
-      background: #f1dca7;
-      padding: 11px 16px;
-      border-radius: 12px;
-      font-weight: bold;
-      color: #57461d;
-    }
+body {
+  margin: 0;
+  font-family: Arial, Helvetica, sans-serif;
+  background: #f6f3ed;
+  color: #233449;
+}
 
-    /* ---------- HEADER ---------- */
+.container {
+  max-width: 860px;
+  margin: 0 auto;
+  padding: 18px 16px 55px;
+}
 
-    .header {
-      background: white;
-      border-radius: 24px;
-      padding: 28px 22px;
-      text-align: center;
-      box-shadow: 0 7px 20px rgba(0,0,0,0.07);
-    }
 
-    .header-icon {
-      font-size: 52px;
-    }
+/* ==================================================
+   TOP BAR
+================================================== */
 
-    h1 {
-      color: #304b78;
-      margin: 8px 0;
-      font-size: 34px;
-    }
+.topbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 18px;
+}
 
-    .subtitle {
-      color: #6c5b8c;
-      font-size: 19px;
-      font-weight: bold;
-    }
+.home-link {
+  text-decoration: none;
+  background: white;
+  color: #65537f;
+  padding: 11px 17px;
+  border-radius: 13px;
+  font-weight: bold;
+  box-shadow: 0 3px 12px rgba(0,0,0,0.07);
+}
 
-    .goal {
-      margin: 18px auto 0;
-      background: #eef4ff;
-      padding: 15px;
-      border-radius: 15px;
-      max-width: 600px;
-      line-height: 1.5;
-    }
+.day-badge {
+  background: #f2dca3;
+  color: #604c1d;
+  padding: 11px 17px;
+  border-radius: 13px;
+  font-weight: bold;
+}
 
-    /* ---------- PROGRESS ---------- */
 
-    .progress-area {
-      background: white;
-      margin-top: 20px;
-      border-radius: 18px;
-      padding: 18px;
-      box-shadow: 0 4px 14px rgba(0,0,0,0.05);
-    }
+/* ==================================================
+   HEADER
+================================================== */
 
-    .progress-row {
-      display: flex;
-      justify-content: space-between;
-      font-weight: bold;
-      margin-bottom: 10px;
-    }
+.header {
+  background: white;
+  border-radius: 26px;
+  padding: 28px 22px;
+  text-align: center;
+  box-shadow: 0 7px 22px rgba(0,0,0,0.07);
+}
 
-    .progress-bar {
-      width: 100%;
-      height: 15px;
-      background: #e6e6e6;
-      border-radius: 20px;
-      overflow: hidden;
-    }
+.header-icon {
+  font-size: 52px;
+}
 
-    .progress-fill {
-      width: 0%;
-      height: 100%;
-      background: #6c5b8c;
-      transition: width 0.4s ease;
-    }
+h1 {
+  margin: 8px 0 6px;
+  color: #304c78;
+  font-size: 35px;
+}
 
-    /* ---------- CARD ---------- */
+.subtitle {
+  color: #705d8b;
+  font-size: 19px;
+  font-weight: bold;
+}
 
-    .word-card {
-      background: white;
-      margin-top: 22px;
-      border-radius: 26px;
-      padding: 30px 28px;
-      box-shadow: 0 8px 24px rgba(0,0,0,0.08);
-    }
+.goal {
+  max-width: 600px;
+  margin: 20px auto 0;
+  background: #eef4ff;
+  border-radius: 17px;
+  padding: 16px;
+  font-size: 17px;
+  line-height: 1.6;
+}
 
-    .category {
-      display: inline-block;
-      background: #f0edf6;
-      color: #65557e;
-      padding: 8px 13px;
-      border-radius: 20px;
-      font-size: 14px;
-      font-weight: bold;
-    }
 
-    .word-row {
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      gap: 12px;
-      margin-top: 18px;
-    }
+/* ==================================================
+   PROGRESS
+================================================== */
 
-    .word {
-      text-align: center;
-      font-size: 42px;
-      font-weight: bold;
-      color: #304b78;
-      margin: 0;
-    }
+.progress-area {
+  margin-top: 19px;
+  background: white;
+  border-radius: 19px;
+  padding: 18px;
+  box-shadow: 0 4px 14px rgba(0,0,0,0.05);
+}
 
-    .sound-button {
-      border: none;
-      background: #edf3ff;
-      border-radius: 50%;
-      width: 48px;
-      height: 48px;
-      cursor: pointer;
-      font-size: 22px;
-    }
+.progress-row {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 10px;
+  font-weight: bold;
+}
 
-    .sound-button:hover {
-      transform: scale(1.05);
-    }
+.progress-bar {
+  width: 100%;
+  height: 15px;
+  background: #e6e6e6;
+  border-radius: 20px;
+  overflow: hidden;
+}
 
-    .meaning-box {
-      margin-top: 22px;
-      background: #fff8e8;
-      border-radius: 18px;
-      padding: 20px;
-    }
+.progress-fill {
+  width: 0%;
+  height: 100%;
+  background: #725f91;
+  border-radius: 20px;
+  transition: width 0.35s ease;
+}
 
-    .small-title {
-      font-size: 14px;
-      text-transform: uppercase;
-      letter-spacing: 1px;
-      color: #8a7544;
-      font-weight: bold;
-      margin-bottom: 8px;
-    }
 
-    .meaning {
-      font-size: 21px;
-      line-height: 1.5;
-      font-weight: bold;
-    }
+/* ==================================================
+   MAIN WORD CARD
+================================================== */
 
-    /* ---------- CHINESE ---------- */
+.word-card {
+  background: white;
+  margin-top: 22px;
+  border-radius: 28px;
+  padding: 26px;
+  box-shadow: 0 8px 26px rgba(0,0,0,0.08);
+}
 
-    .chinese-button {
-      display: block;
-      margin: 18px auto 0;
-      border: 2px solid #6c5b8c;
-      color: #6c5b8c;
-      background: white;
-      padding: 11px 18px;
-      border-radius: 13px;
-      font-size: 16px;
-      font-weight: bold;
-      cursor: pointer;
-    }
+.category {
+  display: inline-block;
+  padding: 8px 14px;
+  border-radius: 20px;
+  background: #f0edf6;
+  color: #665580;
+  font-size: 14px;
+  font-weight: bold;
+}
 
-    .chinese-help {
-      display: none;
-      margin-top: 13px;
-      background: #f2eff7;
-      border-radius: 14px;
-      padding: 14px;
-      text-align: center;
-      font-size: 20px;
-      font-weight: bold;
-      color: #594a72;
-    }
 
-    /* ---------- SCHOOL SENTENCE ---------- */
+/* ==================================================
+   WORD TITLE
+================================================== */
 
-    .sentence-box {
-      margin-top: 22px;
-      background: #edf6f1;
-      border-radius: 18px;
-      padding: 20px;
-    }
+.word-title-area {
+  text-align: center;
+  margin-top: 15px;
+}
 
-    .sentence-title {
-      font-size: 14px;
-      color: #52705e;
-      text-transform: uppercase;
-      letter-spacing: 1px;
-      font-weight: bold;
-      margin-bottom: 9px;
-    }
+.word {
+  font-size: 43px;
+  font-weight: 800;
+  color: #2e4a77;
+  margin: 8px 0;
+}
 
-    .sentence {
-      font-size: 20px;
-      line-height: 1.6;
-    }
 
-    /* ---------- CHECK ---------- */
+/* ==================================================
+   VISUAL
+================================================== */
 
-    .check-box {
-      margin-top: 24px;
-      border-top: 2px solid #eeeeee;
-      padding-top: 22px;
-    }
+.visual-frame {
+  margin: 18px auto 5px;
+  max-width: 650px;
+  min-height: 250px;
+  background: #f6f7fb;
+  border-radius: 24px;
+  padding: 18px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  overflow: hidden;
+}
 
-    .check-question {
-      text-align: center;
-      font-size: 21px;
-      font-weight: bold;
-      margin-bottom: 18px;
-    }
+.visual-frame svg {
+  width: 100%;
+  max-height: 280px;
+}
 
-    .choice-grid {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 12px;
-    }
 
-    .choice-button {
-      border: none;
-      padding: 15px;
-      border-radius: 15px;
-      font-size: 17px;
-      font-weight: bold;
-      cursor: pointer;
-    }
+/* ==================================================
+   AUDIO
+================================================== */
 
-    .know {
-      background: #dcefe2;
-      color: #345c42;
-    }
+.audio-section {
+  margin-top: 19px;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 10px;
+}
 
-    .help {
-      background: #f8e5c8;
-      color: #745726;
-    }
+.audio-button {
+  border: none;
+  border-radius: 14px;
+  padding: 13px 10px;
+  background: #eaf0fb;
+  color: #304c78;
+  font-size: 15px;
+  font-weight: bold;
+  cursor: pointer;
+}
 
-    .choice-button:hover {
-      transform: translateY(-2px);
-    }
+.audio-button:hover {
+  transform: translateY(-2px);
+}
 
-    .feedback {
-      display: none;
-      margin-top: 18px;
-      padding: 16px;
-      border-radius: 15px;
-      text-align: center;
-      line-height: 1.5;
-      font-weight: bold;
-    }
+.audio-tip {
+  text-align: center;
+  margin-top: 9px;
+  font-size: 13px;
+  color: #777;
+}
 
-    .next-button {
-      display: none;
-      width: 100%;
-      margin-top: 18px;
-      border: none;
-      background: #6c5b8c;
-      color: white;
-      padding: 16px;
-      border-radius: 15px;
-      font-size: 18px;
-      font-weight: bold;
-      cursor: pointer;
-    }
 
-    /* ---------- FINISH ---------- */
+/* ==================================================
+   MEANING
+================================================== */
 
-    .finish-card {
-      display: none;
-      background: white;
-      margin-top: 22px;
-      border-radius: 26px;
-      padding: 32px 25px;
-      text-align: center;
-      box-shadow: 0 8px 24px rgba(0,0,0,0.08);
-    }
+.meaning-box {
+  margin-top: 22px;
+  background: #fff7e5;
+  border-radius: 20px;
+  padding: 20px;
+}
 
-    .finish-icon {
-      font-size: 65px;
-    }
+.section-label {
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  font-size: 13px;
+  font-weight: bold;
+  color: #88723e;
+  margin-bottom: 9px;
+}
 
-    .finish-card h2 {
-      color: #304b78;
-      font-size: 30px;
-    }
+.meaning {
+  font-size: 21px;
+  line-height: 1.55;
+  font-weight: bold;
+}
 
-    .result-box {
-      margin-top: 20px;
-      background: #f5f3fa;
-      border-radius: 18px;
-      padding: 20px;
-      line-height: 1.8;
-      font-size: 18px;
-    }
 
-    .restart-button {
-      border: none;
-      margin-top: 20px;
-      background: #5e8870;
-      color: white;
-      padding: 14px 22px;
-      border-radius: 14px;
-      font-size: 17px;
-      font-weight: bold;
-      cursor: pointer;
-    }
+/* ==================================================
+   CHINESE HELP
+================================================== */
 
-    .bottom-message {
-      margin-top: 22px;
-      text-align: center;
-      color: #777;
-      line-height: 1.6;
-      font-size: 14px;
-    }
+.chinese-button {
+  display: block;
+  margin: 18px auto 0;
+  background: white;
+  color: #705d8b;
+  border: 2px solid #705d8b;
+  border-radius: 14px;
+  padding: 11px 18px;
+  font-size: 16px;
+  font-weight: bold;
+  cursor: pointer;
+}
 
-    @media (max-width: 600px) {
+.chinese-help {
+  display: none;
+  margin-top: 13px;
+  padding: 15px;
+  border-radius: 15px;
+  background: #f1eef7;
+  text-align: center;
+  color: #55446d;
+  font-size: 19px;
+  font-weight: bold;
+}
 
-      .word {
-        font-size: 34px;
-      }
 
-      .word-card {
-        padding: 24px 18px;
-      }
+/* ==================================================
+   SCHOOL SENTENCE
+================================================== */
 
-      .choice-grid {
-        grid-template-columns: 1fr;
-      }
+.sentence-box {
+  margin-top: 23px;
+  background: #ebf5ef;
+  border-radius: 20px;
+  padding: 20px;
+}
 
-      h1 {
-        font-size: 28px;
-      }
-    }
-  </style>
+.sentence-label {
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  color: #55715f;
+  font-size: 13px;
+  font-weight: bold;
+  margin-bottom: 10px;
+}
+
+.sentence {
+  font-size: 20px;
+  line-height: 1.65;
+}
+
+
+/* ==================================================
+   QUICK MEANING CHECK
+================================================== */
+
+.quick-check {
+  margin-top: 24px;
+  background: #f4f6fa;
+  border-radius: 20px;
+  padding: 19px;
+}
+
+.quick-title {
+  text-align: center;
+  font-size: 19px;
+  font-weight: bold;
+  margin-bottom: 14px;
+}
+
+.quick-options {
+  display: grid;
+  gap: 10px;
+}
+
+.quiz-button {
+  border: 2px solid #d8dce5;
+  background: white;
+  padding: 13px;
+  border-radius: 14px;
+  font-size: 16px;
+  cursor: pointer;
+}
+
+.quiz-button:hover {
+  background: #f7f7fa;
+}
+
+.quiz-feedback {
+  display: none;
+  margin-top: 12px;
+  border-radius: 13px;
+  padding: 13px;
+  text-align: center;
+  font-weight: bold;
+}
+
+
+/* ==================================================
+   SELF REFLECTION
+================================================== */
+
+.self-check {
+  margin-top: 25px;
+  border-top: 2px solid #eee;
+  padding-top: 22px;
+}
+
+.self-title {
+  text-align: center;
+  font-size: 20px;
+  font-weight: bold;
+  line-height: 1.45;
+  margin-bottom: 16px;
+}
+
+.self-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 12px;
+}
+
+.self-button {
+  border: none;
+  border-radius: 15px;
+  padding: 16px 10px;
+  font-size: 17px;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+.know-button {
+  background: #dcefe2;
+  color: #335b40;
+}
+
+.help-button {
+  background: #f7e5c8;
+  color: #735724;
+}
+
+.self-feedback {
+  display: none;
+  margin-top: 17px;
+  padding: 15px;
+  border-radius: 15px;
+  text-align: center;
+  font-weight: bold;
+  line-height: 1.55;
+}
+
+.next-button {
+  display: none;
+  width: 100%;
+  border: none;
+  background: #705d8b;
+  color: white;
+  margin-top: 17px;
+  padding: 16px;
+  border-radius: 15px;
+  font-size: 18px;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+
+/* ==================================================
+   FINISH PAGE
+================================================== */
+
+.finish-card {
+  display: none;
+  background: white;
+  margin-top: 22px;
+  border-radius: 28px;
+  padding: 32px 24px;
+  text-align: center;
+  box-shadow: 0 8px 26px rgba(0,0,0,0.08);
+}
+
+.finish-icon {
+  font-size: 67px;
+}
+
+.finish-card h2 {
+  color: #304c78;
+  font-size: 30px;
+}
+
+.result-box {
+  margin-top: 20px;
+  background: #f3f1f7;
+  border-radius: 19px;
+  padding: 20px;
+  font-size: 18px;
+  line-height: 1.8;
+}
+
+.restart-button {
+  margin-top: 20px;
+  border: none;
+  padding: 14px 22px;
+  border-radius: 14px;
+  background: #5f8c70;
+  color: white;
+  font-size: 17px;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+
+/* ==================================================
+   BOTTOM NOTE
+================================================== */
+
+.bottom-note {
+  margin-top: 23px;
+  text-align: center;
+  color: #6d6d6d;
+  font-size: 14px;
+  line-height: 1.6;
+}
+
+
+/* ==================================================
+   MOBILE
+================================================== */
+
+@media (max-width: 650px) {
+
+  .word {
+    font-size: 35px;
+  }
+
+  h1 {
+    font-size: 29px;
+  }
+
+  .word-card {
+    padding: 20px 16px;
+  }
+
+  .audio-section {
+    grid-template-columns: 1fr;
+  }
+
+  .self-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .visual-frame {
+    min-height: 210px;
+  }
+
+}
+
+</style>
+
 </head>
 
 
@@ -385,251 +533,349 @@
 
 <div class="container">
 
-  <!-- TOP -->
 
-  <div class="topbar">
+<!-- ==================================================
+     TOP BAR
+================================================== -->
 
-    <a href="index.html" class="home-link">
-      ← Home
-    </a>
+<div class="topbar">
 
-    <div class="day-label">
-      Day 1 · Discover
+  <a href="index.html" class="home-link">
+    ← Home
+  </a>
+
+  <div class="day-badge">
+    Day 1 · Discover
+  </div>
+
+</div>
+
+
+<!-- ==================================================
+     HEADER
+================================================== -->
+
+<section class="header">
+
+  <div class="header-icon">
+    🔍 🦉
+  </div>
+
+  <h1>
+    Ava's Word Detective
+  </h1>
+
+  <div class="subtitle">
+    See it. Hear it. Know it. Understand it.
+  </div>
+
+  <div class="goal">
+
+    <strong>🌱 Today's Goal</strong>
+
+    <br>
+
+    I can connect an English word with its meaning.
+
+  </div>
+
+</section>
+
+
+<!-- ==================================================
+     PROGRESS
+================================================== -->
+
+<section class="progress-area">
+
+  <div class="progress-row">
+
+    <span>
+      My Word Mission
+    </span>
+
+    <span id="progressText">
+      1 / 12
+    </span>
+
+  </div>
+
+  <div class="progress-bar">
+
+    <div
+      class="progress-fill"
+      id="progressFill">
+    </div>
+
+  </div>
+
+</section>
+
+
+<!-- ==================================================
+     WORD CARD
+================================================== -->
+
+<section
+  class="word-card"
+  id="wordCard">
+
+
+  <div
+    class="category"
+    id="category">
+  </div>
+
+
+  <div class="word-title-area">
+
+    <div
+      class="word"
+      id="word">
     </div>
 
   </div>
 
 
-  <!-- HEADER -->
+  <!-- VISUAL -->
 
-  <section class="header">
+  <div
+    class="visual-frame"
+    id="visualFrame">
+  </div>
 
-    <div class="header-icon">
-      🏛️ 🔍
+
+  <!-- AUDIO -->
+
+  <div class="audio-section">
+
+    <button
+      class="audio-button"
+      onclick="speakCurrentWord()">
+
+      🔊 Hear Word
+
+    </button>
+
+
+    <button
+      class="audio-button"
+      onclick="speakMeaning()">
+
+      🔊 Hear Meaning
+
+    </button>
+
+
+    <button
+      class="audio-button"
+      onclick="speakSentence()">
+
+      🔊 Hear Sentence
+
+    </button>
+
+  </div>
+
+
+  <div class="audio-tip">
+
+    👂 Listen once. Then try saying it yourself.
+
+  </div>
+
+
+  <!-- MEANING -->
+
+  <div class="meaning-box">
+
+    <div class="section-label">
+      🧠 What does it mean?
     </div>
-
-    <h1>
-      Word Detective
-    </h1>
-
-    <div class="subtitle">
-      Discover the words that unlock your school reading.
-    </div>
-
-    <div class="goal">
-      <strong>Today's Goal</strong><br>
-      I can connect a word with its meaning.
-    </div>
-
-  </section>
-
-
-  <!-- PROGRESS -->
-
-  <section class="progress-area">
-
-    <div class="progress-row">
-
-      <span>
-        My Word Mission
-      </span>
-
-      <span id="progressText">
-        1 / 12
-      </span>
-
-    </div>
-
-    <div class="progress-bar">
-      <div
-        class="progress-fill"
-        id="progressFill">
-      </div>
-    </div>
-
-  </section>
-
-
-  <!-- WORD CARD -->
-
-  <section
-    class="word-card"
-    id="wordCard">
 
     <div
-      class="category"
-      id="category">
+      class="meaning"
+      id="meaning">
+    </div>
+
+  </div>
+
+
+  <!-- CHINESE -->
+
+  <button
+    class="chinese-button"
+    onclick="toggleChinese()">
+
+    🇨🇳 I need Chinese help
+
+  </button>
+
+
+  <div
+    class="chinese-help"
+    id="chineseHelp">
+  </div>
+
+
+  <!-- SCHOOL SENTENCE -->
+
+  <div class="sentence-box">
+
+    <div class="sentence-label">
+      🎒 See it in school reading
+    </div>
+
+    <div
+      class="sentence"
+      id="sentence">
+    </div>
+
+  </div>
+
+
+  <!-- QUICK CHECK -->
+
+  <div class="quick-check">
+
+    <div class="quick-title">
+      🎯 Check the meaning
+    </div>
+
+    <div
+      class="quick-options"
+      id="quickOptions">
+    </div>
+
+    <div
+      class="quiz-feedback"
+      id="quizFeedback">
+    </div>
+
+  </div>
+
+
+  <!-- SELF CHECK -->
+
+  <div class="self-check">
+
+    <div class="self-title">
+
+      How much help did you need to understand this word?
+
     </div>
 
 
-    <div class="word-row">
-
-      <div
-        class="word"
-        id="word">
-      </div>
+    <div class="self-grid">
 
       <button
-        class="sound-button"
-        onclick="speakWord()"
-        aria-label="Hear the word">
+        class="self-button know-button"
+        onclick="recordAnswer('know')">
 
-        🔊
+        🟢 I know it
+
+      </button>
+
+
+      <button
+        class="self-button help-button"
+        onclick="recordAnswer('help')">
+
+        🟡 I need help
 
       </button>
 
     </div>
 
 
-    <!-- MEANING -->
-
-    <div class="meaning-box">
-
-      <div class="small-title">
-        🧠 What does it mean?
-      </div>
-
-      <div
-        class="meaning"
-        id="meaning">
-      </div>
-
+    <div
+      class="self-feedback"
+      id="selfFeedback">
     </div>
 
-
-    <!-- CHINESE HELP -->
 
     <button
-      class="chinese-button"
-      onclick="toggleChinese()">
+      class="next-button"
+      id="nextButton"
+      onclick="nextWord()">
 
-      🇨🇳 I need Chinese help
-
-    </button>
-
-    <div
-      class="chinese-help"
-      id="chineseHelp">
-    </div>
-
-
-    <!-- SCHOOL SENTENCE -->
-
-    <div class="sentence-box">
-
-      <div class="sentence-title">
-        🎒 See it in a school sentence
-      </div>
-
-      <div
-        class="sentence"
-        id="sentence">
-      </div>
-
-    </div>
-
-
-    <!-- SELF CHECK -->
-
-    <div class="check-box">
-
-      <div class="check-question">
-        Before we move on, how much help did you need?
-      </div>
-
-      <div class="choice-grid">
-
-        <button
-          class="choice-button know"
-          onclick="recordAnswer('know')">
-
-          🟢 I know it
-
-        </button>
-
-        <button
-          class="choice-button help"
-          onclick="recordAnswer('help')">
-
-          🟡 I need help
-
-        </button>
-
-      </div>
-
-
-      <div
-        class="feedback"
-        id="feedback">
-      </div>
-
-
-      <button
-        class="next-button"
-        id="nextButton"
-        onclick="nextWord()">
-
-        Next Word →
-
-      </button>
-
-    </div>
-
-  </section>
-
-
-  <!-- FINISH -->
-
-  <section
-    class="finish-card"
-    id="finishCard">
-
-    <div class="finish-icon">
-      🌟
-    </div>
-
-    <h2>
-      Day 1 Complete!
-    </h2>
-
-    <p>
-      Great work, Ava.
-      Today you discovered the meanings of important school words.
-    </p>
-
-    <div
-      class="result-box"
-      id="resultBox">
-    </div>
-
-    <button
-      class="restart-button"
-      onclick="restartMission()">
-
-      🔁 Practice Again
+      Next Word →
 
     </button>
-
-    <br><br>
-
-    <a
-      href="index.html"
-      class="home-link">
-
-      ← Back to Home
-
-    </a>
-
-  </section>
-
-
-  <div class="bottom-message">
-
-    🌱 Reading a word is the first step.<br>
-
-    Understanding the word helps us understand the sentence.
 
   </div>
+
+</section>
+
+
+<!-- ==================================================
+     FINISH CARD
+================================================== -->
+
+<section
+  class="finish-card"
+  id="finishCard">
+
+
+  <div class="finish-icon">
+    🌟
+  </div>
+
+
+  <h2>
+    Day 1 Complete!
+  </h2>
+
+
+  <p>
+    You discovered important words that can unlock your school reading.
+  </p>
+
+
+  <div
+    class="result-box"
+    id="resultBox">
+  </div>
+
+
+  <button
+    class="restart-button"
+    onclick="restartMission()">
+
+    🔁 Practice Again
+
+  </button>
+
+
+  <br><br>
+
+
+  <a
+    href="index.html"
+    class="home-link">
+
+    ← Back to Home
+
+  </a>
+
+</section>
+
+
+<div class="bottom-note">
+
+  🌉
+
+  <strong>
+    Read it → Know it → Understand it
+  </strong>
+
+  <br>
+
+  Pictures help us build meaning.  
+  Words help us understand the text.
+
+</div>
+
 
 </div>
 
@@ -637,491 +883,1857 @@
 
 <script>
 
-  /*
-  ------------------------------------------------
-  WEEK 1 WORD DATA
-  ------------------------------------------------
-  */
 
-  const words = [
+/* ==================================================
+   WEEK 1 DATA
+================================================== */
 
-    {
-      word: "government",
-      category: "🏫 School Word",
-      meaning: "the people or system that make decisions and run a country or place",
-      chinese: "政府；管理国家或地区的机构",
-      sentence: "The government of Sparta included two kings, a council of elders, and an Assembly."
-    },
 
-    {
-      word: "citizen",
-      category: "🏫 School Word",
-      meaning: "a person who belongs to a country or city and has rights and responsibilities there",
-      chinese: "公民；属于一个国家或城市并拥有相应权利和责任的人",
-      sentence: "Citizens could take part in important decisions in some ancient Greek city-states."
-    },
+const words = [
 
-    {
-      word: "assembly",
-      category: "🏫 School Word",
-      meaning: "a group of people who meet together to discuss or make decisions",
-      chinese: "集会；议事大会",
-      sentence: "The Assembly voted yes or no on important decisions."
-    },
 
-    {
-      word: "rights",
-      category: "🏫 School Word",
-      meaning: "things that people are allowed to do or have",
-      chinese: "权利；人们被允许拥有或做的事情",
-      sentence: "Citizens had certain rights in their city-state."
-    },
+{
+  word: "government",
 
-    {
-      word: "slave",
-      category: "🏫 School Word",
-      meaning: "a person who was forced to work for another person and was not free",
-      chinese: "奴隶；被迫为别人劳动并且没有自由的人",
-      sentence: "Slaves in ancient societies did not have the same rights as citizens."
-    },
+  category: "🏫 School Word",
 
-    {
-      word: "debate",
-      category: "🏫 School Word",
-      meaning: "a discussion in which people give different ideas or opinions",
-      chinese: "辩论；人们表达不同观点并进行讨论",
-      sentence: "Citizens could debate important questions before making decisions."
-    },
+  meaning:
+  "the people or system that make decisions and run a country or place",
 
-    {
-      word: "enemy",
-      category: "📖 Reading Word",
-      meaning: "a person, group, or country that you fight against",
-      chinese: "敌人；敌对的一方",
-      sentence: "Sparta and Athens were, at times, enemies."
-    },
+  chinese:
+  "政府；管理国家或地区、作出重要决定的机构",
 
-    {
-      word: "army",
-      category: "📖 Reading Word",
-      meaning: "a large group of soldiers trained to fight on land",
-      chinese: "军队；由士兵组成、接受作战训练的队伍",
-      sentence: "The kings were in charge of the army."
-    },
+  sentence:
+  "The government of Sparta included two kings, a council of elders, and an Assembly.",
 
-    {
-      word: "soldier",
-      category: "📖 Reading Word",
-      meaning: "a person who serves and fights in an army",
-      chinese: "士兵；在军队中服役和作战的人",
-      sentence: "Spartan boys trained hard to become strong soldiers."
-    },
+  quizQuestion:
+  "Which idea best matches government?",
 
-    {
-      word: "in charge of",
-      category: "⚡ Power Phrase",
-      meaning: "responsible for leading, controlling, or taking care of something",
-      chinese: "负责；掌管",
-      sentence: "The kings were in charge of the army."
-    },
+  quizOptions: [
+    "People who make decisions and run a country or place",
+    "A group of soldiers",
+    "A person you fight against"
+  ],
 
-    {
-      word: "be allowed to",
-      category: "⚡ Power Phrase",
-      meaning: "to have permission to do something",
-      chinese: "被允许做某事",
-      sentence: "Spartan boys were allowed to begin military training when they were young."
-    },
+  answer: 0,
 
-    {
-      word: "be loyal to",
-      category: "⚡ Power Phrase",
-      meaning: "to continue supporting a person, group, or place",
-      chinese: "忠于；忠诚于",
-      sentence: "Spartan soldiers were expected to be loyal to one another."
-    }
+  visual: "government"
+},
+
+
+
+{
+  word: "citizen",
+
+  category: "🏫 School Word",
+
+  meaning:
+  "a person who belongs to a country or city and has rights and responsibilities there",
+
+  chinese:
+  "公民；属于一个国家或城市，并拥有相应权利和责任的人",
+
+  sentence:
+  "Ancient citizens of Greece lived different lives from us.",
+
+  quizQuestion:
+  "Who is a citizen?",
+
+  quizOptions: [
+    "A person who belongs to a country or city",
+    "A building",
+    "A type of army"
+  ],
+
+  answer: 0,
+
+  visual: "citizen"
+},
+
+
+
+{
+  word: "assembly",
+
+  category: "🏫 School Word",
+
+  meaning:
+  "a group of people who meet together to make decisions",
+
+  chinese:
+  "公民大会；一群人聚在一起讨论或作出决定",
+
+  sentence:
+  "The Spartan Assembly could not discuss problems; its members could only vote yes or no.",
+
+  quizQuestion:
+  "What happens in an assembly?",
+
+  quizOptions: [
+    "People meet together",
+    "A soldier trains alone",
+    "Someone sleeps"
+  ],
+
+  answer: 0,
+
+  visual: "assembly"
+},
+
+
+
+{
+  word: "rights",
+
+  category: "🏫 School Word",
+
+  meaning:
+  "things that people are allowed to do or have",
+
+  chinese:
+  "权利；一个人被允许拥有或做的事情",
+
+  sentence:
+  "Spartan women had more rights than Athenian women.",
+
+  quizQuestion:
+  "Rights are things people are...",
+
+  quizOptions: [
+    "allowed to do or have",
+    "forced to forget",
+    "unable to see"
+  ],
+
+  answer: 0,
+
+  visual: "rights"
+},
+
+
+
+{
+  word: "slave",
+
+  category: "🏫 School Word",
+
+  meaning:
+  "a person who was forced to work for another person and was not free",
+
+  chinese:
+  "奴隶；被迫为别人劳动并且没有自由的人",
+
+  sentence:
+  "Like the people of Athens, the Spartans also had slaves.",
+
+  quizQuestion:
+  "A slave in ancient society was...",
+
+  quizOptions: [
+    "not free",
+    "a king",
+    "a teacher"
+  ],
+
+  answer: 0,
+
+  visual: "slave"
+},
+
+
+
+{
+  word: "debate",
+
+  category: "🏫 School Word",
+
+  meaning:
+  "a discussion where people share different ideas or opinions",
+
+  chinese:
+  "辩论；人们表达和讨论不同观点",
+
+  sentence:
+  "The Athenians debated and voted on laws.",
+
+  quizQuestion:
+  "During a debate, people usually...",
+
+  quizOptions: [
+    "share different ideas",
+    "sleep quietly",
+    "march in an army"
+  ],
+
+  answer: 0,
+
+  visual: "debate"
+},
+
+
+
+{
+  word: "enemy",
+
+  category: "📖 Reading Word",
+
+  meaning:
+  "a person, group, or country that you fight against",
+
+  chinese:
+  "敌人；与你对立或作战的人、团体或国家",
+
+  sentence:
+  "Sparta and Athens were, at times, enemies.",
+
+  quizQuestion:
+  "Which is the opposite of a friend?",
+
+  quizOptions: [
+    "enemy",
+    "citizen",
+    "teacher"
+  ],
+
+  answer: 0,
+
+  visual: "enemy"
+},
+
+
+
+{
+  word: "army",
+
+  category: "📖 Reading Word",
+
+  meaning:
+  "a large group of soldiers trained to fight",
+
+  chinese:
+  "军队；由许多接受作战训练的士兵组成的队伍",
+
+  sentence:
+  "The kings were in charge of the army.",
+
+  quizQuestion:
+  "An army is made up mainly of...",
+
+  quizOptions: [
+    "soldiers",
+    "teachers",
+    "musicians"
+  ],
+
+  answer: 0,
+
+  visual: "army"
+},
+
+
+
+{
+  word: "soldier",
+
+  category: "📖 Reading Word",
+
+  meaning:
+  "a person who serves and fights in an army",
+
+  chinese:
+  "士兵；在军队中服役和作战的人",
+
+  sentence:
+  "Boys were sent away from home to train to become soldiers.",
+
+  quizQuestion:
+  "Where does a soldier serve?",
+
+  quizOptions: [
+    "in an army",
+    "in a bakery",
+    "in a library"
+  ],
+
+  answer: 0,
+
+  visual: "soldier"
+},
+
+
+
+{
+  word: "in charge of",
+
+  category: "⚡ Power Phrase",
+
+  meaning:
+  "responsible for leading or taking care of something",
+
+  chinese:
+  "负责；掌管",
+
+  sentence:
+  "The kings were in charge of the army.",
+
+  quizQuestion:
+  "If you are in charge of something, you are...",
+
+  quizOptions: [
+    "responsible for it",
+    "afraid of it",
+    "far away from it"
+  ],
+
+  answer: 0,
+
+  visual: "charge"
+},
+
+
+
+{
+  word: "be allowed to",
+
+  category: "⚡ Power Phrase",
+
+  meaning:
+  "to have permission to do something",
+
+  chinese:
+  "被允许做某事",
+
+  sentence:
+  "Spartan boys were not allowed to wear shoes.",
+
+  quizQuestion:
+  "If you are allowed to do something, you...",
+
+  quizOptions: [
+    "have permission",
+    "must hide",
+    "cannot understand"
+  ],
+
+  answer: 0,
+
+  visual: "allowed"
+},
+
+
+
+{
+  word: "be loyal to",
+
+  category: "⚡ Power Phrase",
+
+  meaning:
+  "to keep supporting and standing by a person or group",
+
+  chinese:
+  "忠于；忠诚于；一直支持某人或某个群体",
+
+  sentence:
+  "The soldiers in a phalanx were very loyal to one another.",
+
+  quizQuestion:
+  "Being loyal means you...",
+
+  quizOptions: [
+    "keep supporting someone or your group",
+    "forget your group",
+    "run away every time"
+  ],
+
+  answer: 0,
+
+  visual: "loyal"
+}
+
+];
+
+
+
+/* ==================================================
+   STATE
+================================================== */
+
+let currentIndex = 0;
+
+let answers = [];
+
+let chineseUsed = false;
+
+let quizCorrect = false;
+
+
+
+/* ==================================================
+   VOICE SYSTEM
+================================================== */
+
+let voices = [];
+
+
+function loadVoices() {
+
+  voices =
+    window.speechSynthesis.getVoices();
+
+}
+
+
+loadVoices();
+
+
+if ("speechSynthesis" in window) {
+
+  window.speechSynthesis.onvoiceschanged =
+    loadVoices;
+
+}
+
+
+
+function chooseBestVoice() {
+
+  if (!voices.length) {
+    voices = window.speechSynthesis.getVoices();
+  }
+
+
+  const englishVoices =
+    voices.filter(
+      voice =>
+      voice.lang &&
+      voice.lang.toLowerCase().startsWith("en")
+    );
+
+
+  const preferredNames = [
+
+    "Samantha",
+    "Ava",
+    "Allison",
+    "Susan",
+    "Karen",
+    "Google US English",
+    "Microsoft Aria",
+    "Microsoft Jenny",
+    "Daniel"
 
   ];
 
 
-  /*
-  ------------------------------------------------
-  APP STATE
-  ------------------------------------------------
-  */
+  for (const preferred of preferredNames) {
 
-  let currentIndex = 0;
-
-  let answers = [];
-
-  let chineseUsed = false;
-
-
-  /*
-  ------------------------------------------------
-  SHOW WORD
-  ------------------------------------------------
-  */
-
-  function showWord() {
-
-    const item = words[currentIndex];
-
-    document.getElementById("category").textContent =
-      item.category;
-
-    document.getElementById("word").textContent =
-      item.word;
-
-    document.getElementById("meaning").textContent =
-      item.meaning;
-
-    document.getElementById("chineseHelp").textContent =
-      item.chinese;
-
-    document.getElementById("sentence").textContent =
-      item.sentence;
-
-
-    document.getElementById("chineseHelp").style.display =
-      "none";
-
-    chineseUsed = false;
-
-
-    document.getElementById("feedback").style.display =
-      "none";
-
-    document.getElementById("nextButton").style.display =
-      "none";
-
-
-    updateProgress();
-
-  }
-
-
-  /*
-  ------------------------------------------------
-  PROGRESS
-  ------------------------------------------------
-  */
-
-  function updateProgress() {
-
-    const number =
-      currentIndex + 1;
-
-    document.getElementById("progressText").textContent =
-      number + " / " + words.length;
-
-    const percent =
-      (currentIndex / words.length) * 100;
-
-    document.getElementById("progressFill").style.width =
-      percent + "%";
-
-  }
-
-
-  /*
-  ------------------------------------------------
-  AUDIO
-  ------------------------------------------------
-  */
-
-  function speakWord() {
-
-    const item =
-      words[currentIndex];
-
-    if ("speechSynthesis" in window) {
-
-      window.speechSynthesis.cancel();
-
-      const speech =
-        new SpeechSynthesisUtterance(item.word);
-
-      speech.lang =
-        "en-US";
-
-      speech.rate =
-        0.82;
-
-      window.speechSynthesis.speak(speech);
-
-    } else {
-
-      alert(
-        "Audio is not supported on this browser."
+    const found =
+      englishVoices.find(
+        voice =>
+        voice.name
+        .toLowerCase()
+        .includes(
+          preferred.toLowerCase()
+        )
       );
 
+    if (found) {
+      return found;
     }
 
   }
 
 
-  /*
-  ------------------------------------------------
-  CHINESE HELP
-  ------------------------------------------------
-  */
+  const usVoice =
+    englishVoices.find(
+      voice =>
+      voice.lang.toLowerCase()
+      .includes("en-us")
+    );
 
-  function toggleChinese() {
 
-    const box =
-      document.getElementById("chineseHelp");
+  if (usVoice) {
+    return usVoice;
+  }
 
-    if (box.style.display === "block") {
 
-      box.style.display =
-        "none";
+  return englishVoices[0] || null;
 
-    } else {
+}
 
-      box.style.display =
-        "block";
 
-      chineseUsed =
-        true;
 
-    }
+function speakText(text, rate = 0.75) {
+
+  if (!("speechSynthesis" in window)) {
+
+    alert(
+      "Audio is not supported in this browser."
+    );
+
+    return;
 
   }
 
 
-  /*
-  ------------------------------------------------
-  RECORD ANSWER
-  ------------------------------------------------
-  */
-
-  function recordAnswer(level) {
-
-    const item =
-      words[currentIndex];
-
-    const record = {
-
-      word: item.word,
-
-      result: level,
-
-      chineseHelpUsed: chineseUsed,
-
-      date: new Date().toISOString()
-
-    };
+  window.speechSynthesis.cancel();
 
 
-    answers[currentIndex] =
-      record;
+  const speech =
+    new SpeechSynthesisUtterance(text);
 
 
-    saveProgress();
+  const voice =
+    chooseBestVoice();
 
 
-    const feedback =
-      document.getElementById("feedback");
+  if (voice) {
+    speech.voice = voice;
+  }
 
 
-    if (level === "know") {
+  speech.lang = "en-US";
 
-      feedback.style.background =
-        "#dcefe2";
+  speech.rate = rate;
 
-      feedback.style.color =
-        "#345c42";
+  speech.pitch = 1;
 
-      feedback.innerHTML =
-        "🌟 Great! You connected the word with its meaning.";
+  speech.volume = 1;
 
-    } else {
 
-      feedback.style.background =
-        "#f8e5c8";
+  window.speechSynthesis.speak(speech);
 
-      feedback.style.color =
-        "#745726";
+}
 
-      feedback.innerHTML =
-        "🌱 That's okay. This word needs another meeting.<br>We will see it again.";
+
+
+function speakCurrentWord() {
+
+  speakText(
+    words[currentIndex].word,
+    0.68
+  );
+
+}
+
+
+
+function speakMeaning() {
+
+  speakText(
+    words[currentIndex].meaning,
+    0.72
+  );
+
+}
+
+
+
+function speakSentence() {
+
+  speakText(
+    words[currentIndex].sentence,
+    0.72
+  );
+
+}
+
+
+
+/* ==================================================
+   VISUALS
+================================================== */
+
+
+function getVisual(type) {
+
+
+/* GOVERNMENT */
+
+if (type === "government") {
+
+return `
+
+<svg viewBox="0 0 600 280">
+
+<rect width="600" height="280" rx="25" fill="#eaf1f8"/>
+
+<circle cx="300" cy="54" r="26" fill="#f1cc93"/>
+
+<rect x="276" y="80" width="48" height="76" rx="18" fill="#745d91"/>
+
+<text x="300" y="205"
+text-anchor="middle"
+font-size="25"
+font-weight="bold"
+fill="#334b70">
+MAKE DECISIONS
+</text>
+
+<g fill="#d5b57f">
+
+<circle cx="145" cy="150" r="21"/>
+<circle cx="215" cy="150" r="21"/>
+<circle cx="385" cy="150" r="21"/>
+<circle cx="455" cy="150" r="21"/>
+
+</g>
+
+<g fill="#6885a8">
+
+<rect x="128" y="171" width="34" height="48" rx="10"/>
+<rect x="198" y="171" width="34" height="48" rx="10"/>
+<rect x="368" y="171" width="34" height="48" rx="10"/>
+<rect x="438" y="171" width="34" height="48" rx="10"/>
+
+</g>
+
+<path d="M70 245 H530"
+stroke="#94a7bd"
+stroke-width="4"/>
+
+<text x="300" y="265"
+text-anchor="middle"
+font-size="16"
+fill="#60758e">
+people who help run a place
+</text>
+
+</svg>
+
+`;
+
+}
+
+
+
+/* CITIZEN */
+
+if (type === "citizen") {
+
+return `
+
+<svg viewBox="0 0 600 280">
+
+<rect width="600" height="280" rx="25" fill="#eff6f0"/>
+
+<circle cx="300" cy="92" r="46" fill="#e9bd85"/>
+
+<path
+d="M215 238 Q225 150 300 150 Q375 150 385 238"
+fill="#658d73"/>
+
+<rect
+x="80"
+y="45"
+width="120"
+height="150"
+rx="18"
+fill="#ffffff"
+stroke="#86a790"
+stroke-width="4"/>
+
+<text x="140" y="80"
+text-anchor="middle"
+font-size="18"
+font-weight="bold"
+fill="#56755f">
+CITY
+</text>
+
+<text x="140" y="118"
+text-anchor="middle"
+font-size="42">
+🏛️
+</text>
+
+<text x="140" y="163"
+text-anchor="middle"
+font-size="16"
+fill="#56755f">
+BELONG
+</text>
+
+<text x="460" y="100"
+text-anchor="middle"
+font-size="19"
+font-weight="bold"
+fill="#56755f">
+RIGHTS
+</text>
+
+<text x="460" y="145"
+text-anchor="middle"
+font-size="19"
+font-weight="bold"
+fill="#56755f">
++
+</text>
+
+<text x="460" y="185"
+text-anchor="middle"
+font-size="19"
+font-weight="bold"
+fill="#56755f">
+RESPONSIBILITIES
+</text>
+
+</svg>
+
+`;
+
+}
+
+
+
+/* ASSEMBLY */
+
+if (type === "assembly") {
+
+return `
+
+<svg viewBox="0 0 600 280">
+
+<rect width="600" height="280" rx="25" fill="#f5efe7"/>
+
+<ellipse
+cx="300"
+cy="185"
+rx="210"
+ry="50"
+fill="#d9c5aa"/>
+
+${personSVG(145,105,"#6c88a8")}
+
+${personSVG(230,75,"#7c6592")}
+
+${personSVG(370,75,"#5d8d72")}
+
+${personSVG(455,105,"#b17b63")}
+
+<text x="300" y="250"
+text-anchor="middle"
+font-size="22"
+font-weight="bold"
+fill="#665642">
+MEET → TALK → DECIDE
+</text>
+
+</svg>
+
+`;
+
+}
+
+
+
+/* RIGHTS */
+
+if (type === "rights") {
+
+return `
+
+<svg viewBox="0 0 600 280">
+
+<rect width="600" height="280" rx="25" fill="#eef5fa"/>
+
+<circle cx="300" cy="78" r="38" fill="#e8bd88"/>
+
+<rect
+x="270"
+y="116"
+width="60"
+height="85"
+rx="20"
+fill="#6e88a8"/>
+
+<circle cx="150" cy="128" r="52" fill="#dfeede"/>
+
+<text x="150" y="143"
+text-anchor="middle"
+font-size="42">
+✓
+</text>
+
+<circle cx="450" cy="128" r="52" fill="#f6e4b9"/>
+
+<text x="450" y="143"
+text-anchor="middle"
+font-size="42">
+★
+</text>
+
+<text x="300" y="245"
+text-anchor="middle"
+font-size="21"
+font-weight="bold"
+fill="#496278">
+things you are allowed to do or have
+</text>
+
+</svg>
+
+`;
+
+}
+
+
+
+/* SLAVE */
+
+if (type === "slave") {
+
+return `
+
+<svg viewBox="0 0 600 280">
+
+<rect width="600" height="280" rx="25" fill="#f3eee9"/>
+
+<circle cx="300" cy="72" r="36" fill="#d6a873"/>
+
+<rect x="269" y="108" width="62" height="92"
+rx="20" fill="#92765c"/>
+
+<path
+d="M210 132 Q175 132 155 165"
+fill="none"
+stroke="#777"
+stroke-width="7"
+stroke-linecap="round"/>
+
+<path
+d="M390 132 Q425 132 445 165"
+fill="none"
+stroke="#777"
+stroke-width="7"
+stroke-linecap="round"/>
+
+<circle cx="147" cy="171" r="12"
+fill="none"
+stroke="#777"
+stroke-width="5"/>
+
+<circle cx="453" cy="171" r="12"
+fill="none"
+stroke="#777"
+stroke-width="5"/>
+
+<text x="300" y="240"
+text-anchor="middle"
+font-size="25"
+font-weight="bold"
+fill="#675747">
+NOT FREE
+</text>
+
+</svg>
+
+`;
+
+}
+
+
+
+/* DEBATE */
+
+if (type === "debate") {
+
+return `
+
+<svg viewBox="0 0 600 280">
+
+<rect width="600" height="280" rx="25" fill="#f1f3fa"/>
+
+${personSVG(170,125,"#6e87a8")}
+
+${personSVG(430,125,"#7d6793")}
+
+<rect x="195" y="45"
+width="120"
+height="70"
+rx="20"
+fill="white"
+stroke="#879ab6"
+stroke-width="3"/>
+
+<text x="255" y="88"
+text-anchor="middle"
+font-size="19"
+fill="#425878">
+I think...
+</text>
+
+<rect x="325" y="45"
+width="120"
+height="70"
+rx="20"
+fill="white"
+stroke="#987fa7"
+stroke-width="3"/>
+
+<text x="385" y="88"
+text-anchor="middle"
+font-size="19"
+fill="#654f72">
+I think...
+</text>
+
+<text x="300" y="245"
+text-anchor="middle"
+font-size="23"
+font-weight="bold"
+fill="#4c5870">
+DIFFERENT IDEAS
+</text>
+
+</svg>
+
+`;
+
+}
+
+
+
+/* ENEMY */
+
+if (type === "enemy") {
+
+return `
+
+<svg viewBox="0 0 600 280">
+
+<rect width="600" height="280" rx="25" fill="#f6f1eb"/>
+
+<rect x="55" y="50"
+width="180"
+height="170"
+rx="25"
+fill="#e6edf5"/>
+
+<rect x="365" y="50"
+width="180"
+height="170"
+rx="25"
+fill="#f2e8e2"/>
+
+${personSVG(145,100,"#587fa8")}
+
+${personSVG(455,100,"#a5655c")}
+
+<text x="300" y="150"
+text-anchor="middle"
+font-size="50"
+font-weight="bold"
+fill="#a86e5a">
+VS
+</text>
+
+<text x="145" y="240"
+text-anchor="middle"
+font-size="18"
+font-weight="bold"
+fill="#4f6985">
+SPARTA
+</text>
+
+<text x="455" y="240"
+text-anchor="middle"
+font-size="18"
+font-weight="bold"
+fill="#87594e">
+ATHENS
+</text>
+
+</svg>
+
+`;
+
+}
+
+
+
+/* ARMY */
+
+if (type === "army") {
+
+return `
+
+<svg viewBox="0 0 600 280">
+
+<rect width="600" height="280" rx="25" fill="#edf3ef"/>
+
+${soldierSVG(130,65)}
+
+${soldierSVG(250,55)}
+
+${soldierSVG(370,55)}
+
+${soldierSVG(490,65)}
+
+<text x="300" y="250"
+text-anchor="middle"
+font-size="24"
+font-weight="bold"
+fill="#526d5c">
+A GROUP OF SOLDIERS
+</text>
+
+</svg>
+
+`;
+
+}
+
+
+
+/* SOLDIER */
+
+if (type === "soldier") {
+
+return `
+
+<svg viewBox="0 0 600 280">
+
+<rect width="600" height="280" rx="25" fill="#eef3ed"/>
+
+<circle cx="300" cy="75" r="36" fill="#d9ad76"/>
+
+<path
+d="M260 72 Q300 20 340 72"
+fill="#895f3d"/>
+
+<rect x="268" y="109"
+width="64"
+height="95"
+rx="18"
+fill="#687b62"/>
+
+<ellipse cx="240" cy="150"
+rx="38"
+ry="58"
+fill="#8a563e"/>
+
+<line x1="355" y1="80"
+x2="355" y2="218"
+stroke="#6c5945"
+stroke-width="8"/>
+
+<path
+d="M355 78 L378 104 L355 100 Z"
+fill="#888"/>
+
+<text x="300" y="246"
+text-anchor="middle"
+font-size="22"
+font-weight="bold"
+fill="#516552">
+SERVES IN AN ARMY
+</text>
+
+</svg>
+
+`;
+
+}
+
+
+
+/* IN CHARGE */
+
+if (type === "charge") {
+
+return `
+
+<svg viewBox="0 0 600 280">
+
+<rect width="600" height="280" rx="25" fill="#f3eff7"/>
+
+<text x="155" y="90"
+text-anchor="middle"
+font-size="55">
+👑
+</text>
+
+<text x="155" y="145"
+text-anchor="middle"
+font-size="21"
+font-weight="bold"
+fill="#65517d">
+KING
+</text>
+
+<path
+d="M220 135 H365"
+stroke="#725d8e"
+stroke-width="8"
+stroke-linecap="round"/>
+
+<polygon
+points="365,135 335,115 335,155"
+fill="#725d8e"/>
+
+${soldierSVG(445,95)}
+
+<text x="300" y="250"
+text-anchor="middle"
+font-size="23"
+font-weight="bold"
+fill="#604e77">
+RESPONSIBLE FOR
+</text>
+
+</svg>
+
+`;
+
+}
+
+
+
+/* ALLOWED */
+
+if (type === "allowed") {
+
+return `
+
+<svg viewBox="0 0 600 280">
+
+<rect width="600" height="280" rx="25" fill="#eef6f0"/>
+
+<circle
+cx="200"
+cy="125"
+r="78"
+fill="#dceedd"/>
+
+<text x="200" y="153"
+text-anchor="middle"
+font-size="85"
+font-weight="bold"
+fill="#5f8b68">
+✓
+</text>
+
+<circle
+cx="400"
+cy="125"
+r="78"
+fill="#f4e1dd"/>
+
+<text x="400" y="153"
+text-anchor="middle"
+font-size="85"
+font-weight="bold"
+fill="#a66e62">
+✕
+</text>
+
+<text x="200" y="235"
+text-anchor="middle"
+font-size="21"
+font-weight="bold"
+fill="#58735e">
+ALLOWED
+</text>
+
+<text x="400" y="235"
+text-anchor="middle"
+font-size="21"
+font-weight="bold"
+fill="#875d55">
+NOT ALLOWED
+</text>
+
+</svg>
+
+`;
+
+}
+
+
+
+/* LOYAL */
+
+if (type === "loyal") {
+
+return `
+
+<svg viewBox="0 0 600 280">
+
+<rect width="600" height="280" rx="25" fill="#eef4f2"/>
+
+${personSVG(190,110,"#648a75")}
+
+${personSVG(300,90,"#6984a6")}
+
+${personSVG(410,110,"#806c97")}
+
+<path
+d="M190 200 Q300 245 410 200"
+fill="none"
+stroke="#d49973"
+stroke-width="9"
+stroke-linecap="round"/>
+
+<text x="300" y="250"
+text-anchor="middle"
+font-size="22"
+font-weight="bold"
+fill="#506a61">
+STAY TOGETHER • SUPPORT EACH OTHER
+</text>
+
+</svg>
+
+`;
+
+}
+
+
+return "";
+
+}
+
+
+
+/* ==================================================
+   VISUAL HELPERS
+================================================== */
+
+
+function personSVG(x, y, color) {
+
+return `
+
+<circle
+cx="${x}"
+cy="${y}"
+r="25"
+fill="#ddb27c"/>
+
+<rect
+x="${x - 23}"
+y="${y + 25}"
+width="46"
+height="70"
+rx="15"
+fill="${color}"/>
+
+`;
+
+}
+
+
+
+function soldierSVG(x, y) {
+
+return `
+
+<circle
+cx="${x}"
+cy="${y}"
+r="24"
+fill="#d9ad76"/>
+
+<path
+d="M${x - 22} ${y - 5}
+Q${x} ${y - 42}
+${x + 22} ${y - 5}"
+fill="#7b634d"/>
+
+<rect
+x="${x - 22}"
+y="${y + 23}"
+width="44"
+height="66"
+rx="13"
+fill="#64745f"/>
+
+`;
+
+}
+
+
+
+/* ==================================================
+   SHOW CURRENT WORD
+================================================== */
+
+
+function showWord() {
+
+  const item =
+    words[currentIndex];
+
+
+  document.getElementById("category").textContent =
+    item.category;
+
+
+  document.getElementById("word").textContent =
+    item.word;
+
+
+  document.getElementById("meaning").textContent =
+    item.meaning;
+
+
+  document.getElementById("chineseHelp").textContent =
+    item.chinese;
+
+
+  document.getElementById("sentence").textContent =
+    item.sentence;
+
+
+  document.getElementById("visualFrame").innerHTML =
+    getVisual(item.visual);
+
+
+  chineseUsed =
+    false;
+
+
+  quizCorrect =
+    false;
+
+
+  document.getElementById("chineseHelp").style.display =
+    "none";
+
+
+  document.getElementById("quizFeedback").style.display =
+    "none";
+
+
+  document.getElementById("selfFeedback").style.display =
+    "none";
+
+
+  document.getElementById("nextButton").style.display =
+    "none";
+
+
+  buildQuiz();
+
+
+  updateProgress();
+
+}
+
+
+
+/* ==================================================
+   QUIZ
+================================================== */
+
+
+function buildQuiz() {
+
+  const item =
+    words[currentIndex];
+
+
+  const container =
+    document.getElementById("quickOptions");
+
+
+  container.innerHTML = "";
+
+
+  item.quizOptions.forEach(
+    (option, index) => {
+
+      const button =
+        document.createElement("button");
+
+
+      button.className =
+        "quiz-button";
+
+
+      button.textContent =
+        option;
+
+
+      button.onclick =
+        function() {
+
+          checkQuiz(index);
+
+        };
+
+
+      container.appendChild(button);
 
     }
+  );
 
 
-    feedback.style.display =
-      "block";
+  document.querySelector(
+    ".quick-title"
+  ).textContent =
+    "🎯 " + item.quizQuestion;
+
+}
 
 
-    document.getElementById("nextButton").style.display =
-      "block";
+
+function checkQuiz(selectedIndex) {
+
+  const item =
+    words[currentIndex];
+
+
+  const feedback =
+    document.getElementById(
+      "quizFeedback"
+    );
+
+
+  if (
+    selectedIndex ===
+    item.answer
+  ) {
+
+    quizCorrect =
+      true;
+
+
+    feedback.style.background =
+      "#dcefe2";
+
+
+    feedback.style.color =
+      "#345d42";
+
+
+    feedback.innerHTML =
+      "✅ Yes! You connected the word with its meaning.";
+
+  }
+
+  else {
+
+    feedback.style.background =
+      "#f7e5c8";
+
+
+    feedback.style.color =
+      "#735724";
+
+
+    feedback.innerHTML =
+      "🌱 Try again. Look at the picture and meaning one more time.";
 
   }
 
 
-  /*
-  ------------------------------------------------
-  NEXT WORD
-  ------------------------------------------------
-  */
+  feedback.style.display =
+    "block";
 
-  function nextWord() {
-
-    if (currentIndex < words.length - 1) {
-
-      currentIndex++;
-
-      showWord();
-
-      window.scrollTo({
-        top: 0,
-        behavior: "smooth"
-      });
-
-    } else {
-
-      finishMission();
-
-    }
-
-  }
+}
 
 
-  /*
-  ------------------------------------------------
-  FINISH
-  ------------------------------------------------
-  */
 
-  function finishMission() {
+/* ==================================================
+   CHINESE HELP
+================================================== */
 
-    document.getElementById("wordCard").style.display =
+
+function toggleChinese() {
+
+  const help =
+    document.getElementById(
+      "chineseHelp"
+    );
+
+
+  if (
+    help.style.display ===
+    "block"
+  ) {
+
+    help.style.display =
       "none";
 
-    document.getElementById("finishCard").style.display =
+  }
+
+  else {
+
+    help.style.display =
       "block";
 
-    document.getElementById("progressFill").style.width =
-      "100%";
-
-    document.getElementById("progressText").textContent =
-      "12 / 12";
-
-
-    const known =
-      answers.filter(
-        item => item && item.result === "know"
-      ).length;
-
-
-    const help =
-      answers.filter(
-        item => item && item.result === "help"
-      ).length;
-
-
-    const chinese =
-      answers.filter(
-        item => item && item.chineseHelpUsed
-      ).length;
-
-
-    document.getElementById("resultBox").innerHTML =
-
-      "🟢 <strong>I knew:</strong> " +
-      known +
-      " words / phrases" +
-
-      "<br>" +
-
-      "🟡 <strong>I needed help with:</strong> " +
-      help +
-
-      "<br>" +
-
-      "🇨🇳 <strong>I used Chinese help for:</strong> " +
-      chinese +
-
-      "<br><br>" +
-
-      "<strong>Tomorrow:</strong> We will try to remember these words without seeing the meanings first.";
-
-
-    localStorage.setItem(
-      "avaWordBridgeDay1Complete",
-      "true"
-    );
-
-  }
-
-
-  /*
-  ------------------------------------------------
-  SAVE
-  ------------------------------------------------
-  */
-
-  function saveProgress() {
-
-    localStorage.setItem(
-      "avaWordBridgeDay1",
-      JSON.stringify(answers)
-    );
-
-  }
-
-
-  /*
-  ------------------------------------------------
-  RESTART
-  ------------------------------------------------
-  */
-
-  function restartMission() {
-
-    currentIndex =
-      0;
-
-    answers =
-      [];
 
     chineseUsed =
-      false;
+      true;
+
+  }
+
+}
 
 
-    localStorage.removeItem(
-      "avaWordBridgeDay1"
+
+/* ==================================================
+   RECORD SELF CHECK
+================================================== */
+
+
+function recordAnswer(level) {
+
+  const item =
+    words[currentIndex];
+
+
+  answers[currentIndex] = {
+
+    word:
+      item.word,
+
+    result:
+      level,
+
+    chineseHelpUsed:
+      chineseUsed,
+
+    quizCorrect:
+      quizCorrect,
+
+    timestamp:
+      new Date().toISOString()
+
+  };
+
+
+  saveProgress();
+
+
+  const feedback =
+    document.getElementById(
+      "selfFeedback"
     );
 
 
-    document.getElementById("finishCard").style.display =
-      "none";
+  if (
+    level === "know"
+  ) {
 
-    document.getElementById("wordCard").style.display =
-      "block";
+    feedback.style.background =
+      "#dcefe2";
+
+
+    feedback.style.color =
+      "#345d42";
+
+
+    feedback.innerHTML =
+
+      "🌟 Great. You are building a direct connection:<br>" +
+
+      "<strong>word → meaning</strong>";
+
+  }
+
+  else {
+
+    feedback.style.background =
+      "#f7e5c8";
+
+
+    feedback.style.color =
+      "#735724";
+
+
+    feedback.innerHTML =
+
+      "🌱 Good noticing. This word needs another meeting.<br>" +
+
+      "We will see it again.";
+
+  }
+
+
+  feedback.style.display =
+    "block";
+
+
+  document.getElementById(
+    "nextButton"
+  ).style.display =
+    "block";
+
+}
+
+
+
+/* ==================================================
+   NEXT WORD
+================================================== */
+
+
+function nextWord() {
+
+  if (
+    currentIndex <
+    words.length - 1
+  ) {
+
+    currentIndex++;
 
 
     showWord();
 
 
     window.scrollTo({
+
       top: 0,
+
       behavior: "smooth"
+
     });
 
   }
 
+  else {
 
-  /*
-  ------------------------------------------------
-  START APP
-  ------------------------------------------------
-  */
+    finishMission();
+
+  }
+
+}
+
+
+
+/* ==================================================
+   PROGRESS
+================================================== */
+
+
+function updateProgress() {
+
+  const current =
+    currentIndex + 1;
+
+
+  document.getElementById(
+    "progressText"
+  ).textContent =
+
+    current +
+    " / " +
+    words.length;
+
+
+  const percent =
+
+    (currentIndex /
+    words.length) *
+    100;
+
+
+  document.getElementById(
+    "progressFill"
+  ).style.width =
+
+    percent + "%";
+
+}
+
+
+
+/* ==================================================
+   FINISH
+================================================== */
+
+
+function finishMission() {
+
+  document.getElementById(
+    "wordCard"
+  ).style.display =
+    "none";
+
+
+  document.getElementById(
+    "finishCard"
+  ).style.display =
+    "block";
+
+
+  document.getElementById(
+    "progressFill"
+  ).style.width =
+    "100%";
+
+
+  document.getElementById(
+    "progressText"
+  ).textContent =
+    "12 / 12";
+
+
+  const known =
+    answers.filter(
+      item =>
+      item &&
+      item.result === "know"
+    ).length;
+
+
+  const help =
+    answers.filter(
+      item =>
+      item &&
+      item.result === "help"
+    ).length;
+
+
+  const chinese =
+    answers.filter(
+      item =>
+      item &&
+      item.chineseHelpUsed
+    ).length;
+
+
+  const quiz =
+    answers.filter(
+      item =>
+      item &&
+      item.quizCorrect
+    ).length;
+
+
+  document.getElementById(
+    "resultBox"
+  ).innerHTML =
+
+    "🟢 <strong>I knew:</strong> " +
+    known +
+    " / 12" +
+
+    "<br>" +
+
+    "🟡 <strong>I needed help:</strong> " +
+    help +
+
+    "<br>" +
+
+    "🇨🇳 <strong>I used Chinese help:</strong> " +
+    chinese +
+
+    "<br>" +
+
+    "🎯 <strong>Meaning checks correct:</strong> " +
+    quiz +
+    " / 12" +
+
+    "<br><br>" +
+
+    "<strong>Next step:</strong><br>" +
+
+    "Tomorrow we will try to remember the meanings with fewer clues.";
+
+
+  localStorage.setItem(
+
+    "avaWordBridgeDay1Complete",
+
+    "true"
+
+  );
+
+}
+
+
+
+/* ==================================================
+   SAVE
+================================================== */
+
+
+function saveProgress() {
+
+  localStorage.setItem(
+
+    "avaWordBridgeDay1",
+
+    JSON.stringify(
+      answers
+    )
+
+  );
+
+}
+
+
+
+/* ==================================================
+   RESTART
+================================================== */
+
+
+function restartMission() {
+
+  currentIndex =
+    0;
+
+
+  answers =
+    [];
+
+
+  chineseUsed =
+    false;
+
+
+  quizCorrect =
+    false;
+
+
+  localStorage.removeItem(
+    "avaWordBridgeDay1"
+  );
+
+
+  document.getElementById(
+    "finishCard"
+  ).style.display =
+    "none";
+
+
+  document.getElementById(
+    "wordCard"
+  ).style.display =
+    "block";
+
 
   showWord();
 
+
+  window.scrollTo({
+
+    top: 0,
+
+    behavior: "smooth"
+
+  });
+
+}
+
+
+
+/* ==================================================
+   START
+================================================== */
+
+
+showWord();
+
+
 </script>
 
+
 </body>
+
 </html>
