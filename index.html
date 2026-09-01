@@ -1,51 +1,1099 @@
-ava-word-bridge/
-│
-├── index.html
-├── reading.html
-├── math.html
-│
-└── assets/
-    │
-    ├── audio/
-    │   └── reading/
-    │       └── day1/
-    │           ├── government-word.mp3
-    │           ├── government-sentence.mp3
-    │           ├── citizen-word.mp3
-    │           ├── citizen-sentence.mp3
-    │           ├── assembly-word.mp3
-    │           ├── assembly-sentence.mp3
-    │           ├── rights-word.mp3
-    │           ├── rights-sentence.mp3
-    │           ├── slave-word.mp3
-    │           ├── slave-sentence.mp3
-    │           ├── debate-word.mp3
-    │           ├── debate-sentence.mp3
-    │           ├── enemy-word.mp3
-    │           ├── enemy-sentence.mp3
-    │           ├── army-word.mp3
-    │           ├── army-sentence.mp3
-    │           ├── soldier-word.mp3
-    │           ├── soldier-sentence.mp3
-    │           ├── in-charge-of-word.mp3
-    │           ├── in-charge-of-sentence.mp3
-    │           ├── be-allowed-to-word.mp3
-    │           ├── be-allowed-to-sentence.mp3
-    │           ├── be-loyal-to-word.mp3
-    │           └── be-loyal-to-sentence.mp3
-    │
-    └── images/
-        └── reading/
-            └── day1/
-                ├── government.jpg
-                ├── citizen.jpg
-                ├── assembly.jpg
-                ├── rights.jpg
-                ├── slave.jpg
-                ├── debate.jpg
-                ├── enemy.jpg
-                ├── army.jpg
-                ├── soldier.jpg
-                ├── in-charge-of.jpg
-                ├── be-allowed-to.jpg
-                └── be-loyal-to.jpg
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+<meta charset="UTF-8">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Ava Word Bridge</title>
+
+<style>
+
+/* =========================================================
+   RESET
+========================================================= */
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+
+  font-family:
+    -apple-system,
+    BlinkMacSystemFont,
+    "Segoe UI",
+    Arial,
+    Helvetica,
+    sans-serif;
+
+  background:
+    linear-gradient(
+      180deg,
+      #f7f4ee 0%,
+      #f1f5f3 100%
+    );
+
+  color: #28394d;
+}
+
+
+/* =========================================================
+   PAGE
+========================================================= */
+
+.page {
+
+  width: 100%;
+
+  max-width: 900px;
+
+  margin: 0 auto;
+
+  padding: 24px 16px 60px;
+
+}
+
+
+/* =========================================================
+   HERO
+========================================================= */
+
+.hero {
+
+  background: #ffffff;
+
+  border-radius: 30px;
+
+  padding: 38px 25px;
+
+  text-align: center;
+
+  box-shadow:
+    0 10px 35px rgba(45, 57, 76, 0.08);
+
+}
+
+
+.hero-icon {
+
+  font-size: 60px;
+
+  margin-bottom: 6px;
+
+}
+
+
+.hero h1 {
+
+  margin: 4px 0 8px;
+
+  color: #304d79;
+
+  font-size: 42px;
+
+  line-height: 1.15;
+
+}
+
+
+.tagline {
+
+  color: #705e88;
+
+  font-size: 21px;
+
+  font-weight: 800;
+
+  margin-top: 8px;
+
+}
+
+
+.hero-message {
+
+  max-width: 620px;
+
+  margin: 24px auto 0;
+
+  padding: 17px 20px;
+
+  border-radius: 18px;
+
+  background: #eef4ff;
+
+  font-size: 17px;
+
+  line-height: 1.6;
+
+}
+
+
+.hero-message strong {
+
+  color: #304d79;
+
+}
+
+
+/* =========================================================
+   SECTION TITLES
+========================================================= */
+
+.section-title {
+
+  text-align: center;
+
+  color: #344b67;
+
+  font-size: 26px;
+
+  margin:
+
+    32px 0 18px;
+
+}
+
+
+.section-subtitle {
+
+  text-align: center;
+
+  max-width: 650px;
+
+  margin: -7px auto 20px;
+
+  color: #747b84;
+
+  line-height: 1.5;
+
+}
+
+
+/* =========================================================
+   MISSION CARDS
+========================================================= */
+
+.missions {
+
+  display: grid;
+
+  grid-template-columns:
+    1fr 1fr;
+
+  gap: 18px;
+
+}
+
+
+.mission-card {
+
+  background: #ffffff;
+
+  border-radius: 26px;
+
+  padding: 25px 22px;
+
+  box-shadow:
+    0 7px 24px rgba(45, 57, 76, 0.07);
+
+  display: flex;
+
+  flex-direction: column;
+
+  min-height: 350px;
+
+}
+
+
+.mission-card:hover {
+
+  transform:
+    translateY(-2px);
+
+  transition:
+    0.2s ease;
+
+}
+
+
+.mission-icon {
+
+  font-size: 54px;
+
+  margin-bottom: 12px;
+
+}
+
+
+.mission-card h2 {
+
+  margin: 0;
+
+  font-size: 25px;
+
+  line-height: 1.25;
+
+}
+
+
+.reading-card h2 {
+
+  color: #5f537c;
+
+}
+
+
+.math-card h2 {
+
+  color: #426c73;
+
+}
+
+
+.mission-description {
+
+  margin-top: 13px;
+
+  color: #68717c;
+
+  line-height: 1.6;
+
+  flex-grow: 1;
+
+}
+
+
+.path {
+
+  margin-top: 17px;
+
+  padding: 13px;
+
+  border-radius: 15px;
+
+  font-size: 14px;
+
+  font-weight: 750;
+
+  line-height: 1.55;
+
+}
+
+
+.reading-path {
+
+  background: #f1eef6;
+
+  color: #5f5376;
+
+}
+
+
+.math-path {
+
+  background: #edf5f3;
+
+  color: #486d68;
+
+}
+
+
+.mission-button {
+
+  display: block;
+
+  width: 100%;
+
+  margin-top: 18px;
+
+  padding: 15px;
+
+  border-radius: 15px;
+
+  text-align: center;
+
+  text-decoration: none;
+
+  color: white;
+
+  font-size: 17px;
+
+  font-weight: 850;
+
+}
+
+
+.reading-button {
+
+  background: #725f91;
+
+}
+
+
+.math-button {
+
+  background: #56827a;
+
+}
+
+
+.mission-button:hover {
+
+  opacity: 0.92;
+
+}
+
+
+/* =========================================================
+   7 DAY JOURNEY
+========================================================= */
+
+.journey-card {
+
+  background: #ffffff;
+
+  border-radius: 28px;
+
+  padding: 26px 22px;
+
+  box-shadow:
+    0 7px 24px rgba(45, 57, 76, 0.07);
+
+}
+
+
+.journey {
+
+  display: grid;
+
+  grid-template-columns:
+    repeat(7, 1fr);
+
+  gap: 9px;
+
+}
+
+
+.day-item {
+
+  padding: 13px 8px;
+
+  border-radius: 16px;
+
+  background: #f5f5f6;
+
+  text-align: center;
+
+  min-height: 120px;
+
+  display: flex;
+
+  flex-direction: column;
+
+  justify-content: center;
+
+}
+
+
+.day-item.active {
+
+  background: #eeeaf5;
+
+  border: 2px solid #806c9b;
+
+}
+
+
+.day-number {
+
+  font-weight: 900;
+
+  color: #66547e;
+
+  font-size: 15px;
+
+}
+
+
+.day-icon {
+
+  font-size: 29px;
+
+  margin: 6px 0;
+
+}
+
+
+.day-name {
+
+  font-size: 12px;
+
+  line-height: 1.3;
+
+  font-weight: 750;
+
+  color: #626a72;
+
+}
+
+
+/* =========================================================
+   LEARNING PATH
+========================================================= */
+
+.bridge-card {
+
+  margin-top: 24px;
+
+  background:
+
+    linear-gradient(
+      135deg,
+      #eef4fb,
+      #f3eef7
+    );
+
+  border-radius: 28px;
+
+  padding: 27px 22px;
+
+  text-align: center;
+
+}
+
+
+.bridge-title {
+
+  font-size: 24px;
+
+  font-weight: 850;
+
+  color: #405777;
+
+  margin-bottom: 20px;
+
+}
+
+
+.bridge {
+
+  display: flex;
+
+  justify-content: center;
+
+  align-items: center;
+
+  gap: 10px;
+
+  flex-wrap: wrap;
+
+}
+
+
+.bridge-step {
+
+  background: white;
+
+  padding: 12px 15px;
+
+  border-radius: 15px;
+
+  font-weight: 800;
+
+  color: #4d5d72;
+
+  box-shadow:
+    0 3px 10px rgba(0,0,0,.05);
+
+}
+
+
+.bridge-arrow {
+
+  font-size: 24px;
+
+  color: #857497;
+
+  font-weight: 900;
+
+}
+
+
+/* =========================================================
+   FOOTER
+========================================================= */
+
+.footer {
+
+  margin-top: 30px;
+
+  text-align: center;
+
+  color: #737a82;
+
+  font-size: 14px;
+
+  line-height: 1.7;
+
+}
+
+
+.footer strong {
+
+  color: #52657c;
+
+}
+
+
+/* =========================================================
+   MOBILE
+========================================================= */
+
+@media (max-width: 720px) {
+
+  .hero {
+
+    padding:
+      30px 18px;
+
+  }
+
+
+  .hero h1 {
+
+    font-size:
+      34px;
+
+  }
+
+
+  .tagline {
+
+    font-size:
+      18px;
+
+  }
+
+
+  .missions {
+
+    grid-template-columns:
+      1fr;
+
+  }
+
+
+  .journey {
+
+    grid-template-columns:
+      repeat(2, 1fr);
+
+  }
+
+
+  .day-item:last-child {
+
+    grid-column:
+      span 2;
+
+  }
+
+}
+
+
+@media (max-width: 430px) {
+
+  .page {
+
+    padding:
+      16px 12px 50px;
+
+  }
+
+
+  .hero h1 {
+
+    font-size:
+      30px;
+
+  }
+
+
+  .hero-icon {
+
+    font-size:
+      50px;
+
+  }
+
+}
+
+</style>
+
+</head>
+
+
+<body>
+
+
+<div class="page">
+
+
+<!-- =========================================================
+     HERO
+========================================================= -->
+
+<section class="hero">
+
+
+  <div class="hero-icon">
+
+    🌉 🦉
+
+  </div>
+
+
+  <h1>
+
+    Ava Word Bridge
+
+  </h1>
+
+
+  <div class="tagline">
+
+    Read it. Know it. Understand it.
+
+  </div>
+
+
+  <div class="hero-message">
+
+    <strong>
+      My Learning Goal
+    </strong>
+
+    <br>
+
+    I can use words I know
+    to understand what I read.
+
+  </div>
+
+
+</section>
+
+
+
+<!-- =========================================================
+     MISSIONS
+========================================================= -->
+
+<h2 class="section-title">
+
+  Choose Today's Mission
+
+</h2>
+
+
+<p class="section-subtitle">
+
+  School words can unlock reading,
+  Social Studies, and Math.
+
+</p>
+
+
+<section class="missions">
+
+
+<!-- READING -->
+
+<div class="mission-card reading-card">
+
+
+  <div class="mission-icon">
+
+    📖
+
+  </div>
+
+
+  <h2>
+
+    Reading & Social Studies
+
+  </h2>
+
+
+  <div class="mission-description">
+
+    Discover important words and phrases
+    from Ava's school reading.
+
+    <br><br>
+
+    Use pictures, meaning,
+    sentences, and retrieval practice
+    to build understanding.
+
+  </div>
+
+
+  <div class="path reading-path">
+
+    WORD
+    → PHRASE
+    → SENTENCE
+    → MEANING
+    → GIST
+
+  </div>
+
+
+  <a
+    href="reading.html"
+    class="mission-button reading-button">
+
+    Start Word Mission →
+
+  </a>
+
+
+</div>
+
+
+
+<!-- MATH -->
+
+<div class="mission-card math-card">
+
+
+  <div class="mission-icon">
+
+    🔢
+
+  </div>
+
+
+  <h2>
+
+    Math Word Bridge
+
+  </h2>
+
+
+  <div class="mission-description">
+
+    Understand the English words
+    that appear in Grade 4 Math.
+
+    <br><br>
+
+    Connect vocabulary with
+    pictures, concepts,
+    math sentences, and school tasks.
+
+  </div>
+
+
+  <div class="path math-path">
+
+    WORD
+    → VISUAL
+    → CONCEPT
+    → MATH SENTENCE
+    → TASK
+
+  </div>
+
+
+  <a
+    href="math.html"
+    class="mission-button math-button">
+
+    Start Math Mission →
+
+  </a>
+
+
+</div>
+
+
+</section>
+
+
+
+<!-- =========================================================
+     7 DAY JOURNEY
+========================================================= -->
+
+<h2 class="section-title">
+
+  🌱 7-Day Word Journey
+
+</h2>
+
+
+<p class="section-subtitle">
+
+  We meet the same important words again
+  with less and less help.
+
+</p>
+
+
+<section class="journey-card">
+
+
+<div class="journey">
+
+
+<div class="day-item active">
+
+  <div class="day-number">
+    Day 1
+  </div>
+
+  <div class="day-icon">
+    🔍
+  </div>
+
+  <div class="day-name">
+    Discover
+  </div>
+
+</div>
+
+
+<div class="day-item">
+
+  <div class="day-number">
+    Day 2
+  </div>
+
+  <div class="day-icon">
+    🧠
+  </div>
+
+  <div class="day-name">
+    Remember
+  </div>
+
+</div>
+
+
+<div class="day-item">
+
+  <div class="day-number">
+    Day 3
+  </div>
+
+  <div class="day-icon">
+    🧩
+  </div>
+
+  <div class="day-name">
+    Phrases
+  </div>
+
+</div>
+
+
+<div class="day-item">
+
+  <div class="day-number">
+    Day 4
+  </div>
+
+  <div class="day-icon">
+    💬
+  </div>
+
+  <div class="day-name">
+    Sentences
+  </div>
+
+</div>
+
+
+<div class="day-item">
+
+  <div class="day-number">
+    Day 5
+  </div>
+
+  <div class="day-icon">
+    🌍
+  </div>
+
+  <div class="day-name">
+    New Context
+  </div>
+
+</div>
+
+
+<div class="day-item">
+
+  <div class="day-number">
+    Day 6
+  </div>
+
+  <div class="day-icon">
+    📚
+  </div>
+
+  <div class="day-name">
+    School Text
+  </div>
+
+</div>
+
+
+<div class="day-item">
+
+  <div class="day-number">
+    Day 7
+  </div>
+
+  <div class="day-icon">
+    ⭐
+  </div>
+
+  <div class="day-name">
+    I Can!
+  </div>
+
+</div>
+
+
+</div>
+
+
+</section>
+
+
+
+<!-- =========================================================
+     BRIDGE
+========================================================= -->
+
+<section class="bridge-card">
+
+
+<div class="bridge-title">
+
+  🌉 How the Word Bridge Works
+
+</div>
+
+
+<div class="bridge">
+
+
+  <div class="bridge-step">
+
+    👀 See
+
+  </div>
+
+
+  <div class="bridge-arrow">
+
+    →
+
+  </div>
+
+
+  <div class="bridge-step">
+
+    👂 Hear
+
+  </div>
+
+
+  <div class="bridge-arrow">
+
+    →
+
+  </div>
+
+
+  <div class="bridge-step">
+
+    🧠 Know
+
+  </div>
+
+
+  <div class="bridge-arrow">
+
+    →
+
+  </div>
+
+
+  <div class="bridge-step">
+
+    📖 Understand
+
+  </div>
+
+
+  <div class="bridge-arrow">
+
+    →
+
+  </div>
+
+
+  <div class="bridge-step">
+
+    ⭐ Do It Myself
+
+  </div>
+
+
+</div>
+
+
+</section>
+
+
+
+<!-- =========================================================
+     FOOTER
+========================================================= -->
+
+<div class="footer">
+
+
+  <strong>
+
+    High standards + the right support
+
+  </strong>
+
+  <br>
+
+  The goal is not more worksheets.
+
+  <br>
+
+  The goal is more independence.
+
+
+</div>
+
+
+</div>
+
+
+</body>
+
+</html>
