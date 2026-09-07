@@ -1,0 +1,389 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>Ava's Vocabulary Bridge | Week 2</title>
+
+  <style>
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      font-family: Arial, Helvetica, sans-serif;
+      background: #f7fafc;
+      color: #263238;
+    }
+
+    .container {
+      width: 92%;
+      max-width: 900px;
+      margin: 0 auto;
+      padding: 30px 0 60px;
+    }
+
+    .back {
+      display: inline-block;
+      margin-bottom: 22px;
+      color: #64748b;
+      text-decoration: none;
+      font-size: 15px;
+    }
+
+    .hero {
+      background: white;
+      border-radius: 26px;
+      padding: 34px 24px;
+      text-align: center;
+      box-shadow: 0 8px 24px rgba(0,0,0,0.06);
+      margin-bottom: 28px;
+    }
+
+    .week {
+      display: inline-block;
+      background: #eef2ff;
+      color: #5b5bd6;
+      padding: 7px 14px;
+      border-radius: 20px;
+      font-size: 14px;
+      font-weight: bold;
+      margin-bottom: 12px;
+    }
+
+    h1 {
+      margin: 6px 0;
+      font-size: 34px;
+      color: #263b64;
+    }
+
+    .topic {
+      font-size: 20px;
+      color: #5f6b7a;
+      margin: 8px 0 22px;
+    }
+
+    .goal {
+      max-width: 560px;
+      margin: 0 auto;
+      padding: 18px;
+      border-radius: 18px;
+      background: #f1f8f4;
+    }
+
+    .goal-label {
+      font-size: 13px;
+      font-weight: bold;
+      color: #56806a;
+      letter-spacing: 1px;
+      margin-bottom: 6px;
+    }
+
+    .goal-text {
+      font-size: 19px;
+      font-weight: bold;
+      color: #315b46;
+      line-height: 1.4;
+    }
+
+    .section-title {
+      text-align: center;
+      margin: 35px 0 22px;
+    }
+
+    .section-title h2 {
+      color: #263b64;
+      margin-bottom: 7px;
+    }
+
+    .section-title p {
+      color: #718096;
+      margin-top: 0;
+    }
+
+    .journey {
+      display: grid;
+      gap: 16px;
+    }
+
+    .step {
+      display: flex;
+      align-items: center;
+      gap: 18px;
+      background: white;
+      border-radius: 20px;
+      padding: 20px;
+      box-shadow: 0 5px 16px rgba(0,0,0,0.05);
+    }
+
+    .icon {
+      width: 62px;
+      height: 62px;
+      flex-shrink: 0;
+      border-radius: 18px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 30px;
+    }
+
+    .text-icon { background: #fff5e8; }
+    .see-icon { background: #eaf8ef; }
+    .break-icon { background: #f3edff; }
+    .decode-icon { background: #e9f4ff; }
+    .retrieve-icon { background: #fff1f5; }
+    .read-icon { background: #eef2ff; }
+
+    .step-content {
+      flex: 1;
+    }
+
+    .step-number {
+      font-size: 12px;
+      color: #94a3b8;
+      font-weight: bold;
+      letter-spacing: 1px;
+    }
+
+    .step h3 {
+      margin: 4px 0;
+      color: #334155;
+      font-size: 19px;
+    }
+
+    .step p {
+      margin: 0;
+      color: #64748b;
+      line-height: 1.4;
+    }
+
+    .arrow {
+      color: #cbd5e1;
+      font-size: 22px;
+      text-align: center;
+    }
+
+    .start-box {
+      margin-top: 34px;
+      padding: 26px;
+      background: #263b64;
+      color: white;
+      border-radius: 24px;
+      text-align: center;
+    }
+
+    .start-box h2 {
+      margin-top: 0;
+    }
+
+    .start-box p {
+      color: #dbe4f3;
+      line-height: 1.5;
+    }
+
+    .start-button {
+      display: inline-block;
+      margin-top: 10px;
+      padding: 13px 24px;
+      background: white;
+      color: #263b64;
+      border-radius: 24px;
+      text-decoration: none;
+      font-weight: bold;
+    }
+
+    .teacher-note {
+      margin-top: 25px;
+      background: #fffdf4;
+      border: 1px solid #f3e8b6;
+      border-radius: 18px;
+      padding: 18px;
+      color: #685d37;
+      line-height: 1.5;
+    }
+
+    @media (max-width: 600px) {
+      h1 {
+        font-size: 28px;
+      }
+
+      .hero {
+        padding: 26px 18px;
+      }
+
+      .step {
+        padding: 16px;
+        gap: 13px;
+      }
+
+      .icon {
+        width: 54px;
+        height: 54px;
+        font-size: 26px;
+      }
+
+      .step h3 {
+        font-size: 17px;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+<div class="container">
+
+  <a href="index.html" class="back">← Back to My Weeks</a>
+
+  <section class="hero">
+
+    <div class="week">WEEK 2 · SEP 7–11</div>
+
+    <h1>🌱 Ava's Vocabulary Bridge</h1>
+
+    <div class="topic">
+      Great Thinkers & Socrates
+    </div>
+
+    <div class="goal">
+      <div class="goal-label">🎯 MY GOAL</div>
+
+      <div class="goal-text">
+        I can use new words to understand what I read.
+      </div>
+    </div>
+
+  </section>
+
+
+  <section class="section-title">
+    <h2>My Learning Journey</h2>
+    <p>From new words to real reading.</p>
+  </section>
+
+
+  <div class="journey">
+
+    <div class="step">
+
+      <div class="icon text-icon">🔎</div>
+
+      <div class="step-content">
+        <div class="step-number">STEP 1</div>
+        <h3>Start with the Text</h3>
+        <p>Read first. Find out what is hard.</p>
+      </div>
+
+    </div>
+
+    <div class="arrow">↓</div>
+
+
+    <div class="step">
+
+      <div class="icon see-icon">🖼️</div>
+
+      <div class="step-content">
+        <div class="step-number">STEP 2</div>
+        <h3>See It</h3>
+        <p>Connect the word to a picture and its meaning.</p>
+      </div>
+
+    </div>
+
+    <div class="arrow">↓</div>
+
+
+    <div class="step">
+
+      <div class="icon break-icon">🧩</div>
+
+      <div class="step-content">
+        <div class="step-number">STEP 3</div>
+        <h3>Break It</h3>
+        <p>Look at useful word parts when they can help.</p>
+      </div>
+
+    </div>
+
+    <div class="arrow">↓</div>
+
+
+    <div class="step">
+
+      <div class="icon decode-icon">🔊</div>
+
+      <div class="step-content">
+        <div class="step-number">STEP 4</div>
+        <h3>Decode It</h3>
+        <p>Break the academic word into chunks and read it aloud.</p>
+      </div>
+
+    </div>
+
+    <div class="arrow">↓</div>
+
+
+    <div class="step">
+
+      <div class="icon retrieve-icon">🧠</div>
+
+      <div class="step-content">
+        <div class="step-number">STEP 5</div>
+        <h3>Retrieve It</h3>
+        <p>Remember the word without the picture.</p>
+      </div>
+
+    </div>
+
+    <div class="arrow">↓</div>
+
+
+    <div class="step">
+
+      <div class="icon read-icon">📖</div>
+
+      <div class="step-content">
+        <div class="step-number">STEP 6</div>
+        <h3>Back to the Text</h3>
+        <p>Use the word to understand a real sentence and paragraph.</p>
+      </div>
+
+    </div>
+
+  </div>
+
+
+  <section class="start-box">
+
+    <h2>Ready for Week 2?</h2>
+
+    <p>
+      We will start with the real text first.<br>
+      Then we will build the bridge.
+    </p>
+
+    <a href="#" class="start-button">
+      Start My Journey →
+    </a>
+
+  </section>
+
+
+  <div class="teacher-note">
+
+    <strong>Teacher Note</strong><br><br>
+
+    Week 2 follows this learning path:<br>
+
+    School Text → Diagnose → Meaning → Word Parts →
+    Academic Decoding → Retrieval → Back to Text → Independence
+
+  </div>
+
+</div>
+
+</body>
+</html>
