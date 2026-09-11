@@ -1,0 +1,1121 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Pet Detective Writing Mission</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,600;9..144,700&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --cream:#faf6ee;
+    --card:#ffffff;
+    --ink:#3a3f3c;
+    --muted:#8a9089;
+    --border:#ece4d3;
+    --mist:#7fa5c4;
+    --mist-light:#e7eff6;
+    --mist-dark:#4d7699;
+    --sage:#8fae8f;
+    --sage-light:#ecf3ea;
+    --sage-dark:#5c7d5c;
+    --lav:#a595c4;
+    --lav-light:#f0ecf7;
+    --lav-dark:#6e5b91;
+    --peach:#e3a97e;
+    --peach-light:#faeee0;
+    --peach-dark:#a56a3b;
+    --gold:#d9a441;
+    --gold-glow:rgba(217,164,65,0.35);
+    --shadow-sm: 0 2px 8px rgba(58,63,60,0.06);
+    --shadow-md: 0 18px 46px rgba(45,40,30,0.16), 0 4px 14px rgba(58,63,60,0.08);
+    --radius-lg: 26px;
+    --radius-md: 16px;
+    --font-display:"Fraunces","Iowan Old Style","Palatino Linotype",Georgia,serif;
+    --font-body:"Plus Jakarta Sans","Avenir Next","Segoe UI",-apple-system,BlinkMacSystemFont,"Helvetica Neue",Arial,sans-serif;
+    --theater-1:#16261f;
+    --theater-2:#1f352c;
+    --marquee:#f0ca85;
+    --marquee-deep:#c99a4f;
+    --cream-text:#f4ecd8;
+  }
+  *{box-sizing:border-box;}
+  html,body{margin:0;padding:0;}
+  body{
+    background:
+      radial-gradient(circle at 50% -8%, rgba(240,202,133,0.20), transparent 46%),
+      radial-gradient(circle at 10% 85%, rgba(111,165,196,0.14), transparent 42%),
+      radial-gradient(circle at 90% 90%, rgba(143,174,143,0.12), transparent 46%),
+      linear-gradient(180deg, var(--theater-2) 0%, var(--theater-1) 70%);
+    color:var(--cream-text);
+    font-family:var(--font-body);
+    line-height:1.6;
+    min-height:100vh;
+    -webkit-font-smoothing:antialiased;
+    position:relative;
+  }
+  body::before{
+    content:"";
+    position:fixed;
+    inset:0;
+    pointer-events:none;
+    z-index:0;
+    background:radial-gradient(ellipse at 50% 0%, transparent 45%, rgba(6,12,10,0.55) 100%);
+  }
+  .mote{position:fixed;border-radius:50%;pointer-events:none;z-index:0;filter:blur(1px);opacity:.5;animation:drift 14s ease-in-out infinite;}
+  @keyframes drift{0%,100%{transform:translateY(0) translateX(0);}50%{transform:translateY(-18px) translateX(8px);}}
+  .app-shell{max-width:800px;margin:0 auto;padding:0 22px 34px;min-height:100vh;display:flex;flex-direction:column;position:relative;z-index:1;}
+  header{padding:26px 0 8px;}
+  .stage-track{display:flex;gap:6px;align-items:center;margin-bottom:10px;}
+  .stage-dot{flex:1;height:5px;border-radius:999px;background:rgba(244,236,216,0.16);transition:background .35s ease, box-shadow .35s ease;}
+  .stage-dot.done{background:var(--sage);}
+  .stage-dot.active{background:var(--marquee);box-shadow:0 0 12px var(--gold-glow);}
+  .stage-label{text-align:center;font-size:11.5px;font-weight:700;letter-spacing:.16em;color:var(--marquee);text-transform:uppercase;}
+  main{flex:1;display:flex;align-items:flex-start;justify-content:center;padding-top:22px;}
+  .card{
+    background:linear-gradient(150deg, #fffdf6 0%, #fbf3e2 100%);
+    border:1px solid rgba(255,246,211,0.55);
+    border-radius:var(--radius-lg);
+    box-shadow:0 30px 70px rgba(6,16,13,0.45), 0 8px 20px rgba(6,16,13,0.25), 0 0 0 5px rgba(255,255,255,0.28) inset;
+    padding:40px 40px 36px;
+    width:100%;
+    position:relative;
+    animation:fadeIn .55s cubic-bezier(.16,.9,.2,1);
+  }
+  @keyframes fadeIn{from{opacity:0;transform:translateY(16px) scale(.98);filter:blur(5px);}to{opacity:1;transform:translateY(0) scale(1);filter:blur(0);}}
+  @keyframes pop{0%{transform:scale(.92);opacity:0;}65%{transform:scale(1.03);}100%{transform:scale(1);opacity:1;}}
+  .pop{animation:pop .4s cubic-bezier(.2,.8,.2,1);}
+  @keyframes softGlow{0%,100%{filter:drop-shadow(0 0 0 rgba(127,165,196,0));}50%{filter:drop-shadow(0 0 10px rgba(127,165,196,.6));}}
+  h1{font-family:var(--font-display);font-size:33px;text-align:center;margin:4px 0 8px;color:var(--ink);font-weight:600;letter-spacing:-.01em;}
+  h2{font-family:var(--font-display);font-size:25px;margin:0 0 8px;color:var(--ink);font-weight:600;letter-spacing:-.005em;}
+  .subhead{text-align:center;font-size:16px;color:var(--muted);margin:0 0 22px;}
+  .lead{font-size:17px;color:var(--ink);text-align:center;margin:0 0 20px;}
+  .pet-row{position:relative;display:flex;justify-content:center;gap:22px;margin:8px 0 20px;}
+  .pet-row::before{
+    content:"";
+    position:absolute;
+    top:-30px; left:50%; transform:translateX(-50%);
+    width:280px; height:220px;
+    background:radial-gradient(ellipse at center, var(--gold-glow), transparent 70%);
+    z-index:0;
+    pointer-events:none;
+  }
+  .pet-wrap{position:relative;z-index:1;display:flex;flex-direction:column;align-items:center;gap:6px;}
+  .pet-wrap svg{border-radius:50%;background:radial-gradient(circle at 35% 30%, #fffaf0, #fbeed7);border:3px solid var(--marquee);box-shadow:0 6px 16px rgba(6,16,13,0.25), 0 0 0 1px rgba(255,255,255,0.5) inset;padding:5px;}
+  .pet-wrap::after{
+    content:"";
+    display:block;
+    width:52px; height:10px;
+    margin-top:-6px;
+    border-radius:50%;
+    background:radial-gradient(ellipse at center, rgba(58,63,60,0.16), transparent 75%);
+  }
+  .pet-name{font-family:var(--font-display);font-size:13px;font-weight:600;color:var(--muted);letter-spacing:.03em;}
+  .speech{
+    position:relative;
+    background:var(--mist-light);
+    border:1.5px solid #d7e5ef;
+    border-radius:18px;
+    padding:14px 18px;
+    font-size:16px;
+    font-weight:600;
+    color:var(--mist-dark);
+    margin:0 0 18px;
+    display:flex;
+    align-items:center;
+    gap:12px;
+    box-shadow:0 6px 16px rgba(77,118,153,0.10);
+  }
+  .speech.cat{background:var(--lav-light);border-color:#e2d7ef;color:var(--lav-dark);}
+  .speech.sage{background:var(--sage-light);border-color:#d6e6d3;color:var(--sage-dark);}
+  .speech-pet{width:44px;height:44px;flex:none;}
+  .prompt-box{background:var(--sage-light);border:1.5px solid #d6e6d3;border-radius:var(--radius-md);padding:22px 24px;margin-bottom:22px;}
+  .prompt-label{font-size:11px;font-weight:800;letter-spacing:.07em;text-transform:uppercase;color:var(--sage-dark);margin-bottom:8px;}
+  .prompt-text{font-size:19px;font-weight:700;color:var(--ink);margin:0;}
+  .ask-line{font-size:20px;font-weight:700;color:var(--mist-dark);background:var(--mist-light);padding:15px 18px;border-radius:16px;text-align:center;margin:0 0 18px;}
+  .center{text-align:center;}
+  .btn{font-family:var(--font-body);font-size:16px;font-weight:700;padding:15px 28px;border-radius:16px;cursor:pointer;border:none;transition:transform .12s ease, box-shadow .12s ease, opacity .12s ease;box-shadow:var(--shadow-sm);}
+  .btn:active{transform:scale(.97);}
+  .btn-primary{
+    background:linear-gradient(180deg, #f5d690 0%, var(--marquee) 45%, var(--marquee-deep) 100%);
+    color:#4a3818;
+    box-shadow:0 4px 0 #a97c3c, 0 12px 26px rgba(35,24,12,0.35), 0 1px 0 rgba(255,255,255,0.4) inset;
+  }
+  .btn-primary:hover{filter:brightness(1.04);box-shadow:0 4px 0 #a97c3c, 0 16px 30px rgba(35,24,12,0.4), 0 1px 0 rgba(255,255,255,0.4) inset;}
+  .btn-primary:active{box-shadow:0 1px 0 #a97c3c, 0 4px 10px rgba(35,24,12,0.3), 0 1px 0 rgba(255,255,255,0.4) inset;}
+  .btn-primary:disabled{background:#dfe3de;color:#a2a89f;cursor:not-allowed;box-shadow:none;}
+  .btn-outline{background:#fff;border:1.5px solid var(--border);color:var(--ink);}
+  .btn-outline:hover{border-color:var(--mist);}
+  .btn-ghost{background:none;border:none;color:var(--muted);font-size:13px;text-decoration:underline;cursor:pointer;box-shadow:none;padding:6px;}
+  .btn-row{display:flex;justify-content:center;gap:12px;margin-top:24px;flex-wrap:wrap;}
+  .input-row{display:flex;gap:10px;align-items:flex-start;margin-bottom:10px;}
+  textarea.answer-box{flex:1;min-height:72px;border:1.5px solid var(--border);border-radius:16px;padding:15px 17px;font-family:inherit;font-size:17px;resize:vertical;background:#fdfcf7;}
+  textarea.answer-box:focus{outline:none;border-color:var(--mist);}
+  .mic-btn{width:56px;height:56px;flex:none;border-radius:50%;border:1.5px solid var(--border);background:#fff;font-size:22px;cursor:pointer;box-shadow:var(--shadow-sm);}
+  .mic-btn.listening{background:var(--peach-light);border-color:var(--peach);animation:pulseMic 1s infinite;}
+  @keyframes pulseMic{0%{box-shadow:0 0 0 0 rgba(227,169,126,.55);}70%{box-shadow:0 0 0 14px rgba(227,169,126,0);}100%{box-shadow:0 0 0 0 rgba(227,169,126,0);}}
+  .mic-hint{font-size:12.5px;color:var(--muted);text-align:center;margin-bottom:18px;}
+  .objects-row{display:flex;gap:30px;justify-content:center;margin:6px 0 22px;}
+  .object-card{width:118px;padding:14px 0;background:var(--lav-light);border:1.5px solid #e2d7ef;border-radius:20px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:8px;}
+  .object-card span{font-size:12.5px;color:var(--lav-dark);font-weight:700;}
+  .reveal-card{background:var(--lav-light);border:1.5px solid #e2d7ef;border-radius:18px;padding:18px 20px;font-size:18px;font-weight:700;color:var(--lav-dark);text-align:center;margin-bottom:14px;}
+  .choice-row{display:flex;flex-direction:column;gap:12px;margin-top:8px;}
+  .choice-btn{text-align:left;font-size:16px;font-weight:600;padding:16px 18px;border-radius:16px;border:1.5px solid var(--border);background:#fff;cursor:pointer;box-shadow:var(--shadow-sm);}
+  .choice-btn:hover{border-color:var(--mist);}
+  .choice-btn.correct{background:var(--sage-light);border-color:var(--sage);}
+  .choice-btn.incorrect{background:var(--peach-light);border-color:#dba876;}
+  .feedback-line{margin-top:14px;font-size:16px;font-weight:700;text-align:center;}
+  .feedback-line.good{color:var(--sage-dark);}
+  .feedback-line.retry{color:var(--lav-dark);}
+  .action-card{background:#fdfcf7;border:1.5px solid var(--border);border-radius:20px;padding:26px 26px;margin-bottom:8px;}
+  .action-word{display:inline-block;font-size:25px;font-weight:800;letter-spacing:.02em;color:var(--mist-dark);background:var(--mist-light);padding:9px 20px;border-radius:14px;margin-bottom:16px;}
+  .hint-btn{display:block;margin:16px auto 0;background:none;border:none;color:var(--muted);font-size:13.5px;text-decoration:underline;cursor:pointer;}
+  .hint-box{margin-top:12px;background:var(--peach-light);border:1px dashed var(--peach);border-radius:14px;padding:12px 16px;font-size:14.5px;color:var(--peach-dark);text-align:center;}
+  .hint-box.level2{background:var(--lav-light);border-color:var(--lav);color:var(--lav-dark);}
+  .hint-box.zh{background:var(--sage-light);border-color:var(--sage);color:var(--sage-dark);}
+  .chip-pool{display:flex;flex-wrap:wrap;gap:11px;justify-content:center;margin:8px 0 20px;}
+  .idea-chip{background:var(--peach-light);border:1.5px solid var(--peach);border-radius:16px;padding:13px 17px;font-size:15px;font-weight:600;color:var(--peach-dark);cursor:grab;max-width:280px;box-shadow:var(--shadow-sm);}
+  .idea-chip.selected{outline:3px solid var(--mist);}
+  .idea-chip.placed{opacity:.32;cursor:default;}
+  .rocket-wrap{display:flex;justify-content:center;margin:8px 0 6px;}
+  .rocket-wrap svg{max-width:100%;height:auto;}
+  .rocket-zone{cursor:pointer;transition:opacity .15s ease;}
+  .rocket-zone:hover{opacity:.82;}
+  .rocket-zone.filled{opacity:1;}
+  .rocket-zone.cue{animation:softGlow 1.4s ease-in-out infinite;}
+  .zone-caption{text-align:center;font-size:13px;color:var(--muted);margin-bottom:6px;}
+  .sparkle-msg{text-align:center;font-size:20px;font-weight:800;color:var(--sage-dark);margin:20px 0 4px;animation:pop .45s ease;}
+  .celebrate-wrap{position:relative;display:flex;justify-content:center;margin-bottom:6px;}
+  .twinkle{position:absolute;color:var(--gold,#e3c96a);font-size:20px;animation:twinkle 1.6s ease-in-out infinite;}
+  .twinkle.t1{top:-6px;left:28%;animation-delay:0s;}
+  .twinkle.t2{top:10px;right:26%;animation-delay:.35s;color:var(--lav);}
+  .twinkle.t3{bottom:-4px;left:46%;animation-delay:.7s;color:var(--mist);}
+  @keyframes twinkle{0%,100%{opacity:.25;transform:scale(.8);}50%{opacity:1;transform:scale(1.15);}}
+  .footer-bar{padding:18px 0 4px;text-align:center;}
+  .teacher-link{background:none;border:none;color:rgba(244,236,216,0.4);font-size:12px;cursor:pointer;text-decoration:underline;}
+  .teacher-link:hover{color:rgba(244,236,216,0.7);}
+  .modal{position:fixed;inset:0;background:rgba(58,63,60,.5);display:flex;align-items:flex-start;justify-content:center;padding:40px 16px;overflow-y:auto;z-index:200;}
+  .modal.hidden{display:none;}
+  .modal-card{background:#fff;border-radius:22px;max-width:660px;width:100%;padding:30px 32px 34px;box-shadow:var(--shadow-md);}
+  .modal-close{float:right;background:none;border:none;font-size:20px;cursor:pointer;color:var(--muted);}
+  .tv-section{margin-bottom:20px;}
+  .tv-section h4{margin:0 0 8px;font-size:12px;text-transform:uppercase;letter-spacing:.05em;color:var(--mist-dark);}
+  .tv-item{background:#fdfcf7;border:1px solid var(--border);border-radius:10px;padding:10px 14px;margin-bottom:8px;font-size:14px;}
+  .tv-item b{color:var(--ink);}
+  .axis-row{display:flex;justify-content:space-between;align-items:flex-start;gap:10px;background:#fdfcf7;border:1px solid var(--border);border-radius:10px;padding:10px 14px;margin-bottom:8px;}
+  .axis-name{font-weight:700;font-size:13px;color:var(--ink);min-width:130px;}
+  .axis-text{font-size:13px;color:var(--muted);}
+  .empty-note{font-size:13px;color:var(--muted);font-style:italic;}
+  .mode-row{display:flex;justify-content:center;gap:10px;margin-bottom:20px;flex-wrap:wrap;}
+  .mode-btn{font-size:13.5px;font-weight:700;padding:9px 16px;border-radius:12px;border:1.5px solid var(--border);background:#fff;color:var(--muted);cursor:pointer;}
+  .mode-btn.active{background:var(--mist);border-color:var(--mist);color:#fff;}
+  .frame-row{background:#fdfcf7;border:1.5px solid var(--border);border-radius:16px;padding:16px 18px;margin-bottom:14px;}
+  .frame-label{font-size:15px;font-weight:700;color:var(--ink);margin-bottom:8px;}
+  .frame-starter{font-size:14px;color:var(--muted);margin-bottom:6px;font-style:italic;}
+  .highlight-phrase{background:#fff4c2;padding:1px 4px;border-radius:4px;}
+  .trace-item{background:#fdfcf7;border:1px solid var(--border);border-radius:10px;padding:10px 14px;margin-bottom:8px;font-size:13px;line-height:1.5;}
+  .trace-rule{font-family:"SF Mono",Menlo,Consolas,monospace;font-size:11px;color:var(--muted);}
+  @media (max-width:640px){
+    .card{padding:28px 22px 26px;}
+    h1{font-size:24px;}
+    .objects-row{gap:16px;}
+    .object-card{width:96px;}
+  }
+</style>
+</head>
+<body>
+<div class="mote" style="top:12%;left:8%;width:10px;height:10px;background:var(--gold);animation-delay:0s;"></div>
+<div class="mote" style="top:68%;left:88%;width:7px;height:7px;background:var(--lav);animation-delay:3s;"></div>
+<div class="mote" style="top:82%;left:14%;width:8px;height:8px;background:var(--sage);animation-delay:6s;"></div>
+<div class="mote" style="top:22%;left:92%;width:6px;height:6px;background:var(--peach);animation-delay:9s;"></div>
+<div class="app-shell">
+  <header>
+    <div class="stage-track" id="stageTrack"></div>
+    <div class="stage-label" id="stageLabel">Authentic Task</div>
+  </header>
+  <main id="app"></main>
+  <div class="footer-bar"><button class="teacher-link" onclick="openTeacherView()">Teacher View</button></div>
+</div>
+
+<div class="modal hidden" id="teacherModal">
+  <div class="modal-card">
+    <button class="modal-close" onclick="closeTeacherView()">✕</button>
+    <h2 style="margin-top:0;">Teacher View</h2>
+    <p style="font-size:13px;color:var(--muted);margin-top:-8px;">Based on one session. Evidence, not a diagnosis.</p>
+    <div id="teacherContent"></div>
+  </div>
+</div>
+
+<script src="bridge-storage.js"></script>
+<script src="bridge-rules.js"></script>
+<script src="bridge-agent.js"></script>
+<script>
+// ======================= Authentic content (verbatim, unedited) =======================
+const PROMPT_TEXT = "Compare and contrast life in Ancient Athens and Ancient Sparta. Include details from both texts.";
+const SAMPLE1 = "Life in Ancient Athens and Ancient Sparta was similar in some ways, but also very different. Both Athens and Sparta were Greek city-states, and both had enslaved people. However, Athens was a busy trading city where male citizens could help make decisions in the assembly. Boys in Athens learned reading, writing, math, music, poetry, and exercise because Athenians wanted them to be educated citizens. In Sparta, life focused more on the army. Spartan boys left home at age seven to train as soldiers, and Spartan men trained for many years. Women in Athens had fewer rights, but Spartan women had more rights, could own land, and did sports like running and gymnastics. Overall, Athens valued education, trade, and debate, while Sparta valued toughness, bravery, and military strength.";
+const SAMPLE2 = "Athens and Sparta were both places in Ancient Greece. They were city-states and people lived there a long time ago. Athens was busy and had people trading. Boys learned things like reading and math. Sparta was different because boys had to train to be soldiers when they were young. They had to be tough. Women in Sparta could do more things that women in Athens. Athens and Sparta were kind of alike, but they also had different ways of living.";
+
+// Idea chips for the rocket screen — real sentences lifted from Sample 1 (unedited).
+const IDEA_CHIPS = [
+  { id:'c1', text:'Both Athens and Sparta were Greek city-states.', correctZones:['nose'] },
+  { id:'c2', text:'Boys in Athens learned reading, writing, math, music, poetry, and exercise.', correctZones:['body1','body2','body3'] },
+  { id:'c3', text:'Overall, Athens valued education, trade, and debate, while Sparta valued toughness, bravery, and military strength.', correctZones:['tail'] }
+];
+// Evidence Detective — the "idea" is a verbatim sentence from Sample 1; all three choices are also verbatim.
+const EVIDENCE_IDEA = "In Sparta, life focused more on the army.";
+const EVIDENCE_CHOICES = [
+  { id:'e1', text:'Spartan boys left home at age seven to train as soldiers.', isEvidence:true, phrase:'train as soldiers' },
+  { id:'e2', text:'Boys in Athens learned reading, writing, math, music, poetry, and exercise.', isEvidence:false },
+  { id:'e3', text:'Both Athens and Sparta were Greek city-states.', isEvidence:false }
+];
+
+// ======================= Pet mascots (inline SVG — no external images/network) =======================
+function dogSVG(size){
+  size = size || 56;
+  return `<svg width="${size}" height="${size}" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+    <defs>
+      <radialGradient id="dogFur" cx="38%" cy="30%" r="75%">
+        <stop offset="0%" stop-color="#f6dfb9"/><stop offset="100%" stop-color="#dba76a"/>
+      </radialGradient>
+      <linearGradient id="dogEar" x1="0" y1="0" x2="0" y2="1">
+        <stop offset="0%" stop-color="#c8934f"/><stop offset="100%" stop-color="#a97638"/>
+      </linearGradient>
+    </defs>
+    <ellipse cx="21" cy="52" rx="11" ry="24" fill="url(#dogEar)" transform="rotate(-12 21 52)"/>
+    <ellipse cx="79" cy="52" rx="11" ry="24" fill="url(#dogEar)" transform="rotate(12 79 52)"/>
+    <circle cx="50" cy="53" r="31" fill="url(#dogFur)"/>
+    <ellipse cx="35" cy="72" rx="6" ry="4" fill="#f6dfb9" opacity=".7"/>
+    <ellipse cx="65" cy="72" rx="6" ry="4" fill="#f6dfb9" opacity=".7"/>
+    <ellipse cx="50" cy="68" rx="15" ry="12" fill="#fdf6ea"/>
+    <ellipse cx="39" cy="49" rx="4.3" ry="5.2" fill="#4a3626"/>
+    <ellipse cx="61" cy="49" rx="4.3" ry="5.2" fill="#4a3626"/>
+    <circle cx="40.3" cy="47" r="1.3" fill="#fff"/><circle cx="62.3" cy="47" r="1.3" fill="#fff"/>
+    <ellipse cx="50" cy="63" rx="5.4" ry="4" fill="#3a2a1c"/>
+    <path d="M50 66 L50 69" stroke="#3a2a1c" stroke-width="2" stroke-linecap="round"/>
+    <path d="M40 72 Q50 78 60 72" stroke="#3a2a1c" stroke-width="2.4" fill="none" stroke-linecap="round"/>
+  </svg>`;
+}
+function catSVG(size){
+  size = size || 56;
+  return `<svg width="${size}" height="${size}" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+    <defs>
+      <radialGradient id="catFur" cx="38%" cy="30%" r="75%">
+        <stop offset="0%" stop-color="#efeaf3"/><stop offset="100%" stop-color="#c3b7d6"/>
+      </radialGradient>
+    </defs>
+    <polygon points="22,44 30,12 46,42" fill="#a692c4"/>
+    <polygon points="78,44 70,12 54,42" fill="#a692c4"/>
+    <polygon points="26,40 31,21 41,40" fill="#f3e9f5"/>
+    <polygon points="74,40 69,21 59,40" fill="#f3e9f5"/>
+    <circle cx="50" cy="55" r="31" fill="url(#catFur)"/>
+    <ellipse cx="34" cy="66" rx="7" ry="5" fill="#f8f4fa" opacity=".8"/>
+    <ellipse cx="66" cy="66" rx="7" ry="5" fill="#f8f4fa" opacity=".8"/>
+    <path d="M27 52 Q12 49 8 45" stroke="#8f7fa8" stroke-width="1.8" fill="none" stroke-linecap="round"/>
+    <path d="M27 58 Q11 60 8 62" stroke="#8f7fa8" stroke-width="1.8" fill="none" stroke-linecap="round"/>
+    <path d="M73 52 Q88 49 92 45" stroke="#8f7fa8" stroke-width="1.8" fill="none" stroke-linecap="round"/>
+    <path d="M73 58 Q89 60 92 62" stroke="#8f7fa8" stroke-width="1.8" fill="none" stroke-linecap="round"/>
+    <ellipse cx="38" cy="53" rx="4.8" ry="6" fill="#463a5c"/>
+    <ellipse cx="62" cy="53" rx="4.8" ry="6" fill="#463a5c"/>
+    <ellipse cx="38" cy="53" rx="1.6" ry="4.2" fill="#a89bc4"/>
+    <ellipse cx="62" cy="53" rx="1.6" ry="4.2" fill="#a89bc4"/>
+    <circle cx="39.4" cy="50.5" r="1.2" fill="#fff"/><circle cx="63.4" cy="50.5" r="1.2" fill="#fff"/>
+    <path d="M50 61 L46.5 65 L53.5 65 Z" fill="#3d3547"/>
+    <path d="M50 65 Q46 70 41 68" stroke="#3d3547" stroke-width="2" fill="none" stroke-linecap="round"/>
+    <path d="M50 65 Q54 70 59 68" stroke="#3d3547" stroke-width="2" fill="none" stroke-linecap="round"/>
+  </svg>`;
+}
+
+// ======================= Data (hidden BRIDGE record — UNCHANGED from baseline) =======================
+const DATA_KEY = 'bridgePetMissionData_v1';
+function freshData(){
+  return {
+    startedAt: new Date().toISOString(),
+    initial_task_interpretation: '',
+    same_response: '',
+    different_response: '',
+    concept_check: { compare:{attempts:0,correct:null}, contrast:{attempts:0,correct:null} },
+    compare_understanding: { text:'', hintLevel:0, attempts:1 },
+    contrast_understanding: { text:'', hintLevel:0, attempts:1 },
+    details_understanding: { text:'', hintLevel:0, attempts:1 },
+    evidence_choice: { choice:null, correct:null, attempts:0 },
+    evidence_explanation: { text:'', hintLevel:0 },
+    rocket_organization: { placements:{}, attempts:{} },
+    oral_rehearsal: { mode:'full', main:'', same:'', diff:'', evidence:'' },
+    final_task_interpretation: '',
+    first_step_response: '',
+    organization_response: '',
+    hints: { total:0, highestLevel:0 },
+    finishedAt: null
+  };
+}
+let data = freshData();
+function saveData(){ try{ localStorage.setItem(DATA_KEY, JSON.stringify(data)); }catch(e){} }
+function loadSavedData(){ try{ const raw = localStorage.getItem(DATA_KEY); return raw ? JSON.parse(raw) : null; }catch(e){ return null; } }
+function logHint(level){ data.hints.total += 1; if(level > data.hints.highestLevel) data.hints.highestLevel = level; saveData(); }
+
+// ======================= Navigation =======================
+let screen = 1;
+const sub = { s3:'same', s4:0, s5route:null, s6sel:null, s7mode:'full', s7modeAutoSet:false, s8:'task' };
+const STAGE_LABELS = {
+  EXPLAIN_TASK: 'Authentic Task',
+  ISOLATION_CHECK: 'Diagnose & Discover',
+  EVIDENCE_CHECK: 'Diagnose & Discover',
+  ORGANIZE_CHECK: 'Guided Practice',
+  CONCEPT_BRIDGE: 'Targeted Scaffold',
+  TASK_MEANING_BRIDGE: 'Targeted Scaffold',
+  EVIDENCE_BRIDGE: 'Targeted Scaffold',
+  ORGANIZATION_BRIDGE: 'Targeted Scaffold',
+  REDUCE_SUPPORT: 'Less Support',
+  ORIGINAL_TASK: 'Authentic Task Again',
+  DONE: 'Authentic Task Again'
+};
+function goTo(n){ screen = n; renderHeader(); renderCurrent(); window.scrollTo({top:0,behavior:'smooth'}); }
+function renderHeader(){
+  const prog = Bridge.progressEstimate();
+  const shown = Math.max(prog.current, 1);
+  document.getElementById('stageTrack').innerHTML = Array.from({length: prog.total}).map((_,i)=>`<div class="stage-dot ${i < shown-1?'done':i===shown-1?'active':''}"></div>`).join('');
+  const lastNode = Bridge.state.route.history[Bridge.state.route.history.length-1];
+  document.getElementById('stageLabel').textContent = STAGE_LABELS[lastNode] || 'Authentic Task';
+}
+function escapeHtml(str){ return String(str==null?'':str).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;'); }
+
+// ======================= Speech recognition helper =======================
+function attachMic(micBtnId, textareaId){
+  const micBtn = document.getElementById(micBtnId);
+  if(!micBtn) return;
+  const SR = window.SpeechRecognition || window.webkitSpeechRecognition;
+  if(!SR){ micBtn.style.display = 'none'; return; }
+  let recognizing = false, recognizer = null;
+  micBtn.addEventListener('click', ()=>{
+    const ta = document.getElementById(textareaId);
+    if(recognizing){ recognizer && recognizer.stop(); return; }
+    recognizer = new SR();
+    recognizer.lang = 'en-US'; recognizer.interimResults = false; recognizer.maxAlternatives = 1;
+    recognizer.onstart = ()=>{ recognizing = true; micBtn.classList.add('listening'); };
+    recognizer.onend = ()=>{ recognizing = false; micBtn.classList.remove('listening'); };
+    recognizer.onerror = ()=>{ recognizing = false; micBtn.classList.remove('listening'); };
+    recognizer.onresult = (event)=>{
+      const transcript = event.results[0][0].transcript;
+      ta.value = (ta.value.trim() ? ta.value.trim() + ' ' : '') + transcript;
+      ta.dispatchEvent(new Event('input'));
+    };
+    recognizer.start();
+  });
+}
+function petSpeech(pet, text, cls){
+  const svg = pet === 'dog' ? dogSVG(44) : catSVG(44);
+  return `<div class="speech ${cls||''}"><div class="speech-pet">${svg}</div><div>${text}</div></div>`;
+}
+
+// ======================= Screen 1 — Pet Mission Intro =======================
+function renderScreen1(){
+  document.getElementById('app').innerHTML = `
+    <div class="card">
+      <h1>🐾 Athens &amp; Sparta Writing Mission</h1>
+      <p class="subhead">Your pet team needs your help to solve a writing mission.</p>
+      <div class="pet-row">
+        <div class="pet-wrap">${dogSVG(84)}<span class="pet-name">Buddy</span></div>
+        <div class="pet-wrap">${catSVG(84)}<span class="pet-name">Detective</span></div>
+      </div>
+      <p class="lead">First, let's look at the real school task.</p>
+      <div class="prompt-box">
+        <div class="prompt-label">Your Assignment</div>
+        <p class="prompt-text">${PROMPT_TEXT}</p>
+      </div>
+      <div class="btn-row"><button class="btn btn-primary" onclick="goTo(2)">START THE MISSION →</button></div>
+    </div>`;
+}
+
+// ======================= Screen 2 — First Try (Agent checkpoint: EXPLAIN_TASK) =======================
+function renderScreen2(){
+  document.getElementById('app').innerHTML = `
+    <div class="card">
+      <h2>🕵️ What do you think?</h2>
+      <div class="prompt-box"><div class="prompt-label">Your Assignment</div><p class="prompt-text">${PROMPT_TEXT}</p></div>
+      <div class="ask-line">What is this assignment asking you to do?</div>
+      <div class="input-row">
+        <textarea class="answer-box" id="s2input" placeholder="Type your idea here...">${escapeHtml(data.initial_task_interpretation)}</textarea>
+        <button class="mic-btn" id="s2mic" title="Say it">🎤</button>
+      </div>
+      <div class="mic-hint">🎤 Say it, or ⌨️ type it — whatever feels easier.</div>
+      <div class="btn-row"><button class="btn btn-primary" id="s2submit" onclick="submitScreen2()" ${data.initial_task_interpretation.trim()?'':'disabled'}>Submit →</button></div>
+      <div id="s2feedback"></div>
+    </div>`;
+  const ta = document.getElementById('s2input');
+  ta.addEventListener('input', ()=>{ document.getElementById('s2submit').disabled = !ta.value.trim(); });
+  attachMic('s2mic','s2input');
+}
+function submitScreen2(){
+  const ta = document.getElementById('s2input');
+  if(!ta.value.trim()) return;
+  data.initial_task_interpretation = ta.value.trim();
+  saveData();
+  const result = Bridge.handleExplainTask(data.initial_task_interpretation);
+  document.getElementById('s2submit').style.display = 'none';
+  document.getElementById('s2feedback').innerHTML = petSpeech('dog', "You gave it a try. Now let's investigate the mission. 🔍", '');
+  renderHeader();
+  setTimeout(()=>goTo(result.nextNode === NODE.EVIDENCE_CHECK ? 5 : 3), 1200);
+}
+
+// ======================= Screen 3 — Pet Detective: Same or Different (Agent checkpoint: ISOLATION_CHECK) =======================
+function renderScreen3(){
+  const step = sub.s3;
+  let body = '';
+  if(step === 'same' || step === 'different'){
+    const isSame = step === 'same';
+    body = `
+      <div class="objects-row">
+        <div class="object-card">${dogSVG(60)}<span>Dog</span></div>
+        <div class="object-card">${catSVG(60)}<span>Cat</span></div>
+      </div>
+      <div class="ask-line">What is ${isSame?'the SAME':'DIFFERENT'}?</div>
+      <div class="input-row">
+        <textarea class="answer-box" id="s3input" placeholder="Type your idea...">${escapeHtml(isSame?data.same_response:data.different_response)}</textarea>
+        <button class="mic-btn" id="s3mic" title="Say it">🎤</button>
+      </div>
+      <div class="btn-row"><button class="btn btn-primary" id="s3submit" onclick="${isSame?'submitSame()':'submitDifferent()'}" ${(isSame?data.same_response:data.different_response).trim()?'':'disabled'}>Next →</button></div>`;
+  } else if(step === 'ask_compare' || step === 'ask_contrast'){
+    const kind = step === 'ask_compare' ? 'compare' : 'contrast';
+    const verb = kind === 'compare' ? 'COMPARE' : 'CONTRAST';
+    body = `
+      ${petSpeech('cat', `What should your brain look for when we ${verb} two things?`, 'cat')}
+      <div class="choice-row" id="cchoices">
+        <button class="choice-btn" onclick="chooseCatCheck('${kind}','same')">things that are the same</button>
+        <button class="choice-btn" onclick="chooseCatCheck('${kind}','different')">things that are different</button>
+      </div>
+      <div id="catfeedback"></div>`;
+  } else {
+    body = `
+      <div class="reveal-card">COMPARE = look for what is the SAME</div>
+      <div class="reveal-card">CONTRAST = look for what is DIFFERENT</div>
+      ${petSpeech('dog', "Nice detective work! Let's crack the real mission next.", '')}
+      <div class="btn-row"><button class="btn btn-primary" onclick="finishIsolationCheck()">Continue →</button></div>`;
+  }
+  document.getElementById('app').innerHTML = `<div class="card"><h2>Same or Different?</h2>${body}</div>`;
+  if(step==='same' || step==='different'){
+    const ta = document.getElementById('s3input');
+    ta.addEventListener('input', ()=>{ document.getElementById('s3submit').disabled = !ta.value.trim(); });
+    attachMic('s3mic','s3input');
+  }
+}
+function submitSame(){
+  const ta = document.getElementById('s3input');
+  if(!ta.value.trim()) return;
+  data.same_response = ta.value.trim(); saveData();
+  sub.s3 = 'different'; renderCurrent();
+}
+function submitDifferent(){
+  const ta = document.getElementById('s3input');
+  if(!ta.value.trim()) return;
+  data.different_response = ta.value.trim(); saveData();
+  sub.s3 = 'ask_compare'; renderCurrent();
+}
+function chooseCatCheck(kind, pick){
+  const correct = kind === 'compare' ? pick === 'same' : pick === 'different';
+  const entry = data.concept_check[kind];
+  entry.attempts += 1;
+  if(correct) entry.correct = true;
+  saveData();
+  document.getElementById('cchoices').innerHTML = `
+    <button class="choice-btn ${pick==='same' ? (correct?'correct':'incorrect') : ''}" disabled>things that are the same</button>
+    <button class="choice-btn ${pick==='different' ? (correct?'correct':'incorrect') : ''}" disabled>things that are different</button>`;
+  document.getElementById('catfeedback').innerHTML = correct
+    ? petSpeech('cat', "Yes! You've got sharp detective eyes. 🔍", 'cat') + `<div class="btn-row"><button class="btn btn-primary" onclick="advanceS3Ask('${kind}')">Next →</button></div>`
+    : petSpeech('cat', `That's okay — every detective double-checks. Think about the word ${kind.toUpperCase()} again.`, 'cat') + `<div class="btn-row"><button class="btn btn-outline" onclick="renderCurrent()">Try again</button></div>`;
+}
+function advanceS3Ask(kind){
+  sub.s3 = kind === 'compare' ? 'ask_contrast' : 'reveal';
+  renderCurrent();
+}
+function finishIsolationCheck(){
+  const result = Bridge.handleIsolationCheck({
+    sameResponse: data.same_response,
+    differentResponse: data.different_response,
+    compareCheck: data.concept_check.compare,
+    contrastCheck: data.concept_check.contrast
+  });
+  renderHeader();
+  goTo(result.nextNode === NODE.CONCEPT_BRIDGE ? 4 : 9);
+}
+
+// ======================= Screen 4 — Concept Bridge (word meaning, own words + hints) =======================
+const S4_WORDS = [
+  { key:'compare_understanding', word:'COMPARE', hint1:'🔍 Look for what is the SAME between two things.', hint2:'COMPARE means to look at two things and notice how they are alike.', zh:'比较 — 找出两个东西哪里一样。' },
+  { key:'contrast_understanding', word:'CONTRAST', hint1:'🔀 Look for what is DIFFERENT between two things.', hint2:'CONTRAST means to look at two things and notice how they are not alike.', zh:'对比 — 找出两个东西哪里不一样。' },
+  { key:'details_understanding', word:'INCLUDE DETAILS', hint1:'🔎 A detail is a small, exact fact — not a big general idea.', hint2:'To include details means to use small, specific facts from the text to support your idea.', zh:'加入细节 — 从文中找出具体的小事实来支持你的想法。' }
+];
+function renderScreen4(){
+  const w = S4_WORDS[sub.s4];
+  const entry = data[w.key];
+  document.getElementById('app').innerHTML = `
+    <div class="card">
+      <h2>Crack the Mission</h2>
+      <div class="prompt-box"><div class="prompt-label">Your Assignment</div><p class="prompt-text">${PROMPT_TEXT}</p></div>
+      <div class="action-card">
+        <div class="action-word">${w.word}</div>
+        <div class="ask-line" style="margin-bottom:14px;">What do you think this word means?</div>
+        <div class="input-row">
+          <textarea class="answer-box" id="s4input" placeholder="Tell me in your own words...">${escapeHtml(entry.text)}</textarea>
+          <button class="mic-btn" id="s4mic" title="Say it">🎤</button>
+        </div>
+        <div id="s4hints">${renderS4Hints(entry.hintLevel, w)}</div>
+        <div class="btn-row" style="margin-top:16px;">
+          ${entry.hintLevel < 3 ? `<button class="hint-btn" onclick="escalateHint()">💡 I need a hint</button>` : ''}
+        </div>
+        <div class="btn-row"><button class="btn btn-primary" id="s4submit" onclick="submitS4()" ${entry.text.trim()?'':'disabled'}>I've got it →</button></div>
+      </div>
+    </div>`;
+  const ta = document.getElementById('s4input');
+  ta.addEventListener('input', ()=>{ document.getElementById('s4submit').disabled = !ta.value.trim(); });
+  attachMic('s4mic','s4input');
+}
+function renderS4Hints(level, w){
+  let html = '';
+  if(level >= 1) html += `<div class="hint-box">${w.hint1}</div>`;
+  if(level >= 2) html += `<div class="hint-box level2">${w.hint2}</div>`;
+  if(level >= 3) html += `<div class="hint-box zh">${w.zh}</div>`;
+  return html;
+}
+function escalateHint(){
+  const w = S4_WORDS[sub.s4];
+  const entry = data[w.key];
+  entry.attempts += 1;
+  entry.hintLevel = Math.min(3, entry.hintLevel + 1);
+  logHint(entry.hintLevel);
+  renderCurrent();
+}
+function submitS4(){
+  const ta = document.getElementById('s4input');
+  if(!ta.value.trim()) return;
+  const w = S4_WORDS[sub.s4];
+  data[w.key].text = ta.value.trim();
+  saveData();
+  if(sub.s4 < S4_WORDS.length - 1){ sub.s4 += 1; renderCurrent(); }
+  else { finishConceptBridge(); }
+}
+function finishConceptBridge(){
+  const maxHintLevel = Math.max(data.compare_understanding.hintLevel, data.contrast_understanding.hintLevel, data.details_understanding.hintLevel);
+  Bridge.state.dimensions.compareContrastConcept.hintLevel = maxHintLevel;
+  const combinedText = [data.compare_understanding.text, data.contrast_understanding.text, data.details_understanding.text].join(' | ');
+  Bridge.handleBridgeAttempt('compareContrastConcept', 'CONCEPT_BRIDGE', true, combinedText);
+  renderHeader();
+  goTo(7);
+}
+
+// ======================= Screen 9 — Task Meaning Bridge (new) =======================
+function renderScreen9(){
+  const dim = Bridge.state.dimensions.taskMeaning;
+  document.getElementById('app').innerHTML = `
+    <div class="card">
+      <h2>Crack the Whole Mission</h2>
+      ${petSpeech('cat', "You know COMPARE and CONTRAST — now let's put the WHOLE assignment into your own words.", 'cat')}
+      <div class="prompt-box"><div class="prompt-label">Your Assignment</div><p class="prompt-text">${PROMPT_TEXT}</p></div>
+      <div class="ask-line">What is this WHOLE assignment asking you to do?</div>
+      <div id="s9hints">${renderS9Hints(dim)}</div>
+      <div class="input-row">
+        <textarea class="answer-box" id="s9input" placeholder="Tell me in your own words...">${escapeHtml(dim.response)}</textarea>
+        <button class="mic-btn" id="s9mic" title="Say it">🎤</button>
+      </div>
+      <div class="btn-row">
+        ${dim.hintLevel < LADDER_LENGTH ? `<button class="hint-btn" onclick="requestS9Hint()">💡 I need a hint</button>` : ''}
+      </div>
+      <div class="btn-row"><button class="btn btn-primary" id="s9submit" onclick="submitS9()" ${dim.response.trim()?'':'disabled'}>I've got it →</button></div>
+    </div>`;
+  const ta = document.getElementById('s9input');
+  ta.addEventListener('input', ()=>{ document.getElementById('s9submit').disabled = !ta.value.trim(); });
+  attachMic('s9mic','s9input');
+}
+function renderS9Hints(dim){
+  const expr = Bridge.state.roadblock.languageExpressionTrack;
+  let html = '';
+  if(dim.hintLevel >= 1) html += petSpeech('cat', 'What TWO things does this assignment want you to look at, and what does it want you to DO with them?', 'cat');
+  if(dim.hintLevel >= 2){
+    html += expr
+      ? `<div class="hint-box level2">Look at your assignment again — the words <span class="highlight-phrase">Compare</span>, <span class="highlight-phrase">contrast</span>, and <span class="highlight-phrase">details</span> tell you what to do.</div>`
+      : `<div class="hint-box">Break it into parts: <b>COMPARE</b> Athens &amp; Sparta &nbsp;+&nbsp; <b>CONTRAST</b> Athens &amp; Sparta &nbsp;+&nbsp; <b>INCLUDE DETAILS</b> from both texts</div>`;
+  }
+  if(dim.hintLevel >= 3){
+    html += expr
+      ? `<div class="frame-starter">Try starting with: "This assignment is asking me to ______."</div>`
+      : petSpeech('dog', "Watch how I do it: I look at the words COMPARE, CONTRAST, and DETAILS, then I put them together into one sentence about what I need to do.", '');
+  }
+  if(dim.hintLevel >= 4){
+    html += expr
+      ? `<div class="frame-starter">Dog models the full sentence: "This assignment is asking me to ___ Athens and Sparta, ___ them, and use ___ from both texts."</div>`
+      : `<div class="hint-box level2">Try saying the whole assignment out loud in your own words first — any language is okay — then type it in English.</div>`;
+  }
+  return html;
+}
+function requestS9Hint(){
+  Bridge.requestHintEarly('taskMeaning', 'TASK_MEANING_BRIDGE');
+  renderCurrent();
+}
+function submitS9(){
+  const ta = document.getElementById('s9input');
+  if(!ta.value.trim()) return;
+  const text = ta.value.trim();
+  Bridge.state.dimensions.taskMeaning.response = text;
+  const succeeded = evalExplainTask(text).understands;
+  const result = Bridge.handleBridgeAttempt('taskMeaning', 'TASK_MEANING_BRIDGE', succeeded, text);
+  renderHeader();
+  if(result.decision === 'CONTINUE_SUPPORT'){ renderCurrent(); return; }
+  goTo(7);
+}
+
+// ======================= Screen 5 — Evidence Detective (Agent checkpoint: EVIDENCE_CHECK) =======================
+function renderScreen5(){
+  const ec = data.evidence_choice;
+  const answered = !!ec.choice;
+  document.getElementById('app').innerHTML = `
+    <div class="card">
+      <h2>🔍 Evidence Detective</h2>
+      ${petSpeech('cat', 'Here is an idea from the real text. Which sentence could be evidence for it?', 'cat')}
+      <div class="prompt-box"><div class="prompt-label">The Idea</div><p class="prompt-text">${EVIDENCE_IDEA}</p></div>
+      <div class="choice-row" id="s5choices">
+        ${EVIDENCE_CHOICES.map(c=>`<button class="choice-btn ${answered ? (c.id===ec.choice ? (ec.correct?'correct':'incorrect') : '') : ''}" ${answered && ec.correct ? 'disabled':''} onclick="chooseEvidence('${c.id}')">${c.text}</button>`).join('')}
+      </div>
+      <div id="s5feedback">${answered && ec.correct ? `<div class="feedback-line good pop">Yes! That's evidence. ✅</div>` : (answered ? petSpeech('cat', "Good detectives check more than one clue — take another look.", 'cat') : '')}</div>
+      ${ec.correct ? renderEvidenceExplain() : ''}
+    </div>`;
+  if(ec.correct){
+    const ta = document.getElementById('s5explain');
+    if(ta){ ta.addEventListener('input', ()=>{ document.getElementById('s5esubmit').disabled = !ta.value.trim(); }); attachMic('s5mic','s5explain'); }
+  }
+}
+function renderEvidenceExplain(){
+  const ee = data.evidence_explanation;
+  const expr = Bridge.state.roadblock.languageExpressionTrack;
+  let hintHtml = '';
+  if(ee.hintLevel >= 1) hintHtml += petSpeech('cat', 'Does this sentence help prove your idea?', 'cat');
+  if(ee.hintLevel >= 2) hintHtml += `<div class="hint-box level2">Useful phrase: <span class="highlight-phrase">${EVIDENCE_CHOICES[0].phrase}</span></div>`;
+  if(ee.hintLevel >= 3){
+    hintHtml += expr
+      ? `<div class="frame-starter">Try starting with: "because..."</div>`
+      : petSpeech('dog', "Watch how I check evidence: I ask myself, does this sentence match the idea? If yes, that's my evidence.", '');
+  }
+  if(ee.hintLevel >= 4){
+    hintHtml += expr
+      ? `<div class="frame-starter">Sentence starter: "This is evidence because ______."</div>`
+      : `<div class="hint-box level2">Try saying your reason out loud first, then type it.</div>`;
+  }
+  return `
+    <div class="ask-line" style="margin-top:22px;">How do you know?</div>
+    ${hintHtml}
+    <div class="input-row">
+      <textarea class="answer-box" id="s5explain" placeholder="Tell me why...">${escapeHtml(ee.text)}</textarea>
+      <button class="mic-btn" id="s5mic" title="Say it">🎤</button>
+    </div>
+    <div class="btn-row">
+      ${ee.hintLevel < LADDER_LENGTH ? `<button class="hint-btn" onclick="escalateEvidenceHint()">💡 I need a hint</button>` : ''}
+    </div>
+    <div class="btn-row"><button class="btn btn-primary" id="s5esubmit" onclick="submitEvidenceExplain()" ${ee.text.trim()?'':'disabled'}>Submit →</button></div>`;
+}
+function chooseEvidence(id){
+  const ec = data.evidence_choice;
+  if(ec.correct) return;
+  const choice = EVIDENCE_CHOICES.find(c=>c.id===id);
+  ec.attempts += 1; ec.choice = id; ec.correct = choice.isEvidence;
+  saveData();
+  const result = Bridge.handleEvidenceChoice({ correct: ec.correct, attempts: ec.attempts });
+  if(ec.correct){ sub.s5route = result.nextNode; renderHeader(); }
+  renderCurrent();
+}
+function escalateEvidenceHint(){
+  data.evidence_explanation.hintLevel = Math.min(LADDER_LENGTH, data.evidence_explanation.hintLevel + 1);
+  logHint(data.evidence_explanation.hintLevel);
+  Bridge.state.dimensions.evidenceUse.hintLevel = data.evidence_explanation.hintLevel;
+  Bridge.requestHintEarly('evidenceUse', 'EVIDENCE_BRIDGE');
+  renderCurrent();
+}
+function submitEvidenceExplain(){
+  const ta = document.getElementById('s5explain');
+  if(!ta.value.trim()) return;
+  data.evidence_explanation.text = ta.value.trim();
+  saveData();
+  if(sub.s5route === NODE.EVIDENCE_BRIDGE){
+    Bridge.state.dimensions.evidenceUse.hintLevel = data.evidence_explanation.hintLevel;
+    Bridge.handleBridgeAttempt('evidenceUse', 'EVIDENCE_BRIDGE', true, data.evidence_explanation.text);
+    renderHeader();
+    goTo(7);
+  } else {
+    goTo(6);
+  }
+}
+
+// ======================= Screen 6 — Build the Rocket (Agent checkpoint: ORGANIZE_CHECK) =======================
+let selectedChip = null;
+const ZONE_HINTS = {
+  nose: 'This is the Beginning — a big shared idea usually starts the paragraph.',
+  body1: 'This is the Middle — a specific detail usually goes here.',
+  body2: 'This is the Middle — a specific detail usually goes here.',
+  body3: 'This is the Middle — a specific detail usually goes here.',
+  tail: 'This is the Ending — a sentence that sums everything up goes here.'
+};
+function renderScreen6(){
+  const placedIds = Object.keys(data.rocket_organization.placements);
+  const remaining = IDEA_CHIPS.filter(c=>!placedIds.includes(c.id));
+  const allPlaced = remaining.length === 0;
+  const sel = selectedChip ? IDEA_CHIPS.find(c=>c.id===selectedChip) : null;
+  const attempts = sel ? (data.rocket_organization.attempts[sel.id] || 0) : 0;
+  document.getElementById('app').innerHTML = `
+    <div class="card">
+      <h2>🚀 Build the Rocket</h2>
+      ${petSpeech('dog', 'Which part tells the main idea?', '')}
+      ${petSpeech('cat', 'Where should this piece of evidence go?', 'cat')}
+      <p class="lead" style="font-size:15px;">Pick an idea, then tap where it belongs.</p>
+      <div class="chip-pool" id="chipPool">
+        ${IDEA_CHIPS.map(c=>{
+          const isPlaced = placedIds.includes(c.id);
+          const isSelected = selectedChip === c.id;
+          return `<div class="idea-chip ${isPlaced?'placed':''} ${isSelected?'selected':''}" draggable="${!isPlaced}" id="chip-${c.id}"
+                    ondragstart="dragStartChip(event,'${c.id}')"
+                    onclick="${isPlaced?'':`selectChip('${c.id}')`}">${c.text}</div>`;
+        }).join('')}
+      </div>
+      <div class="rocket-wrap">${rocketSVGVertical(data.rocket_organization.placements, attempts>=1 ? sel : null)}</div>
+      <div class="zone-caption">Tap a rocket part to drop your idea there.</div>
+      <div id="s6feedback"></div>
+      ${sel && attempts>=2 ? `<div class="hint-box">${ZONE_HINTS[sel.correctZones[0]]}</div>` : ''}
+      ${sel && attempts>=3 ? `<div class="frame-starter" style="text-align:center;">Ideas like this one usually fit best where a "${sel.correctZones[0]==='tail'?'wrap-up':(sel.correctZones[0]==='nose'?'big shared idea':'specific fact')}" belongs.</div>` : ''}
+      ${allPlaced ? `<div class="sparkle-msg">🚀 Your rocket is ready!</div><div class="btn-row"><button class="btn btn-primary" onclick="finishOrganizeCheck()">Continue →</button></div>` : ''}
+    </div>`;
+}
+function selectChip(id){ selectedChip = (selectedChip === id) ? null : id; renderCurrent(); }
+function dragStartChip(ev, id){ selectedChip = id; ev.dataTransfer.setData('text/plain', id); }
+function placeChip(zone){
+  const id = selectedChip;
+  if(!id) return;
+  const chip = IDEA_CHIPS.find(c=>c.id===id);
+  data.rocket_organization.attempts[id] = (data.rocket_organization.attempts[id] || 0) + 1;
+  const succeeded = chip.correctZones.includes(zone);
+  if(succeeded){
+    data.rocket_organization.placements[id] = zone;
+    selectedChip = null; saveData();
+    document.getElementById('s6feedback').innerHTML = `<div class="feedback-line good pop">Great fit! ✨</div>`;
+  } else {
+    saveData();
+    document.getElementById('s6feedback').innerHTML = petSpeech('dog', "That's okay — building a rocket takes a few tries. Let's find its spot.", '');
+  }
+  // Note: unlike the other three bridges, organization's unit of success is "all three
+  // chips placed," not one placement — so this only logs into `data` (driving the existing
+  // visual ZONE_HINTS ladder unchanged) and the single evaluation happens once, in
+  // finishOrganizeCheck, once the whole rocket is done. Calling the generic per-attempt
+  // handler here would let one early correct chip register as "the checkpoint succeeded"
+  // while two chips were still unplaced.
+  renderCurrent();
+}
+function finishOrganizeCheck(){
+  const totalAttempts = Object.values(data.rocket_organization.attempts).reduce((a,b)=>a+b,0);
+  const result = Bridge.handleOrganizeCheck({ totalAttempts, chipCount: IDEA_CHIPS.length });
+  if(result.nextNode === NODE.ORGANIZATION_BRIDGE){
+    if(Bridge.pushRouteIfChanged(NODE.REDUCE_SUPPORT)) Bridge.save();
+  }
+  renderHeader();
+  goTo(7);
+}
+function rocketSVGVertical(placements, cueChip){
+  const zoneChip = {};
+  Object.keys(placements).forEach(chipId=>{ zoneChip[placements[chipId]] = chipId; });
+  const label = (zone)=>{
+    const chipId = zoneChip[zone];
+    if(!chipId) return '';
+    return IDEA_CHIPS.find(c=>c.id===chipId).text;
+  };
+  const filled = (zone)=> zoneChip[zone] ? 'filled' : '';
+  const cued = (zone)=> (cueChip && cueChip.correctZones.includes(zone) && !zoneChip[zone]) ? 'cue' : '';
+  const fillColor = (zone)=> zoneChip[zone] ? 'url(#zoneFilled)' : 'url(#zoneEmpty)';
+  const bodies = [{y:150,key:'body1'},{y:230,key:'body2'},{y:310,key:'body3'}];
+  let bodyMarkup = '';
+  bodies.forEach(b=>{
+    bodyMarkup += `
+      <g>
+        <rect class="rocket-zone ${filled(b.key)} ${cued(b.key)}" x="80" y="${b.y}" width="140" height="70" rx="12" fill="${fillColor(b.key)}" stroke="#8a9a8f" stroke-width="1.5"
+          ondragover="event.preventDefault()" ondrop="placeChip('${b.key}')" onclick="placeChip('${b.key}')"></rect>
+        <circle cx="94" cy="${b.y+35}" r="3" fill="#c9c2ac" opacity=".6" pointer-events="none"/>
+        <circle cx="206" cy="${b.y+35}" r="3" fill="#c9c2ac" opacity=".6" pointer-events="none"/>
+        <text x="150" y="${b.y+40}" text-anchor="middle" font-size="10.5" fill="#3f4a44" pointer-events="none">${label(b.key) ? tspanWrap(label(b.key), 150, b.y+30) : 'Middle'}</text>
+      </g>`;
+  });
+  return `
+  <svg viewBox="0 0 300 500" xmlns="http://www.w3.org/2000/svg" style="max-width:280px;">
+    <defs>
+      <linearGradient id="zoneEmpty" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stop-color="#fbf4e2"/><stop offset="100%" stop-color="#efe2c4"/></linearGradient>
+      <linearGradient id="zoneFilled" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stop-color="#e6f3e6"/><stop offset="100%" stop-color="#c9e3c9"/></linearGradient>
+      <linearGradient id="flameGrad" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stop-color="#f6d17a"/><stop offset="100%" stop-color="#e3a97e"/></linearGradient>
+    </defs>
+    <path d="${sparklePath(24,50,11)}" fill="#e0b96e" opacity=".55"/>
+    <path d="${sparklePath(274,84,9)}" fill="#a595c4" opacity=".5"/>
+    <path d="${sparklePath(30,415,8)}" fill="#7fa5c4" opacity=".5"/>
+    <path class="rocket-zone ${filled('nose')} ${cued('nose')}" d="M80,140 L220,140 Q150,30 80,140 Z" fill="${fillColor('nose')}" stroke="#8a9a8f" stroke-width="1.5"
+      ondragover="event.preventDefault()" ondrop="placeChip('nose')" onclick="placeChip('nose')"></path>
+    <text x="150" y="118" text-anchor="middle" font-size="10.5" fill="#3f4a44" pointer-events="none">${label('nose') ? tspanWrap(label('nose'),150,108) : 'Beginning'}</text>
+    ${bodyMarkup}
+    <polygon points="80,340 65,382 80,375" fill="#c7b8de" opacity=".85" pointer-events="none"/>
+    <polygon points="220,340 235,382 220,375" fill="#c7b8de" opacity=".85" pointer-events="none"/>
+    <polygon class="rocket-zone ${filled('tail')} ${cued('tail')}" points="80,380 220,380 150,430" fill="${fillColor('tail')}" stroke="#8a9a8f" stroke-width="1.5"
+      ondragover="event.preventDefault()" ondrop="placeChip('tail')" onclick="placeChip('tail')"></polygon>
+    <text x="150" y="405" text-anchor="middle" font-size="10.5" fill="#3f4a44" pointer-events="none">${label('tail') ? tspanWrap(label('tail'),150,398) : 'Ending'}</text>
+    <path d="M128,430 Q150,470 172,430 Q150,450 128,430 Z" fill="url(#flameGrad)" opacity="${Object.keys(placements).length>0 ? 1 : 0.35}" pointer-events="none"/>
+  </svg>`;
+}
+function sparklePath(cx, cy, r){
+  const k = r * 0.28;
+  return `M${cx},${cy-r} Q${cx+k},${cy-k} ${cx+r},${cy} Q${cx+k},${cy+k} ${cx},${cy+r} Q${cx-k},${cy+k} ${cx-r},${cy} Q${cx-k},${cy-k} ${cx},${cy-r} Z`;
+}
+function tspanWrap(text, cx, startY){
+  const words = text.split(' ');
+  const lines = [];
+  let cur = '';
+  words.forEach(w=>{
+    if((cur+' '+w).trim().length > 18){ lines.push(cur.trim()); cur = w; }
+    else cur = (cur+' '+w).trim();
+  });
+  if(cur) lines.push(cur);
+  return lines.slice(0,4).map((l,i)=>`<tspan x="${cx}" y="${startY + i*12}">${escapeHtml(l)}</tspan>`).join('');
+}
+
+// ======================= Screen 7 — Say It Before You Write (Agent checkpoint: REDUCE_SUPPORT) =======================
+const S7_PROMPTS = [
+  { key:'main', label:'My main idea is…' },
+  { key:'same', label:'One similarity is…' },
+  { key:'diff', label:'One difference is…' },
+  { key:'evidence', label:'One piece of evidence is…' }
+];
+function renderScreen7(){
+  if(!sub.s7modeAutoSet){
+    // Agent picks the starting support level: a bridge fired -> start with full frames;
+    // no bridge needed anywhere -> she's shown independence already, start with less help.
+    sub.s7mode = Bridge.state.roadblock.primary ? 'full' : 'less';
+    data.oral_rehearsal.mode = sub.s7mode;
+    sub.s7modeAutoSet = true;
+  }
+  const mode = sub.s7mode;
+  document.getElementById('app').innerHTML = `
+    <div class="card">
+      <h2>🎤 Say It Before You Write</h2>
+      ${petSpeech('dog', 'Practice saying your plan out loud before you write it.', '')}
+      <div class="mode-row">
+        <button class="mode-btn ${mode==='full'?'active':''}" onclick="setS7Mode('full')">Full Frames</button>
+        <button class="mode-btn ${mode==='less'?'active':''}" onclick="setS7Mode('less')">TRY WITH LESS HELP</button>
+        <button class="mode-btn ${mode==='none'?'active':''}" onclick="setS7Mode('none')">TRY IT YOUR WAY</button>
+      </div>
+      ${S7_PROMPTS.map(p=>renderFrame(p, mode)).join('')}
+      <div class="btn-row"><button class="btn btn-primary" id="s7submit" onclick="submitS7()" ${allS7Filled()?'':'disabled'}>I'm ready to write →</button></div>
+    </div>`;
+  S7_PROMPTS.forEach(p=>{
+    const ta = document.getElementById('s7-'+p.key);
+    if(ta) ta.addEventListener('input', ()=>{ document.getElementById('s7submit').disabled = !allS7Filled(); });
+    attachMic('s7mic-'+p.key, 's7-'+p.key);
+  });
+}
+function renderFrame(p, mode){
+  const val = data.oral_rehearsal[p.key];
+  const starterLine = mode==='full' ? `<div class="frame-starter">${p.label} ______.</div>` : (mode==='less' ? `<div class="frame-starter">${p.label}</div>` : '');
+  return `
+    <div class="frame-row">
+      <div class="frame-label">${mode==='none' ? '💭' : ''} ${mode==='none' ? '' : p.label}</div>
+      ${starterLine}
+      <div class="input-row">
+        <textarea class="answer-box" id="s7-${p.key}" placeholder="${mode==='none' ? p.label : 'Type your idea...'}">${escapeHtml(val)}</textarea>
+        <button class="mic-btn" id="s7mic-${p.key}" title="Say it">🎤</button>
+      </div>
+    </div>`;
+}
+function setS7Mode(mode){
+  sub.s7mode = mode;
+  data.oral_rehearsal.mode = mode;
+  S7_PROMPTS.forEach(p=>{ const ta=document.getElementById('s7-'+p.key); if(ta) data.oral_rehearsal[p.key] = ta.value; });
+  saveData();
+  renderCurrent();
+}
+function allS7Filled(){ return S7_PROMPTS.every(p=>{ const ta=document.getElementById('s7-'+p.key); return ta && ta.value.trim(); }); }
+function submitS7(){
+  S7_PROMPTS.forEach(p=>{ const ta=document.getElementById('s7-'+p.key); data.oral_rehearsal[p.key] = ta.value.trim(); });
+  saveData();
+  goTo(8);
+}
+
+// ======================= Screen 8 — Back to the Real School Task (Agent checkpoint: ORIGINAL_TASK retest, no scaffolds) =======================
+function renderScreen8(){
+  const step = sub.s8;
+  const Q = { task:'What is this assignment asking you to do?', first:'What will you do first?', org:'How will you organize your writing?' };
+  const KEYMAP = { task:'final_task_interpretation', first:'first_step_response', org:'organization_response' };
+  if(step === 'done'){
+    document.getElementById('app').innerHTML = `
+      <div class="card">
+        <h2>Mission Complete</h2>
+        <div class="celebrate-wrap pop">
+          <span class="twinkle t1">✦</span><span class="twinkle t2">✦</span><span class="twinkle t3">✦</span>
+          <div class="pet-row" style="margin:6px 0 4px;">
+            <div class="pet-wrap">${dogSVG(70)}</div>
+            <div class="pet-wrap">${catSVG(70)}</div>
+          </div>
+        </div>
+        <div class="prompt-box"><div class="prompt-label">Your Assignment</div><p class="prompt-text">${PROMPT_TEXT}</p></div>
+        ${petSpeech('dog', 'You did more of the thinking by yourself.', '')}
+        <p class="lead" style="font-size:15px;">Your writing mission is ready for you to start.</p>
+        <div class="btn-row"><button class="btn btn-outline" onclick="restartMission()">Start a New Mission</button></div>
+      </div>`;
+    return;
+  }
+  const key = KEYMAP[step];
+  document.getElementById('app').innerHTML = `
+    <div class="card">
+      <h2>Back to the Real Mission</h2>
+      <div class="prompt-box"><div class="prompt-label">Your Assignment</div><p class="prompt-text">${PROMPT_TEXT}</p></div>
+      <div class="ask-line">${Q[step]}</div>
+      <div class="input-row">
+        <textarea class="answer-box" id="s8input" placeholder="Type your answer...">${escapeHtml(data[key])}</textarea>
+        <button class="mic-btn" id="s8mic" title="Say it">🎤</button>
+      </div>
+      <div class="btn-row"><button class="btn btn-primary" id="s8submit" onclick="submitS8()" ${data[key].trim()?'':'disabled'}>Submit →</button></div>
+    </div>`;
+  const ta = document.getElementById('s8input');
+  ta.addEventListener('input', ()=>{ document.getElementById('s8submit').disabled = !ta.value.trim(); });
+  attachMic('s8mic','s8input');
+}
+function submitS8(){
+  const ta = document.getElementById('s8input');
+  if(!ta.value.trim()) return;
+  const order = ['task','first','org'];
+  const KEYMAP = { task:'final_task_interpretation', first:'first_step_response', org:'organization_response' };
+  const text = ta.value.trim();
+  data[KEYMAP[sub.s8]] = text;
+  saveData();
+  if(sub.s8 === 'task'){
+    Bridge.handleExplainTask(text, { isRetest: true });
+    if(Bridge.state.route.history[Bridge.state.route.history.length-1] !== NODE.ORIGINAL_TASK){
+      Bridge.state.route.history.push(NODE.ORIGINAL_TASK);
+      Bridge.save();
+    }
+    renderHeader();
+  }
+  const idx = order.indexOf(sub.s8);
+  if(idx < order.length - 1){ sub.s8 = order[idx+1]; renderCurrent(); }
+  else {
+    data.finishedAt = new Date().toISOString(); saveData();
+    Bridge.state.route.history.push(NODE.DONE); Bridge.save();
+    renderHeader();
+    sub.s8 = 'done'; renderCurrent();
+  }
+}
+function restartMission(){
+  if(!confirm('Start a brand new mission? This clears your answers.')) return;
+  data = freshData(); saveData();
+  Bridge.state = freshLearnerState({ dimensions: WRITING_DIMENSIONS }); Bridge.save();
+  selectedChip = null;
+  sub.s3='same'; sub.s4=0; sub.s5route=null; sub.s6sel=null; sub.s7mode='full'; sub.s7modeAutoSet=false; sub.s8='task';
+  goTo(1);
+}
+
+// ======================= Render dispatcher =======================
+const RENDERERS = {1:renderScreen1,2:renderScreen2,3:renderScreen3,4:renderScreen4,5:renderScreen5,6:renderScreen6,7:renderScreen7,8:renderScreen8,9:renderScreen9};
+function renderCurrent(){ RENDERERS[screen](); }
+
+// ======================= Teacher View — rollups (UNCHANGED, read from `data`) =======================
+function classifyComparisonConcept(){
+  const cc = data.concept_check;
+  const bothTested = cc.compare.correct !== null && cc.contrast.correct !== null;
+  const s = data.same_response.trim(), d = data.different_response.trim();
+  const freeTextOk = s.length>1 && d.length>1 && s.toLowerCase()!==d.toLowerCase();
+  if(!bothTested && !freeTextOk) return 'Evidence remains inconclusive — neither the open response nor the interactive check was completed.';
+  if(!bothTested) return freeTextOk ? 'Evidence weakens Comparison Concept as a barrier — she offered a similarity and a difference independently.' : 'Evidence remains inconclusive — one response was brief, missing, or unclear.';
+  const firstTryBoth = cc.compare.attempts<=1 && cc.contrast.attempts<=1;
+  if(firstTryBoth && freeTextOk) return 'Evidence weakens Comparison Concept as a barrier — she named a real similarity and difference, and matched COMPARE/CONTRAST to the right thinking action on the first try for both.';
+  if(!firstTryBoth && freeTextOk) return 'Evidence is mixed — she could name a similarity and difference, but needed more than one try to match COMPARE or CONTRAST to the right thinking action.';
+  if(firstTryBoth && !freeTextOk) return 'Evidence is mixed — she matched COMPARE and CONTRAST correctly, but her own similarity/difference responses were brief or unclear.';
+  return 'Evidence supports Comparison Concept as a barrier — she needed more than one try to match both COMPARE and CONTRAST to the right thinking action.';
+}
+function classifyTaskLanguage(){
+  const levels = S4_WORDS.map(w=>data[w.key].hintLevel);
+  if(levels.every(l=>l===0)) return 'Evidence weakens Task Language as a barrier — all three action words were explained with no hints.';
+  if(levels.every(l=>l>=2)) return 'Evidence supports Task Language as a barrier — every action word needed a meaning-level hint or more.';
+  return 'Evidence remains inconclusive — some action words needed more support than others.';
+}
+function classifyEvidenceUse(){
+  const ec = data.evidence_choice, ee = data.evidence_explanation;
+  if(!ec.choice) return 'Evidence remains inconclusive — the evidence check was not completed.';
+  if(ec.attempts<=1 && ee.hintLevel===0) return 'Evidence weakens Evidence Use as a barrier — she chose correctly on the first try and explained it without hints.';
+  if(ec.attempts>1 && ee.hintLevel>=2) return 'Evidence supports Evidence Use as a barrier — she needed more than one try and a meaning-level hint to explain her choice.';
+  return 'Evidence remains inconclusive — mixed results between choosing and explaining.';
+}
+function classifyOrganization(){
+  const attempts = Object.values(data.rocket_organization.attempts||{});
+  if(attempts.length < IDEA_CHIPS.length) return 'Evidence remains inconclusive — the rocket was not fully completed.';
+  const total = attempts.reduce((a,b)=>a+b,0);
+  if(total <= IDEA_CHIPS.length) return 'Evidence weakens Organization as a barrier — every idea was placed correctly on the first try.';
+  if(total >= IDEA_CHIPS.length*2) return 'Evidence supports Organization as a barrier — several ideas needed more than one try to place.';
+  return 'Evidence remains inconclusive — some ideas were placed quickly, others took more tries.';
+}
+function classifyIndependence(){
+  const before = data.initial_task_interpretation.trim(), after = data.final_task_interpretation.trim();
+  if(!before || !after) return 'Evidence remains inconclusive — one of the two task-understanding checks was not completed.';
+  const keywordHit = /compare|contrast|same|different|evidence|detail/i.test(after) && !/compare|contrast|same|different|evidence|detail/i.test(before);
+  const grew = after.length > before.length + 8 || keywordHit;
+  if(grew) return 'Evidence weakens the idea that she still needs a lot of support — her explanation of the task became more complete after the mission.';
+  return 'Evidence remains inconclusive — her before-and-after explanations look similar in depth.';
+}
+
+// ======================= Teacher View — Agent decision trace (NEW) =======================
+function renderTraceSection(){
+  if(!Bridge.state.trace.length) return `<div class="tv-section"><h4>Agent Decision Trace</h4><div class="empty-note">No agent decisions recorded yet.</div></div>`;
+  const rows = Bridge.state.trace.map(t=>`
+    <div class="trace-item">
+      <b>#${t.seq} ${t.checkpointId}${t.dimensionKey && t.dimensionKey!=='ROUTE' ? ' · '+t.dimensionKey : ''}</b><br>
+      Observed: "${escapeHtml((t.observed.responseSummary||'').toString())}" (was ${t.observed.statusBefore})<br>
+      Decision: ${t.decision.type || '—'}${t.decision.scaffoldAction ? ' / '+t.decision.scaffoldAction : ''}${t.decision.track ? ' ['+t.decision.track+']' : ''}<br>
+      Result: ${t.result.statusAfter} — ${escapeHtml(t.result.evidenceNote)}<br>
+      <span class="trace-rule">rule: ${t.ruleId}</span><br>
+      Reason: ${escapeHtml(t.reason)}
+    </div>`).join('');
+  return `<div class="tv-section"><h4>Agent Decision Trace (in order — INPUT → EVIDENCE → DECISION → SCAFFOLD → NEXT DECISION)</h4>${rows}</div>`;
+}
+function renderTeacherView(){
+  const line = (label, val) => val && val.trim() ? `<div class="tv-item"><b>${label}:</b> "${escapeHtml(val)}"</div>` : `<div class="tv-item empty-note">${label}: not yet answered</div>`;
+  document.getElementById('teacherContent').innerHTML = `
+    <div class="tv-section"><h4>Before</h4>${line('Initial task understanding', data.initial_task_interpretation)}</div>
+    <div class="tv-section"><h4>During — where support was needed</h4>
+      ${line('Same', data.same_response)}
+      ${line('Different', data.different_response)}
+      <div class="tv-item"><b>Compare = same/different check:</b> ${data.concept_check.compare.correct!==null ? 'correct (' + data.concept_check.compare.attempts + ' attempt(s))' : 'not yet answered'}</div>
+      <div class="tv-item"><b>Contrast = same/different check:</b> ${data.concept_check.contrast.correct!==null ? 'correct (' + data.concept_check.contrast.attempts + ' attempt(s))' : 'not yet answered'}</div>
+      ${S4_WORDS.map(w=>`<div class="tv-item"><b>${w.word}:</b> ${data[w.key].text ? 'explained' : 'not yet answered'} (hint level ${data[w.key].hintLevel})</div>`).join('')}
+      <div class="tv-item"><b>Evidence choice:</b> ${data.evidence_choice.choice ? (data.evidence_choice.correct?'correct':'still working on it') + ' (' + data.evidence_choice.attempts + ' attempt(s))' : 'not yet answered'}</div>
+      <div class="tv-item"><b>Evidence explanation:</b> ${data.evidence_explanation.text ? 'given (hint level ' + data.evidence_explanation.hintLevel + ')' : 'not yet answered'}</div>
+      <div class="tv-item"><b>Rocket placements:</b> ${Object.keys(data.rocket_organization.placements).length} of ${IDEA_CHIPS.length} — total attempts: ${Object.values(data.rocket_organization.attempts||{}).reduce((a,b)=>a+b,0)}</div>
+      <div class="tv-item"><b>Oral rehearsal mode used:</b> ${data.oral_rehearsal.mode}</div>
+      <div class="tv-item"><b>Total hints used:</b> ${data.hints.total} (highest level ${data.hints.highestLevel})</div>
+    </div>
+    <div class="tv-section"><h4>After</h4>
+      ${line('Final task understanding', data.final_task_interpretation)}
+      ${line('First step', data.first_step_response)}
+      ${line('Organization plan', data.organization_response)}
+    </div>
+    <div class="tv-section"><h4>Provisional BRIDGE Interpretation</h4>
+      <div class="axis-row"><div class="axis-name">Comparison Concept</div><div class="axis-text">${classifyComparisonConcept()}</div></div>
+      <div class="axis-row"><div class="axis-name">Task Language</div><div class="axis-text">${classifyTaskLanguage()}</div></div>
+      <div class="axis-row"><div class="axis-name">Evidence Use</div><div class="axis-text">${classifyEvidenceUse()}</div></div>
+      <div class="axis-row"><div class="axis-name">Organization</div><div class="axis-text">${classifyOrganization()}</div></div>
+      <div class="axis-row"><div class="axis-name">Independence</div><div class="axis-text">${classifyIndependence()}</div></div>
+    </div>
+    <div class="tv-section"><h4>Agent Roadblock Determination</h4>
+      <div class="tv-item"><b>Primary roadblock this session:</b> ${Bridge.state.roadblock.primary || 'None — no bridge was needed'}</div>
+      <div class="tv-item"><b>Isolation Check result:</b> ${Bridge.state.roadblock.isolationCheckResult || 'not run this session'}</div>
+      <div class="tv-item"><b>Language Expression track active:</b> ${Bridge.state.roadblock.languageExpressionTrack ? 'yes' : 'no'}</div>
+      <div class="tv-item"><b>Route taken:</b> ${Bridge.state.route.history.join(' → ') || '(not started)'}</div>
+    </div>
+    ${renderTraceSection()}`;
+}
+function openTeacherView(){ renderTeacherView(); document.getElementById('teacherModal').classList.remove('hidden'); }
+function closeTeacherView(){ document.getElementById('teacherModal').classList.add('hidden'); }
+
+// ======================= Boot =======================
+const existing = loadSavedData();
+if(existing){ data = Object.assign(freshData(), existing); }
+Bridge.init();
+renderHeader();
+renderCurrent();
+</script>
+</body>
+</html>
