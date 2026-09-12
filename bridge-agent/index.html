@@ -1,0 +1,285 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Ava BRIDGE Learning Agent</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,600;9..144,700&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --cream:#faf6ee; --card:#ffffff; --ink:#3a3f3c; --muted:#8a9089; --border:#ece4d3;
+    --mist:#7fa5c4; --mist-light:#e7eff6; --mist-dark:#4d7699;
+    --sage:#8fae8f; --sage-light:#ecf3ea; --sage-dark:#5c7d5c;
+    --lav:#a595c4; --lav-light:#f0ecf7; --lav-dark:#6e5b91;
+    --peach:#e3a97e; --peach-light:#faeee0; --peach-dark:#a56a3b;
+    --gold:#d9a441; --gold-glow:rgba(217,164,65,0.35);
+    --shadow-sm: 0 2px 8px rgba(58,63,60,0.06);
+    --shadow-md: 0 18px 46px rgba(45,40,30,0.16), 0 4px 14px rgba(58,63,60,0.08);
+    --radius-lg: 26px; --radius-md: 16px;
+    --font-display:"Fraunces","Iowan Old Style","Palatino Linotype",Georgia,serif;
+    --font-body:"Plus Jakarta Sans","Avenir Next","Segoe UI",-apple-system,BlinkMacSystemFont,"Helvetica Neue",Arial,sans-serif;
+    --theater-1:#16261f; --theater-2:#1f352c; --marquee:#f0ca85; --marquee-deep:#c99a4f; --cream-text:#f4ecd8;
+  }
+  *{box-sizing:border-box;}
+  html,body{margin:0;padding:0;}
+  body{
+    background: radial-gradient(circle at 50% -8%, rgba(240,202,133,0.20), transparent 46%),
+      radial-gradient(circle at 10% 85%, rgba(111,165,196,0.14), transparent 42%),
+      radial-gradient(circle at 90% 90%, rgba(143,174,143,0.12), transparent 46%),
+      linear-gradient(180deg, var(--theater-2) 0%, var(--theater-1) 70%);
+    color:var(--cream-text); font-family:var(--font-body); line-height:1.6; min-height:100vh; -webkit-font-smoothing:antialiased;
+  }
+  .app-shell{max-width:800px;margin:0 auto;padding:0 22px 34px;min-height:100vh;display:flex;flex-direction:column;}
+  header{padding:26px 0 8px;display:flex;justify-content:space-between;align-items:center;}
+  header h1{font-family:var(--font-display);font-size:22px;color:var(--marquee);margin:0;font-weight:600;}
+  header .subtitle{font-size:12.5px;color:rgba(244,236,216,0.55);}
+  main{flex:1;padding-top:14px;}
+  .card{background:linear-gradient(150deg, #fffdf6 0%, #fbf3e2 100%);border:1px solid rgba(255,246,211,0.55);border-radius:var(--radius-lg);
+    box-shadow:0 30px 70px rgba(6,16,13,0.45), 0 8px 20px rgba(6,16,13,0.25), 0 0 0 5px rgba(255,255,255,0.28) inset;padding:36px 36px 32px;width:100%;position:relative;}
+  h2{font-family:var(--font-display);font-size:24px;margin:0 0 12px;color:var(--ink);font-weight:600;}
+  .lead{font-size:16px;color:var(--ink);}
+  .subhead{font-size:14px;color:var(--muted);margin:0 0 18px;}
+  .prompt-box{background:var(--sage-light);border:1.5px solid #d6e6d3;border-radius:var(--radius-md);padding:18px 20px;margin-bottom:18px;}
+  .prompt-label{font-size:11px;font-weight:800;letter-spacing:.07em;text-transform:uppercase;color:var(--sage-dark);margin-bottom:6px;}
+  .prompt-text{font-size:16px;font-weight:600;color:var(--ink);margin:0;white-space:pre-wrap;}
+  .ask-line{font-size:18px;font-weight:700;color:var(--mist-dark);background:var(--mist-light);padding:13px 16px;border-radius:14px;text-align:center;margin:0 0 16px;}
+  .answer-box{width:100%;min-height:70px;border:1.5px solid var(--border);border-radius:14px;padding:13px 15px;font-family:inherit;font-size:16px;resize:vertical;background:#fdfcf7;}
+  .answer-box:focus{outline:none;border-color:var(--mist);}
+  .input-row{margin-bottom:10px;}
+  .btn{font-family:var(--font-body);font-size:15px;font-weight:700;padding:13px 24px;border-radius:14px;cursor:pointer;border:none;box-shadow:var(--shadow-sm);}
+  .btn:disabled{opacity:.5;cursor:not-allowed;}
+  .btn-primary,.bridge-btn-primary{background:linear-gradient(180deg, #f5d690 0%, var(--marquee) 45%, var(--marquee-deep) 100%);color:#4a3818;
+    font-family:var(--font-body);font-size:15px;font-weight:700;padding:13px 24px;border-radius:14px;cursor:pointer;border:none;
+    box-shadow:0 4px 0 #a97c3c, 0 12px 26px rgba(35,24,12,0.35), 0 1px 0 rgba(255,255,255,0.4) inset;}
+  .btn-primary:disabled,.bridge-btn-primary:disabled{background:#dfe3de;color:#a2a89f;box-shadow:none;cursor:not-allowed;}
+  .btn-outline,.bridge-btn-outline{background:#fff;border:1.5px solid var(--border);color:var(--ink);font-family:var(--font-body);font-size:14px;font-weight:600;
+    padding:10px 16px;border-radius:12px;cursor:pointer;margin:4px 6px 4px 0;}
+  .btn-ghost,.bridge-btn-ghost,.hint-btn{background:none;border:none;color:var(--muted);font-size:13px;text-decoration:underline;cursor:pointer;padding:6px;font-family:var(--font-body);}
+  .btn-row{display:flex;justify-content:center;gap:12px;margin-top:20px;flex-wrap:wrap;}
+  .pet-row{display:flex;justify-content:center;gap:22px;margin:8px 0 20px;}
+  .pet-wrap{display:flex;flex-direction:column;align-items:center;gap:6px;}
+  .pet-wrap svg{border-radius:50%;background:radial-gradient(circle at 35% 30%, #fffaf0, #fbeed7);border:3px solid var(--marquee);padding:5px;}
+  .pet-name{font-family:var(--font-display);font-size:13px;font-weight:600;color:var(--muted);}
+  .speech{background:var(--mist-light);border:1.5px solid #d7e5ef;border-radius:16px;padding:12px 16px;font-size:15px;font-weight:600;color:var(--mist-dark);
+    margin:0 0 16px;display:flex;align-items:center;gap:10px;}
+  .speech.cat{background:var(--lav-light);border-color:#e2d7ef;color:var(--lav-dark);}
+  .speech-pet{width:40px;height:40px;flex:none;}
+  .objects-row{display:flex;gap:24px;justify-content:center;margin:6px 0 18px;}
+  .object-card{width:96px;padding:12px 0;background:var(--lav-light);border:1.5px solid #e2d7ef;border-radius:18px;display:flex;flex-direction:column;align-items:center;gap:6px;}
+  .object-card span{font-size:12px;color:var(--lav-dark);font-weight:700;}
+  .reveal-card{background:var(--lav-light);border:1.5px solid #e2d7ef;border-radius:16px;padding:14px 16px;font-size:16px;font-weight:700;color:var(--lav-dark);text-align:center;margin-bottom:12px;}
+  .choice-row{display:flex;flex-direction:column;gap:10px;margin-top:8px;}
+  .choice-btn{text-align:left;font-size:15px;font-weight:600;padding:14px 16px;border-radius:14px;border:1.5px solid var(--border);background:#fff;cursor:pointer;}
+  .choice-btn.correct{background:var(--sage-light);border-color:var(--sage);}
+  .choice-btn.incorrect{background:var(--peach-light);border-color:#dba876;}
+  .feedback-line{margin-top:12px;font-size:15px;font-weight:700;text-align:center;}
+  .feedback-line.good{color:var(--sage-dark);}
+  .action-card{background:#fdfcf7;border:1.5px solid var(--border);border-radius:18px;padding:22px;margin-bottom:8px;}
+  .action-word{display:inline-block;font-size:22px;font-weight:800;color:var(--mist-dark);background:var(--mist-light);padding:8px 18px;border-radius:12px;margin-bottom:14px;}
+  .hint-box,.bridge-hint-box{margin-top:10px;background:var(--peach-light);border:1px dashed var(--peach);border-radius:12px;padding:10px 14px;font-size:14px;color:var(--peach-dark);text-align:center;}
+  .chip-pool{display:flex;flex-wrap:wrap;gap:10px;justify-content:center;margin:8px 0 18px;}
+  .idea-chip{background:var(--peach-light);border:1.5px solid var(--peach);border-radius:14px;padding:11px 15px;font-size:14px;font-weight:600;color:var(--peach-dark);cursor:pointer;max-width:260px;}
+  .idea-chip.selected{outline:3px solid var(--mist);}
+  .idea-chip.placed{opacity:.32;cursor:default;}
+  .rocket-wrap{display:flex;justify-content:center;margin:8px 0 6px;}
+  .rocket-wrap svg{max-width:100%;height:auto;}
+  .rocket-zone{cursor:pointer;}
+  .zone-caption{text-align:center;font-size:12.5px;color:var(--muted);margin-bottom:6px;}
+  .sparkle-msg{text-align:center;font-size:18px;font-weight:800;color:var(--sage-dark);margin:18px 0 4px;}
+  .celebrate-wrap{position:relative;display:flex;justify-content:center;margin-bottom:6px;}
+  .twinkle{position:absolute;color:var(--gold);font-size:18px;}
+  .twinkle.t1{top:-6px;left:28%;} .twinkle.t2{top:10px;right:26%;color:var(--lav);} .twinkle.t3{bottom:-4px;left:46%;color:var(--mist);}
+  .frame-starter{font-size:13px;color:var(--muted);font-style:italic;margin-top:6px;}
+  .footer-bar{padding:18px 0 4px;text-align:center;}
+  .teacher-link{background:none;border:none;color:rgba(244,236,216,0.4);font-size:12px;cursor:pointer;text-decoration:underline;}
+  .modal{position:fixed;inset:0;background:rgba(58,63,60,.5);display:flex;align-items:flex-start;justify-content:center;padding:40px 16px;overflow-y:auto;z-index:200;}
+  .modal[hidden]{display:none;}
+  .modal-card{background:#fff;border-radius:22px;max-width:660px;width:100%;padding:28px 30px 32px;box-shadow:var(--shadow-md);}
+  .modal-close{float:right;background:none;border:none;font-size:20px;cursor:pointer;color:var(--muted);}
+  .task-list-item{background:#fdfcf7;border:1px solid var(--border);border-radius:14px;padding:14px 16px;margin-bottom:10px;display:flex;justify-content:space-between;align-items:center;gap:12px;}
+  .task-list-item .meta{font-size:12.5px;color:var(--muted);}
+  .subject-grid{display:flex;flex-wrap:wrap;gap:10px;margin:10px 0 18px;}
+  .subject-btn{padding:10px 16px;border-radius:12px;border:1.5px solid var(--border);background:#fff;cursor:pointer;font-weight:600;}
+  select,input[type=text]{font-family:inherit;font-size:15px;padding:10px 12px;border-radius:10px;border:1.5px solid var(--border);width:100%;}
+
+  /* ---- Generic intake form / checkpoint UI / teacher view (Core, subject-agnostic) ---- */
+  .bridge-field{margin-bottom:16px;}
+  .bridge-field label{display:block;font-size:13px;font-weight:700;color:var(--ink);margin-bottom:6px;}
+  .bridge-field textarea, .bridge-field input[type=text]{width:100%;font-family:inherit;font-size:15px;padding:10px 12px;border-radius:10px;border:1.5px solid var(--border);}
+  .bridge-checklist-row{display:block;font-size:14px;margin-bottom:4px;}
+  .bridge-chips{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:8px;}
+  .bridge-chip{background:var(--peach-light);border:1px solid var(--peach);border-radius:10px;padding:6px 10px;font-size:13px;}
+  .bridge-chip button{border:none;background:none;cursor:pointer;color:var(--peach-dark);font-weight:700;margin-left:4px;}
+  .bridge-repeatable-row{display:flex;gap:8px;align-items:center;margin-bottom:8px;}
+  .bridge-repeatable-row input[type=text]{flex:1;}
+  .bridge-authentic-task{background:var(--sage-light);border:1.5px solid #d6e6d3;border-radius:14px;padding:16px 18px;margin-bottom:16px;}
+  .bridge-authentic-label{font-size:11px;font-weight:800;letter-spacing:.06em;text-transform:uppercase;color:var(--sage-dark);margin-bottom:6px;}
+  .bridge-authentic-text{font-size:15px;color:var(--ink);white-space:pre-wrap;}
+  .bridge-prompt{font-size:17px;font-weight:700;color:var(--mist-dark);background:var(--mist-light);padding:13px 16px;border-radius:14px;margin-bottom:14px;}
+  .bridge-response-input{width:100%;min-height:70px;border:1.5px solid var(--border);border-radius:12px;padding:12px;font-family:inherit;font-size:15px;margin-bottom:10px;}
+  .bridge-btn-row{display:flex;justify-content:space-between;gap:10px;}
+  .bridge-isolation-question{font-size:15px;font-weight:600;color:var(--lav-dark);background:var(--lav-light);padding:12px 14px;border-radius:12px;margin-bottom:10px;}
+  .bridge-tv-section{margin-bottom:18px;}
+  .bridge-tv-section h4{margin:0 0 8px;font-size:12px;text-transform:uppercase;letter-spacing:.05em;color:var(--mist-dark);}
+  .bridge-tv-item{background:#fdfcf7;border:1px solid var(--border);border-radius:10px;padding:10px 14px;margin-bottom:8px;font-size:13.5px;}
+  .bridge-axis-row{background:#fdfcf7;border:1px solid var(--border);border-radius:10px;padding:10px 14px;margin-bottom:8px;}
+  .bridge-axis-name{font-weight:700;font-size:13px;color:var(--ink);}
+  .bridge-axis-category{font-weight:400;color:var(--muted);}
+  .bridge-axis-text{font-size:12.5px;color:var(--muted);margin-top:4px;}
+  .bridge-empty-note{font-size:13px;color:var(--muted);font-style:italic;}
+  .bridge-trace-item{background:#fdfcf7;border:1px solid var(--border);border-radius:10px;padding:10px 14px;margin-bottom:8px;font-size:12.5px;line-height:1.5;}
+  .bridge-trace-rule{font-family:"SF Mono",Menlo,Consolas,monospace;font-size:11px;color:var(--muted);}
+  .bridge-review-item{border-color:var(--peach);}
+  .bridge-review-actions{margin-top:8px;}
+</style>
+</head>
+<body>
+<div class="app-shell">
+  <header>
+    <div><h1>Ava BRIDGE Learning Agent</h1><div class="subtitle" id="taskSubtitle">Universal instructional-support Core</div></div>
+    <button class="teacher-link" id="teacherLinkBtn" hidden>Teacher View</button>
+  </header>
+  <main id="app"></main>
+  <div class="footer-bar" id="taskListFooter" hidden><button class="btn-outline" id="backToListBtn">← All Tasks</button></div>
+</div>
+
+<div class="modal" id="teacherModal" hidden>
+  <div class="modal-card">
+    <button class="modal-close" id="closeTeacherModal">✕</button>
+    <h2 style="margin-top:0;">Teacher View</h2>
+    <p style="font-size:13px;color:var(--muted);margin-top:-8px;">Based on one session. Evidence, not a diagnosis.</p>
+    <div id="teacherContent"></div>
+  </div>
+</div>
+
+<script src="core/storage.js"></script>
+<script src="core/student-state.js"></script>
+<script src="core/student-model.js"></script>
+<script src="core/task-intake.js"></script>
+<script src="core/intake-form-renderer.js"></script>
+<script src="core/module-registry.js"></script>
+<script src="core/task-analyzer.js"></script>
+<script src="core/evidence-engine.js"></script>
+<script src="core/isolation-check.js"></script>
+<script src="core/decision-engine.js"></script>
+<script src="core/scaffold-engine.js"></script>
+<script src="core/fading-engine.js"></script>
+<script src="core/bridge-agent.js"></script>
+<script src="core/checkpoint-ui.js"></script>
+<script src="experiences/writing/rocket-writing.js"></script>
+<script src="modules/writing.js"></script>
+<script src="modules/reading.js"></script>
+<script src="modules/math.js"></script>
+<script src="modules/science.js"></script>
+<script src="modules/social-studies.js"></script>
+<script src="teacher/decision-trace.js"></script>
+<script src="teacher/intake-review.js"></script>
+<script src="teacher/teacher-view.js"></script>
+<script>
+const appEl = document.getElementById('app');
+const teacherLinkBtn = document.getElementById('teacherLinkBtn');
+const taskListFooter = document.getElementById('taskListFooter');
+let currentAgent = null, currentModule = null, currentTaskRecord = null;
+
+teacherLinkBtn.addEventListener('click', () => {
+  if (!currentAgent) return;
+  renderTeacherView(document.getElementById('teacherContent'), { agent: currentAgent, taskRecord: currentTaskRecord });
+  document.getElementById('teacherModal').hidden = false;
+});
+document.getElementById('closeTeacherModal').addEventListener('click', () => { document.getElementById('teacherModal').hidden = true; });
+document.getElementById('backToListBtn').addEventListener('click', renderTaskList);
+
+function renderTaskList() {
+  teacherLinkBtn.hidden = true; taskListFooter.hidden = true;
+  const tasks = loadAllTaskRecords();
+  const items = tasks.map(t => `
+    <div class="task-list-item">
+      <div><b>${escapeHtmlIndex(t.title)}</b><div class="meta">${t.subject} · ${new Date(t.createdAt).toLocaleDateString()}</div></div>
+      <button class="btn-outline" data-task="${t.taskId}">Open</button>
+    </div>`).join('') || '<p class="subhead">No tasks yet — create one to get started.</p>';
+  appEl.innerHTML = `<div class="card"><h2>Tasks</h2>${items}<div class="btn-row"><button class="btn btn-primary" id="newTaskBtn">+ New Task</button></div></div>`;
+  appEl.querySelectorAll('[data-task]').forEach(btn => btn.addEventListener('click', () => openTask(loadTaskRecord(btn.dataset.task))));
+  document.getElementById('newTaskBtn').addEventListener('click', renderTaskSetup);
+}
+
+function renderTaskSetup() {
+  const subjects = ModuleRegistry.list();
+  appEl.innerHTML = `
+    <div class="card">
+      <h2>New Task</h2>
+      <div class="bridge-field"><label>Task title</label><input type="text" id="setupTitle" placeholder="e.g. Sea Turtle Migration"></div>
+      <div class="bridge-field"><label>Subject</label>
+        <select id="setupSubject">
+          ${subjects.map(m => `<option value="${m.subject}">${m.label}</option>`).join('')}
+          <option value="AUTO_UNSURE">I'm not sure</option>
+        </select>
+      </div>
+      <div class="bridge-field"><label>Learning goal (optional)</label><input type="text" id="setupGoal"></div>
+      <div id="unsureBox" hidden>
+        <div class="bridge-field"><label>Paste the task text so I can confirm the subject</label><textarea id="unsureText" rows="4"></textarea></div>
+        <div class="subject-grid" id="subjectConfirmGrid"></div>
+      </div>
+      <div class="btn-row"><button class="btn btn-primary" id="setupNextBtn">Next →</button></div>
+    </div>`;
+  const subjSel = document.getElementById('setupSubject');
+  const unsureBox = document.getElementById('unsureBox');
+  subjSel.addEventListener('change', () => { unsureBox.hidden = subjSel.value !== 'AUTO_UNSURE'; });
+  document.getElementById('setupNextBtn').addEventListener('click', () => {
+    const title = document.getElementById('setupTitle').value.trim() || '(untitled task)';
+    const learningGoal = document.getElementById('setupGoal').value.trim();
+    if (subjSel.value === 'AUTO_UNSURE') {
+      const text = document.getElementById('unsureText').value.trim();
+      const grid = document.getElementById('subjectConfirmGrid');
+      grid.innerHTML = subjects.map(m => `<button class="subject-btn" data-subject="${m.subject}">This looks like ${m.label}</button>`).join('');
+      grid.querySelectorAll('[data-subject]').forEach(btn => btn.addEventListener('click', () => {
+        renderIntakeStep(title, btn.dataset.subject, learningGoal, text);
+      }));
+      return;
+    }
+    renderIntakeStep(title, subjSel.value, learningGoal, '');
+  });
+}
+
+function renderIntakeStep(title, subject, learningGoal, prefillText) {
+  const module = ModuleRegistry.get(subject);
+  appEl.innerHTML = `<div class="card"><h2>${escapeHtmlIndex(module.label)} — Task Details</h2><div id="missingNote"></div><div id="formMount"></div></div>`;
+  const initial = prefillText ? { taskText: prefillText } : {};
+  renderIntakeForm(document.getElementById('formMount'), module.intakeSchema, initial, values => {
+    const taskRecord = createTaskRecord({
+      title, subject, learningGoal, authenticText: values.taskText || '', moduleIntakeData: values, createdBy: 'teacher'
+    });
+    const analysis = analyzeTask(taskRecord);
+    if (analysis.status === 'NEEDS_TEACHER_INPUT') {
+      document.getElementById('missingNote').innerHTML = `<div class="bridge-hint-box">Missing: ${analysis.missingFields.map(escapeHtmlIndex).join(', ')}</div>`;
+      return;
+    }
+    taskRecord.status = 'READY';
+    saveTaskRecord(taskRecord);
+    openTask(taskRecord);
+  });
+}
+
+function openTask(taskRecord) {
+  const module = ModuleRegistry.get(taskRecord.subject);
+  const analysis = analyzeTask(taskRecord);
+  if (analysis.status !== 'READY') { renderTaskList(); return; }
+  currentModule = module; currentTaskRecord = taskRecord;
+  currentAgent = createBridgeAgent({ taskRecord, module });
+  currentAgent.init();
+  teacherLinkBtn.hidden = false; taskListFooter.hidden = false;
+  document.getElementById('taskSubtitle').textContent = `${taskRecord.title} · ${module.label}`;
+  if (module.renderExperience) {
+    module.renderExperience(appEl, { agent: currentAgent, module, taskRecord, onTaskComplete: () => {} });
+  } else {
+    renderGenericCheckpointUI(appEl, { agent: currentAgent, module, taskRecord, onTaskComplete: () => {} });
+  }
+}
+
+function escapeHtmlIndex(str) { return String(str == null ? '' : str).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;'); }
+
+renderTaskList();
+</script>
+</body>
+</html>
