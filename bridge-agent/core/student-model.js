@@ -82,7 +82,7 @@ function recordFluencyAttempt(model, word, wasCorrect) {
 // Runs once, after a task's fading loop completes. Pushes one evidence tuple
 // per dimension the task evidenced — never a scalar trait, always a dated,
 // task-attributed record a teacher can read chronologically.
-function commitEvidenceToStudentModel(model, { taskId, subject, finalDimensions }) {
+function commitEvidenceToStudentModel(model, { taskId, subject, finalDimensions, languageDemand }) {
   if (!model.evidenceHistory[subject]) model.evidenceHistory[subject] = {};
   const subjectHistory = model.evidenceHistory[subject];
   const date = new Date().toISOString();
@@ -92,7 +92,11 @@ function commitEvidenceToStudentModel(model, { taskId, subject, finalDimensions 
     subjectHistory[dimKey].push({
       taskId, date,
       evidenceNote: dim.response ? dim.response.slice(0, 140) : '',
-      status: dim.status
+      status: dim.status,
+      // Optional — lets a teacher eventually see a pattern like "Explain /
+      // Expressive shows INDEPENDENT across 3 tasks." Never a scalar trait
+      // on its own; always attached to a dated, task-attributed tuple.
+      languageDemand: languageDemand ? { discipline: languageDemand.discipline, klu: languageDemand.klu } : null
     });
   });
 }

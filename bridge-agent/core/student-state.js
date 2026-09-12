@@ -11,11 +11,15 @@ const BRIDGE_STATUS = Object.freeze({
   INDEPENDENT: 'INDEPENDENT'
 });
 
-// The 10 universal roadblock categories (reconciled from the 9-category v2
+// The 11 universal roadblock categories (reconciled from the 9-category v2
 // taxonomy: EVIDENCE_REASONING -> REASONING; STAMINA -> FLUENCY + RETENTION,
-// since STAMINA was an unused placeholder with no rules ever acting on it).
+// since STAMINA was an unused placeholder with no rules ever acting on it;
+// DECODING added per the Standards Library v2 taxonomy — word-level
+// phonics/decoding, distinct from FLUENCY (rate/accuracy) and CONCEPT
+// (comprehension)).
 const ROADBLOCK_CATEGORY = Object.freeze({
   LANGUAGE: 'LANGUAGE',
+  DECODING: 'DECODING',
   CONCEPT: 'CONCEPT',
   REPRESENTATION: 'REPRESENTATION',
   STRATEGY: 'STRATEGY',
@@ -74,7 +78,8 @@ function freshLearnerState({ dimensions }) {
 }
 
 function traceEntry({ checkpointId, dimensionKey, responseSummary, statusBefore, statusAfter,
-                       evidenceNote, decision, scaffoldAction, ruleId, reason }) {
+                       evidenceNote, decision, scaffoldAction, ruleId, reason,
+                       contentStandardId, languageDemandId }) {
   return {
     seq: null, // filled in by appendTrace(), which knows the array length
     timestamp: new Date().toISOString(),
@@ -84,7 +89,13 @@ function traceEntry({ checkpointId, dimensionKey, responseSummary, statusBefore,
     decision: { type: decision, scaffoldAction: scaffoldAction || null },
     result: { statusAfter, evidenceNote },
     ruleId,
-    reason
+    reason,
+    // Optional — stamped only on the one-time STANDARDS_ALIGNMENT entry (see
+    // core/bridge-agent.js) and on STANDARD_OVERRIDE/WIDA_OVERRIDE entries,
+    // so "Task -> Standard -> WIDA -> Baseline -> ..." is reconstructable by
+    // reading the trace array top to bottom, per the required Teacher trace.
+    contentStandardId: contentStandardId || null,
+    languageDemandId: languageDemandId || null
   };
 }
 

@@ -12,6 +12,8 @@ const MATH_DIMENSIONS = [
 
 const MATH_INTAKE_SCHEMA = [
   { id: 'taskText', type: 'textarea', label: 'Authentic Task (paste the word problem verbatim)', required: true },
+  { id: 'actionWords', type: 'checklist', label: 'What is the problem asking Ava to do?',
+    options: ['EXPLAIN', 'ARGUE', 'DESCRIBE'], required: true },
   { id: 'literalQuestion', type: 'text', label: 'The literal question being asked', required: true },
   { id: 'expectedOperations', type: 'checklist', label: 'Expected operation(s)', options: ['+', '-', '×', '÷'], required: true }
 ];

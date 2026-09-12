@@ -19,7 +19,12 @@ function createTaskRecord({ title, subject, learningGoal, authenticText, moduleI
     moduleIntakeData: moduleIntakeData || {},
     createdAt: new Date().toISOString(),
     createdBy: createdBy || 'teacher',
-    status: 'READY' // or 'NEEDS_TEACHER_INPUT' — set by task-analyzer.js
+    status: 'READY', // or 'NEEDS_TEACHER_INPUT' / 'NEEDS_ALIGNMENT_CONFIRMATION' — set by task-analyzer.js
+    // Display-only alignment info (never read by an evaluator or the Decision
+    // Engine — see core/standards-matcher.js / core/wida-matcher.js). Both
+    // null until the teacher confirms the "Confirm Alignment" step.
+    contentStandard: null,   // { id, framework, target, confirmedByTeacher }
+    languageDemand: null     // { discipline, klu, expectation: {interpretive, expressive}, confirmedByTeacher }
   };
 }
 

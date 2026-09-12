@@ -8,6 +8,8 @@ const SOCIAL_STUDIES_DIMENSIONS = [
 
 const SOCIAL_STUDIES_INTAKE_SCHEMA = [
   { id: 'taskText', type: 'textarea', label: 'Authentic Task (paste verbatim)', required: true },
+  { id: 'actionWords', type: 'checklist', label: 'What is the task asking Ava to do?',
+    options: ['EXPLAIN', 'ARGUE', 'DESCRIBE'], required: true },
   { id: 'keyTermsExpected', type: 'chipList', label: 'Key terms (2-4)', required: true, min: 2 }
 ];
 

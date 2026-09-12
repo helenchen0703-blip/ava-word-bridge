@@ -157,6 +157,9 @@
 <script src="core/storage.js"></script>
 <script src="core/student-state.js"></script>
 <script src="core/student-model.js"></script>
+<script src="core/standards-library.js"></script>
+<script src="core/standards-matcher.js"></script>
+<script src="core/wida-matcher.js"></script>
 <script src="core/task-intake.js"></script>
 <script src="core/intake-form-renderer.js"></script>
 <script src="core/module-registry.js"></script>
@@ -255,6 +258,81 @@ function renderIntakeStep(title, subject, learningGoal, prefillText) {
       document.getElementById('missingNote').innerHTML = `<div class="bridge-hint-box">Missing: ${analysis.missingFields.map(escapeHtmlIndex).join(', ')}</div>`;
       return;
     }
+    renderConfirmAlignment(taskRecord);
+  });
+}
+
+// "Confirm Alignment" — Content Standard + WIDA Language Demand, suggested
+// from the intake data the teacher already typed, always teacher-confirmed
+// before the task becomes READY. Neither suggestion is ever applied silently
+// (core/standards-matcher.js, core/wida-matcher.js) — this screen is that
+// confirmation, the same pattern as the AUTO_UNSURE subject-confirm step.
+function renderConfirmAlignment(taskRecord) {
+  const module = ModuleRegistry.get(taskRecord.subject);
+  const standardMatch = matchContentStandards(taskRecord);
+  const demandMatch = matchLanguageDemand(taskRecord);
+  const library = loadStandardsLibrary();
+  const frameworks = SUBJECT_TO_FRAMEWORKS[taskRecord.subject] || [];
+  const allSubjectStandards = library.standards.filter(s => frameworks.includes(s.framework));
+  const suggestedIds = standardMatch.suggestions.map(s => s.id);
+  const restStandards = allSubjectStandards.filter(s => !suggestedIds.includes(s.id));
+
+  appEl.innerHTML = `
+    <div class="card">
+      <h2>Confirm Alignment</h2>
+      <p class="subhead">Suggested from what you already typed — pick a different one anytime.</p>
+      <div class="bridge-field">
+        <label>Content Standard${standardMatch.usedFallback ? ' (priority list — nothing scored a direct match)' : ''}</label>
+        <select id="standardSelect">
+          <option value="">(none)</option>
+          ${standardMatch.suggestions.map(s => `<option value="${s.id}" selected>${s.id} — ${escapeHtmlIndex(s.target)}</option>`).join('')}
+          ${restStandards.map(s => `<option value="${s.id}">${s.id} — ${escapeHtmlIndex(s.target)}</option>`).join('')}
+        </select>
+      </div>
+      <div class="bridge-field">
+        <label>WIDA Language Demand</label>
+        <select id="kluSelect">
+          <option value="">(none)</option>
+          ${['Narrate', 'Inform', 'Explain', 'Argue'].map(k => `<option value="${k}" ${demandMatch && demandMatch.klu === k ? 'selected' : ''}>${k}</option>`).join('')}
+        </select>
+        <div id="demandPreview" class="bridge-hint-box" style="margin-top:8px;"></div>
+      </div>
+      <div class="btn-row"><button class="btn btn-primary" id="confirmAlignBtn">Confirm & Start →</button></div>
+    </div>`;
+
+  function renderDemandPreview() {
+    const klu = document.getElementById('kluSelect').value;
+    const preview = document.getElementById('demandPreview');
+    if (!klu) { preview.textContent = 'No language demand recorded for this task.'; return; }
+    const discipline = SUBJECT_TO_DISCIPLINE[taskRecord.subject];
+    const expectations = library.wida_language_layer.language_expectations.filter(e => e.discipline === discipline && e.klu === klu);
+    const interp = expectations.find(e => e.mode === 'Interpretive');
+    const expr = expectations.find(e => e.mode === 'Expressive');
+    preview.innerHTML = `<b>${discipline} — ${klu}</b><br>Interpretive: ${interp ? escapeHtmlIndex(interp.observable_demands.join('; ')) : '—'}<br>Expressive: ${expr ? escapeHtmlIndex(expr.observable_demands.join('; ')) : '—'}`;
+  }
+  document.getElementById('kluSelect').addEventListener('change', renderDemandPreview);
+  renderDemandPreview();
+
+  document.getElementById('confirmAlignBtn').addEventListener('click', () => {
+    const standardId = document.getElementById('standardSelect').value;
+    const chosenStandard = allSubjectStandards.find(s => s.id === standardId);
+    taskRecord.contentStandard = chosenStandard
+      ? { id: chosenStandard.id, framework: chosenStandard.framework, target: chosenStandard.target, confirmedByTeacher: true }
+      : null;
+
+    const klu = document.getElementById('kluSelect').value;
+    if (klu) {
+      const discipline = SUBJECT_TO_DISCIPLINE[taskRecord.subject];
+      const expectations = library.wida_language_layer.language_expectations.filter(e => e.discipline === discipline && e.klu === klu);
+      taskRecord.languageDemand = {
+        discipline, klu,
+        expectation: { interpretive: expectations.find(e => e.mode === 'Interpretive') || null, expressive: expectations.find(e => e.mode === 'Expressive') || null },
+        confirmedByTeacher: true
+      };
+    } else {
+      taskRecord.languageDemand = null;
+    }
+
     taskRecord.status = 'READY';
     saveTaskRecord(taskRecord);
     openTask(taskRecord);

@@ -14,6 +14,7 @@ function renderDecisionTrace(state) {
       Observed: "${escapeHtmlTrace((t.observed.responseSummary || '').toString())}" (was ${t.observed.statusBefore})<br>
       Decision: ${t.decision.type || '—'}${t.decision.scaffoldAction ? ' / ' + escapeHtmlTrace(t.decision.scaffoldAction) : ''}<br>
       Result: ${t.result.statusAfter} — ${escapeHtmlTrace(t.result.evidenceNote)}<br>
+      ${(t.contentStandardId || t.languageDemandId) ? `Alignment: ${escapeHtmlTrace(t.contentStandardId || '—')} / ${escapeHtmlTrace(t.languageDemandId || '—')}<br>` : ''}
       <span class="bridge-trace-rule">rule: ${escapeHtmlTrace(t.ruleId)}</span><br>
       Reason: ${escapeHtmlTrace(t.reason)}
     </div>`).join('');

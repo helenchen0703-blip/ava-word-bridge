@@ -52,3 +52,19 @@ function applyTeacherOverride(dim, decision, note, teacherName) {
   dim.teacherOverride = { decision, note: note || '', teacher: teacherName || 'teacher', timestamp: new Date().toISOString() };
   dim.needsTeacherReview = false;
 }
+
+// Structurally identical to applyTeacherOverride above: a field replacement,
+// never silent. Content Standard and WIDA Language Demand are informational
+// (never read by an evaluator or by decideSupportTransition), but a
+// teacher's change to either must still be recorded, not just applied.
+function overrideContentStandard(taskRecord, newStandard, teacherName) {
+  taskRecord.contentStandard = Object.assign({}, newStandard, {
+    confirmedByTeacher: true, overriddenBy: teacherName || 'teacher', timestamp: new Date().toISOString()
+  });
+}
+
+function overrideLanguageDemand(taskRecord, newDemand, teacherName) {
+  taskRecord.languageDemand = Object.assign({}, newDemand, {
+    confirmedByTeacher: true, overriddenBy: teacherName || 'teacher', timestamp: new Date().toISOString()
+  });
+}

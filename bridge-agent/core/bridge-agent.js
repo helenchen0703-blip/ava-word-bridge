@@ -26,8 +26,25 @@ function createBridgeAgent({ taskRecord, module }) {
     state: null,
 
     init() {
-      this.state = loadLearnerState(experienceId, taskId) || freshLearnerState({ dimensions: module.dimensionManifest });
+      const existing = loadLearnerState(experienceId, taskId);
+      this.state = existing || freshLearnerState({ dimensions: module.dimensionManifest });
       if (!this.state.route.currentNode) this.state.route.currentNode = module.firstCheckpointId;
+      // One-time trace stamp, first init only, so "Task -> Standard -> WIDA
+      // -> Baseline -> ..." is reconstructable by reading the trace top to
+      // bottom. Informational only — never read by an evaluator or the
+      // Decision Engine.
+      if (!existing && this.state.trace.length === 0) {
+        appendTrace(this.state, {
+          checkpointId: 'STANDARDS_ALIGNMENT', dimensionKey: null,
+          responseSummary: '', statusBefore: null, statusAfter: null,
+          evidenceNote: 'Content standard and WIDA language demand recorded for this task.',
+          decision: null, ruleId: 'ruleStandardsAlignmentRecorded', reason: 'Task intake confirmed by teacher.',
+          contentStandardId: taskRecord.contentStandard ? taskRecord.contentStandard.id : null,
+          languageDemandId: taskRecord.languageDemand
+            ? `${taskRecord.languageDemand.discipline}.${taskRecord.languageDemand.klu}` : null
+        });
+        this.save();
+      }
       return this.state;
     },
 
@@ -235,7 +252,8 @@ function createBridgeAgent({ taskRecord, module }) {
       if (nextCheckpointId) return;
       const model = loadStudentModel();
       commitEvidenceToStudentModel(model, {
-        taskId, subject: taskRecord.subject, finalDimensions: this.state.dimensions
+        taskId, subject: taskRecord.subject, finalDimensions: this.state.dimensions,
+        languageDemand: taskRecord.languageDemand
       });
       saveStudentModel(model);
     },

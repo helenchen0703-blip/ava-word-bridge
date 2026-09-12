@@ -15,6 +15,8 @@ const READING_DIMENSIONS = [
 
 const READING_INTAKE_SCHEMA = [
   { id: 'taskText', type: 'textarea', label: 'Authentic Task (passage + the actual comprehension question, paste verbatim)', required: true },
+  { id: 'actionWords', type: 'checklist', label: 'What is the question asking Ava to do?',
+    options: ['SUMMARIZE', 'DESCRIBE', 'EXPLAIN', 'ARGUE', 'NARRATE'], required: true },
   { id: 'keyWords', type: 'chipList', label: 'Key academic words in this passage (2-4)', required: true, min: 2 },
   { id: 'mainIdeaSentence', type: 'text', label: 'The expected main-idea / gist answer', required: true },
   { id: 'evidenceIdea', type: 'text', label: 'One idea from the text needing evidence', required: true },
