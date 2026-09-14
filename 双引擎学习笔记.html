@@ -1,0 +1,183 @@
+<!doctype html><html><head><meta charset=utf8><meta name=viewport content="width=device-width,initial-scale=1"><style>:root{color-scheme:light}body{margin:0;padding:0;font:14px -apple-system,BlinkMacSystemFont,sans-serif;background:#faf9f5;color:#141413}img{max-width:100%}[hidden]:not([hidden=until-found i]){display:none!important}</style></head><body>
+<title>双引擎学习笔记</title>
+<style>
+  :root{
+    --paper:#fbf6ea;
+    --card:#ffffff;
+    --ink:#1f2e27;
+    --ink-soft:#55665c;
+    --ink-faint:#8a9689;
+    --amber:#de9a3c;
+    --amber-soft:#f6e3c2;
+    --sage:#5f8768;
+    --sage-soft:#e3ede4;
+    --mist:#4f7592;
+    --mist-soft:#e4edf1;
+    --line:#e3d9c2;
+  }
+  @media (prefers-color-scheme: dark){
+    :root:not([data-theme="light"]){
+      --paper:#171f1a;
+      --card:#1f2b24;
+      --ink:#eef1ea;
+      --ink-soft:#aab8ad;
+      --ink-faint:#77857b;
+      --amber:#eab15a;
+      --amber-soft:#3a2f1c;
+      --sage:#8fbb99;
+      --sage-soft:#233830;
+      --mist:#84aec9;
+      --mist-soft:#1f3340;
+      --line:#334138;
+    }
+  }
+  :root[data-theme="dark"]{
+    --paper:#171f1a;
+    --card:#1f2b24;
+    --ink:#eef1ea;
+    --ink-soft:#aab8ad;
+    --ink-faint:#77857b;
+    --amber:#eab15a;
+    --amber-soft:#3a2f1c;
+    --sage:#8fbb99;
+    --sage-soft:#233830;
+    --mist:#84aec9;
+    --mist-soft:#1f3340;
+    --line:#334138;
+  }
+  *{box-sizing:border-box;}
+  body{
+    margin:0; background:var(--paper); color:var(--ink);
+    font-family:"Noto Sans SC","PingFang SC","Microsoft YaHei",sans-serif;
+    display:flex; justify-content:center;
+  }
+  .sheet{width:100%; max-width:460px; padding:36px 26px 44px;}
+  h1,h2,h3{font-family:"Noto Serif SC","Songti SC",serif; text-wrap:balance; margin:0;}
+  .eyebrow{
+    font-family:"Fraunces","Noto Serif SC",serif; font-style:italic; font-weight:500;
+    font-size:13px; letter-spacing:.06em; color:var(--ink-faint); margin-bottom:6px;
+  }
+  h1{font-size:30px; font-weight:700; line-height:1.3; color:var(--ink);}
+  .hook{font-size:14.5px; color:var(--ink-soft); margin-top:12px; line-height:1.75;}
+  .hook b{color:var(--ink); font-weight:700;}
+
+  .divider{height:1px; background:var(--line); margin:28px 0;}
+
+  .lane-label{
+    display:flex; align-items:baseline; gap:10px; margin-bottom:14px;
+  }
+  .lane-tag{
+    font-family:"Fraunces",serif; font-weight:600; font-size:12px; letter-spacing:.08em;
+    padding:3px 10px; border-radius:999px; text-transform:uppercase;
+  }
+  .lane-tag.bridge{background:var(--mist-soft); color:var(--mist);}
+  .lane-tag.growth{background:var(--sage-soft); color:var(--sage);}
+  .lane-title{font-size:18px; font-weight:700; color:var(--ink); font-family:"Noto Serif SC",serif;}
+  .lane-sub{font-size:12.5px; color:var(--ink-faint); margin-left:auto; white-space:nowrap;}
+
+  .steps{list-style:none; margin:0; padding:0; display:flex; flex-direction:column;}
+  .step{
+    display:grid; grid-template-columns:26px 1fr; gap:12px;
+    padding:10px 0; border-top:1px solid var(--line);
+  }
+  .step:first-child{border-top:none;}
+  .num{
+    font-family:"Fraunces",serif; font-weight:600; font-size:14px;
+    display:flex; align-items:center; justify-content:center;
+    width:26px; height:26px; border-radius:50%;
+    align-self:start; margin-top:1px;
+  }
+  .bridge .num{background:var(--mist-soft); color:var(--mist);}
+  .growth .num{background:var(--sage-soft); color:var(--sage);}
+  .step-body{font-size:14px; line-height:1.55;}
+  .step-title{font-weight:700; color:var(--ink);}
+  .step-detail{color:var(--ink-soft); font-size:13px; margin-top:2px;}
+
+  .core{
+    margin-top:30px; border:1px solid var(--line); border-radius:18px;
+    padding:22px 20px; background:var(--card);
+  }
+  .core-head{display:flex; align-items:baseline; gap:8px; margin-bottom:14px;}
+  .core-head .mark{font-family:"Fraunces",serif; font-style:italic; color:var(--amber); font-size:15px;}
+  .core-head h3{font-size:16px;}
+  .core-grid{display:grid; grid-template-columns:1fr 1fr; gap:10px;}
+  .core-item{
+    background:var(--amber-soft); border-radius:12px; padding:12px 12px;
+  }
+  .core-item .k{font-size:12.5px; font-weight:700; color:var(--ink); display:block; margin-bottom:3px;}
+  .core-item .v{font-size:11.5px; color:var(--ink-soft); line-height:1.5; display:block;}
+  .core-foot{font-size:12.5px; color:var(--ink-soft); margin-top:14px; line-height:1.6;}
+  .core-foot b{color:var(--ink);}
+
+  .closing{margin-top:30px; font-size:14.5px; line-height:1.8; color:var(--ink);}
+  .closing .accent{color:var(--amber); font-weight:700;}
+
+  .tags{display:flex; flex-wrap:wrap; gap:8px; margin-top:22px;}
+  .tag{font-size:12px; color:var(--ink-soft); background:var(--card); border:1px solid var(--line); border-radius:999px; padding:5px 12px;}
+</style>
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,wght@0,500;0,600;1,500&family=Noto+Serif+SC:wght@600;700&family=Noto+Sans+SC:wght@400;500;700&display=swap" rel="stylesheet">
+
+<div class="sheet">
+  <div class="eyebrow">A learning agent, in one card</div>
+  <h1>双引擎学习系统</h1>
+  <p class="hook">一个孩子的英语学习工具，拆开看其实是<b>两个 Agent</b> ——<br>一个管"这次作业怎么过"，一个管"这个词会不会真的留下来"。</p>
+
+  <div class="divider"></div>
+
+  <div class="lane bridge">
+    <div class="lane-label">
+      <span class="lane-tag bridge">Bridge</span>
+      <span class="lane-title">完成眼前的作业</span>
+      <span class="lane-sub">当下任务</span>
+    </div>
+    <ul class="steps">
+      <li class="step bridge"><span class="num">1</span><div class="step-body"><span class="step-title">粘贴真实作业</span><div class="step-detail">阅读 / 写作 / 数学 / 科学，原题不改写</div></div></li>
+      <li class="step bridge"><span class="num">2</span><div class="step-body"><span class="step-title">先独立尝试</span><div class="step-detail">看她能走到哪一步，不预设结论</div></div></li>
+      <li class="step bridge"><span class="num">3</span><div class="step-body"><span class="step-title">定位卡点</span><div class="step-detail">语言？概念？表达？拿不准就多问一句，不瞎猜</div></div></li>
+      <li class="step bridge"><span class="num">4</span><div class="step-body"><span class="step-title">给最小支架</span><div class="step-detail">0～5 级，够用就好，不多给</div></div></li>
+      <li class="step bridge"><span class="num">5</span><div class="step-body"><span class="step-title">撤支架，回原题</span><div class="step-detail">同一道题，帮助更少、理解更多</div></div></li>
+    </ul>
+  </div>
+
+  <div class="divider"></div>
+
+  <div class="lane growth">
+    <div class="lane-label">
+      <span class="lane-tag growth">Growth</span>
+      <span class="lane-title">让能力真的留下来</span>
+      <span class="lane-sub">长期积累</span>
+    </div>
+    <ul class="steps">
+      <li class="step growth"><span class="num">1</span><div class="step-body"><span class="step-title">冷读打底</span><div class="step-detail">先朗读、先标记，不给任何提示</div></div></li>
+      <li class="step growth"><span class="num">2</span><div class="step-body"><span class="step-title">区分卡点类型</span><div class="step-detail">读音慢 ≠ 不懂词，词 ≠ 词组，分开记</div></div></li>
+      <li class="step growth"><span class="num">3</span><div class="step-body"><span class="step-title">存入个人词库</span><div class="step-detail">记住出自哪句话、哪篇文章</div></div></li>
+      <li class="step growth"><span class="num">4</span><div class="step-body"><span class="step-title">检索，不是复习</span><div class="step-detail">凭记忆说，不是看着答案背</div></div></li>
+      <li class="step growth"><span class="num">5</span><div class="step-body"><span class="step-title">下次先测，不重教</span><div class="step-detail">同一个词再出现，先看她还记不记得</div></div></li>
+    </ul>
+  </div>
+
+  <div class="core">
+    <div class="core-head"><span class="mark">shared</span><h3>两条线，共用一本成长档案</h3></div>
+    <div class="core-grid">
+      <div class="core-item"><span class="k">个人词库</span><span class="v">词义 · 出处句子 · 使用次数</span></div>
+      <div class="core-item"><span class="k">词组库</span><span class="v">整块记，不拆成单词</span></div>
+      <div class="core-item"><span class="k">朗读记录</span><span class="v">哪些词读得慢、读错过</span></div>
+      <div class="core-item"><span class="k">证据历史</span><span class="v">每次判断的原因，全部留痕</span></div>
+    </div>
+    <p class="core-foot">老师随时能<b>覆盖系统的判断</b>，每次覆盖都被记下来，从不悄悄改。内容只来自老师自己录入的材料——<b>不瞎猜，不编词义</b>。</p>
+  </div>
+
+  <p class="closing">一句话说完：<br>Bridge 负责<span class="accent">这一次</span>，Growth 负责<span class="accent">这一生</span>。</p>
+
+  <div class="tags">
+    <span class="tag">#AI学习工具</span>
+    <span class="tag">#双语教育</span>
+    <span class="tag">#多语言儿童</span>
+    <span class="tag">#英语启蒙</span>
+  </div>
+</div>
+
+</body></html>
