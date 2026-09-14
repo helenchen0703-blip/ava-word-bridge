@@ -133,6 +133,18 @@
   .bridge-trace-rule{font-family:"SF Mono",Menlo,Consolas,monospace;font-size:11px;color:var(--muted);}
   .bridge-review-item{border-color:var(--peach);}
   .bridge-review-actions{margin-top:8px;}
+
+  /* ---- English Growth Agent (shares Core, distinct screens) ---- */
+  .growth-cold-read-text{font-size:18px;line-height:2.1;color:var(--ink);}
+  .growth-token{cursor:pointer;padding:2px 3px;border-radius:6px;}
+  .growth-token:hover{background:var(--mist-light);}
+  .growth-token-selected{background:var(--mist);color:#fff;}
+  .growth-marked-accurate{border-bottom:3px solid var(--sage);}
+  .growth-marked-slow{border-bottom:3px solid var(--gold);}
+  .growth-marked-misread,.growth-marked-stuck{border-bottom:3px solid var(--peach-dark);}
+  .growth-marked-self-corrected{border-bottom:3px dashed var(--sage);}
+  .growth-marked-unknown-meaning{border-bottom:3px solid var(--lav);}
+  .growth-marking-toolbar{display:flex;flex-wrap:wrap;gap:8px;margin-top:16px;align-items:center;}
 </style>
 </head>
 <body>
@@ -180,21 +192,39 @@
 <script src="teacher/decision-trace.js"></script>
 <script src="teacher/intake-review.js"></script>
 <script src="teacher/teacher-view.js"></script>
+<script src="core/text-intake.js"></script>
+<script src="core/growth-session.js"></script>
+<script src="core/cold-read-marker.js"></script>
+<script src="growth/growth-pathway.js"></script>
+<script src="growth/growth-ui.js"></script>
+<script src="teacher/growth-review.js"></script>
+<script src="teacher/growth-view.js"></script>
 <script>
 const appEl = document.getElementById('app');
 const teacherLinkBtn = document.getElementById('teacherLinkBtn');
 const taskListFooter = document.getElementById('taskListFooter');
 let currentAgent = null, currentModule = null, currentTaskRecord = null;
+let currentMode = null; // 'bridge' | 'growth' | null
+let currentGrowthSession = null, currentTextRecord = null;
 
 teacherLinkBtn.addEventListener('click', () => {
-  if (!currentAgent) return;
-  renderTeacherView(document.getElementById('teacherContent'), { agent: currentAgent, taskRecord: currentTaskRecord });
+  const content = document.getElementById('teacherContent');
+  if (currentMode === 'growth' && currentGrowthSession) {
+    renderGrowthTeacherView(content, { session: currentGrowthSession, textRecord: currentTextRecord });
+  } else if (currentMode === 'bridge' && currentAgent) {
+    renderTeacherView(content, { agent: currentAgent, taskRecord: currentTaskRecord });
+  } else {
+    return;
+  }
   document.getElementById('teacherModal').hidden = false;
 });
 document.getElementById('closeTeacherModal').addEventListener('click', () => { document.getElementById('teacherModal').hidden = true; });
-document.getElementById('backToListBtn').addEventListener('click', renderTaskList);
+document.getElementById('backToListBtn').addEventListener('click', () => {
+  if (currentMode === 'growth') renderTextList(); else renderTaskList();
+});
 
 function renderTaskList() {
+  currentMode = null;
   teacherLinkBtn.hidden = true; taskListFooter.hidden = true;
   const tasks = loadAllTaskRecords();
   const items = tasks.map(t => `
@@ -202,9 +232,67 @@ function renderTaskList() {
       <div><b>${escapeHtmlIndex(t.title)}</b><div class="meta">${t.subject} · ${new Date(t.createdAt).toLocaleDateString()}</div></div>
       <button class="btn-outline" data-task="${t.taskId}">Open</button>
     </div>`).join('') || '<p class="subhead">No tasks yet — create one to get started.</p>';
-  appEl.innerHTML = `<div class="card"><h2>Tasks</h2>${items}<div class="btn-row"><button class="btn btn-primary" id="newTaskBtn">+ New Task</button></div></div>`;
+  appEl.innerHTML = `<div class="card"><h2>BRIDGE Tasks</h2>${items}
+    <div class="btn-row"><button class="btn btn-primary" id="newTaskBtn">+ New Task</button></div>
+    <div class="btn-row"><button class="btn-outline" id="goGrowthBtn">Go to English Growth →</button></div></div>`;
   appEl.querySelectorAll('[data-task]').forEach(btn => btn.addEventListener('click', () => openTask(loadTaskRecord(btn.dataset.task))));
   document.getElementById('newTaskBtn').addEventListener('click', renderTaskSetup);
+  document.getElementById('goGrowthBtn').addEventListener('click', renderTextList);
+}
+
+// ================= English Growth Agent (Option C: shares Core + Student Model) =================
+
+function renderTextList() {
+  currentMode = 'growth';
+  teacherLinkBtn.hidden = true; taskListFooter.hidden = true;
+  const texts = loadAllTextRecords();
+  const items = texts.map(t => `
+    <div class="task-list-item">
+      <div><b>${escapeHtmlIndex(t.title)}</b><div class="meta">${new Date(t.createdAt).toLocaleDateString()}</div></div>
+      <button class="btn-outline" data-text="${t.textId}">Open</button>
+    </div>`).join('') || '<p class="subhead">No texts yet — add one to get started.</p>';
+  appEl.innerHTML = `<div class="card"><h2>English Growth — Texts</h2>${items}
+    <div class="btn-row"><button class="btn btn-primary" id="newTextBtn">+ New Text</button></div>
+    <div class="btn-row"><button class="btn-outline" id="viewBankBtn">View Word / Chunk Bank</button></div>
+    <div class="btn-row"><button class="btn-outline" id="goTasksBtn">← Back to BRIDGE Tasks</button></div></div>`;
+  appEl.querySelectorAll('[data-text]').forEach(btn => btn.addEventListener('click', () => openGrowthText(loadTextRecord(btn.dataset.text))));
+  document.getElementById('newTextBtn').addEventListener('click', renderTextSetup);
+  document.getElementById('goTasksBtn').addEventListener('click', renderTaskList);
+  document.getElementById('viewBankBtn').addEventListener('click', () => {
+    renderWordChunkBankOverview(document.getElementById('teacherContent'));
+    document.getElementById('teacherModal').hidden = false;
+  });
+}
+
+function renderTextSetup() {
+  appEl.innerHTML = `<div class="card"><h2>New Text</h2><div id="missingNote"></div><div id="growthFormMount"></div></div>`;
+  renderIntakeForm(document.getElementById('growthFormMount'), GROWTH_TEXT_INTAKE_SCHEMA, {}, values => {
+    const { valid, missing } = validateAgainstSchema(GROWTH_TEXT_INTAKE_SCHEMA, values);
+    if (!valid) {
+      document.getElementById('missingNote').innerHTML = `<div class="bridge-hint-box">Missing: ${missing.map(escapeHtmlIndex).join(', ')}</div>`;
+      return;
+    }
+    const textRecord = createTextRecord({
+      title: values.title || '(untitled text)',
+      authenticText: values.authenticText,
+      taggedWords: (values.taggedWords || []).filter(w => w.word),
+      taggedChunks: (values.taggedChunks || []).filter(c => c.chunk),
+      mainIdeaSentence: values.mainIdeaSentence || '',
+      createdBy: 'teacher'
+    });
+    saveTextRecord(textRecord);
+    openGrowthText(textRecord);
+  });
+}
+
+function openGrowthText(textRecord) {
+  currentMode = 'growth';
+  currentTextRecord = textRecord;
+  currentGrowthSession = createGrowthSession({ textRecord });
+  currentGrowthSession.init();
+  teacherLinkBtn.hidden = false; taskListFooter.hidden = false;
+  document.getElementById('taskSubtitle').textContent = `${textRecord.title} · English Growth`;
+  renderGrowthFlow(appEl, { session: currentGrowthSession, textRecord, onExit: renderTextList });
 }
 
 function renderTaskSetup() {
@@ -343,6 +431,7 @@ function openTask(taskRecord) {
   const module = ModuleRegistry.get(taskRecord.subject);
   const analysis = analyzeTask(taskRecord);
   if (analysis.status !== 'READY') { renderTaskList(); return; }
+  currentMode = 'bridge';
   currentModule = module; currentTaskRecord = taskRecord;
   currentAgent = createBridgeAgent({ taskRecord, module });
   currentAgent.init();
