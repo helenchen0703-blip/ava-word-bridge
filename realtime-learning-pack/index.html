@@ -15,8 +15,8 @@
     --lav:#a595c4; --lav-light:#f0ecf7; --lav-dark:#6e5b91;
     --peach:#e3a97e; --peach-light:#faeee0; --peach-dark:#a56a3b;
     --gold:#d9a441; --gold-glow:rgba(217,164,65,0.35);
+    --highlight:#fff3b0; --highlight-border:#d4a017;
     --shadow-sm: 0 2px 8px rgba(58,63,60,0.06);
-    --shadow-md: 0 18px 46px rgba(45,40,30,0.16), 0 4px 14px rgba(58,63,60,0.08);
     --radius-lg: 26px; --radius-md: 16px;
     --font-display:"Fraunces","Iowan Old Style","Palatino Linotype",Georgia,serif;
     --font-body:"Plus Jakarta Sans","Avenir Next","Segoe UI",-apple-system,BlinkMacSystemFont,"Helvetica Neue",Arial,sans-serif;
@@ -31,8 +31,8 @@
       linear-gradient(180deg, var(--theater-2) 0%, var(--theater-1) 70%);
     color:var(--cream-text); font-family:var(--font-body); line-height:1.6; min-height:100vh; -webkit-font-smoothing:antialiased;
   }
-  .app-shell{max-width:820px;margin:0 auto;padding:0 22px 34px;min-height:100vh;display:flex;flex-direction:column;}
-  header{padding:26px 0 8px;display:flex;justify-content:space-between;align-items:center;}
+  .app-shell{max-width:820px;margin:0 auto;padding:0 22px 40px;min-height:100vh;display:flex;flex-direction:column;}
+  header{padding:26px 0 8px;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:8px;}
   header h1{font-family:var(--font-display);font-size:22px;color:var(--marquee);margin:0;font-weight:600;}
   header .subtitle{font-size:12.5px;color:rgba(244,236,216,0.55);}
   header .home-link{font-size:13px;color:rgba(244,236,216,0.4);text-decoration:none;}
@@ -48,118 +48,124 @@
   h3{font-family:var(--font-display);font-size:18px;margin:0 0 8px;color:var(--ink);font-weight:600;}
   .lead{font-size:16px;color:var(--ink);}
   .subhead{font-size:14px;color:var(--muted);margin:0 0 18px;}
+  .step-hint{font-size:13px;color:var(--mist-dark);background:var(--mist-light);padding:10px 14px;border-radius:12px;margin-bottom:16px;display:flex;align-items:center;gap:8px;}
+  .step-hint b{color:var(--mist-dark);}
 
-  /* ---- Step Indicator ---- */
-  .step-track{display:flex;gap:4px;margin-bottom:28px;flex-wrap:wrap;}
+  /* Step Track */
+  .step-track{display:flex;gap:4px;margin-bottom:24px;flex-wrap:wrap;}
   .step-dot{
-    flex:1;min-width:80px;text-align:center;padding:10px 6px;border-radius:12px;
-    font-size:11px;font-weight:700;letter-spacing:.03em;text-transform:uppercase;
-    background:rgba(255,246,211,0.12);color:rgba(244,236,216,0.4);
+    flex:1;min-width:70px;text-align:center;padding:8px 4px;border-radius:10px;
+    font-size:10px;font-weight:700;letter-spacing:.03em;text-transform:uppercase;
+    background:rgba(255,246,211,0.1);color:rgba(244,236,216,0.35);
     transition:all .3s ease;cursor:pointer;border:1px solid transparent;
   }
-  .step-dot .step-num{display:block;font-size:20px;margin-bottom:2px;font-family:var(--font-display);}
+  .step-dot .step-num{display:block;font-size:18px;margin-bottom:2px;font-family:var(--font-display);}
   .step-dot.active{
-    background:linear-gradient(180deg, rgba(240,202,133,0.25), rgba(201,154,79,0.15));
+    background:linear-gradient(180deg, rgba(240,202,133,0.25), rgba(201,154,79,0.12));
     border-color:rgba(240,202,133,0.4);color:var(--marquee);
   }
-  .step-dot.done{
-    background:rgba(143,174,143,0.15);border-color:rgba(143,174,143,0.3);color:rgba(143,174,143,0.9);
-  }
+  .step-dot.done{background:rgba(143,174,143,0.12);border-color:rgba(143,174,143,0.25);color:rgba(143,174,143,0.85);}
 
-  /* ---- Cold Read ---- */
-  .cold-read-text{font-size:19px;line-height:2.2;color:var(--ink);font-family:var(--font-display);}
-  .cr-token{cursor:pointer;padding:3px 4px;border-radius:6px;transition:all .15s ease;display:inline;}
-  .cr-token:hover{background:var(--mist-light);}
-  .cr-token.cr-accurate{border-bottom:3px solid var(--sage);}
-  .cr-token.cr-slow{border-bottom:3px solid var(--gold);}
-  .cr-token.cr-misread{border-bottom:3px solid var(--peach-dark);}
-  .cr-token.cr-unknown-meaning{border-bottom:3px solid var(--lav);}
-  .cr-marking-toolbar{
-    display:flex;flex-wrap:wrap;gap:8px;margin-top:20px;align-items:center;
-    padding:16px;background:var(--mist-light);border-radius:14px;
+  /* Buttons */
+  .btn{font-family:var(--font-body);font-size:15px;font-weight:700;padding:13px 24px;border-radius:14px;cursor:pointer;border:none;}
+  .btn-primary{
+    background:linear-gradient(180deg, #f5d690 0%, var(--marquee) 45%, var(--marquee-deep) 100%);color:#4a3818;
+    box-shadow:0 4px 0 #a97c3c, 0 12px 26px rgba(35,24,12,0.35), 0 1px 0 rgba(255,255,255,0.4) inset;
   }
+  .btn-primary:disabled{background:#dfe3de;color:#a2a89f;box-shadow:none;cursor:not-allowed;}
+  .btn-outline{background:#fff;border:1.5px solid var(--border);color:var(--ink);font-size:14px;font-weight:600;padding:10px 16px;border-radius:12px;cursor:pointer;}
+  .btn-row{display:flex;justify-content:center;gap:12px;margin-top:22px;flex-wrap:wrap;}
+
+  /* Text Input */
+  .text-input{width:100%;min-height:160px;padding:14px;border:1.5px solid var(--border);border-radius:14px;font-family:var(--font-display);font-size:16px;line-height:1.8;resize:vertical;background:#fffdf7;color:var(--ink);}
+  .text-input:focus{outline:none;border-color:var(--mist);}
+  .text-input::placeholder{color:var(--muted);font-family:var(--font-body);font-size:14px;}
+
+  /* Word suggestion chips */
+  .word-suggest-area{margin-top:18px;}
+  .word-chips{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:14px;}
+  .word-chip{
+    display:inline-flex;align-items:center;gap:6px;padding:8px 12px;border-radius:10px;
+    border:1.5px solid var(--border);background:#fff;font-size:14px;font-weight:600;color:var(--ink);cursor:pointer;transition:all .15s ease;
+  }
+  .word-chip.selected{background:var(--mist-light);border-color:var(--mist);color:var(--mist-dark);}
+  .word-chip .remove{font-size:16px;color:var(--peach-dark);margin-left:4px;border:none;background:none;cursor:pointer;padding:0;line-height:1;}
+
+  /* Meaning input rows */
+  .meaning-rows{display:flex;flex-direction:column;gap:12px;margin-top:14px;}
+  .meaning-row{display:grid;grid-template-columns:140px 1fr;gap:10px;align-items:start;}
+  .meaning-row .word-label{font-size:15px;font-weight:800;color:var(--ink);padding:10px 0;font-family:var(--font-display);}
+  .meaning-row input{padding:10px 12px;border:1.5px solid var(--border);border-radius:10px;font-family:inherit;font-size:14px;width:100%;background:#fff;color:var(--ink);}
+  .meaning-row input:focus{outline:none;border-color:var(--mist);}
+
+  /* Chunk input */
+  .chunk-row{display:grid;grid-template-columns:160px 1fr;gap:10px;align-items:start;margin-bottom:10px;}
+  .chunk-row input{padding:10px 12px;border:1.5px solid var(--border);border-radius:10px;font-family:inherit;font-size:14px;width:100%;background:#fff;color:var(--ink);}
+  .chunk-row input:focus{outline:none;border-color:var(--lav);}
+
+  /* Cold Read */
+  .cold-read-text{font-size:19px;line-height:2.4;color:var(--ink);font-family:var(--font-display);padding:20px;background:#fffdf7;border:1.5px solid var(--border);border-radius:16px;}
+  .cr-token{
+    cursor:pointer;padding:3px 5px;border-radius:6px;transition:all .15s ease;display:inline;
+    background:var(--highlight);border-bottom:3px solid var(--highlight-border);font-weight:600;
+  }
+  .cr-token:hover{background:#ffe680;}
+  .cr-token.cr-accurate{background:var(--sage-light);border-bottom-color:var(--sage);}
+  .cr-token.cr-slow{background:#fff3d4;border-bottom-color:var(--gold);}
+  .cr-token.cr-misread{background:var(--peach-light);border-bottom-color:var(--peach-dark);}
+  .cr-token.cr-unknown-meaning{background:var(--lav-light);border-bottom-color:var(--lav);}
+  .cr-marking-toolbar{display:flex;flex-wrap:wrap;gap:8px;margin-top:20px;align-items:center;padding:16px;background:var(--mist-light);border-radius:14px;}
   .cr-marking-toolbar .label{font-size:12px;font-weight:800;letter-spacing:.06em;text-transform:uppercase;color:var(--mist-dark);margin-right:4px;}
-  .cr-mark-btn{
-    padding:8px 14px;border-radius:10px;border:2px solid transparent;background:#fff;
-    font-size:13px;font-weight:600;color:var(--ink);cursor:pointer;transition:all .15s ease;
-  }
+  .cr-mark-btn{padding:8px 14px;border-radius:10px;border:2px solid transparent;background:#fff;font-size:13px;font-weight:600;color:var(--ink);cursor:pointer;transition:all .15s ease;}
   .cr-mark-btn.cr-accurate{border-color:var(--sage);}
   .cr-mark-btn.cr-slow{border-color:var(--gold);}
   .cr-mark-btn.cr-misread{border-color:var(--peach-dark);}
   .cr-mark-btn.cr-unknown-meaning{border-color:var(--lav);}
   .cr-mark-btn:hover{background:var(--mist-light);}
-  .cr-mark-btn.active{background:var(--mist);color:#fff;}
+  .cr-mark-btn.active{background:var(--mist);color:#fff;border-color:var(--mist);}
 
-  /* ---- Classification ---- */
-  .class-grid{display:grid;grid-template-columns:1fr;gap:12px;}
-  .class-row{
-    display:flex;align-items:center;gap:14px;padding:14px 16px;
-    background:#fdfcf7;border:1.5px solid var(--border);border-radius:14px;
-  }
-  .class-word{font-size:18px;font-weight:800;color:var(--ink);min-width:120px;}
-  .class-type{
-    font-size:12px;font-weight:700;padding:5px 12px;border-radius:8px;letter-spacing:.03em;text-transform:uppercase;
-  }
+  /* Classification */
+  .class-grid{display:grid;grid-template-columns:1fr;gap:10px;}
+  .class-row{display:flex;align-items:center;gap:14px;padding:14px 16px;background:#fdfcf7;border:1.5px solid var(--border);border-radius:14px;flex-wrap:wrap;}
+  .class-word{font-size:17px;font-weight:800;color:var(--ink);min-width:100px;font-family:var(--font-display);}
+  .class-type{font-size:11px;font-weight:700;padding:5px 10px;border-radius:8px;letter-spacing:.03em;text-transform:uppercase;}
   .ct-known{background:var(--sage-light);color:var(--sage-dark);}
   .ct-meaning{background:var(--lav-light);color:var(--lav-dark);}
   .ct-decode{background:var(--peach-light);color:var(--peach-dark);}
-  .class-note{font-size:13px;color:var(--muted);margin-left:auto;text-align:right;}
+  .class-note{font-size:13px;color:var(--muted);margin-left:auto;}
 
-  /* ---- Meaning Support ---- */
-  .meaning-card{
-    background:var(--lav-light);border:1.5px solid #e2d7ef;border-radius:16px;
-    padding:18px 20px;margin-bottom:14px;
-  }
-  .meaning-word{font-size:22px;font-weight:800;color:var(--lav-dark);margin-bottom:6px;}
+  /* Meaning Support */
+  .meaning-card{background:var(--lav-light);border:1.5px solid #e2d7ef;border-radius:16px;padding:18px 20px;margin-bottom:14px;}
+  .meaning-word{font-size:20px;font-weight:800;color:var(--lav-dark);margin-bottom:6px;font-family:var(--font-display);}
   .meaning-def{font-size:15px;color:var(--ink);line-height:1.6;}
-  .meaning-hint{
-    margin-top:10px;background:var(--peach-light);border:1px dashed var(--peach);
-    border-radius:12px;padding:10px 14px;font-size:14px;color:var(--peach-dark);text-align:center;
-  }
+  .meaning-card.chunk{background:var(--mist-light);border-color:#d7e5ef;}
+  .meaning-card.chunk .meaning-word{color:var(--mist-dark);}
 
-  /* ---- Sentence Meaning ---- */
-  .sentence-box{
-    background:#fdfcf7;border:1.5px solid var(--border);border-radius:18px;
-    padding:22px;margin-bottom:10px;
-  }
-  .sentence-text{font-size:17px;color:var(--ink);line-height:1.8;margin-bottom:14px;}
-  .sentence-text .hl{background:var(--mist-light);padding:2px 6px;border-radius:6px;font-weight:700;color:var(--mist-dark);}
+  /* Sentence Meaning */
+  .sentence-box{background:#fdfcf7;border:1.5px solid var(--border);border-radius:18px;padding:20px;margin-bottom:10px;}
+  .sentence-text{font-size:17px;color:var(--ink);line-height:1.8;margin-bottom:14px;font-family:var(--font-display);}
+  .sentence-text .hl{background:var(--highlight);padding:2px 6px;border-radius:6px;font-weight:700;}
   .sentence-text .hl2{background:var(--lav-light);padding:2px 6px;border-radius:6px;font-weight:700;color:var(--lav-dark);}
-  .sentence-q{font-size:15px;font-weight:700;color:var(--mist-dark);margin-bottom:10px;}
-  .sentence-input{
-    width:100%;padding:12px 14px;border:1.5px solid var(--border);border-radius:12px;
-    font-family:inherit;font-size:15px;background:#fff;color:var(--ink);
-  }
+  .sentence-q{font-size:14px;font-weight:700;color:var(--mist-dark);margin-bottom:10px;}
+  .sentence-input{width:100%;padding:12px 14px;border:1.5px solid var(--border);border-radius:12px;font-family:inherit;font-size:15px;background:#fff;color:var(--ink);}
   .sentence-input:focus{outline:none;border-color:var(--mist);}
 
-  /* ---- Gist ---- */
-  .gist-prompt{
-    font-size:18px;font-weight:700;color:var(--mist-dark);background:var(--mist-light);
-    padding:14px 18px;border-radius:14px;text-align:center;margin-bottom:16px;
-  }
-  .gist-input{
-    width:100%;min-height:80px;padding:14px;border:1.5px solid var(--border);border-radius:14px;
-    font-family:inherit;font-size:16px;resize:vertical;background:#fff;color:var(--ink);
-  }
+  /* Gist */
+  .gist-prompt{font-size:17px;font-weight:700;color:var(--mist-dark);background:var(--mist-light);padding:14px 18px;border-radius:14px;text-align:center;margin-bottom:16px;}
+  .gist-input{width:100%;min-height:80px;padding:14px;border:1.5px solid var(--border);border-radius:14px;font-family:inherit;font-size:16px;resize:vertical;background:#fff;color:var(--ink);}
   .gist-input:focus{outline:none;border-color:var(--mist);}
 
-  /* ---- Word Bank ---- */
+  /* Word Bank */
   .bank-section{margin-bottom:18px;}
   .bank-title{font-size:13px;font-weight:800;letter-spacing:.06em;text-transform:uppercase;color:var(--sage-dark);margin-bottom:10px;}
   .bank-chips{display:flex;flex-wrap:wrap;gap:8px;}
-  .bank-chip{
-    background:var(--sage-light);border:1px solid var(--sage);border-radius:10px;
-    padding:7px 13px;font-size:14px;font-weight:600;color:var(--sage-dark);
-  }
+  .bank-chip{background:var(--sage-light);border:1px solid var(--sage);border-radius:10px;padding:7px 13px;font-size:14px;font-weight:600;color:var(--sage-dark);}
   .bank-chip.chunk{background:var(--lav-light);border-color:var(--lav);color:var(--lav-dark);}
 
-  /* ---- Retrieval ---- */
+  /* Retrieval */
   .ret-q{font-size:16px;font-weight:600;color:var(--ink);margin-bottom:12px;line-height:1.5;}
   .ret-options{display:flex;flex-direction:column;gap:10px;}
-  .ret-btn{
-    text-align:left;font-size:15px;font-weight:600;padding:14px 16px;border-radius:14px;
-    border:1.5px solid var(--border);background:#fff;cursor:pointer;color:var(--ink);transition:all .15s ease;
-  }
+  .ret-btn{text-align:left;font-size:15px;font-weight:600;padding:14px 16px;border-radius:14px;border:1.5px solid var(--border);background:#fff;cursor:pointer;color:var(--ink);transition:all .15s ease;}
   .ret-btn:hover{border-color:var(--mist);}
   .ret-btn.correct{background:var(--sage-light);border-color:var(--sage);}
   .ret-btn.incorrect{background:var(--peach-light);border-color:#dba876;}
@@ -168,11 +174,9 @@
   .ret-feedback.good{color:var(--sage-dark);}
   .ret-feedback.try-again{color:var(--peach-dark);}
 
-  /* ---- Before/After ---- */
+  /* Before/After */
   .compare-grid{display:grid;grid-template-columns:1fr 1fr;gap:16px;}
-  .compare-col{
-    border-radius:16px;padding:20px;
-  }
+  .compare-col{border-radius:16px;padding:20px;}
   .compare-before{background:var(--peach-light);border:1.5px solid #dba876;}
   .compare-after{background:var(--sage-light);border:1.5px solid var(--sage);}
   .compare-label{font-size:12px;font-weight:800;letter-spacing:.06em;text-transform:uppercase;margin-bottom:10px;}
@@ -182,61 +186,38 @@
   .compare-before .compare-stat{color:var(--peach-dark);}
   .compare-after .compare-stat{color:var(--sage-dark);}
   .compare-desc{font-size:13px;color:var(--ink);margin-top:4px;}
-  .compare-arrow{text-align:center;font-size:36px;color:var(--gold);margin:10px 0;}
-
-  /* ---- Buttons ---- */
-  .btn{font-family:var(--font-body);font-size:15px;font-weight:700;padding:13px 24px;border-radius:14px;cursor:pointer;border:none;box-shadow:var(--shadow-sm);}
-  .btn-primary{
-    background:linear-gradient(180deg, #f5d690 0%, var(--marquee) 45%, var(--marquee-deep) 100%);color:#4a3818;
-    font-family:var(--font-body);font-size:15px;font-weight:700;padding:13px 24px;border-radius:14px;cursor:pointer;border:none;
-    box-shadow:0 4px 0 #a97c3c, 0 12px 26px rgba(35,24,12,0.35), 0 1px 0 rgba(255,255,255,0.4) inset;
-  }
-  .btn-primary:disabled{background:#dfe3de;color:#a2a89f;box-shadow:none;cursor:not-allowed;}
-  .btn-outline{
-    background:#fff;border:1.5px solid var(--border);color:var(--ink);font-family:var(--font-body);font-size:14px;font-weight:600;
-    padding:10px 16px;border-radius:12px;cursor:pointer;
-  }
-  .btn-row{display:flex;justify-content:center;gap:12px;margin-top:22px;flex-wrap:wrap;}
-
-  /* ---- Flow Steps Overview ---- */
-  .flow-overview{display:flex;flex-wrap:wrap;gap:8px;justify-content:center;margin-bottom:24px;}
-  .flow-step{
-    background:rgba(255,246,211,0.08);border:1px solid rgba(255,246,211,0.2);border-radius:12px;
-    padding:10px 14px;font-size:12px;font-weight:600;color:rgba(244,236,216,0.7);text-align:center;
-  }
-  .flow-step .flow-icon{font-size:22px;display:block;margin-bottom:4px;}
-  .flow-arrow{color:var(--marquee);font-size:18px;display:flex;align-items:center;}
-
-  /* ---- Toast ---- */
-  .toast{
-    position:fixed;bottom:24px;left:50%;transform:translateX(-50%) translateY(100px);
-    background:var(--theater-1);color:var(--marquee);padding:14px 28px;border-radius:14px;
-    font-size:14px;font-weight:600;box-shadow:0 12px 36px rgba(0,0,0,0.4);
-    border:1px solid rgba(240,202,133,0.3);z-index:300;transition:transform .4s ease;opacity:0;
-  }
-  .toast.show{transform:translateX(-50%) translateY(0);opacity:1;}
-
-  /* ---- Decision Trace ---- */
-  .trace-box{
-    background:#fdfcf7;border:1px solid var(--border);border-radius:12px;
-    padding:14px;margin-bottom:10px;font-size:12.5px;line-height:1.5;
-  }
-  .trace-rule{font-family:"SF Mono",Menlo,Consolas,monospace;font-size:11px;color:var(--muted);}
-  .trace-action{font-weight:700;color:var(--ink);}
-
-  /* ---- Celebration ---- */
   .celebrate{text-align:center;padding:20px 0;}
   .celebrate-icon{font-size:48px;margin-bottom:10px;}
   .celebrate-title{font-family:var(--font-display);font-size:26px;color:var(--sage-dark);margin-bottom:8px;}
   .celebrate-desc{font-size:15px;color:var(--ink);max-width:420px;margin:0 auto 16px;line-height:1.6;}
 
-  /* ---- Responsive ---- */
+  /* Trace */
+  .trace-box{background:#fdfcf7;border:1px solid var(--border);border-radius:12px;padding:14px;margin-bottom:10px;font-size:12.5px;line-height:1.5;}
+  .trace-rule{font-family:"SF Mono",Menlo,Consolas,monospace;font-size:11px;color:var(--muted);}
+  .trace-action{font-weight:700;color:var(--ink);}
+
+  /* Add word manual */
+  .manual-add{display:flex;gap:8px;margin-top:10px;align-items:center;}
+  .manual-add input{padding:8px 12px;border:1.5px solid var(--border);border-radius:10px;font-family:inherit;font-size:14px;flex:1;background:#fff;color:var(--ink);}
+  .manual-add input:focus{outline:none;border-color:var(--mist);}
+  .add-btn{padding:8px 14px;border-radius:10px;border:1.5px solid var(--mist);background:var(--mist-light);color:var(--mist-dark);font-size:13px;font-weight:700;cursor:pointer;white-space:nowrap;}
+
+  /* Empty state */
+  .empty-state{text-align:center;padding:20px;color:var(--muted);font-size:14px;}
+
+  /* Toast */
+  .toast{position:fixed;bottom:24px;left:50%;transform:translateX(-50%) translateY(100px);background:var(--theater-1);color:var(--marquee);padding:14px 28px;border-radius:14px;font-size:14px;font-weight:600;box-shadow:0 12px 36px rgba(0,0,0,0.4);border:1px solid rgba(240,202,133,0.3);z-index:300;transition:transform .4s ease,opacity .4s ease;opacity:0;}
+  .toast.show{transform:translateX(-50%) translateY(0);opacity:1;}
+
+  /* Responsive */
   @media(max-width:600px){
     .card{padding:24px 18px;}
-    .cold-read-text{font-size:17px;line-height:2;}
+    .cold-read-text{font-size:17px;line-height:2.2;}
     .compare-grid{grid-template-columns:1fr;}
-    .step-dot{min-width:60px;font-size:10px;}
-    .step-dot .step-num{font-size:16px;}
+    .step-dot{min-width:50px;font-size:9px;}
+    .step-dot .step-num{font-size:15px;}
+    .meaning-row{grid-template-columns:1fr;}
+    .chunk-row{grid-template-columns:1fr;}
   }
 </style>
 </head>
@@ -245,60 +226,94 @@
   <header>
     <div>
       <h1>Realtime Learning Pack</h1>
-      <div class="subtitle">BRIDGE Agent — live learning flow demo</div>
+      <div class="subtitle" id="stepSubtitle">Paste any text. Turn it into a learning session.</div>
     </div>
     <a class="home-link" href="../index.html">← Ava Word Bridge</a>
   </header>
   <main id="app"></main>
 </div>
-
 <div class="toast" id="toast"></div>
 
 <script>
 // ============================================================
-//  DATA — sample text and tagged words for the demo
-// ============================================================
-const SAMPLE_TEXT = {
-  title: "Sea Turtle Journey",
-  passage: "Sea turtles travel thousands of miles across the ocean. They navigate by sensing the Earth's magnetic field, which acts like an invisible compass. When a female turtle is ready to lay eggs, she returns to the exact beach where she was born. This remarkable journey is called migration. Scientists track these gentle creatures to protect their habitat and ensure their survival.",
-  taggedWords: [
-    { word: "migration", status: "can-read-meaning-unknown", meaning: "the movement of animals from one place to another, usually seasonally", sentence: "This remarkable journey is called migration." },
-    { word: "navigate", status: "can-read-meaning-unknown", meaning: "to find the way to a destination", sentence: "They navigate by sensing the Earth's magnetic field." },
-    { word: "habitat", status: "can-read-meaning-unknown", meaning: "the natural home of a living thing", sentence: "Scientists track these gentle creatures to protect their habitat." },
-  ],
-  taggedChunks: [
-    { chunk: "magnetic field", meaning: "an invisible force around the Earth that pulls on certain metals", sentence: "They navigate by sensing the Earth's magnetic field." },
-  ],
-  mainIdea: "Sea turtles travel huge distances across the ocean and return to their birthplace to lay eggs.",
-  gistAnswer: "Sea turtles migrate across the ocean and return to the beach where they were born to lay eggs.",
-};
-
-const FLOW_STEPS = [
-  { id:0, icon:"\uD83D\uDCD6", label:"Cold Read" },
-  { id:1, icon:"\uD83C\uDFF7\uFE0F", label:"Classify" },
-  { id:2, icon:"\uD83D\uDCA1", label:"Meaning" },
-  { id:3, icon:"\uD83D\uDCAC", label:"Sentence" },
-  { id:4, icon:"\uD83C\uDFAF", label:"Gist" },
-  { id:5, icon:"\uD83C\uDFDB\uFE0F", label:"Word Bank" },
-  { id:6, icon:"\uD83E\uDDEE", label:"Retrieve" },
-  { id:7, icon:"\u267E\uFE0F", label:"Reread" },
-];
-
-// ============================================================
 //  STATE
 // ============================================================
-let currentStep = 0;
-let coldReadMarks = {}; // word -> mark type
+let sessionData = {
+  text: "",
+  title: "",
+  words: [],         // [{word, meaning}]
+  chunks: [],        // [{chunk, meaning}]
+  coldReadMarks: {}, // word -> mark type
+  sentenceAnswers: {},
+  gistAnswer: "",
+  retrievalAnswer: null,
+  retrievalDone: false,
+};
+let currentStep = 0;  // 0=input, 1=cold read, 2=classify, 3=meaning, 4=sentence, 5=gist, 6=bank, 7=retrieval, 8=reread
 let selectedMarkType = null;
-let sentenceAnswers = {};
-let gistAnswer = "";
-let retrievalAnswer = null;
-let retrievalDone = false;
-let coldReadAccuracy = 0;
-let rereadAccuracy = 0;
+
+const STEP_LABELS = [
+  "Input text",
+  "Cold read",
+  "Classify",
+  "Meaning",
+  "Sentence",
+  "Gist",
+  "Word bank",
+  "Retrieve",
+  "Reread"
+];
+
+// Common words to exclude from auto-suggest
+const COMMON_WORDS = new Set([
+  'about','above','after','again','against','although','another','answer','because','before',
+  'behind','between','both','brought','cannot','certain','change','children','city','clothes',
+  'community','could','course','different','during','each','early','earth','enough','even',
+  'every','example','family','father','first','following','friend','from','general','great',
+  'group','happy','heard','heart','heavy','however','important','instead','interest','journal',
+  'just','knew','know','large','later','learned','little','live','many','maybe','might',
+  'money','mother','mountains','myself','never','night','nothing','number','often','once',
+  'other','our','people','perhaps','picture','place','problem','question','rather','really',
+  'reason','right','school','several','should','since','small','something','sometimes','station',
+  'still','such','sure','teacher','their','them','then','there','these','they','thing','think',
+  'those','through','today','together','too','toward','turned','understand','until','very',
+  'water','were','what','when','where','which','while','white','without','would','write','years',
+  'young','your','yourself','also','back','been','being','book','came','come','day','does','done',
+  'door','down','each','else','end','eyes','fact','feel','felt','find','found','gave','goes',
+  'going','gone','half','hand','head','help','high','house','kind','knew','last','left','let',
+  'life','like','line','list','live','long','look','made','make','many','mean','mind','more',
+  'most','much','must','name','near','need','next','only','open','order','own','page','part',
+  'past','people','point','put','read','ready','really','rest','room','run','said','same','sat',
+  'saw','seem','self','send','set,','short','show','side','six','some','start','stay','story',
+  'study','take','tell','than','that','them','then','them','there','these','they','thing',
+  'think','this','those','time','told','took','tree','true','try','turn','unit','upon','use',
+  'used','very','want','way','well','went','were','what','when','where','which','while','who',
+  'whole','why','wide','will','wind','with','wood','word','work','world','year','yet','you',
+  'afternoon','everyone','everything','someone','something','sometimes','somewhere','themselves',
+  'whatever','whenever','wherever','whichever','whoever','already','always','another','anyone',
+  'anybody','anything','anywhere','around','became','become','behind','beside','besides',
+  'between','beyond','both','certain','certainly','continue','develop','distance','especially',
+  'either','else','enough','evening','everywhere','excellent','excited','exciting','foreign',
+  'getting','happened','happening','having','himself','holiday','however','hundred','imagine',
+  'increase','indeed','interested','interesting','invite','island','itself','language','laughing',
+  'listening','machine','making','many','material','maybe','measure','message','middle','minute',
+  'morning','mountain','moving','myself','narrow','nation','national','natural','nearly','neither',
+  'nervous','never','office','officer','often','opening','outside','particular','perhaps',
+  'person','picture','piece','place','plains','planning','planting','pleased','position',
+  'possible','present','pretty','probably','problem','program','promise','province','public',
+  'quietly','quite','really','reason','record','remember','replied','report','result','return',
+  'school','science','section','seemed','several','shouted','shown','silent','simple','since',
+  'sleeping','slowly','smiled','someone','speaking','special','spread','started','station',
+  'stopped','straight','stronger','suddenly','supper','surely','surprise','surprised','system',
+  'taught','teaching','thought','through','thought','thrown','together','tomorrow','tonight',
+  'toward','traveled','trying','turning','understand','united','unless','until','usually',
+  'valley','village','waiting','walking','watching','wearing','weather','welcome','whether',
+  'wonder','wondered','wonderful','working','writing','written','yesterday','younger',
+]);
 
 const appEl = document.getElementById('app');
 const toastEl = document.getElementById('toast');
+const subtitleEl = document.getElementById('stepSubtitle');
 
 function showToast(msg) {
   toastEl.textContent = msg;
@@ -306,29 +321,66 @@ function showToast(msg) {
   setTimeout(() => toastEl.classList.remove('show'), 2500);
 }
 
-function escapeHtml(str) {
-  return String(str == null ? '' : str).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');
+function escapeHtml(s) {
+  return String(s == null ? '' : s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');
+}
+
+function escapeRegex(s) {
+  return s.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+}
+
+// Count syllables in a word (simple heuristic)
+function countSyllables(word) {
+  word = word.toLowerCase().replace(/[^a-z]/g, '');
+  if (word.length <= 3) return 1;
+  word = word.replace(/(?:[^laeiouy]es|ed|[^laeiouy]e)$/, '');
+  word = word.replace(/^y/, '');
+  const matches = word.match(/[aeiouy]{1,2}/g);
+  return matches ? matches.length : 1;
+}
+
+// Auto-suggest challenging words from text
+function suggestWords(text) {
+  const words = text.split(/\s+/).map(w => w.replace(/[.,;:!?"'()\[\]{}]/g, '')).filter(w => w.length > 0);
+  const seen = new Set();
+  const suggestions = [];
+  for (const w of words) {
+    const lower = w.toLowerCase();
+    if (seen.has(lower)) continue;
+    seen.add(lower);
+    if (lower.length < 6) continue;
+    if (COMMON_WORDS.has(lower)) continue;
+    const syl = countSyllables(lower);
+    if (syl >= 3 || lower.length >= 9) {
+      suggestions.push(w);
+    }
+  }
+  return suggestions.slice(0, 30);
+}
+
+// Find sentence containing a word
+function findSentence(text, word) {
+  const sentences = text.match(/[^.!?]+[.!?]*/g) || [text];
+  for (const s of sentences) {
+    const re = new RegExp('\\b' + escapeRegex(word) + '\\b', 'i');
+    if (re.test(s)) return s.trim();
+  }
+  // If no sentence boundary, return a chunk around the word
+  const re = new RegExp('[^.!?]*\\b' + escapeRegex(word) + '\\b[^.!?]*', 'i');
+  const m = text.match(re);
+  return m ? m[0].trim() : '';
 }
 
 // ============================================================
 //  RENDER — Step Track
 // ============================================================
 function renderStepTrack() {
-  return `<div class="step-track">${FLOW_STEPS.map(s => {
+  return `<div class="step-track">${STEP_LABELS.map((label, i) => {
     let cls = '';
-    if (s.id === currentStep) cls = 'active';
-    else if (s.id < currentStep) cls = 'done';
-    return `<div class="step-dot ${cls}" data-step="${s.id}"><span class="step-num">${s.id+1}</span>${s.label}</div>`;
+    if (i === currentStep) cls = 'active';
+    else if (i < currentStep) cls = 'done';
+    return `<div class="step-dot ${cls}" data-step="${i}"><span class="step-num">${i+1}</span>${label}</div>`;
   }).join('')}</div>`;
-}
-
-function renderFlowOverview() {
-  return `<div class="flow-overview">
-    ${FLOW_STEPS.map((s,i) => `
-      <div class="flow-step"><span class="flow-icon">${s.icon}</span>${s.label}</div>
-      ${i < FLOW_STEPS.length-1 ? '<div class="flow-arrow">\u2192</div>' : ''}
-    `).join('')}
-  </div>`;
 }
 
 function renderCard(inner) {
@@ -336,68 +388,150 @@ function renderCard(inner) {
 }
 
 // ============================================================
-//  STEP 0 — Cold Read
+//  STEP 0 — Input Text & Prepare Words
+// ============================================================
+function renderInput() {
+  subtitleEl.textContent = "Paste any text. Turn it into a learning session.";
+
+  const hasText = sessionData.text.trim().length > 0;
+  const hasWords = sessionData.words.length > 0;
+
+  let wordPrepHtml = '';
+  if (hasText) {
+    // Show suggested words
+    const suggested = suggestWords(sessionData.text);
+    const selectedWords = new Set(sessionData.words.map(w => w.word.toLowerCase()));
+
+    const chipHtml = suggested.map(w => {
+      const isSel = selectedWords.has(w.toLowerCase());
+      return `<span class="word-chip ${isSel?'selected':''}" data-word="${escapeHtml(w)}">${escapeHtml(w)}</span>`;
+    }).join('');
+
+    // Meaning input rows for selected words
+    const meaningHtml = sessionData.words.length > 0 ? sessionData.words.map((w, i) => `
+      <div class="meaning-row">
+        <div class="word-label">${escapeHtml(w.word)}</div>
+        <input type="text" data-idx="${i}" placeholder="What does this word mean? (simple explanation for Ava)" value="${escapeHtml(w.meaning||'')}">
+      </div>
+    `).join('') : '<div class="empty-state">Select words above, or type a word manually below.</div>';
+
+    // Chunk rows
+    const chunkHtml = sessionData.chunks.map((c, i) => `
+      <div class="chunk-row">
+        <input type="text" data-chunk-idx="${i}" data-field="chunk" placeholder="phrase (e.g. \"magnetic field\")" value="${escapeHtml(c.chunk||'')}">
+        <input type="text" data-chunk-idx="${i}" data-field="meaning" placeholder="What does this phrase mean?" value="${escapeHtml(c.meaning||'')}">
+      </div>
+    `).join('');
+
+    wordPrepHtml = `
+      <div class="step-hint"><b>Step 1:</b> Click words to select the ones Ava needs to learn. Then type a simple meaning for each.</div>
+
+      <h3>Suggested words from the text</h3>
+      <p class="subhead">Auto-detected challenging words (3+ syllables or 9+ letters). Click to select/deselect.</p>
+      <div class="word-chips">${chipHtml}</div>
+
+      <div class="manual-add">
+        <input type="text" id="manualWordInput" placeholder="Or type a word manually and press Add...">
+        <button class="add-btn" id="manualAddBtn">+ Add word</button>
+      </div>
+
+      <h3 style="margin-top:24px;">Meanings for selected words</h3>
+      <div class="meaning-rows">${meaningHtml}</div>
+
+      <h3 style="margin-top:20px;">Word chunks / phrases (optional)</h3>
+      <div id="chunkContainer">${chunkHtml || '<div class="empty-state">No chunks added yet.</div>'}</div>
+      <div class="btn-row"><button class="btn-outline" id="addChunkBtn">+ Add chunk</button></div>
+    `;
+  }
+
+  return renderCard(`
+    <h2>Paste text to begin</h2>
+    <p class="subhead">Any reading Ava brings home — story, science, social studies, math — becomes a structured learning session.</p>
+    <textarea class="text-input" id="textInput" placeholder="Paste the full text here. For example:
+
+Sea turtles travel thousands of miles across the ocean. They navigate by sensing the Earth's magnetic field...">${escapeHtml(sessionData.text)}</textarea>
+    <div class="btn-row">
+      <button class="btn btn-primary" id="analyzeBtn" ${!hasText?'disabled':''}>Analyze text →</button>
+    </div>
+    ${wordPrepHtml}
+    <div class="btn-row" style="margin-top:24px;">
+      <button class="btn btn-primary" id="startSessionBtn" ${!hasWords?'disabled':''}>Start Cold Read →</button>
+    </div>
+    ${!hasWords && hasText ? '<p style="text-align:center;font-size:13px;color:var(--muted);margin-top:8px;">Select at least one word and add its meaning to continue.</p>' : ''}
+  `);
+}
+
+// ============================================================
+//  STEP 1 — Cold Read
 // ============================================================
 function renderColdRead() {
-  const tokens = SAMPLE_TEXT.passage.split(/(\s+)/);
+  subtitleEl.textContent = "Cold Read — student reads aloud, teacher marks each word.";
+
+  // Build text with tagged words highlighted
+  const words = sessionData.words.map(w => w.word);
+  const text = sessionData.text;
+
+  // Tokenize text, wrapping tagged words
+  const taggedSet = new Set(words.map(w => w.toLowerCase()));
+  const tokens = text.split(/(\s+)/);
   const tokenHtml = tokens.map(t => {
-    const clean = t.replace(/[.,;:!?"'()]/g,'').trim();
-    const tagged = SAMPLE_TEXT.taggedWords.find(w => w.word === clean);
-    if (tagged && clean) {
-      const mark = coldReadMarks[clean];
+    const clean = t.replace(/[.,;:!?"'()\[\]{}]/g, '').trim();
+    if (clean && taggedSet.has(clean.toLowerCase())) {
+      const mark = sessionData.coldReadMarks[clean.toLowerCase()];
       let markCls = '';
       if (mark === 'accurate') markCls = 'cr-accurate';
       else if (mark === 'slow') markCls = 'cr-slow';
       else if (mark === 'misread') markCls = 'cr-misread';
       else if (mark === 'unknown-meaning') markCls = 'cr-unknown-meaning';
-      return `<span class="cr-token ${markCls}" data-word="${escapeHtml(clean)}">${escapeHtml(t)}</span>`;
+      return `<span class="cr-token ${markCls}" data-word="${escapeHtml(clean.toLowerCase())}">${escapeHtml(t)}</span>`;
     }
     return escapeHtml(t);
   }).join('');
 
-  const markedCount = Object.keys(coldReadMarks).length;
+  const markedCount = Object.keys(sessionData.coldReadMarks).length;
+  const totalWords = sessionData.words.length;
 
   return renderCard(`
-    ${renderFlowOverview()}
-    <h2>\uD83D\uDCD6 Cold Read</h2>
-    <p class="subhead">Student reads the passage cold — no meaning hints shown yet. Teacher marks each tagged word.</p>
+    <div class="step-hint"><b>How to use:</b> Pick a marking type below, then click each <span style="background:var(--highlight);padding:1px 4px;border-radius:3px;border-bottom:2px solid var(--highlight-border);font-weight:600;">highlighted word</span> in the text.</div>
+
     <div class="cold-read-text">${tokenHtml}</div>
+
     <div class="cr-marking-toolbar">
       <span class="label">Mark as:</span>
-      <button class="cr-mark-btn cr-accurate ${selectedMarkType==='accurate'?'active':''}" data-mark="accurate">\u2705 Accurate</button>
-      <button class="cr-mark-btn cr-slow ${selectedMarkType==='slow'?'active':''}" data-mark="slow">\u23F1 Slow / Hesitant</button>
-      <button class="cr-mark-btn cr-misread ${selectedMarkType==='misread'?'active':''}" data-mark="misread">\u274C Misread</button>
-      <button class="cr-mark-btn cr-unknown-meaning ${selectedMarkType==='unknown-meaning'?'active':''}" data-mark="unknown-meaning">\u2754 Read OK, meaning unknown</button>
+      <button class="cr-mark-btn cr-accurate ${selectedMarkType==='accurate'?'active':''}" data-mark="accurate">✅ Accurate</button>
+      <button class="cr-mark-btn cr-slow ${selectedMarkType==='slow'?'active':''}" data-mark="slow">⏱ Slow / Hesitant</button>
+      <button class="cr-mark-btn cr-misread ${selectedMarkType==='misread'?'active':''}" data-mark="misread">❌ Misread</button>
+      <button class="cr-mark-btn cr-unknown-meaning ${selectedMarkType==='unknown-meaning'?'active':''}" data-mark="unknown-meaning">❓ Read OK, meaning unknown</button>
     </div>
-    <div class="btn-row">
-      <button class="btn btn-primary" id="coldReadNext" ${markedCount < 3 ? 'disabled' : ''}>Classify Words \u2192</button>
-    </div>
-    ${markedCount < 3 ? '<p style="text-align:center;font-size:13px;color:var(--muted);margin-top:8px;">Mark all 3 tagged words to continue ('+markedCount+'/3)</p>' : ''}
-  `);
 
-  // Event handlers set in attachEvents
+    <div class="btn-row">
+      <button class="btn btn-primary" id="coldReadNext" ${markedCount < totalWords ? 'disabled' : ''}>Classify words →</button>
+    </div>
+    ${markedCount < totalWords ? '<p style="text-align:center;font-size:13px;color:var(--muted);margin-top:8px;">Mark all '+totalWords+' highlighted words to continue ('+markedCount+'/'+totalWords+')</p>' : ''}
+  `);
 }
 
 // ============================================================
-//  STEP 1 — Classification
+//  STEP 2 — Classification
 // ============================================================
 function renderClassification() {
-  const rows = SAMPLE_TEXT.taggedWords.map(w => {
-    const mark = coldReadMarks[w.word] || 'accurate';
-    let type, note;
-    if (mark === 'accurate') { type = 'ct-known'; note = 'Can read + knows meaning'; }
-    else if (mark === 'unknown-meaning') { type = 'ct-meaning'; note = 'Can decode, meaning unknown'; }
-    else if (mark === 'slow') { type = 'ct-decode'; note = 'Slow decoding, may need support'; }
-    else { type = 'ct-decode'; note = 'Misread — needs decoding support'; }
+  subtitleEl.textContent = "Classification — Decision Engine routes each word.";
+
+  const rows = sessionData.words.map(w => {
+    const mark = sessionData.coldReadMarks[w.word.toLowerCase()] || 'accurate';
+    let type, note, cls;
+    if (mark === 'accurate') { cls = 'ct-known'; type = 'KNOWN'; note = 'Can read + knows meaning'; }
+    else if (mark === 'unknown-meaning') { cls = 'ct-meaning'; type = 'MEANING GAP'; note = 'Can decode, meaning unknown'; }
+    else if (mark === 'slow') { cls = 'ct-decode'; type = 'DECODE GAP'; note = 'Slow decoding, may need support'; }
+    else { cls = 'ct-decode'; type = 'DECODE GAP'; note = 'Misread — needs decoding support'; }
     return `<div class="class-row">
       <div class="class-word">${escapeHtml(w.word)}</div>
-      <span class="class-type ${type}">${mark === 'accurate' ? 'KNOWN' : mark === 'unknown-meaning' ? 'MEANING GAP' : 'DECODE GAP'}</span>
+      <span class="class-type ${cls}">${type}</span>
       <div class="class-note">${escapeHtml(note)}</div>
     </div>`;
   }).join('');
 
-  // Also classify chunks
-  const chunkRows = SAMPLE_TEXT.taggedChunks.map(c => {
+  const chunkRows = sessionData.chunks.filter(c => c.chunk).map(c => {
     return `<div class="class-row">
       <div class="class-word">${escapeHtml(c.chunk)}</div>
       <span class="class-type ct-meaning">MEANING GAP</span>
@@ -405,213 +539,260 @@ function renderClassification() {
     </div>`;
   }).join('');
 
+  const needMeaning = sessionData.words.filter(w => {
+    const mark = sessionData.coldReadMarks[w.word.toLowerCase()];
+    return mark !== 'accurate';
+  }).length;
+
   return renderCard(`
-    <h2>\uD83C\uDFF7\uFE0F Word & Chunk Classification</h2>
+    <h2>Word & chunk classification</h2>
     <p class="subhead">The Decision Engine routes each word based on Cold Read evidence.</p>
     <div class="class-grid">${rows}${chunkRows}</div>
     <div class="trace-box">
-      <div class="trace-rule">RULE: canRead=true, meaningKnown=false \u2192 route: minimal_meaning_support</div>
-      <div class="trace-action">\u2192 3 words + 1 chunk routed to Meaning Support (just enough, not a dictionary)</div>
+      <div class="trace-rule">RULE: canRead=true, meaningKnown=false → route: minimal_meaning_support</div>
+      <div class="trace-action">→ ${needMeaning} word(s) + ${sessionData.chunks.filter(c=>c.chunk).length} chunk(s) routed to Meaning Support</div>
     </div>
     <div class="trace-box">
-      <div class="trace-rule">RULE: canRead=true, meaningKnown=true \u2192 route: recall_check (skip)</div>
-      <div class="trace-action">\u2192 Words already known are not re-taught</div>
+      <div class="trace-rule">RULE: canRead=true, meaningKnown=true → route: recall_check (skip re-teach)</div>
+      <div class="trace-action">→ Words already known are not re-taught</div>
     </div>
-    <div class="btn-row"><button class="btn btn-primary" id="classifyNext">Show Meaning Support \u2192</button></div>
+    <div class="btn-row"><button class="btn btn-primary" id="classifyNext">Show meaning support →</button></div>
   `);
 }
 
 // ============================================================
-//  STEP 2 — Meaning Support
+//  STEP 3 — Meaning Support
 // ============================================================
 function renderMeaningSupport() {
-  const wordCards = SAMPLE_TEXT.taggedWords.map(w => {
+  subtitleEl.textContent = "Meaning Support — just enough, not a dictionary.";
+
+  const needMeaningWords = sessionData.words.filter(w => {
+    const mark = sessionData.coldReadMarks[w.word.toLowerCase()];
+    return mark !== 'accurate' && w.meaning;
+  });
+  const allWordsWithMeaning = sessionData.words.filter(w => w.meaning);
+  const chunksWithMeaning = sessionData.chunks.filter(c => c.chunk && c.meaning);
+
+  const wordCards = (needMeaningWords.length > 0 ? needMeaningWords : allWordsWithMeaning).map(w => {
     return `<div class="meaning-card">
       <div class="meaning-word">${escapeHtml(w.word)}</div>
       <div class="meaning-def">${escapeHtml(w.meaning)}</div>
-      <div class="meaning-hint">\uD83D\uDC48 Just enough meaning to unlock the sentence — not a full dictionary entry</div>
     </div>`;
   }).join('');
-  const chunkCards = SAMPLE_TEXT.taggedChunks.map(c => {
-    return `<div class="meaning-card" style="background:var(--mist-light);border-color:#d7e5ef;">
-      <div class="meaning-word" style="color:var(--mist-dark);">${escapeHtml(c.chunk)}</div>
+
+  const chunkCards = chunksWithMeaning.map(c => {
+    return `<div class="meaning-card chunk">
+      <div class="meaning-word">${escapeHtml(c.chunk)}</div>
       <div class="meaning-def">${escapeHtml(c.meaning)}</div>
     </div>`;
   }).join('');
 
   return renderCard(`
-    <h2>\uD83D\uDCA1 Minimal Meaning Support</h2>
-    <p class="subhead">The Scaffold Engine provides just enough meaning — never more than needed.</p>
-    ${wordCards}${chunkCards}
+    <h2>Minimal meaning support</h2>
+    <p class="subhead">The Scaffold Engine shows just enough meaning — never more than needed. All meanings are teacher-prepared.</p>
+    ${wordCards || '<div class="empty-state">No meanings provided for words that need support.</div>'}
+    ${chunkCards}
     <div class="trace-box">
-      <div class="trace-rule">SCAFFOLD: meaning = teacher_prepared (not auto-generated)</div>
-      <div class="trace-action">\u2192 No external API, no dictionary lookup — all meanings come from teacher intake data</div>
+      <div class="trace-rule">SCAFFOLD: meaning = teacher_prepared (not auto-generated, no external API)</div>
+      <div class="trace-action">→ Every meaning comes from the intake data you typed in Step 1</div>
     </div>
-    <div class="btn-row"><button class="btn btn-primary" id="meaningNext">Build Sentence Meaning \u2192</button></div>
+    <div class="btn-row"><button class="btn btn-primary" id="meaningNext">Build sentence meaning →</button></div>
   `);
 }
 
 // ============================================================
-//  STEP 3 — Sentence Meaning
+//  STEP 4 — Sentence Meaning
 // ============================================================
 function renderSentenceMeaning() {
-  const sentences = SAMPLE_TEXT.taggedWords.map((w, i) => {
-    const sent = w.sentence;
-    // Highlight the target word in the sentence
-    const highlighted = sent.replace(new RegExp('\\b'+escapeRegex(w.word)+'\\b'), `<span class="hl">${escapeHtml(w.word)}</span>`);
+  subtitleEl.textContent = "Sentence meaning — student explains words in context.";
+
+  const boxes = sessionData.words.filter(w => w.meaning).map(w => {
+    const sent = findSentence(sessionData.text, w.word);
+    const highlighted = sent.replace(new RegExp('\\b'+escapeRegex(w.word)+'\\b', 'i'), `<span class="hl">${escapeHtml(w.word)}</span>`);
     return `<div class="sentence-box">
       <div class="sentence-text">${highlighted}</div>
       <div class="sentence-q">What does "${escapeHtml(w.word)}" mean in this sentence?</div>
-      <input type="text" class="sentence-input" data-word="${escapeHtml(w.word)}" placeholder="Use your own words..." value="${escapeHtml(sentenceAnswers[w.word]||'')}">
+      <input type="text" class="sentence-input" data-word="${escapeHtml(w.word)}" placeholder="Use your own words..." value="${escapeHtml(sessionData.sentenceAnswers[w.word]||'')}">
     </div>`;
   }).join('');
 
-  // Chunk sentence
-  const chunkSent = SAMPLE_TEXT.taggedChunks[0];
-  const chunkHighlighted = chunkSent.sentence.replace(
-    new RegExp(escapeRegex(chunkSent.chunk), 'i'),
-    `<span class="hl2">${escapeHtml(chunkSent.chunk)}</span>`
-  );
-  const chunkBox = `<div class="sentence-box">
-    <div class="sentence-text">${chunkHighlighted}</div>
-    <div class="sentence-q">What does "${escapeHtml(chunkSent.chunk)}" help the turtle do?</div>
-    <input type="text" class="sentence-input" data-word="${escapeHtml(chunkSent.chunk)}" placeholder="Use your own words..." value="${escapeHtml(sentenceAnswers[chunkSent.chunk]||'')}">
-  </div>`;
+  const chunkBoxes = sessionData.chunks.filter(c => c.chunk && c.meaning).map(c => {
+    const sent = findSentence(sessionData.text, c.chunk);
+    const highlighted = sent.replace(new RegExp(escapeRegex(c.chunk), 'i'), `<span class="hl2">${escapeHtml(c.chunk)}</span>`);
+    return `<div class="sentence-box">
+      <div class="sentence-text">${highlighted}</div>
+      <div class="sentence-q">What does "${escapeHtml(c.chunk)}" mean here?</div>
+      <input type="text" class="sentence-input" data-word="${escapeHtml(c.chunk)}" placeholder="Use your own words..." value="${escapeHtml(sessionData.sentenceAnswers[c.chunk]||'')}">
+    </div>`;
+  }).join('');
 
-  const answered = Object.keys(sentenceAnswers).length;
+  const answered = Object.keys(sessionData.sentenceAnswers).length;
+  const total = sessionData.words.filter(w => w.meaning).length + sessionData.chunks.filter(c => c.chunk && c.meaning).length;
 
   return renderCard(`
-    <h2>\uD83D\uDCAC Sentence Meaning</h2>
-    <p class="subhead">Student puts the word back into its sentence and explains it in their own words.</p>
-    ${sentences}${chunkBox}
+    <h2>Sentence meaning</h2>
+    <p class="subhead">Student puts each word back into its sentence and explains it in their own words.</p>
+    ${boxes || '<div class="empty-state">No words with meanings to practice.</div>'}
+    ${chunkBoxes}
     <div class="btn-row">
-      <button class="btn btn-primary" id="sentenceNext" ${answered < 3 ? 'disabled' : ''}>Find the Gist \u2192</button>
+      <button class="btn btn-primary" id="sentenceNext" ${total > 0 && answered < Math.min(3, total) ? 'disabled' : ''}>Find the gist →</button>
     </div>
-    ${answered < 3 ? '<p style="text-align:center;font-size:13px;color:var(--muted);margin-top:8px;">Answer at least 3 to continue ('+answered+'/4)</p>' : ''}
+    ${total > 0 && answered < Math.min(3, total) ? '<p style="text-align:center;font-size:13px;color:var(--muted);margin-top:8px;">Answer at least '+Math.min(3,total)+' to continue ('+answered+'/'+Math.min(3,total)+')</p>' : ''}
   `);
 }
 
 // ============================================================
-//  STEP 4 — Gist
+//  STEP 5 — Gist
 // ============================================================
 function renderGist() {
+  subtitleEl.textContent = "Gist — what is the whole passage mostly about?";
   return renderCard(`
-    <h2>\uD83C\uDFAF Gist</h2>
+    <h2>Gist</h2>
     <p class="subhead">Now that every word is unlocked, what is the whole passage mostly about?</p>
     <div class="gist-prompt">In one sentence, what is the main idea of this passage?</div>
-    <textarea class="gist-input" id="gistInput" placeholder="Type your answer here...">${escapeHtml(gistAnswer)}</textarea>
+    <textarea class="gist-input" id="gistInput" placeholder="Type your answer here...">${escapeHtml(sessionData.gistAnswer)}</textarea>
     <div class="btn-row">
-      <button class="btn btn-primary" id="gistNext" ${!gistAnswer.trim() ? 'disabled' : ''}>Save to Word Bank \u2192</button>
+      <button class="btn btn-primary" id="gistNext" ${!sessionData.gistAnswer.trim() ? 'disabled' : ''}>Save to word bank →</button>
     </div>
   `);
 }
 
 // ============================================================
-//  STEP 5 — Word Bank
+//  STEP 6 — Word Bank
 // ============================================================
 function renderWordBank() {
-  const wordChips = SAMPLE_TEXT.taggedWords.map(w =>
+  subtitleEl.textContent = "Word bank — every word saved with its source text.";
+
+  const wordChips = sessionData.words.map(w =>
     `<span class="bank-chip">${escapeHtml(w.word)}</span>`
   ).join('');
-  const chunkChips = SAMPLE_TEXT.taggedChunks.map(c =>
+  const chunkChips = sessionData.chunks.filter(c => c.chunk).map(c =>
     `<span class="bank-chip chunk">${escapeHtml(c.chunk)}</span>`
   ).join('');
 
   return renderCard(`
-    <h2>\uD83C\uDFDB\uFE0F Personal Word Bank</h2>
+    <h2>Personal word bank</h2>
     <p class="subhead">Every banked word stays linked to its source text, sentence, and word position.</p>
     <div class="bank-section">
-      <div class="bank-title">Word Bank (3 new words)</div>
-      <div class="bank-chips">${wordChips}</div>
+      <div class="bank-title">Word bank (${sessionData.words.length} words)</div>
+      <div class="bank-chips">${wordChips || '<div class="empty-state">No words banked.</div>'}</div>
     </div>
-    <div class="bank-section">
-      <div class="bank-title">Chunk Bank (1 new phrase)</div>
+    ${chunkChips ? `<div class="bank-section">
+      <div class="bank-title">Chunk bank (${sessionData.chunks.filter(c=>c.chunk).length} phrases)</div>
       <div class="bank-chips">${chunkChips}</div>
-    </div>
+    </div>` : ''}
     <div class="trace-box">
       <div class="trace-rule">STORAGE: localStorage — no cloud sync, no accounts</div>
-      <div class="trace-action">\u2192 Student model updated: encounter + meaning evidence logged for each word</div>
+      <div class="trace-action">→ Student model updated: encounter + meaning evidence logged for each word</div>
     </div>
     <div class="trace-box">
       <div class="trace-rule">FADING: next encounter starts with bare recall check (not re-teach)</div>
-      <div class="trace-action">\u2192 If recall succeeds \u2192 log transfer evidence on existing Bank entry (no duplicate)</div>
+      <div class="trace-action">→ If recall succeeds → log transfer evidence on existing Bank entry</div>
     </div>
-    <div class="btn-row"><button class="btn btn-primary" id="bankNext">Retrieval Practice \u2192</button></div>
+    <div class="btn-row"><button class="btn btn-primary" id="bankNext">Retrieval practice →</button></div>
   `);
 }
 
 // ============================================================
-//  STEP 6 — Retrieval Practice
+//  STEP 7 — Retrieval Practice
 // ============================================================
 function renderRetrieval() {
-  const qWord = SAMPLE_TEXT.taggedWords[0];
-  const options = [
-    { text: "The movement of animals from one place to another, usually seasonally", correct: true },
-    { text: "A type of sea turtle that lives in the ocean", correct: false },
-    { text: "The place where baby turtles are born", correct: false },
-    { text: "A scientist who studies ocean animals", correct: false },
+  subtitleEl.textContent = "Retrieval practice — can the student recall without hints?";
+
+  // Use the first word that has a meaning
+  const wordsWithMeaning = sessionData.words.filter(w => w.meaning);
+  if (wordsWithMeaning.length === 0) {
+    return renderCard(`
+      <h2>Retrieval practice</h2>
+      <div class="empty-state">No words with meanings to practice. Go back and add meanings in Step 1.</div>
+      <div class="btn-row"><button class="btn btn-primary" id="retNext">Skip to reread →</button></div>
+    `);
+  }
+
+  const qWord = wordsWithMeaning[0];
+  // Build options: correct meaning + distractors from other words' meanings
+  const correctMeaning = qWord.meaning;
+  const otherMeanings = wordsWithMeaning.slice(1).map(w => w.meaning);
+
+  // If not enough distractors, add generic wrong answers
+  const genericDistractors = [
+    "A type of animal that lives in the ocean",
+    "The place where something happens",
+    "A person who studies science",
+    "To move quickly from one place to another",
+    "Something that is very old",
   ];
-  const optHtml = options.map((o,i) =>
-    `<button class="ret-btn ${retrievalAnswer===i?(o.correct?'correct':'incorrect'):''}" data-opt="${i}">${String.fromCharCode(65+i)}. ${escapeHtml(o.text)}</button>`
+  const distractors = [...otherMeanings, ...genericDistractors].slice(0, 3);
+
+  const allOptions = [{text: correctMeaning, correct: true}, ...distractors.map(d => ({text: d, correct: false}))];
+  // Shuffle
+  for (let i = allOptions.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1));
+    [allOptions[i], allOptions[j]] = [allOptions[j], allOptions[i]];
+  }
+
+  const optHtml = allOptions.map((o, i) =>
+    `<button class="ret-btn ${sessionData.retrievalAnswer===i?(o.correct?'correct':'incorrect'):''}" data-opt="${i}">${String.fromCharCode(65+i)}. ${escapeHtml(o.text)}</button>`
   ).join('');
 
   let feedback = '';
-  if (retrievalDone) {
-    feedback = retrievalAnswer !== null && options[retrievalAnswer].correct
-      ? '<div class="ret-feedback show good">\u2705 Correct! "migration" = the movement of animals from one place to another.</div>'
-      : '<div class="ret-feedback show try-again">\u274C Not quite — the correct answer is A. "migration" = the movement of animals from one place to another.</div>';
+  if (sessionData.retrievalDone) {
+    const chosen = sessionData.retrievalAnswer !== null ? allOptions[sessionData.retrievalAnswer] : null;
+    feedback = chosen && chosen.correct
+      ? '<div class="ret-feedback show good">✅ Correct! "'+escapeHtml(qWord.word)+'" = '+escapeHtml(correctMeaning)+'</div>'
+      : '<div class="ret-feedback show try-again">❌ Not quite — "'+escapeHtml(qWord.word)+'" = '+escapeHtml(correctMeaning)+'</div>';
   }
 
   return renderCard(`
-    <h2>\uD83E\uDDEE Retrieval Practice</h2>
+    <h2>Retrieval practice</h2>
     <p class="subhead">Short check: can the student recall the meaning without any hint?</p>
     <div class="ret-q">What does <b>"${escapeHtml(qWord.word)}"</b> mean?</div>
     <div class="ret-options">${optHtml}</div>
     ${feedback}
     <div class="btn-row">
-      <button class="btn btn-primary" id="retNext" ${!retrievalDone ? 'disabled' : ''}>Reread & Compare \u2192</button>
+      <button class="btn btn-primary" id="retNext" ${!sessionData.retrievalDone ? 'disabled' : ''}>Reread & compare →</button>
     </div>
   `);
 }
 
 // ============================================================
-//  STEP 7 — Reread & Before/After
+//  STEP 8 — Reread / Before-After
 // ============================================================
 function renderReread() {
-  // Calculate cold read accuracy
-  const totalWords = SAMPLE_TEXT.taggedWords.length;
+  subtitleEl.textContent = "Reread — compare before and after.";
+
+  const totalWords = sessionData.words.length;
   let accurateCount = 0;
-  SAMPLE_TEXT.taggedWords.forEach(w => {
-    if (coldReadMarks[w.word] === 'accurate' || coldReadMarks[w.word] === 'unknown-meaning') accurateCount++;
+  sessionData.words.forEach(w => {
+    const mark = sessionData.coldReadMarks[w.word.toLowerCase()];
+    if (mark === 'accurate' || mark === 'unknown-meaning') accurateCount++;
   });
-  coldReadAccuracy = Math.round((accurateCount / totalWords) * 100);
-  // Simulate improvement: after learning, student reads all words accurately
-  rereadAccuracy = 100;
+  const coldAccuracy = totalWords > 0 ? Math.round((accurateCount / totalWords) * 100) : 0;
+  const rereadAccuracy = 100;
 
   return renderCard(`
-    <h2>\u267E\uFE0F Reread — Before / After</h2>
+    <h2>Reread — before / after</h2>
     <p class="subhead">Student rereads the same passage. Compare the evidence.</p>
     <div class="compare-grid">
       <div class="compare-col compare-before">
-        <div class="compare-label">\uD83D\uDCD6 Before (Cold Read)</div>
-        <div class="compare-stat">${coldReadAccuracy}%</div>
+        <div class="compare-label">📖 Before (Cold Read)</div>
+        <div class="compare-stat">${coldAccuracy}%</div>
         <div class="compare-desc">Words read accurately or with known meaning</div>
       </div>
       <div class="compare-col compare-after">
-        <div class="compare-label">\u267E\uFE0F After (Reread)</div>
+        <div class="compare-label">♾️ After (Reread)</div>
         <div class="compare-stat">${rereadAccuracy}%</div>
         <div class="compare-desc">All tagged words now read accurately with meaning</div>
       </div>
     </div>
-    <div class="compare-arrow">\u2192</div>
     <div class="celebrate">
-      <div class="celebrate-icon">\uD83C\uDF89</div>
-      <div class="celebrate-title">Evidence of Growth</div>
+      <div class="celebrate-icon">🎉</div>
+      <div class="celebrate-title">Evidence of growth</div>
       <div class="celebrate-desc">The student met the same words again — this time with full understanding. Every banked word is linked to its source text for future retrieval.</div>
     </div>
     <div class="btn-row">
-      <a href="../index.html" class="btn btn-outline">\u2190 Back to Ava Word Bridge</a>
-      <button class="btn btn-primary" id="restartBtn">Restart Demo \u21BA</button>
+      <a href="../index.html" class="btn btn-outline">← Back to Ava Word Bridge</a>
+      <button class="btn btn-primary" id="restartBtn">New text ↻</button>
     </div>
   `);
 }
@@ -622,15 +803,16 @@ function renderReread() {
 function render() {
   let html;
   switch(currentStep) {
-    case 0: html = renderColdRead(); break;
-    case 1: html = renderClassification(); break;
-    case 2: html = renderMeaningSupport(); break;
-    case 3: html = renderSentenceMeaning(); break;
-    case 4: html = renderGist(); break;
-    case 5: html = renderWordBank(); break;
-    case 6: html = renderRetrieval(); break;
-    case 7: html = renderReread(); break;
-    default: html = renderColdRead();
+    case 0: html = renderInput(); break;
+    case 1: html = renderColdRead(); break;
+    case 2: html = renderClassification(); break;
+    case 3: html = renderMeaningSupport(); break;
+    case 4: html = renderSentenceMeaning(); break;
+    case 5: html = renderGist(); break;
+    case 6: html = renderWordBank(); break;
+    case 7: html = renderRetrieval(); break;
+    case 8: html = renderReread(); break;
+    default: html = renderInput();
   }
   appEl.innerHTML = html;
   attachEvents();
@@ -641,7 +823,7 @@ function render() {
 //  EVENT ATTACHMENT
 // ============================================================
 function attachEvents() {
-  // Step track navigation (only allow going back to completed steps)
+  // Step track navigation (only back to completed steps)
   appEl.querySelectorAll('.step-dot').forEach(dot => {
     dot.addEventListener('click', () => {
       const step = parseInt(dot.dataset.step);
@@ -649,8 +831,103 @@ function attachEvents() {
     });
   });
 
-  // Cold Read
+  // Step 0 — Input
   if (currentStep === 0) {
+    const textInput = document.getElementById('textInput');
+    if (textInput) {
+      textInput.addEventListener('input', () => {
+        sessionData.text = textInput.value;
+        // Re-render to update analyze button state
+        const analyzeBtn = document.getElementById('analyzeBtn');
+        if (analyzeBtn) analyzeBtn.disabled = !sessionData.text.trim();
+      });
+    }
+
+    const analyzeBtn = document.getElementById('analyzeBtn');
+    if (analyzeBtn) analyzeBtn.addEventListener('click', () => {
+      // Auto-select all suggested words
+      const suggested = suggestWords(sessionData.text);
+      const existing = new Set(sessionData.words.map(w => w.word.toLowerCase()));
+      suggested.forEach(w => {
+        if (!existing.has(w.toLowerCase())) {
+          sessionData.words.push({word: w, meaning: ''});
+        }
+      });
+      render();
+    });
+
+    // Word chip toggle
+    appEl.querySelectorAll('.word-chip').forEach(chip => {
+      chip.addEventListener('click', () => {
+        const word = chip.dataset.word;
+        const idx = sessionData.words.findIndex(w => w.word.toLowerCase() === word.toLowerCase());
+        if (idx >= 0) {
+          sessionData.words.splice(idx, 1);
+        } else {
+          sessionData.words.push({word: word, meaning: ''});
+        }
+        render();
+      });
+    });
+
+    // Meaning inputs
+    appEl.querySelectorAll('.meaning-row input[data-idx]').forEach(inp => {
+      inp.addEventListener('input', () => {
+        const idx = parseInt(inp.dataset.idx);
+        sessionData.words[idx].meaning = inp.value;
+        const startBtn = document.getElementById('startSessionBtn');
+        if (startBtn) startBtn.disabled = sessionData.words.filter(w => w.meaning).length === 0;
+      });
+    });
+
+    // Manual add word
+    const manualInput = document.getElementById('manualWordInput');
+    const manualBtn = document.getElementById('manualAddBtn');
+    if (manualBtn) manualBtn.addEventListener('click', () => {
+      const word = manualInput.value.trim();
+      if (!word) return;
+      const exists = sessionData.words.find(w => w.word.toLowerCase() === word.toLowerCase());
+      if (!exists) {
+        sessionData.words.push({word: word, meaning: ''});
+        render();
+      }
+    });
+    if (manualInput) manualInput.addEventListener('keydown', (e) => {
+      if (e.key === 'Enter') { e.preventDefault(); manualBtn.click(); }
+    });
+
+    // Chunk inputs
+    appEl.querySelectorAll('.chunk-row input[data-chunk-idx]').forEach(inp => {
+      inp.addEventListener('input', () => {
+        const idx = parseInt(inp.dataset.chunkIdx);
+        const field = inp.dataset.field;
+        if (!sessionData.chunks[idx]) sessionData.chunks[idx] = {chunk:'', meaning:''};
+        sessionData.chunks[idx][field] = inp.value;
+      });
+    });
+
+    // Add chunk button
+    const addChunkBtn = document.getElementById('addChunkBtn');
+    if (addChunkBtn) addChunkBtn.addEventListener('click', () => {
+      sessionData.chunks.push({chunk: '', meaning: ''});
+      render();
+    });
+
+    // Start session
+    const startBtn = document.getElementById('startSessionBtn');
+    if (startBtn) startBtn.addEventListener('click', () => {
+      // Filter out words/chunks without meaning
+      sessionData.words = sessionData.words.filter(w => w.word);
+      sessionData.chunks = sessionData.chunks.filter(c => c.chunk);
+      if (sessionData.words.length > 0) {
+        currentStep = 1;
+        render();
+      }
+    });
+  }
+
+  // Step 1 — Cold Read
+  if (currentStep === 1) {
     appEl.querySelectorAll('.cr-mark-btn').forEach(btn => {
       btn.addEventListener('click', () => {
         selectedMarkType = btn.dataset.mark;
@@ -660,97 +937,96 @@ function attachEvents() {
     appEl.querySelectorAll('.cr-token').forEach(tok => {
       tok.addEventListener('click', () => {
         if (!selectedMarkType) { showToast('Pick a marking type first'); return; }
-        coldReadMarks[tok.dataset.word] = selectedMarkType;
+        sessionData.coldReadMarks[tok.dataset.word] = selectedMarkType;
         render();
       });
     });
     const nextBtn = document.getElementById('coldReadNext');
     if (nextBtn) nextBtn.addEventListener('click', () => {
-      currentStep = 1; render();
+      currentStep = 2; render();
     });
   }
 
-  // Classification
-  if (currentStep === 1) {
-    const btn = document.getElementById('classifyNext');
-    if (btn) btn.addEventListener('click', () => { currentStep = 2; render(); });
-  }
-
-  // Meaning Support
+  // Step 2 — Classify
   if (currentStep === 2) {
-    const btn = document.getElementById('meaningNext');
+    const btn = document.getElementById('classifyNext');
     if (btn) btn.addEventListener('click', () => { currentStep = 3; render(); });
   }
 
-  // Sentence Meaning
+  // Step 3 — Meaning
   if (currentStep === 3) {
+    const btn = document.getElementById('meaningNext');
+    if (btn) btn.addEventListener('click', () => { currentStep = 4; render(); });
+  }
+
+  // Step 4 — Sentence
+  if (currentStep === 4) {
     appEl.querySelectorAll('.sentence-input').forEach(inp => {
       inp.addEventListener('input', () => {
-        sentenceAnswers[inp.dataset.word] = inp.value;
+        sessionData.sentenceAnswers[inp.dataset.word] = inp.value;
+        const total = sessionData.words.filter(w => w.meaning).length + sessionData.chunks.filter(c => c.chunk && c.meaning).length;
+        const answered = Object.keys(sessionData.sentenceAnswers).length;
+        const btn = document.getElementById('sentenceNext');
+        if (btn) btn.disabled = answered < Math.min(3, total);
       });
     });
     const btn = document.getElementById('sentenceNext');
     if (btn) btn.addEventListener('click', () => {
-      if (Object.keys(sentenceAnswers).length >= 3) { currentStep = 4; render(); }
+      const total = sessionData.words.filter(w => w.meaning).length + sessionData.chunks.filter(c => c.chunk && c.meaning).length;
+      const answered = Object.keys(sessionData.sentenceAnswers).length;
+      if (answered >= Math.min(3, total) || total === 0) { currentStep = 5; render(); }
     });
   }
 
-  // Gist
-  if (currentStep === 4) {
+  // Step 5 — Gist
+  if (currentStep === 5) {
     const inp = document.getElementById('gistInput');
     if (inp) {
       inp.addEventListener('input', () => {
-        gistAnswer = inp.value;
+        sessionData.gistAnswer = inp.value;
         const btn = document.getElementById('gistNext');
-        if (btn) btn.disabled = !gistAnswer.trim();
+        if (btn) btn.disabled = !sessionData.gistAnswer.trim();
       });
     }
     const btn = document.getElementById('gistNext');
     if (btn) btn.addEventListener('click', () => {
-      if (gistAnswer.trim()) { currentStep = 5; render(); }
+      if (sessionData.gistAnswer.trim()) { currentStep = 6; render(); }
     });
   }
 
-  // Word Bank
-  if (currentStep === 5) {
+  // Step 6 — Bank
+  if (currentStep === 6) {
     const btn = document.getElementById('bankNext');
-    if (btn) btn.addEventListener('click', () => { currentStep = 6; render(); });
+    if (btn) btn.addEventListener('click', () => { currentStep = 7; render(); });
   }
 
-  // Retrieval
-  if (currentStep === 6) {
+  // Step 7 — Retrieval
+  if (currentStep === 7) {
     appEl.querySelectorAll('.ret-btn').forEach(btn => {
       btn.addEventListener('click', () => {
-        retrievalAnswer = parseInt(btn.dataset.opt);
-        retrievalDone = true;
+        sessionData.retrievalAnswer = parseInt(btn.dataset.opt);
+        sessionData.retrievalDone = true;
         render();
       });
     });
     const btn = document.getElementById('retNext');
     if (btn) btn.addEventListener('click', () => {
-      if (retrievalDone) { currentStep = 7; render(); }
+      if (sessionData.retrievalDone || sessionData.words.filter(w => w.meaning).length === 0) {
+        currentStep = 8; render();
+      }
     });
   }
 
-  // Reread
-  if (currentStep === 7) {
+  // Step 8 — Reread
+  if (currentStep === 8) {
     const btn = document.getElementById('restartBtn');
     if (btn) btn.addEventListener('click', () => {
-      // Reset all state
-      currentStep = 0;
-      coldReadMarks = {};
+      sessionData = {text:"", title:"", words:[], chunks:[], coldReadMarks:{}, sentenceAnswers:{}, gistAnswer:"", retrievalAnswer:null, retrievalDone:false};
       selectedMarkType = null;
-      sentenceAnswers = {};
-      gistAnswer = "";
-      retrievalAnswer = null;
-      retrievalDone = false;
+      currentStep = 0;
       render();
     });
   }
-}
-
-function escapeRegex(s) {
-  return s.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
 }
 
 // ============================================================
