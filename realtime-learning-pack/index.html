@@ -51,6 +51,27 @@
   .step-hint{font-size:13px;color:var(--mist-dark);background:var(--mist-light);padding:10px 14px;border-radius:12px;margin-bottom:16px;display:flex;align-items:center;gap:8px;}
   .step-hint b{color:var(--mist-dark);}
 
+  /* Header Phase Progress */
+  .phase-bar{display:flex;gap:3px;margin-top:14px;padding:8px 10px;background:rgba(255,246,211,0.08);border-radius:12px;border:0.5px solid rgba(255,246,211,0.15);}
+  .phase-seg{
+    flex:1;padding:7px 6px;border-radius:8px;text-align:center;cursor:pointer;
+    background:rgba(255,246,211,0.06);transition:all .25s ease;
+    border:0.5px solid transparent;position:relative;
+  }
+  .phase-seg .phase-name{display:block;font-size:10px;font-weight:700;letter-spacing:.04em;text-transform:uppercase;color:rgba(244,236,216,0.4);margin-bottom:3px;}
+  .phase-seg .phase-count{display:block;font-size:9px;color:rgba(244,236,216,0.3);}
+  .phase-seg .phase-bar-fill{position:absolute;left:0;bottom:0;height:3px;width:0;border-radius:0 0 8px 8px;background:var(--peach);transition:width .4s ease;}
+  .phase-seg.s-prepare .phase-bar-fill{background:var(--peach);}
+  .phase-seg.s-assess .phase-bar-fill{background:var(--gold);}
+  .phase-seg.s-comprehend .phase-bar-fill{background:var(--lav);}
+  .phase-seg.s-retain .phase-bar-fill{background:var(--sage);}
+  .phase-seg.s-grow .phase-bar-fill{background:var(--mist);}
+  .phase-seg.active{background:rgba(255,246,211,0.18);border-color:rgba(255,246,211,0.3);}
+  .phase-seg.active .phase-name{color:var(--marquee);}
+  .phase-seg.done{background:rgba(143,174,143,0.1);border-color:rgba(143,174,143,0.2);}
+  .phase-seg.done .phase-name{color:rgba(244,236,216,0.65);}
+  .phase-seg.done .phase-bar-fill{width:100%;}
+
   /* Step Track */
   .step-track{display:flex;gap:4px;margin-bottom:24px;flex-wrap:wrap;}
   .step-dot{
@@ -224,9 +245,10 @@
 <body>
 <div class="app-shell">
   <header>
-    <div>
+    <div style="flex:1;min-width:0;">
       <h1>Realtime Learning Pack</h1>
       <div class="subtitle" id="stepSubtitle">Paste any text. Turn it into a learning session.</div>
+      <div class="phase-bar" id="phaseBar"></div>
     </div>
     <a class="home-link" href="../index.html">← Ava Word Bridge</a>
   </header>
@@ -263,6 +285,56 @@ const STEP_LABELS = [
   "Retrieve",
   "Reread"
 ];
+
+// Phase groups: step indices → phase
+const PHASES = [
+  { id:'prepare',    name:'Prepare',     steps:[0],              color:'var(--peach)' },
+  { id:'assess',     name:'Assess',      steps:[1,2],            color:'var(--gold)' },
+  { id:'comprehend', name:'Comprehend',  steps:[3,4,5],          color:'var(--lav)' },
+  { id:'retain',     name:'Retain',      steps:[6,7],            color:'var(--sage)' },
+  { id:'grow',       name:'Grow',        steps:[8],              color:'var(--mist)' },
+];
+
+function getCurrentPhaseIdx() {
+  for (let i = PHASES.length - 1; i >= 0; i--) {
+    if (PHASES[i].steps.includes(currentStep)) return i;
+  }
+  return 0;
+}
+
+function renderHeaderProgress() {
+  const phaseBar = document.getElementById('phaseBar');
+  if (!phaseBar) return;
+  const curPhase = getCurrentPhaseIdx();
+  phaseBar.innerHTML = PHASES.map((p, i) => {
+    const isActive = i === curPhase;
+    const isDone = i < curPhase;
+    // Fill width: progress within current phase
+    let fillPct = 0;
+    if (isDone) fillPct = 100;
+    else if (isActive) {
+      const stepsInPhase = p.steps.length;
+      const stepOffset = p.steps.indexOf(currentStep);
+      fillPct = Math.round(((stepOffset + 1) / stepsInPhase) * 100);
+    }
+    const cls = isActive ? 'active' : (isDone ? 'done' : '');
+    return `<div class="phase-seg s-${p.id} ${cls}" data-phase="${i}">
+      <span class="phase-name">${p.name}</span>
+      <span class="phase-count">${p.steps.length} step${p.steps.length>1?'s':''}</span>
+      <div class="phase-bar-fill" style="width:${fillPct}%;"></div>
+    </div>`;
+  }).join('');
+  // Attach navigation: clicking a phase jumps to its first step if previous
+  phaseBar.querySelectorAll('.phase-seg').forEach(seg => {
+    seg.addEventListener('click', () => {
+      const phaseIdx = parseInt(seg.dataset.phase);
+      if (phaseIdx < curPhase) {
+        currentStep = PHASES[phaseIdx].steps[0];
+        render();
+      }
+    });
+  });
+}
 
 // Common words to exclude from auto-suggest
 const COMMON_WORDS = new Set([
@@ -384,7 +456,7 @@ function renderStepTrack() {
 }
 
 function renderCard(inner) {
-  return `<div class="card">${renderStepTrack()}${inner}</div>`;
+  return `<div class="card">${inner}</div>`;
 }
 
 // ============================================================
@@ -815,6 +887,7 @@ function render() {
     default: html = renderInput();
   }
   appEl.innerHTML = html;
+  renderHeaderProgress();
   attachEvents();
   window.scrollTo({top:0, behavior:'smooth'});
 }
