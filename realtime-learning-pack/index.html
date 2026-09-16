@@ -33,8 +33,11 @@
   header{padding:26px 0 8px;display:flex;justify-content:space-between;align-items:flex-start;flex-wrap:wrap;gap:8px;}
   header h1{font-family:var(--font-display);font-size:24px;color:var(--lav-dark);margin:0;font-weight:700;}
   header .subtitle{font-size:13px;color:var(--muted);}
+  header .header-links{display:flex;gap:14px;align-items:center;flex-wrap:wrap;}
   header .home-link{font-size:13px;color:var(--mist);text-decoration:none;font-weight:600;}
   header .home-link:hover{color:var(--mist-dark);}
+  header .library-link{font-size:13px;color:var(--lav);text-decoration:none;font-weight:600;background:var(--lav-light);padding:6px 14px;border-radius:10px;border:1.5px solid var(--lav);transition:all .15s ease;}
+  header .library-link:hover{background:var(--lav);color:#fff;}
   main{flex:1;padding-top:14px;}
   .card{
     background:#ffffff;border-radius:var(--radius-lg);
@@ -234,6 +237,39 @@
   .toast{position:fixed;bottom:24px;left:50%;transform:translateX(-50%) translateY(100px);background:var(--lav);color:#fff;padding:14px 28px;border-radius:14px;font-size:14px;font-weight:600;box-shadow:0 12px 36px rgba(155,89,224,0.3);z-index:300;transition:transform .4s ease,opacity .4s ease;opacity:0;}
   .toast.show{transform:translateX(-50%) translateY(0);opacity:1;}
 
+  /* === Review Library === */
+  .review-list{display:flex;flex-direction:column;gap:12px;}
+  .review-card{
+    display:flex;align-items:center;gap:14px;padding:16px 18px;
+    background:#fff;border:2px solid var(--border);border-radius:16px;
+    transition:all .2s ease;
+  }
+  .review-card:hover{border-color:var(--lav);box-shadow:0 4px 16px rgba(155,89,224,0.10);}
+  .review-card-info{flex:1;min-width:0;}
+  .review-card-date{font-size:12px;color:var(--muted);font-weight:600;}
+  .review-card-title{font-size:16px;font-weight:700;color:var(--ink);font-family:var(--font-display);margin:3px 0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;}
+  .review-card-meta{font-size:13px;color:var(--muted);}
+  .review-card-actions{display:flex;gap:8px;flex-shrink:0;}
+  .review-btn{padding:8px 14px;border-radius:10px;font-size:13px;font-weight:600;cursor:pointer;border:2px solid transparent;transition:all .15s ease;}
+  .review-btn.view{background:var(--lav-light);color:var(--lav-dark);border-color:var(--lav);}
+  .review-btn.view:hover{background:var(--lav);color:#fff;}
+  .review-btn.delete{background:var(--peach-light);color:var(--peach-dark);border-color:var(--peach);}
+  .review-btn.delete:hover{background:var(--peach);color:#fff;}
+
+  /* === Review Detail === */
+  .review-section{margin-bottom:24px;}
+  .review-section-title{font-size:13px;font-weight:800;letter-spacing:.06em;text-transform:uppercase;color:var(--lav-dark);margin-bottom:10px;display:flex;align-items:center;gap:6px;}
+  .review-word-grid{display:flex;flex-wrap:wrap;gap:8px;}
+  .review-word-card{background:var(--lav-light);border:1.5px solid var(--lav);border-radius:12px;padding:10px 14px;min-width:140px;}
+  .review-word-card.chunk{background:var(--mist-light);border-color:var(--mist);}
+  .review-word-card .rw-word{font-weight:800;color:var(--lav-dark);font-size:15px;font-family:var(--font-display);}
+  .review-word-card.chunk .rw-word{color:var(--mist-dark);}
+  .review-word-card .rw-meaning{font-size:13px;color:var(--ink);margin-top:3px;line-height:1.4;}
+  .review-answer-box{font-size:15px;color:var(--ink);padding:10px 14px;background:var(--mist-light);border-radius:10px;border:1.5px solid var(--mist);margin-top:8px;}
+
+  /* Saved badge */
+  .saved-badge{display:inline-flex;align-items:center;gap:6px;font-size:13px;font-weight:700;color:var(--sage-dark);background:var(--sage-light);padding:8px 16px;border-radius:10px;border:1.5px solid var(--sage);}
+
   /* Responsive */
   @media(max-width:600px){
     .card{padding:24px 18px;}
@@ -243,6 +279,8 @@
     .step-dot .step-num{font-size:15px;}
     .meaning-row{grid-template-columns:1fr;}
     .chunk-row{grid-template-columns:1fr;}
+    .review-card{flex-direction:column;align-items:stretch;}
+    .review-card-actions{justify-content:flex-end;}
   }
 </style>
 </head>
@@ -254,7 +292,10 @@
       <div class="subtitle" id="stepSubtitle">Paste any text. Turn it into a learning session.</div>
       <div class="phase-bar" id="phaseBar"></div>
     </div>
-    <a class="home-link" href="../index.html">← Ava Word Bridge</a>
+    <div class="header-links">
+      <a href="javascript:void(0)" class="library-link" id="libraryBtn">📚 Review Library</a>
+      <a class="home-link" href="../index.html">← Ava Word Bridge</a>
+    </div>
   </header>
   <main id="app"></main>
 </div>
@@ -274,9 +315,13 @@ let sessionData = {
   gistAnswer: "",
   retrievalAnswer: null,
   retrievalDone: false,
+  retrievalCorrect: false,
+  savedAt: null,
 };
 let currentStep = 0;  // 0=input, 1=cold read, 2=classify, 3=meaning, 4=sentence, 5=gist, 6=bank, 7=retrieval, 8=reread
 let selectedMarkType = null;
+let currentView = 'session'; // 'session' | 'library' | 'review'
+let reviewingSessionId = null;
 
 const STEP_LABELS = [
   "Input text",
@@ -299,6 +344,8 @@ const PHASES = [
   { id:'grow',       name:'Grow',        steps:[8],              color:'var(--mist)' },
 ];
 
+const STORAGE_KEY = 'ava-learning-sessions';
+
 function getCurrentPhaseIdx() {
   for (let i = PHASES.length - 1; i >= 0; i--) {
     if (PHASES[i].steps.includes(currentStep)) return i;
@@ -309,11 +356,12 @@ function getCurrentPhaseIdx() {
 function renderHeaderProgress() {
   const phaseBar = document.getElementById('phaseBar');
   if (!phaseBar) return;
+  if (currentView !== 'session') { phaseBar.style.display = 'none'; return; }
+  phaseBar.style.display = '';
   const curPhase = getCurrentPhaseIdx();
   phaseBar.innerHTML = PHASES.map((p, i) => {
     const isActive = i === curPhase;
     const isDone = i < curPhase;
-    // Fill width: progress within current phase
     let fillPct = 0;
     if (isDone) fillPct = 100;
     else if (isActive) {
@@ -328,7 +376,6 @@ function renderHeaderProgress() {
       <div class="phase-bar-fill" style="width:${fillPct}%;"></div>
     </div>`;
   }).join('');
-  // Attach navigation: clicking a phase jumps to its first step if previous
   phaseBar.querySelectorAll('.phase-seg').forEach(seg => {
     seg.addEventListener('click', () => {
       const phaseIdx = parseInt(seg.dataset.phase);
@@ -441,10 +488,64 @@ function findSentence(text, word) {
     const re = new RegExp('\\b' + escapeRegex(word) + '\\b', 'i');
     if (re.test(s)) return s.trim();
   }
-  // If no sentence boundary, return a chunk around the word
   const re = new RegExp('[^.!?]*\\b' + escapeRegex(word) + '\\b[^.!?]*', 'i');
   const m = text.match(re);
   return m ? m[0].trim() : '';
+}
+
+// Generate a title from text (first sentence or first 60 chars)
+function makeTitle(text) {
+  const firstSentence = text.trim().split(/[.!?]/)[0].trim();
+  return firstSentence.length > 60 ? firstSentence.slice(0, 57) + '...' : (firstSentence || 'Untitled');
+}
+
+// ============================================================
+//  LOCALSTORAGE — Save / Load / Delete
+// ============================================================
+function getSavedSessions() {
+  try {
+    return JSON.parse(localStorage.getItem(STORAGE_KEY) || '[]');
+  } catch { return []; }
+}
+
+function saveSession() {
+  if (!sessionData.text.trim()) return;
+  const sessions = getSavedSessions();
+  const session = {
+    id: Date.now(),
+    title: makeTitle(sessionData.text),
+    date: new Date().toISOString(),
+    text: sessionData.text,
+    words: JSON.parse(JSON.stringify(sessionData.words)),
+    chunks: JSON.parse(JSON.stringify(sessionData.chunks)),
+    coldReadMarks: JSON.parse(JSON.stringify(sessionData.coldReadMarks)),
+    sentenceAnswers: JSON.parse(JSON.stringify(sessionData.sentenceAnswers)),
+    gistAnswer: sessionData.gistAnswer,
+    retrievalAnswer: sessionData.retrievalAnswer,
+    retrievalDone: sessionData.retrievalDone,
+    retrievalCorrect: sessionData.retrievalCorrect,
+  };
+  // Replace existing session with same text, or add new
+  const existingIdx = sessions.findIndex(s => s.text === sessionData.text);
+  if (existingIdx >= 0) {
+    session.id = sessions[existingIdx].id; // keep original ID
+    sessions[existingIdx] = session;
+  } else {
+    sessions.unshift(session);
+  }
+  localStorage.setItem(STORAGE_KEY, JSON.stringify(sessions));
+  sessionData.savedAt = Date.now();
+}
+
+function deleteSessionById(id) {
+  const sessions = getSavedSessions().filter(s => s.id !== id);
+  localStorage.setItem(STORAGE_KEY, JSON.stringify(sessions));
+}
+
+function formatDate(isoStr) {
+  const d = new Date(isoStr);
+  return d.toLocaleDateString('en-US', {month:'short',day:'numeric',year:'numeric'}) + ' · ' +
+         d.toLocaleTimeString('en-US', {hour:'numeric',minute:'2-digit'});
 }
 
 // ============================================================
@@ -472,9 +573,15 @@ function renderInput() {
   const hasText = sessionData.text.trim().length > 0;
   const hasWords = sessionData.words.length > 0;
 
+  // Show "continue saved session" link if sessions exist
+  const savedCount = getSavedSessions().length;
+  const savedLink = savedCount > 0 && !hasText ? `
+    <div style="text-align:center;margin-bottom:18px;">
+      <a href="javascript:void(0)" id="goLibraryLink" style="font-size:14px;color:var(--lav);font-weight:600;">📚 You have ${savedCount} saved session${savedCount>1?'s':''} — Review Library</a>
+    </div>` : '';
+
   let wordPrepHtml = '';
   if (hasText) {
-    // Show suggested words
     const suggested = suggestWords(sessionData.text);
     const selectedWords = new Set(sessionData.words.map(w => w.word.toLowerCase()));
 
@@ -483,7 +590,6 @@ function renderInput() {
       return `<span class="word-chip ${isSel?'selected':''}" data-word="${escapeHtml(w)}">${escapeHtml(w)}</span>`;
     }).join('');
 
-    // Meaning input rows for selected words
     const meaningHtml = sessionData.words.length > 0 ? sessionData.words.map((w, i) => `
       <div class="meaning-row">
         <div class="word-label">${escapeHtml(w.word)}</div>
@@ -491,7 +597,6 @@ function renderInput() {
       </div>
     `).join('') : '<div class="empty-state">Select words above, or type a word manually below.</div>';
 
-    // Chunk rows
     const chunkHtml = sessionData.chunks.map((c, i) => `
       <div class="chunk-row">
         <input type="text" data-chunk-idx="${i}" data-field="chunk" placeholder="phrase (e.g. \"magnetic field\")" value="${escapeHtml(c.chunk||'')}">
@@ -521,6 +626,7 @@ function renderInput() {
   }
 
   return renderCard(`
+    ${savedLink}
     <h2>Paste text to begin</h2>
     <p class="subhead">Any reading Ava brings home — story, science, social studies, math — becomes a structured learning session.</p>
     <textarea class="text-input" id="textInput" placeholder="Paste the full text here. For example:
@@ -543,11 +649,9 @@ Sea turtles travel thousands of miles across the ocean. They navigate by sensing
 function renderColdRead() {
   subtitleEl.textContent = "Cold Read — student reads aloud, teacher marks each word.";
 
-  // Build text with tagged words highlighted
   const words = sessionData.words.map(w => w.word);
   const text = sessionData.text;
 
-  // Tokenize text, wrapping tagged words
   const taggedSet = new Set(words.map(w => w.toLowerCase()));
   const tokens = text.split(/(\s+)/);
   const tokenHtml = tokens.map(t => {
@@ -775,7 +879,6 @@ function renderWordBank() {
 function renderRetrieval() {
   subtitleEl.textContent = "Retrieval practice — can the student recall without hints?";
 
-  // Use the first word that has a meaning
   const wordsWithMeaning = sessionData.words.filter(w => w.meaning);
   if (wordsWithMeaning.length === 0) {
     return renderCard(`
@@ -786,11 +889,9 @@ function renderRetrieval() {
   }
 
   const qWord = wordsWithMeaning[0];
-  // Build options: correct meaning + distractors from other words' meanings
   const correctMeaning = qWord.meaning;
   const otherMeanings = wordsWithMeaning.slice(1).map(w => w.meaning);
 
-  // If not enough distractors, add generic wrong answers
   const genericDistractors = [
     "A type of animal that lives in the ocean",
     "The place where something happens",
@@ -801,20 +902,18 @@ function renderRetrieval() {
   const distractors = [...otherMeanings, ...genericDistractors].slice(0, 3);
 
   const allOptions = [{text: correctMeaning, correct: true}, ...distractors.map(d => ({text: d, correct: false}))];
-  // Shuffle
   for (let i = allOptions.length - 1; i > 0; i--) {
     const j = Math.floor(Math.random() * (i + 1));
     [allOptions[i], allOptions[j]] = [allOptions[j], allOptions[i]];
   }
 
   const optHtml = allOptions.map((o, i) =>
-    `<button class="ret-btn ${sessionData.retrievalAnswer===i?(o.correct?'correct':'incorrect'):''}" data-opt="${i}">${String.fromCharCode(65+i)}. ${escapeHtml(o.text)}</button>`
+    `<button class="ret-btn ${sessionData.retrievalAnswer===i?(o.correct?'correct':'incorrect'):''}" data-opt="${i}" data-correct="${o.correct}">${String.fromCharCode(65+i)}. ${escapeHtml(o.text)}</button>`
   ).join('');
 
   let feedback = '';
   if (sessionData.retrievalDone) {
-    const chosen = sessionData.retrievalAnswer !== null ? allOptions[sessionData.retrievalAnswer] : null;
-    feedback = chosen && chosen.correct
+    feedback = sessionData.retrievalCorrect
       ? '<div class="ret-feedback show good">✅ Correct! "'+escapeHtml(qWord.word)+'" = '+escapeHtml(correctMeaning)+'</div>'
       : '<div class="ret-feedback show try-again">❌ Not quite — "'+escapeHtml(qWord.word)+'" = '+escapeHtml(correctMeaning)+'</div>';
   }
@@ -837,6 +936,12 @@ function renderRetrieval() {
 function renderReread() {
   subtitleEl.textContent = "Reread — compare before and after.";
 
+  // Auto-save when reaching this step
+  if (!sessionData.savedAt) {
+    saveSession();
+    showToast('Session saved to Review Library ✓');
+  }
+
   const totalWords = sessionData.words.length;
   let accurateCount = 0;
   sessionData.words.forEach(w => {
@@ -846,7 +951,11 @@ function renderReread() {
   const coldAccuracy = totalWords > 0 ? Math.round((accurateCount / totalWords) * 100) : 0;
   const rereadAccuracy = 100;
 
+  const savedBadge = sessionData.savedAt ?
+    '<div style="text-align:center;margin-bottom:16px;"><span class="saved-badge">✓ Saved to Review Library</span></div>' : '';
+
   return renderCard(`
+    ${savedBadge}
     <h2>Reread — before / after</h2>
     <p class="subhead">Student rereads the same passage. Compare the evidence.</p>
     <div class="compare-grid">
@@ -867,8 +976,207 @@ function renderReread() {
       <div class="celebrate-desc">The student met the same words again — this time with full understanding. Every banked word is linked to its source text for future retrieval.</div>
     </div>
     <div class="btn-row">
-      <a href="../index.html" class="btn btn-outline">← Back to Ava Word Bridge</a>
+      <button class="btn btn-outline" id="goLibraryFromRereadBtn">📚 Review Library</button>
       <button class="btn btn-primary" id="restartBtn">New text ↻</button>
+    </div>
+  `);
+}
+
+// ============================================================
+//  REVIEW LIBRARY — List all saved sessions
+// ============================================================
+function renderReviewLibrary() {
+  subtitleEl.textContent = "Saved learning sessions — review past work.";
+  const sessions = getSavedSessions();
+
+  if (sessions.length === 0) {
+    return renderCard(`
+      <h2>Review Library</h2>
+      <div style="text-align:center;padding:40px 20px;">
+        <div style="font-size:48px;margin-bottom:14px;">📚</div>
+        <p style="font-size:16px;color:var(--muted);margin-bottom:20px;">No saved sessions yet.<br>Complete a learning session and it will be saved here automatically.</p>
+      </div>
+      <div class="btn-row">
+        <button class="btn btn-primary" id="newSessionBtn">Start new session →</button>
+      </div>
+    `);
+  }
+
+  const sessionCards = sessions.map(s => {
+    const wordCount = s.words ? s.words.length : 0;
+    const chunkCount = s.chunks ? s.chunks.filter(c => c.chunk).length : 0;
+    const retrievalIcon = s.retrievalDone ? (s.retrievalCorrect ? '✅' : '❌') : '—';
+    return `<div class="review-card">
+      <div class="review-card-info">
+        <div class="review-card-date">${formatDate(s.date)}</div>
+        <div class="review-card-title">${escapeHtml(s.title)}</div>
+        <div class="review-card-meta">${wordCount} word${wordCount!==1?'s':''}${chunkCount>0?' · '+chunkCount+' chunk'+(chunkCount>1?'s':''):''} · Retrieval: ${retrievalIcon}</div>
+      </div>
+      <div class="review-card-actions">
+        <button class="review-btn view" data-review-id="${s.id}">Review →</button>
+        <button class="review-btn delete" data-delete-id="${s.id}">Delete</button>
+      </div>
+    </div>`;
+  }).join('');
+
+  return renderCard(`
+    <h2>Review Library</h2>
+    <p class="subhead">${sessions.length} saved session${sessions.length>1?'s':''}. Click any session to review all content.</p>
+    <div class="review-list">${sessionCards}</div>
+    <div class="btn-row" style="margin-top:24px;">
+      <button class="btn btn-primary" id="newSessionBtn">Start new session →</button>
+    </div>
+  `);
+}
+
+// ============================================================
+//  REVIEW DETAIL — Show full saved session
+// ============================================================
+function renderReviewDetail() {
+  const sessions = getSavedSessions();
+  const session = sessions.find(s => s.id === reviewingSessionId);
+  if (!session) {
+    currentView = 'library';
+    return renderReviewLibrary();
+  }
+
+  subtitleEl.textContent = "Reviewing saved session · " + formatDate(session.date);
+
+  // Text with highlighted words (showing cold read marks)
+  const taggedSet = new Set((session.words||[]).map(w => w.word.toLowerCase()));
+  const tokens = (session.text||'').split(/(\s+)/);
+  const tokenHtml = tokens.map(t => {
+    const clean = t.replace(/[.,;:!?"'()\[\]{}]/g, '').trim();
+    if (clean && taggedSet.has(clean.toLowerCase())) {
+      const mark = (session.coldReadMarks||{})[clean.toLowerCase()];
+      let markCls = '';
+      if (mark === 'accurate') markCls = 'cr-accurate';
+      else if (mark === 'slow') markCls = 'cr-slow';
+      else if (mark === 'misread') markCls = 'cr-misread';
+      else if (mark === 'unknown-meaning') markCls = 'cr-unknown-meaning';
+      return `<span class="cr-token ${markCls}">${escapeHtml(t)}</span>`;
+    }
+    return escapeHtml(t);
+  }).join('');
+
+  // Word meanings
+  const wordMeaningHtml = (session.words||[]).filter(w => w.meaning).map(w =>
+    `<div class="review-word-card"><div class="rw-word">${escapeHtml(w.word)}</div><div class="rw-meaning">${escapeHtml(w.meaning)}</div></div>`
+  ).join('');
+  const chunkMeaningHtml = (session.chunks||[]).filter(c => c.chunk && c.meaning).map(c =>
+    `<div class="review-word-card chunk"><div class="rw-word">${escapeHtml(c.chunk)}</div><div class="rw-meaning">${escapeHtml(c.meaning)}</div></div>`
+  ).join('');
+
+  // Classification
+  const classHtml = (session.words||[]).map(w => {
+    const mark = (session.coldReadMarks||{})[w.word.toLowerCase()] || 'accurate';
+    let type, note, cls;
+    if (mark === 'accurate') { cls = 'ct-known'; type = 'KNOWN'; note = 'Can read + knows meaning'; }
+    else if (mark === 'unknown-meaning') { cls = 'ct-meaning'; type = 'MEANING GAP'; note = 'Can decode, meaning unknown'; }
+    else if (mark === 'slow') { cls = 'ct-decode'; type = 'DECODE GAP'; note = 'Slow decoding'; }
+    else { cls = 'ct-decode'; type = 'DECODE GAP'; note = 'Misread'; }
+    return `<div class="class-row"><div class="class-word">${escapeHtml(w.word)}</div><span class="class-type ${cls}">${type}</span><div class="class-note">${escapeHtml(note)}</div></div>`;
+  }).join('');
+
+  // Sentence answers
+  const sentenceHtml = Object.entries(session.sentenceAnswers||{}).filter(([_,v]) => v && v.trim()).map(([word, answer]) => {
+    const sent = findSentence(session.text||'', word);
+    const highlighted = sent.replace(new RegExp('\\b'+escapeRegex(word)+'\\b','i'), `<span class="hl">${escapeHtml(word)}</span>`);
+    return `<div class="sentence-box"><div class="sentence-text">${highlighted}</div><div class="sentence-q">What does "${escapeHtml(word)}" mean here?</div><div class="review-answer-box">${escapeHtml(answer)}</div></div>`;
+  }).join('');
+
+  // Gist
+  const gistHtml = session.gistAnswer && session.gistAnswer.trim() ?
+    `<div class="review-answer-box" style="font-size:16px;">${escapeHtml(session.gistAnswer)}</div>` : '<div class="empty-state">No gist written.</div>';
+
+  // Word bank chips
+  const bankChips = (session.words||[]).map(w => `<span class="bank-chip">${escapeHtml(w.word)}</span>`).join('');
+  const chunkBankChips = (session.chunks||[]).filter(c => c.chunk).map(c => `<span class="bank-chip chunk">${escapeHtml(c.chunk)}</span>`).join('');
+
+  // Retrieval result
+  let retrievalHtml = '';
+  if (session.retrievalDone) {
+    const wordsWithMeaning = (session.words||[]).filter(w => w.meaning);
+    if (wordsWithMeaning.length > 0) {
+      retrievalHtml = session.retrievalCorrect
+        ? `<div class="ret-feedback show good">✅ Correctly recalled: "${escapeHtml(wordsWithMeaning[0].word)}" = ${escapeHtml(wordsWithMeaning[0].meaning)}</div>`
+        : `<div class="ret-feedback show try-again">❌ Did not recall correctly — reviewed the meaning</div>`;
+    }
+  } else {
+    retrievalHtml = '<div class="empty-state">Retrieval practice not completed.</div>';
+  }
+
+  // Before/After
+  const totalWords = (session.words||[]).length;
+  let accurateCount = 0;
+  (session.words||[]).forEach(w => {
+    const mark = (session.coldReadMarks||{})[w.word.toLowerCase()];
+    if (mark === 'accurate' || mark === 'unknown-meaning') accurateCount++;
+  });
+  const coldAccuracy = totalWords > 0 ? Math.round((accurateCount / totalWords) * 100) : 0;
+
+  return renderCard(`
+    <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:20px;flex-wrap:wrap;gap:8px;">
+      <button class="btn btn-outline" id="backToLibraryBtn" style="padding:8px 16px;font-size:13px;">← Library</button>
+      <span style="font-size:13px;color:var(--muted);font-weight:600;">${formatDate(session.date)}</span>
+    </div>
+
+    <h2>${escapeHtml(session.title)}</h2>
+
+    <div class="review-section">
+      <div class="review-section-title">📖 Original Text</div>
+      <div class="cold-read-text">${tokenHtml}</div>
+    </div>
+
+    ${(wordMeaningHtml||chunkMeaningHtml) ? `<div class="review-section">
+      <div class="review-section-title">📝 Word Meanings</div>
+      <div class="review-word-grid">${wordMeaningHtml}${chunkMeaningHtml}</div>
+    </div>` : ''}
+
+    ${classHtml ? `<div class="review-section">
+      <div class="review-section-title">🏷️ Classification</div>
+      <div class="class-grid">${classHtml}</div>
+    </div>` : ''}
+
+    ${sentenceHtml ? `<div class="review-section">
+      <div class="review-section-title">💬 Sentence Meaning</div>
+      ${sentenceHtml}
+    </div>` : ''}
+
+    <div class="review-section">
+      <div class="review-section-title">💡 Gist</div>
+      ${gistHtml}
+    </div>
+
+    ${(bankChips||chunkBankChips) ? `<div class="review-section">
+      <div class="review-section-title">🏦 Word Bank</div>
+      <div class="bank-chips">${bankChips}${chunkBankChips}</div>
+    </div>` : ''}
+
+    <div class="review-section">
+      <div class="review-section-title">🧠 Retrieval Practice</div>
+      ${retrievalHtml}
+    </div>
+
+    <div class="review-section">
+      <div class="review-section-title">📊 Growth</div>
+      <div class="compare-grid">
+        <div class="compare-col compare-before">
+          <div class="compare-label">📖 Before (Cold Read)</div>
+          <div class="compare-stat">${coldAccuracy}%</div>
+          <div class="compare-desc">Words read accurately</div>
+        </div>
+        <div class="compare-col compare-after">
+          <div class="compare-label">♾️ After (Reread)</div>
+          <div class="compare-stat">100%</div>
+          <div class="compare-desc">All words now understood</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="btn-row">
+      <button class="btn btn-outline" id="backToLibraryBtn2">← Back to library</button>
+      <button class="btn btn-primary" id="newSessionFromReviewBtn">Start new session →</button>
     </div>
   `);
 }
@@ -878,17 +1186,23 @@ function renderReread() {
 // ============================================================
 function render() {
   let html;
-  switch(currentStep) {
-    case 0: html = renderInput(); break;
-    case 1: html = renderColdRead(); break;
-    case 2: html = renderClassification(); break;
-    case 3: html = renderMeaningSupport(); break;
-    case 4: html = renderSentenceMeaning(); break;
-    case 5: html = renderGist(); break;
-    case 6: html = renderWordBank(); break;
-    case 7: html = renderRetrieval(); break;
-    case 8: html = renderReread(); break;
-    default: html = renderInput();
+  if (currentView === 'library') {
+    html = renderReviewLibrary();
+  } else if (currentView === 'review') {
+    html = renderReviewDetail();
+  } else {
+    switch(currentStep) {
+      case 0: html = renderInput(); break;
+      case 1: html = renderColdRead(); break;
+      case 2: html = renderClassification(); break;
+      case 3: html = renderMeaningSupport(); break;
+      case 4: html = renderSentenceMeaning(); break;
+      case 5: html = renderGist(); break;
+      case 6: html = renderWordBank(); break;
+      case 7: html = renderRetrieval(); break;
+      case 8: html = renderReread(); break;
+      default: html = renderInput();
+    }
   }
   appEl.innerHTML = html;
   renderHeaderProgress();
@@ -900,7 +1214,84 @@ function render() {
 //  EVENT ATTACHMENT
 // ============================================================
 function attachEvents() {
-  // Step track navigation (only back to completed steps)
+  // Header library button (always available)
+  const libBtn = document.getElementById('libraryBtn');
+  if (libBtn) libBtn.addEventListener('click', () => {
+    currentView = 'library';
+    render();
+  });
+
+  // === Review Library events ===
+  if (currentView === 'library') {
+    const newBtn = document.getElementById('newSessionBtn');
+    if (newBtn) newBtn.addEventListener('click', () => {
+      sessionData = {text:"", title:"", words:[], chunks:[], coldReadMarks:{}, sentenceAnswers:{}, gistAnswer:"", retrievalAnswer:null, retrievalDone:false, retrievalCorrect:false, savedAt:null};
+      selectedMarkType = null;
+      currentStep = 0;
+      currentView = 'session';
+      render();
+    });
+    appEl.querySelectorAll('[data-review-id]').forEach(btn => {
+      btn.addEventListener('click', () => {
+        reviewingSessionId = parseInt(btn.dataset.reviewId);
+        currentView = 'review';
+        render();
+      });
+    });
+    appEl.querySelectorAll('[data-delete-id]').forEach(btn => {
+      btn.addEventListener('click', () => {
+        const id = parseInt(btn.dataset.deleteId);
+        const sessions = getSavedSessions();
+        const s = sessions.find(s => s.id === id);
+        if (s && confirm('Delete this saved session?\n"' + s.title + '"')) {
+          deleteSessionById(id);
+          showToast('Session deleted');
+          render();
+        }
+      });
+    });
+  }
+
+  // === Review Detail events ===
+  if (currentView === 'review') {
+    const backBtn = document.getElementById('backToLibraryBtn');
+    if (backBtn) backBtn.addEventListener('click', () => {
+      currentView = 'library';
+      render();
+    });
+    const backBtn2 = document.getElementById('backToLibraryBtn2');
+    if (backBtn2) backBtn2.addEventListener('click', () => {
+      currentView = 'library';
+      render();
+    });
+    const newBtn = document.getElementById('newSessionFromReviewBtn');
+    if (newBtn) newBtn.addEventListener('click', () => {
+      sessionData = {text:"", title:"", words:[], chunks:[], coldReadMarks:{}, sentenceAnswers:{}, gistAnswer:"", retrievalAnswer:null, retrievalDone:false, retrievalCorrect:false, savedAt:null};
+      selectedMarkType = null;
+      currentStep = 0;
+      currentView = 'session';
+      render();
+    });
+  }
+
+  // === Session events (steps 0-8) ===
+  if (currentView !== 'session') return;
+
+  // Library link on step 0
+  const goLibraryLink = document.getElementById('goLibraryLink');
+  if (goLibraryLink) goLibraryLink.addEventListener('click', () => {
+    currentView = 'library';
+    render();
+  });
+
+  // Library link on step 8
+  const goLibraryFromReread = document.getElementById('goLibraryFromRereadBtn');
+  if (goLibraryFromReread) goLibraryFromReread.addEventListener('click', () => {
+    currentView = 'library';
+    render();
+  });
+
+  // Step track navigation
   appEl.querySelectorAll('.step-dot').forEach(dot => {
     dot.addEventListener('click', () => {
       const step = parseInt(dot.dataset.step);
@@ -914,7 +1305,6 @@ function attachEvents() {
     if (textInput) {
       textInput.addEventListener('input', () => {
         sessionData.text = textInput.value;
-        // Re-render to update analyze button state
         const analyzeBtn = document.getElementById('analyzeBtn');
         if (analyzeBtn) analyzeBtn.disabled = !sessionData.text.trim();
       });
@@ -922,7 +1312,6 @@ function attachEvents() {
 
     const analyzeBtn = document.getElementById('analyzeBtn');
     if (analyzeBtn) analyzeBtn.addEventListener('click', () => {
-      // Auto-select all suggested words
       const suggested = suggestWords(sessionData.text);
       const existing = new Set(sessionData.words.map(w => w.word.toLowerCase()));
       suggested.forEach(w => {
@@ -933,7 +1322,6 @@ function attachEvents() {
       render();
     });
 
-    // Word chip toggle
     appEl.querySelectorAll('.word-chip').forEach(chip => {
       chip.addEventListener('click', () => {
         const word = chip.dataset.word;
@@ -947,7 +1335,6 @@ function attachEvents() {
       });
     });
 
-    // Meaning inputs
     appEl.querySelectorAll('.meaning-row input[data-idx]').forEach(inp => {
       inp.addEventListener('input', () => {
         const idx = parseInt(inp.dataset.idx);
@@ -957,7 +1344,6 @@ function attachEvents() {
       });
     });
 
-    // Manual add word
     const manualInput = document.getElementById('manualWordInput');
     const manualBtn = document.getElementById('manualAddBtn');
     if (manualBtn) manualBtn.addEventListener('click', () => {
@@ -973,7 +1359,6 @@ function attachEvents() {
       if (e.key === 'Enter') { e.preventDefault(); manualBtn.click(); }
     });
 
-    // Chunk inputs
     appEl.querySelectorAll('.chunk-row input[data-chunk-idx]').forEach(inp => {
       inp.addEventListener('input', () => {
         const idx = parseInt(inp.dataset.chunkIdx);
@@ -983,17 +1368,14 @@ function attachEvents() {
       });
     });
 
-    // Add chunk button
     const addChunkBtn = document.getElementById('addChunkBtn');
     if (addChunkBtn) addChunkBtn.addEventListener('click', () => {
       sessionData.chunks.push({chunk: '', meaning: ''});
       render();
     });
 
-    // Start session
     const startBtn = document.getElementById('startSessionBtn');
     if (startBtn) startBtn.addEventListener('click', () => {
-      // Filter out words/chunks without meaning
       sessionData.words = sessionData.words.filter(w => w.word);
       sessionData.chunks = sessionData.chunks.filter(c => c.chunk);
       if (sessionData.words.length > 0) {
@@ -1083,6 +1465,7 @@ function attachEvents() {
       btn.addEventListener('click', () => {
         sessionData.retrievalAnswer = parseInt(btn.dataset.opt);
         sessionData.retrievalDone = true;
+        sessionData.retrievalCorrect = btn.dataset.correct === 'true';
         render();
       });
     });
@@ -1098,7 +1481,7 @@ function attachEvents() {
   if (currentStep === 8) {
     const btn = document.getElementById('restartBtn');
     if (btn) btn.addEventListener('click', () => {
-      sessionData = {text:"", title:"", words:[], chunks:[], coldReadMarks:{}, sentenceAnswers:{}, gistAnswer:"", retrievalAnswer:null, retrievalDone:false};
+      sessionData = {text:"", title:"", words:[], chunks:[], coldReadMarks:{}, sentenceAnswers:{}, gistAnswer:"", retrievalAnswer:null, retrievalDone:false, retrievalCorrect:false, savedAt:null};
       selectedMarkType = null;
       currentStep = 0;
       render();
