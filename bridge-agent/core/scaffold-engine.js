@@ -1,4 +1,4 @@
-// core/scaffold-engine.js — Ava BRIDGE Learning Agent, Core scaffold ladder
+// core/scaffold-engine.js — BRIDGE Learning Agent, Core scaffold ladder
 // Universal 6-level ladder (0-5). Core enforces the STRUCTURE (level is earned
 // by attempts, never jumped to, never regresses within a checkpoint; level 5
 // is gated behind real evidence of a genuine stall). The CONTENT at each level

@@ -1,4 +1,4 @@
-// teacher/decision-trace.js — Ava BRIDGE Learning Agent, generic decision trace renderer
+// teacher/decision-trace.js — BRIDGE Learning Agent, generic decision trace renderer
 // Reads learnerState.trace directly. Subject-agnostic — works for any Module's
 // checkpoint ids and dimension keys, since the trace shape is Core's, not the
 // Module's. Replaces the old classify*() functions, which read Writing-only

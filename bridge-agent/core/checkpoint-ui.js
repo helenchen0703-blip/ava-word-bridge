@@ -1,4 +1,4 @@
-// core/checkpoint-ui.js — Ava BRIDGE Learning Agent, generic checkpoint runner
+// core/checkpoint-ui.js — BRIDGE Learning Agent, generic checkpoint runner
 // The plain UI any Module runs on when it doesn't supply its own
 // renderExperience (Reading, Math, Science, Social Studies in v1 — see the
 // MVP boundary: only Writing keeps a bespoke skin). Text/question/response

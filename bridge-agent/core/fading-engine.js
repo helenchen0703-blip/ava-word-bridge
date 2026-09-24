@@ -1,4 +1,4 @@
-// core/fading-engine.js — Ava BRIDGE Learning Agent, Fading + progress
+// core/fading-engine.js — BRIDGE Learning Agent, Fading + progress
 // Fixes the one confirmed near-miss in the prior Bridge.progressEstimate():
 // it hardcoded NODE.REDUCE_SUPPORT/NODE.ORIGINAL_TASK by name, which only
 // worked for Writing's specific route graph. This version is computed purely

@@ -1,11 +1,11 @@
-// core/student-model.js — Ava BRIDGE Learning Agent, Longitudinal Student Model
+// core/student-model.js — BRIDGE Learning Agent, Longitudinal Student Model
 // Additive across tasks and subjects. Stores EVIDENCE, never identity labels —
 // never write something like "organization: weak"; only ever push a dated,
 // task-attributed tuple. This is separate storage from bridgeCoreData_v2
 // (per-task learnerState) — the student model outlives any single task.
 //
 // Shared by BOTH the BRIDGE Learning Agent and the English Growth Agent
-// (Ava English Growth Agent V1, Option C) — this file is the seam. Nothing
+// (English Growth Agent V1, Option C) — this file is the seam. Nothing
 // here is BRIDGE-specific or Growth-specific; both write evidence tuples,
 // neither owns the schema.
 

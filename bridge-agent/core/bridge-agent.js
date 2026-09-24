@@ -1,4 +1,4 @@
-// core/bridge-agent.js — Ava BRIDGE Learning Agent, generic checkpoint orchestrator
+// core/bridge-agent.js — BRIDGE Learning Agent, generic checkpoint orchestrator
 // The ONE piece of code that runs every task, every subject. It never contains
 // subject content — everything subject-specific comes from the Module object
 // passed into createBridgeAgent(). This is what fires unchanged whether the

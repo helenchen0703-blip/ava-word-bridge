@@ -1,4 +1,4 @@
-// bridge-agent.js — Writing Module orchestrator (Ava BRIDGE Learning Agent)
+// bridge-agent.js — Writing Module orchestrator (BRIDGE Learning Agent)
 // Orchestration glue: the only file that touches both bridge-storage.js /
 // bridge-rules.js AND (indirectly) the screen render functions in the HTML.
 // The HTML calls into `Bridge.*` instead of hardcoding goTo(N); everything

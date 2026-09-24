@@ -35,7 +35,7 @@ const NODE = Object.freeze({
   DONE: 'DONE'
 });
 
-// ---------- Universal 5-level scaffold ladder (Ava BRIDGE Learning Agent, section E) ----------
+// ---------- Universal 5-level scaffold ladder (BRIDGE Learning Agent, section E) ----------
 // Levels are fixed and Core-enforced; a Module may only pick a named VARIANT within a
 // level (e.g. level 2's MEANING variant vs its EXPRESSION variant), never invent a new
 // level or skip one. This collapses BRIDGE Writing Agent v1's 7-tier ACTION_ORDER —
@@ -50,7 +50,7 @@ const LADDER_VARIANTS = Object.freeze({
   3: { MEANING: 'ACTION_MODEL', EXPRESSION: 'PARTIAL_SENTENCE_FRAME' },
   4: { MEANING: 'ORAL_REHEARSAL', EXPRESSION: 'SENTENCE_STARTER' }
 });
-// Structural ban (Ava BRIDGE Learning Agent, section E): a Module's scaffold variants
+// Structural ban (BRIDGE Learning Agent, section E): a Module's scaffold variants
 // must never default to one of these — they are only legitimate as a LAST resort after
 // the graduated ladder above has already been exhausted with evidence, never as the
 // first or only scaffold offered.
@@ -58,7 +58,7 @@ const FORBIDDEN_DEFAULT_ACTIONS = Object.freeze([
   'TRANSLATION', 'MODEL_ANSWER', 'DEFAULT_SENTENCE_FRAME', 'SIMPLIFIED_TEXT', 'GAME', 'FULL_EXPLANATION'
 ]);
 
-// Writing Module's dimension manifest (Ava BRIDGE Learning Agent, section D)
+// Writing Module's dimension manifest (BRIDGE Learning Agent, section D)
 // — the six BRIDGE Writing Agent v1 dimensions, each tagged with the universal
 // roadblock category it evidences. compareContrastConcept is a discriminator:
 // the Isolation Check's whole job is deciding whether a gap belongs to CONCEPT

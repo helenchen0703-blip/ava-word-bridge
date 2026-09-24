@@ -1,4 +1,4 @@
-// core/task-intake.js — Ava BRIDGE Learning Agent, TaskRecord model
+// core/task-intake.js — BRIDGE Learning Agent, TaskRecord model
 // Owns the shape of a teacher-created task and its storage. Never rewrites
 // the authentic task text. Validation logic (schema-required/min checks)
 // lives in task-analyzer.js — this file is CRUD + shape only.

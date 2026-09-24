@@ -1,4 +1,4 @@
-// core/decision-engine.js — Ava BRIDGE Learning Agent, Core Decision Engine
+// core/decision-engine.js — BRIDGE Learning Agent, Core Decision Engine
 // 5 outcomes: CONTINUE_SUPPORT, REDUCE_SUPPORT, REMOVE_SUPPORT,
 // RUN_ONE_MORE_CHECK, RETURN_TO_AUTHENTIC_TASK. Teacher override is checked
 // FIRST, ahead of every rule — an override short-circuits the engine for that

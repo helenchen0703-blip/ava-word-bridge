@@ -1,4 +1,4 @@
-// modules/social-studies.js — Social Studies Module STUB (Ava BRIDGE Learning Agent)
+// modules/social-studies.js — Social Studies Module STUB (BRIDGE Learning Agent)
 // See modules/math.js for why this is a registered stub in v1, not a full pathway.
 
 const SOCIAL_STUDIES_DIMENSIONS = [
@@ -8,7 +8,7 @@ const SOCIAL_STUDIES_DIMENSIONS = [
 
 const SOCIAL_STUDIES_INTAKE_SCHEMA = [
   { id: 'taskText', type: 'textarea', label: 'Authentic Task (paste verbatim)', required: true },
-  { id: 'actionWords', type: 'checklist', label: 'What is the task asking Ava to do?',
+  { id: 'actionWords', type: 'checklist', label: 'What is the task asking the learner to do?',
     options: ['EXPLAIN', 'ARGUE', 'DESCRIBE'], required: true },
   { id: 'keyTermsExpected', type: 'chipList', label: 'Key terms (2-4)', required: true, min: 2 }
 ];

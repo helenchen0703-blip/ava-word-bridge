@@ -1,5 +1,5 @@
-// modules/reading.js — Reading Module (Ava BRIDGE Learning Agent)
-// Built fresh (per the audit, ava-word-bridge's reading.html had no real
+// modules/reading.js — Reading Module (BRIDGE Learning Agent)
+// Built fresh (per the audit, word-bridge's reading.html had no real
 // diagnostic branching to reuse — only its content-array-separation pattern
 // was worth carrying forward, which the intake schema already generalizes).
 // Runs on Core's generic checkpoint UI — no bespoke Experience skin, per the
@@ -15,7 +15,7 @@ const READING_DIMENSIONS = [
 
 const READING_INTAKE_SCHEMA = [
   { id: 'taskText', type: 'textarea', label: 'Authentic Task (passage + the actual comprehension question, paste verbatim)', required: true },
-  { id: 'actionWords', type: 'checklist', label: 'What is the question asking Ava to do?',
+  { id: 'actionWords', type: 'checklist', label: 'What is the question asking the learner to do?',
     options: ['SUMMARIZE', 'DESCRIBE', 'EXPLAIN', 'ARGUE', 'NARRATE'], required: true },
   { id: 'keyWords', type: 'chipList', label: 'Key academic words in this passage (2-4)', required: true, min: 2 },
   { id: 'mainIdeaSentence', type: 'text', label: 'The expected main-idea / gist answer', required: true },

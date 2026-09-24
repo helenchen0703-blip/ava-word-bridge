@@ -1,7 +1,7 @@
-// core/cold-read-marker.js — Ava English Growth Agent, Cold Read marking surface
+// core/cold-read-marker.js — English Growth Agent, Cold Read marking surface
 // The one genuinely new UI interaction in this whole feature: renders the
 // authentic text as tappable word tokens so a teacher can mark evidence
-// WHILE Ava reads aloud. GUARDRAIL: Cold Read must remain truly cold — this
+// WHILE the learner reads aloud. GUARDRAIL: Cold Read must remain truly cold — this
 // component never shows a meaning, a hint, a translation, or a highlight
 // keyed to difficulty. It only classifies and records what already happened.
 

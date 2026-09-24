@@ -1,4 +1,4 @@
-// teacher/intake-review.js — Ava BRIDGE Learning Agent, NEEDS_TEACHER_REVIEW queue
+// teacher/intake-review.js — BRIDGE Learning Agent, NEEDS_TEACHER_REVIEW queue
 // "Do NOT use brittle keyword matching and pretend the Agent understands
 // every free-text response." When confidence is LOW and no isolation check
 // resolved it, the item lands here — a real UI queue, not a silent default.

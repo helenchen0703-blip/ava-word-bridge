@@ -1,4 +1,4 @@
-// core/student-state.js — Ava BRIDGE Learning Agent, Core state shape
+// core/student-state.js — BRIDGE Learning Agent, Core state shape
 // Subject-agnostic. No content literals live here — a Module supplies its
 // own dimension list; this file only knows the universal shape every
 // dimension shares and the universal status/category vocabulary.

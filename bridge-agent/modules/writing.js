@@ -1,4 +1,4 @@
-// modules/writing.js — Writing Module (Ava BRIDGE Learning Agent)
+// modules/writing.js — Writing Module (BRIDGE Learning Agent)
 // Migrated from bridge-rules.js / bridge-agent.js (BRIDGE Writing Agent v1).
 // Every literal that used to be a global constant (PROMPT_TEXT, IDEA_CHIPS,
 // the /athens/i regex, etc.) now comes from taskRecord.moduleIntakeData —

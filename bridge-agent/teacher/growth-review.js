@@ -1,4 +1,4 @@
-// teacher/growth-review.js — Ava English Growth Agent, content-gap queue
+// teacher/growth-review.js — English Growth Agent, content-gap queue
 // Parallel to teacher/intake-review.js. Surfaces items that hit
 // needsTeacherReview — either because no teacher-prepared meaning exists yet
 // (never fabricated, per the approved design) or because an isolation check

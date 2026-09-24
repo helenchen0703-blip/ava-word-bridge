@@ -1,5 +1,5 @@
 // experiences/writing/rocket-writing.js — Rocket Writing Experience
-// Migrated from Ava_Rocket_Writing_BRIDGE_Agent.html. Every render function
+// Migrated from Rocket_Writing_BRIDGE_Agent.html. Every render function
 // now takes `taskRecord` and reads content from taskRecord.moduleIntakeData
 // instead of a global constant (PROMPT_TEXT, IDEA_CHIPS, etc.) — this is the
 // same code whether the task is Athens/Sparta or the water cycle vs. the rock

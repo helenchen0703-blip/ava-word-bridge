@@ -1,5 +1,5 @@
-// core/wida-matcher.js — Ava BRIDGE Learning Agent, WIDA Language Demand Matcher
-// Answers one question only: "What language does Ava need to understand,
+// core/wida-matcher.js — BRIDGE Learning Agent, WIDA Language Demand Matcher
+// Answers one question only: "What language does the learner need to understand,
 // participate in, and express understanding of THIS task?" Never merged with
 // the Content Standard Matcher (core/standards-matcher.js) — this file never
 // reads a content standard, and nothing that reads a content standard reads

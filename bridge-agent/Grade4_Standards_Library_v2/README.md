@@ -1,9 +1,9 @@
-# Ava Grade 4 Standards Library v2
+# Grade 4 Standards Library v2
 
 This package adds a WIDA Grades 4–5 language-demand layer to the existing Grade 4 standards library.
 
 Core distinction:
-- School curriculum/task = what Ava is learning now
+- School curriculum/task = what the learner is learning now
 - CCSS / NGSS / C3 = grade-level content/disciplinary alignment
 - WIDA = language needed to participate in that content task
 - BRIDGE = current roadblock, minimum scaffold, fading, and evidence

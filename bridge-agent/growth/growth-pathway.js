@@ -1,4 +1,4 @@
-// growth/growth-pathway.js — Ava English Growth Agent, the fixed pathway content
+// growth/growth-pathway.js — English Growth Agent, the fixed pathway content
 // There is exactly ONE pathway (not five subjects), so this file plays the
 // role a Module's evaluators/scaffoldContent play in BRIDGE, but is not
 // registered anywhere — core/growth-session.js calls straight into it.

@@ -1,4 +1,4 @@
-// core/isolation-check.js — Ava BRIDGE Learning Agent, Core Isolation Check primitive
+// core/isolation-check.js — BRIDGE Learning Agent, Core Isolation Check primitive
 // "If the roadblock is unclear: run the SHORTEST check that can distinguish
 // between competing explanations." The MECHANISM (ask one short thing, branch
 // on the answer, update exactly the two competing dimensions) is Core. The

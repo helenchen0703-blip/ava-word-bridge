@@ -1,4 +1,4 @@
-// core/standards-library.js — Ava BRIDGE Learning Agent, Standards + WIDA reference data
+// core/standards-library.js — BRIDGE Learning Agent, Standards + WIDA reference data
 // Static, shipped, read-only reference data — never mutated at runtime, never
 // user data. Embedded as a JS constant (not fetched) to match the rest of
 // Core: everything boots synchronously from <script src> tags, no async
@@ -11,10 +11,10 @@
 const STANDARDS_LIBRARY_V2 = Object.freeze(
 {
   "metadata": {
-    "name": "Ava Grade 4 Standards Library",
+    "name": "Grade 4 Standards Library",
     "version": "2.0",
     "principle": "Same school task. Same grade-level goal. Better pathway.",
-    "rule": "The school curriculum decides what Ava learns. Standards clarify the target; BRIDGE diagnoses the roadblock and selects/fades support.",
+    "rule": "The school curriculum decides what the learner learns. Standards clarify the target; BRIDGE diagnoses the roadblock and selects/fades support.",
     "framework_note": "CCSS covers ELA/Math. NGSS supplies Grade 4 science. C3 is a Grades 3-5 social-studies inquiry framework, not a Grade-4 national content curriculum. WIDA 4-5 is a language-development overlay.",
     "wida_layer": "WIDA ELD Standards Framework 2020, Grades 4-5"
   },
@@ -741,7 +741,7 @@ const STANDARDS_LIBRARY_V2 = Object.freeze(
       "target": "Language for interpreting sources, comparing perspectives, explaining relationships, and evidence-based claims."
     }
   ],
-  "ava_priority": {
+  "wb_priority": {
     "reading": [
       "RF.4.3",
       "RF.4.4",
@@ -1067,7 +1067,7 @@ const STANDARDS_LIBRARY_V2 = Object.freeze(
     },
     "proficiency_use_rule": {
       "levels": "WIDA PLDs describe a continuum across six English proficiency levels.",
-      "agent_rule": "Do not assign Ava a fixed WIDA level from one task. Record task-specific evidence by communication mode, language purpose, and support required; use PLDs only as a teacher-facing reference when sufficient evidence exists."
+      "agent_rule": "Do not assign the learner a fixed WIDA level from one task. Record task-specific evidence by communication mode, language purpose, and support required; use PLDs only as a teacher-facing reference when sufficient evidence exists."
     },
     "bridge_mapping": {
       "LANGUAGE": [
@@ -1102,7 +1102,7 @@ const STANDARDS_LIBRARY_V2 = Object.freeze(
       "transfers the language function to a new authentic task"
     ]
   },
-  "integration_rule": "CONTENT STANDARD answers what grade-level content/disciplinary practice is expected; WIDA identifies the language demand; BRIDGE identifies Ava's current roadblock and support."
+  "integration_rule": "CONTENT STANDARD answers what grade-level content/disciplinary practice is expected; WIDA identifies the language demand; BRIDGE identifies the learner's current roadblock and support."
 }
 );
 

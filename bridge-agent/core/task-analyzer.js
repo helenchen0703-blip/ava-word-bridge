@@ -1,11 +1,11 @@
-// core/task-analyzer.js — Ava BRIDGE Learning Agent, Step 1 "Understand the Task"
+// core/task-analyzer.js — BRIDGE Learning Agent, Step 1 "Understand the Task"
 // No NLP claim is made anywhere in this file. Two mechanical steps only:
 //   1. Schema validation — every required/min constraint on the Module's
 //      intakeSchema must be satisfied before a task is READY.
 //   2. Subject routing — direct registry lookup on an explicit subject; for
 //      AUTO_UNSURE, Core asks the teacher to confirm rather than guessing.
 // "If uncertain: ASK THE TEACHER. Do not pretend certainty" is enforced here,
-// structurally, before Ava ever sees the task.
+// structurally, before the learner ever sees the task.
 
 function validateAgainstSchema(schema, moduleIntakeData) {
   const missing = [];

@@ -1,4 +1,4 @@
-// growth/growth-ui.js — Ava English Growth Agent, screen dispatcher
+// growth/growth-ui.js — English Growth Agent, screen dispatcher
 // Reuses the exact .bridge-prompt/.bridge-hint-box/.bridge-response-input
 // component set already in index.html's stylesheet — no new visual language.
 // Dispatches purely on session.state.phase; the fixed pathway (one flow, not

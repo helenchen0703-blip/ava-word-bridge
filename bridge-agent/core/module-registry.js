@@ -1,4 +1,4 @@
-// core/module-registry.js — Ava BRIDGE Learning Agent, Module registration
+// core/module-registry.js — BRIDGE Learning Agent, Module registration
 // A Module is fixed code, registered once. Core never special-cases a
 // Module by name anywhere else — this file (plus generic lookups by
 // module.subject) is the only place the set of Modules is enumerated.

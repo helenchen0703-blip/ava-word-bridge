@@ -1,4 +1,4 @@
-// teacher/growth-view.js — Ava English Growth Agent, Teacher View
+// teacher/growth-view.js — English Growth Agent, Teacher View
 // Shown in the SAME teacher modal BRIDGE uses (index.html's #teacherModal) —
 // no new modal, no new visual language. Reads the shared student model
 // (core/student-model.js) directly, plus the growth session's own trace via

@@ -1,4 +1,4 @@
-// core/storage.js — Ava BRIDGE Learning Agent, Core persistence layer
+// core/storage.js — BRIDGE Learning Agent, Core persistence layer
 // Pure localStorage I/O. No DOM access, no decision logic, no subject knowledge.
 //
 // Two independent stores:

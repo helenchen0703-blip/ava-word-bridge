@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Realtime Learning Pack | Ava Word Bridge</title>
+<title>Realtime Learning Pack | Word Bridge</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,600;9..144,700&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
@@ -294,7 +294,7 @@
     </div>
     <div class="header-links">
       <a href="javascript:void(0)" class="library-link" id="libraryBtn">📚 Review Library</a>
-      <a class="home-link" href="../index.html">← Ava Word Bridge</a>
+      <a class="home-link" href="../index.html">← Word Bridge</a>
     </div>
   </header>
   <main id="app"></main>
@@ -344,7 +344,7 @@ const PHASES = [
   { id:'grow',       name:'Grow',        steps:[8],              color:'var(--mist)' },
 ];
 
-const STORAGE_KEY = 'ava-learning-sessions';
+const STORAGE_KEY = 'wb-learning-sessions';
 
 function getCurrentPhaseIdx() {
   for (let i = PHASES.length - 1; i >= 0; i--) {
@@ -593,7 +593,7 @@ function renderInput() {
     const meaningHtml = sessionData.words.length > 0 ? sessionData.words.map((w, i) => `
       <div class="meaning-row">
         <div class="word-label">${escapeHtml(w.word)}</div>
-        <input type="text" data-idx="${i}" placeholder="What does this word mean? (simple explanation for Ava)" value="${escapeHtml(w.meaning||'')}">
+        <input type="text" data-idx="${i}" placeholder="What does this word mean? (simple explanation for the learner)" value="${escapeHtml(w.meaning||'')}">
       </div>
     `).join('') : '<div class="empty-state">Select words above, or type a word manually below.</div>';
 
@@ -605,7 +605,7 @@ function renderInput() {
     `).join('');
 
     wordPrepHtml = `
-      <div class="step-hint"><b>Step 1:</b> Click words to select the ones Ava needs to learn. Then type a simple meaning for each.</div>
+      <div class="step-hint"><b>Step 1:</b> Click words to select the ones the learner needs to learn. Then type a simple meaning for each.</div>
 
       <h3>Suggested words from the text</h3>
       <p class="subhead">Auto-detected challenging words (3+ syllables or 9+ letters). Click to select/deselect.</p>
@@ -628,7 +628,7 @@ function renderInput() {
   return renderCard(`
     ${savedLink}
     <h2>Paste text to begin</h2>
-    <p class="subhead">Any reading Ava brings home — story, science, social studies, math — becomes a structured learning session.</p>
+    <p class="subhead">Any reading the learner brings home — story, science, social studies, math — becomes a structured learning session.</p>
     <textarea class="text-input" id="textInput" placeholder="Paste the full text here. For example:
 
 Sea turtles travel thousands of miles across the ocean. They navigate by sensing the Earth's magnetic field...">${escapeHtml(sessionData.text)}</textarea>

@@ -1,4 +1,4 @@
-// bridge-storage.js — Ava BRIDGE Learning Agent, Core storage layer
+// bridge-storage.js — BRIDGE Learning Agent, Core storage layer
 // Pure state shape + localStorage persistence. No DOM access. No network calls.
 //
 // Storage is versioned as ONE multi-experience record so Teacher View can
@@ -21,7 +21,7 @@ const BRIDGE_STATUS = Object.freeze({
   INDEPENDENT: 'INDEPENDENT'
 });
 
-// The 9 universal roadblock categories (Ava BRIDGE Learning Agent architecture,
+// The 9 universal roadblock categories (BRIDGE Learning Agent architecture,
 // section D). A Module tags each of its dimensions with one of these so Teacher
 // View and future Modules share one vocabulary instead of each inventing labels.
 const ROADBLOCK_CATEGORY = Object.freeze({

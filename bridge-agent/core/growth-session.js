@@ -1,4 +1,4 @@
-// core/growth-session.js — Ava English Growth Agent, session orchestrator
+// core/growth-session.js — English Growth Agent, session orchestrator
 // Parallel to core/bridge-agent.js, but NOT a Module: English Growth has
 // exactly one fixed pathway (Cold Read -> Word/Chunk Support -> Sentence
 // Meaning -> Gist -> Save to Banks -> Retrieval -> Reread -> Compare), so

@@ -1,5 +1,5 @@
-// core/standards-matcher.js — Ava BRIDGE Learning Agent, Content Standard Matcher
-// "The school curriculum decides what Ava learns" — this file never invents
+// core/standards-matcher.js — BRIDGE Learning Agent, Content Standard Matcher
+// "The school curriculum decides what the learner learns" — this file never invents
 // or chooses curriculum. It only ranks candidate standards from the library
 // against the teacher's own intake tags (no NLP, no semantic scoring) and
 // always hands the result to the teacher to confirm or override. A task
@@ -38,7 +38,7 @@ function scoreStandard(standard, taskKeywords) {
 
 // Returns { suggestions: [{id, framework, domain, target, score}], usedFallback }
 // suggestions is 1-3 items, ranked highest score first. Falls back to the
-// library's ava_priority shortlist for this subject when nothing scores.
+// library's wb_priority shortlist for this subject when nothing scores.
 function matchContentStandards(taskRecord) {
   const library = loadStandardsLibrary();
   const frameworks = SUBJECT_TO_FRAMEWORKS[taskRecord.subject] || [];
@@ -55,7 +55,7 @@ function matchContentStandards(taskRecord) {
   }
 
   const subjectKey = (taskRecord.subject || '').toLowerCase();
-  const priorityIds = (library.ava_priority[subjectKey] || []).filter(id => !id.startsWith('ELD-'));
+  const priorityIds = (library.wb_priority[subjectKey] || []).filter(id => !id.startsWith('ELD-'));
   const fallback = priorityIds
     .map(id => candidates.find(s => s.id === id))
     .filter(Boolean)

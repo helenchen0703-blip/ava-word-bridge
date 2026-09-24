@@ -1,4 +1,4 @@
-// teacher/teacher-view.js — Ava BRIDGE Learning Agent, generic Teacher View
+// teacher/teacher-view.js — BRIDGE Learning Agent, generic Teacher View
 // Reads learnerState.dimensions/.trace directly — no per-Module classify()
 // functions (those read Writing-only `data` fields and are left behind).
 // Same renderer for every subject, every task.

@@ -1,4 +1,4 @@
-// core/text-intake.js — Ava English Growth Agent, TextRecord model
+// core/text-intake.js — English Growth Agent, TextRecord model
 // Parallel to core/task-intake.js, but a TextRecord is not a TaskRecord: it
 // carries no subject/standard/decision data, only the authentic text plus
 // teacher-prepared word/chunk meanings (content enrichment source = teacher-
@@ -14,12 +14,12 @@ const TEXT_RECORD_KEY = 'bridgeTextRecords_v1';
 const GROWTH_TEXT_INTAKE_SCHEMA = [
   { id: 'title', type: 'text', label: 'Title', required: true },
   { id: 'authenticText', type: 'textarea', label: 'Authentic text (paste verbatim)', required: true },
-  { id: 'taggedWords', type: 'repeatable', label: 'Words Ava may not know the meaning of',
+  { id: 'taggedWords', type: 'repeatable', label: 'Words the learner may not know the meaning of',
     fields: [
       { id: 'word', type: 'text' }, { id: 'meaning', type: 'text' },
       { id: 'chineseScaffold', type: 'text' }, { id: 'partOfSpeech', type: 'text' }
     ] },
-  { id: 'taggedChunks', type: 'repeatable', label: 'Chunks / phrases Ava may not know',
+  { id: 'taggedChunks', type: 'repeatable', label: 'Chunks / phrases the learner may not know',
     fields: [ { id: 'chunk', type: 'text' }, { id: 'meaning', type: 'text' } ] },
   { id: 'mainIdeaSentence', type: 'text', label: 'Expected gist / main idea answer', required: true }
 ];

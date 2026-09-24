@@ -1,4 +1,4 @@
-// core/evidence-engine.js — Ava BRIDGE Learning Agent, Evidence Collector
+// core/evidence-engine.js — BRIDGE Learning Agent, Evidence Collector
 // Thin, generic glue: takes a Module's evaluator result and applies it to a
 // dimension in the learnerState. The evaluator itself (Module-owned, pure
 // function) is where the real per-subject logic lives — this file never

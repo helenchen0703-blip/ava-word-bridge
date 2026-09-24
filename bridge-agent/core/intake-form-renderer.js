@@ -1,4 +1,4 @@
-// core/intake-form-renderer.js — Ava BRIDGE Learning Agent, generic intake form
+// core/intake-form-renderer.js — BRIDGE Learning Agent, generic intake form
 // ONE renderer for every Module's intakeSchema. This is the zero-new-HTML seam:
 // a brand-new Module needs a new schema array (data), never a new form. Six
 // field primitives cover every Module's intake needs today: text, textarea,
