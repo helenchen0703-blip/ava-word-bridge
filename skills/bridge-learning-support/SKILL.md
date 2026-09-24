@@ -1,23 +1,23 @@
 ---
-name: ava-bridge-learning-support
-description: Use when analyzing Ava's authentic Grade 4 school tasks, diagnosing why she is stuck, deciding the minimum scaffold, or reviewing whether support should continue, fade, or return to the original task.
+name: bridge-learning-support
+description: Use when analyzing a learner's authentic Grade 4 school tasks, diagnosing why they are stuck, deciding the minimum scaffold, or reviewing whether support should continue, fade, or return to the original task.
 ---
 
-# Ava BRIDGE Learning Support
+# BRIDGE Learning Support
 
 ## Overview
-Use this skill to support Ava on real school tasks without replacing the school curriculum.
+Use this skill to support a learner on real school tasks without replacing the school curriculum.
 
 Core principle:
-> The school task decides what Ava learns. Evidence decides what support she needs.
+> The school task decides what the learner learns. Evidence decides what support they need.
 
 ## Learner Profile Relevant to Instruction
-- Ava is a Grade 4 multilingual learner.
-- She may read words aloud without understanding meaning.
+- The learner is a Grade 4 multilingual learner.
+- They may read words aloud without understanding meaning.
 - Reading aloud ability and comprehension must be assessed separately.
 - Academic vocabulary, chunks/collocations, sentence meaning, and gist can be barriers.
 - In math, separate concept understanding from English task understanding/expression.
-- She benefits from visuals, chunking, short steps, meaningful context, and gradual removal of support.
+- They benefit from visuals, chunking, short steps, meaningful context, and gradual removal of support.
 - Keep high expectations; change the pathway, not the goal.
 
 ## Non-Negotiable Rules
@@ -25,7 +25,7 @@ Core principle:
 2. Never replace it with an easier parallel curriculum.
 3. Do not diagnose from one weak response.
 4. Distinguish language, concept, strategy, representation, reasoning, expression, fluency, retention, and independence.
-5. Use the minimum necessary scaffold that preserves Ava's thinking.
+5. Use the minimum necessary scaffold that preserves the learner's thinking.
 6. Every scaffold needs a fading plan.
 7. Return to the exact original task after support.
 8. Measure independence, not only correctness.
@@ -33,12 +33,15 @@ Core principle:
 10. If evidence is ambiguous, use NEEDS_EVIDENCE and one discriminating check.
 
 ## BRIDGE Flow
-### B �ü� BaselineGive the original task first. Collect evidence before teaching.
+### B — Baseline
+Give the original task first. Collect evidence before teaching.
 
-### R �ü� RoadblockPossible roadblocks:
+### R — Roadblock
+Possible roadblocks:
 LANGUAGE, DECODING, FLUENCY, CONCEPT, REPRESENTATION, STRATEGY, REASONING, ORGANIZATION, EXPRESSION, RETENTION, INDEPENDENCE.
 
-### I �ü� InterventionScaffold ladder:
+### I — Intervention
+Scaffold ladder:
 - 0 Independent
 - 1 Thinking question
 - 2 Visual / highlighting / chunking
@@ -46,25 +49,28 @@ LANGUAGE, DECODING, FLUENCY, CONCEPT, REPRESENTATION, STRATEGY, REASONING, ORGAN
 - 4 Sentence starter / oral rehearsal / model one component
 - 5 Strong support only when necessary
 
-### D �ü� Decrease SupportReduce help after success.
+### D — Decrease Support
+Reduce help after success.
 
-### G �ü� GeneralizeReturn to the original task, then a related new item if appropriate.
+### G — Generalize
+Return to the original task, then a related new item if appropriate.
 
-### E �ü� EvidenceRecord baseline, barrier hypothesis, scaffold, student response, support level, retry/reread, transfer, teacher reflection.
+### E — Evidence
+Record baseline, barrier hypothesis, scaffold, student response, support level, retry/reread, transfer, teacher reflection.
 
 ## Reading Decision Path
-WORD ��� PHRASE/CHUNK ��� SENTENCE ��� MEANING ��� GIST ��� RESPONSE ��� INDEPENDENCE
+WORD → PHRASE/CHUNK → SENTENCE → MEANING → GIST → RESPONSE → INDEPENDENCE
 
 Ask:
-1. Can Ava read it? No ��� Decoding. Yes but slow ��� Fluency.
-2. Does she know the word meaning? No ��� Vocabulary.
-3. Does she understand the chunk? No ��� Chunk.
-4. Does she understand the sentence? No ��� Sentence Meaning.
-5. Can she identify the big idea? No ��� Gist.
-6. Can she do it after support is removed? No ��� Independence/Fading issue.
+1. Can the learner read it? No → Decoding. Yes but slow → Fluency.
+2. Do they know the word meaning? No → Vocabulary.
+3. Do they understand the chunk? No → Chunk.
+4. Do they understand the sentence? No → Sentence Meaning.
+5. Can they identify the big idea? No → Gist.
+6. Can they do it after support is removed? No → Independence/Fading issue.
 
 ## Math Decision Path
-READ ��� UNDERSTAND ��� REPRESENT ��� PLAN ��� SOLVE ��� EXPLAIN
+READ → UNDERSTAND → REPRESENT → PLAN → SOLVE → EXPLAIN
 
 Separate:
 - Math Concept
@@ -74,10 +80,10 @@ Separate:
 ## Academic Language Layer
 Distinguish:
 - Content demand: what disciplinary knowledge/practice is expected.
-- Language demand: what language Ava must understand or produce.
+- Language demand: what language the learner must understand or produce.
 
-Interpretive = Can Ava understand the language?
-Expressive = Can Ava express what she understands?
+Interpretive = Can the learner understand the language?
+Expressive = Can the learner express what they understand?
 
 ## Evidence Scale
 Track support separately from accuracy:
@@ -87,7 +93,7 @@ Track support separately from accuracy:
 - 0 Independent
 
 Prefer:
-> Accuracy �� Support �� Transfer
+> Accuracy × Support × Transfer
 
 ## Output Format
 When given a school task, output:
@@ -114,4 +120,3 @@ Avoid:
 
 ## Core Reminder
 > Same task. Right support. Less support over time.
-
